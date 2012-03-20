@@ -1,0 +1,40 @@
+ul.ui-tabs-nav {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	padding-left: 10px;
+}
+.ui-tabs-nav:after {
+    display: block;
+    clear: both;
+	content: " ";
+}
+
+.ui-tabs-hide {
+	display: none;
+}
+
+ul.ui-tabs-nav li {
+	margin: 0;
+	padding:0;
+	margin-right: 5px;
+	padding: 0 5px;
+	float:left;
+	height: 20px;
+}
+
+li.ui-tabs-selected {
+	background-color: #6884AB;
+}
+
+li.ui-tabs-selected a {
+	color: #FFFFFF;
+}
+
+/* Additional IE specific bug fixes... */
+* html .ui-tabs-nav { /* auto clear @ IE 6 & IE 7 Quirks Mode */
+    display: inline-block;
+}
+*:first-child+html .ui-tabs-nav  { /* auto clear @ IE 7 Standards Mode - do not group selectors, otherwise IE 6 will ignore complete rule (because of the unknown + combinator)... */
+    display: inline-block;
+}

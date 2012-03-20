@@ -1,0 +1,471 @@
+/* @group General */
+
+html, div, body, img, p, h1, h2, h3, form, table {
+	padding: 0;
+	margin: 0;
+	border: 0;
+}
+
+body {
+	background-color: #f0f0f0;
+	font-size: 8pt;
+	font-family: Verdana,Arial,sans-serif;
+	color: #000000;
+	height: 100%;
+	background-image: url(../images/background.png);
+	background-repeat:repeat-y;
+}
+
+form {
+	/*
+	 * http://www.quirksmode.org/bugreports/archives/2005/11/nested_formtable_causes_extra_whitespace.html
+	 */
+	display: inline;
+}
+
+
+/* @end */
+
+/* @group Layout */
+
+#header {
+	background-color: #000000;
+	color: white;
+	height: 51px;
+	line-height: 51px;
+	background-image: url(../images/header.png);
+	font-size: 25px;
+	padding-left: 10px;
+}
+
+#navigation {
+	color: #202020;
+	padding-left: 10px;
+	background: #FFFFFF;
+	height: 26px;
+	line-height: 20px;
+	background-image: url(../images/navigation.png);
+	border-bottom: 1px solid #555555;
+}
+
+
+#main {
+	position: relative;
+}
+#left {
+	position: absolute;
+	left: 0px;
+	top: 41px;
+	bottom: 0;
+	width: 200px;
+	background-color: #d1d7e2;
+	border-right: 1px solid #000000;
+	margin: 0;
+	padding: 0;
+}
+
+#main #content {
+	margin-left: 201px;
+}
+
+/* @end */
+
+/* @group Header */
+
+#header .info {
+	font-size: 9pt;
+	position: absolute;
+	right: 1em;
+	top: 0pt;
+}
+
+#header .info a {
+	color: white;
+}
+
+
+
+/* @end */
+
+/* @group Navigation */
+
+#navigation ul {
+	margin: 0;
+	padding: 0;
+	padding-top: 2px;
+	list-style: none;
+}
+
+#navigation li {
+	height: 22px;
+	float: left;
+	background: url("../images/button_background.png") repeat-x right top;
+	margin: 0;
+	padding: 0;
+}
+
+#navigation a {
+	height: 22px;
+	display: block;
+	background: url("../images/button_background.png") no-repeat left top;
+	padding: 0px 6px;
+	border-left: 1px solid #585858;
+}
+
+#navigation li:first-child a {
+	background: url("../images/button_left.png") no-repeat left top;
+	border: 0;
+}
+
+#navigation li.last {
+	background: url("../images/button_right.png") no-repeat right top;
+}
+
+
+
+/* @end */
+
+/* @group sidebar */
+#sidebar {
+	padding-left: 10px;
+	padding-top: 10px;
+}
+#sidebar h3 {
+	color: #5E6E8F;
+	text-transform: uppercase;
+	margin: 0;
+	padding: 0;
+	text-shadow: #FFF 1px 1px 2px;
+}
+
+#sidebar p {
+	padding-top: 0;
+}
+
+/* @end */
+
+/* @group Main */
+
+#main > #title {
+	padding: 0;
+	margin: 0;
+	color: #FFFFFF;
+	border-bottom: 1px solid #000000;
+	height: 40px;
+	background: #6884AB url(../images/title_background.png) repeat-x;
+	text-shadow: #000 0 0 4px;
+}
+#main > #title h2 {
+	font-size: 14pt;
+}
+#main > #title a {
+	text-decoration: none;
+	color: #FFFFFF;
+}
+
+#main > #title #searchbar {
+	float: right;
+	margin: 0;
+	padding: 0;
+	position: relative;
+	bottom: 32px;
+	right: 10px;
+}
+
+
+
+/* @end */
+
+p, h1, h2 {
+	padding: 10px;
+}
+
+#content p {
+	width: 700px;
+}
+
+#content input.error {
+	background-color: #FFDDDD;
+
+}
+#content span.error {
+	color: red;
+}
+
+h1 {
+	font-size: 16px;
+	font-weight: bold;
+	color: #6884ab;
+}
+
+strong {
+	color: #000;
+}
+
+a {
+	color: #3D4D7C;
+	text-decoration: none;
+}
+
+a:hover, a:focus {
+	text-decoration: underline;
+}
+
+table {
+	width: 700px;
+	margin: 10px;
+	padding: 0;
+	background-color: #FFFFFF;
+	border: 1px solid #CBCBCB;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+
+thead {
+	padding: 3px;
+	background-image: url(../images/grey_background.png);
+	vertical-align: middle;
+	color: #202020;
+	font-weight: bold;
+	font-size: 10pt;
+}
+
+thead tr td {
+	padding: 3px 10px;
+}
+
+tbody tr td {
+	padding: 3px 10px;
+	border-left: 1px solid #D9D9D9;
+}
+
+tbody tr td:first-child {
+	border-left: 0;
+}
+
+thead tr td:first-child {
+	border-left: 0;
+}
+
+td.delete {
+	width: 15px;
+	text-align: center;
+}
+
+tbody .even {
+	background-color: #F1F5FA;
+}
+
+#error_message, #info_message {
+	text-align: left;
+	padding: 5px 5px 5px 30px;
+	margin: 10px;
+	display: none;
+	font-size: 11pt;
+	width: 670px;
+}
+
+#error_message {
+	background: #FAC9CB url(../images/error.png) no-repeat 10px 50%;
+	border: 1px solid #D6ACB0;
+	color: #6F0E08;
+}
+
+#info_message {
+	background: #DEEDDE url(../images/info.png) no-repeat 10px 50%;
+	border: 1px solid #C7D5C7;
+}
+
+.error {
+    font-size: 11px;
+    color : #FF0000;
+    border: 1px #CBCBCB solid;
+    margin: 10px;
+    padding: 5px 5px 5px 5px;
+    width: 690px;
+    background-color: #FFFFFF;
+}
+
+/* forms */
+
+#main #content input[type=text], #main #content textarea {
+	width: 600px;
+}
+
+#main #content textarea {
+	height: 200px;
+}
+
+/* untermenü */
+#main #title ul {
+	margin: 0;
+	padding: 0 0 0 10px;
+	font-size: 13px;
+	border-bottom: 1px solid #404040;
+}
+#main #title ul li {
+	margin: 0;
+	margin-bottom: -1px;
+	padding: 0;
+	display: inline;
+	color: #123;
+	background-color: #6884AB;
+	padding-right: 10px;
+	padding-left: 10px;
+	border-bottom: 1px solid #404040;
+}
+
+#main #title ul li:hover {
+	background-color: #5f799e;
+}
+
+#main #title ul li.ui-tabs-selected a {
+	color: #6884ab;
+	font-weight: bold;
+}
+
+#main #title ul li.ui-tabs-selected {
+	background-color: #FFFFFF;
+	text-shadow: none;
+	border: 1px solid #404040;
+	border-bottom: none;
+	-moz-border-radius-topleft: 5px;
+	-moz-border-radius-topright: 5px;
+	-webkit-border-top-left-radius: 5px;
+	-webkit-border-top-right-radius: 5px;
+}
+
+#content .box {
+	width: 700px;
+	margin: 10px;
+	padding: 0;
+	background-color: #FFFFFF;
+	border: 1px solid #CBCBCB;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+
+#content .box h3 {
+	font-size: 10pt;
+	color: #444444;
+	margin: 0;
+	padding: 3px;
+	background-image: url(../images/grey_background.png);
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius-bottomright: 0px;
+	-moz-border-radius-bottomleft: 0px;
+	-webkit-border-bottom-right-radius: 0px;
+	-webkit-border-bottom-left-radius: 0px;
+}
+
+#content .box .closed h3 {
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+
+
+#main #content form label {
+	display: block;
+	margin: 0;
+	padding: 0;
+	border-bottom: none;
+	font-size: 10pt;
+	font-weight: bold;
+	color: #444444;
+}
+#main #content form label small {
+	font-weight: normal;
+}
+
+#main #content input[type^=button],
+#main #content input[type^=submit],
+#main #content input[type^=reset],
+#main #content button {
+	height: 22px;
+	border: 1px solid #585858;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	background: url(../images/button_background.png) repeat-x 0 center;
+}
+
+#main #content input[type^=button]:hover,
+#main #content input[type^=submit]:hover,
+#main #content input[type^=reset]:hover {
+	background: url(../images/navigation.png) repeat-x 0;
+}
+
+#main #content input[type^=text],
+#main #content input[type^=password] {
+	margin: 0px;
+	padding: 3px;
+	height: 16px;
+	font-size: 10pt;
+	border: 1px solid #CBCBCB;
+	width: 670px;
+}
+
+#main #content textarea {
+	margin: 0;
+	padding: 3px;
+	font-size: 10pt;
+	border: 1px solid #CBCBCB;
+	font-family: inherit;
+	width: 670px;
+	height: 250px;
+}
+
+/* @group Gallery */
+
+.gallery_item {
+	text-align: center;
+	float: left;
+	margin-bottom: 20px;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.gallery_item img {
+	border: 1px solid #585858;
+}
+
+/* @end */
+
+ul.sortable {
+	margin: 0;
+	padding: 0;
+
+}
+ul.sortable li {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+
+ul.sortable .folder {
+	position: relative;
+	height: 20px;
+	line-height: 20px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	background-color: #F1F5FA;
+}
+
+ul.sortable a span {
+	font-weight: bold;
+	height: 20px;
+}
+
+ul.sortable .movehandle {
+	background: url(../images/icon_move.gif) no-repeat 4px;
+	padding-left: 16px;
+	color: #999999;
+	cursor: move;
+	margin-right: 10px;
+}
+
+ul.sortable .hover {
+	background-color: #bcbcbc;
+}

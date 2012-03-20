@@ -1,0 +1,5 @@
+AddDefaultCharset utf-8
+DirectoryIndex index.php
+
+# Запрет листинга
+Options -Indexes

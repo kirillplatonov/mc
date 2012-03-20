@@ -1,0 +1,60 @@
+html,body {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+}
+
+body {
+	background-color: #EAEAEA;
+	text-align: center;
+	font-family: verdana, arial, sans serif;
+	font-size: 11pt;
+	color: black;
+}
+
+#logo {
+	padding-top: 20px;
+	padding-bottom: 40px;
+}
+
+#message, .error {
+	color: #AD151F;
+}
+
+#login {
+	width: 300px;
+	position: relative;
+	margin: 0 auto;
+	height: 100%;
+	background-color: #99BBCD;
+	border-left: 10pt #6698B3 solid;
+	border-right: 10pt #6698B3 solid;
+}
+
+#formular {
+	text-align: center;
+	margin: 0 auto;
+	padding-top: 10px;
+	width: 100%;
+}
+
+#formular p.error {
+	color: red;
+}
+
+input {
+	background: #f4f4f4;
+	border: 1px solid #000000;
+	color: black;
+	font-size: 13px;
+	padding: 4px;
+	width: 70%;
+}
+
+input:focus {
+	background: #fff;
+}
+
+label {
+	cursor: pointer;
+}
