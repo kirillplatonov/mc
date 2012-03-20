@@ -1,0 +1,52 @@
+# Запрет листинга
+Options -Indexes
+
+php_flag engine 0
+
+# MIME-типы
+AddType application/vnd.sonyericsson.mms-template tpl
+AddType application/vnd.wap.wmlc .wmlc
+AddType text/vnd.wap.wmlscript .wmls
+AddType application/vnd.wap.wmlscriptc .wmlsc
+AddType image/vnd.wap.wbmp .wbmp
+AddType application/vnd.eri.thm .thm 
+AddType application/vnd.mophun.application .mpn  
+AddType application/vnd.mophun.certificate .mpc
+AddType text/vnd.sun.j2me.app-descriptor .jad
+Addtype text/x-vmel .mel
+Addtype audio/imelody .imy
+AddType application/vnd.smaf .mmf
+Addtype text/x-vmel .emy
+AddType audio/amr .amr
+AddType audio/x-wav .wav
+AddType application/x-tar .hid
+Addtype image/jpeg .jpg 
+Addtype image/jpeg .jpeg 
+Addtype image/gif .gif 
+Addtype image/png .png 
+Addtype image/bmp .bmp 
+Addtype text/x-imelody .imy 
+Addtype text/x-emelody .emy 
+Addtype text/x-vcard .vcf 
+Addtype text/x-vcalendar .vcs 
+Addtype text/calendar .ics 
+Addtype application/smil .smil 
+Addtype application/smil .smi 
+Addtype application/java-archive .jar 
+Addtype application/vnd.symbian.install .sis 
+Addtype audio/wav .wav 
+Addtype audio/midi .midi 
+Addtype audio/midi .mid 
+Addtype audio/rmf .rmf 
+Addtype application/vnd.wap.mms-message .mms 
+AddType video/flv .flv
+AddType video/mp4 .mp4
+Addtype video/3gpp .3gp
+Addtype application/zip .zip
+Addtype audio/mpeg .mp3
+Addtype audio/mpeg .mp3
+Addtype application/vnd.eri.thm .thm
+AddType application/x-httpd-php-source .exe .phps .php .cgi .pl .fcgi .fpl .phtml .shtml .shtm .htm .html .wml .php1 .php2 .php3 .php4 .php5 .php6 .asp .aspx .jsp
+
+# Запрет исполнения скриптов
+RemoveHandler .exe .phps .php .cgi .pl .fcgi .fpl .phtml .shtml .shtm .htm .html .wml .php1 .php2 .php3 .php4 .php5 .php6 .asp .aspx .jsp

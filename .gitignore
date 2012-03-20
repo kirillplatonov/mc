@@ -1,6 +1,1 @@
-/files/
-!/files/.htaccess
 /data_files/config.php
-/cache/file_cache/
-/tmp/
-!/tmp/.htaccess
