@@ -102,7 +102,7 @@ class User_Controller extends Controller {
             if ($this->db->get_one("SELECT user_id FROM #__users WHERE username = '". a_safe($_POST['username']) ."'")) $this->error .= 'Указанное имя пользователя уже занято<br />';
 
             // Проверка e-mail на занятость
-            //if ($this->db->get_one("SELECT user_id FROM #__users WHERE email = '". a_safe($_POST['email']) ."'")) $this->error .= 'Указанный e-mail адрес уже занят<br />';
+            if ($this->db->get_one("SELECT user_id FROM #__users WHERE email = '". a_safe($_POST['email']) ."'")) $this->error .= 'Указанный e-mail адрес уже занят<br />';
 
             if (empty($_POST['username']) || empty($_POST['email']) || empty($_POST['password']) || empty($_POST['password2'])) $this->error = 'Заполнены не все обязательные поля<br />';
 
@@ -422,7 +422,7 @@ class User_Controller extends Controller {
 				// Если передан параметр то записываем данные в куки
 				if (isset($_POST['remember_me'])) {
                     setcookie('username', $username, time() + 86400 * 14, '/', '.'. $_SERVER['HTTP_HOST']);
-                    setcookie('password', $password, time() + 86400 * 14, '/', '.'. $_SERVER['HTTP_HOST']);
+                    setcookie('password', md5(md5($password)), time() + 86400 * 14, '/', '.'. $_SERVER['HTTP_HOST']);
 				}
 
 				// Перенаправление в кабинет

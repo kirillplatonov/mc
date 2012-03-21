@@ -65,7 +65,7 @@ abstract class Controller {
         
 		// Авторизация гостей по COOKIES, добавление гостей в бд
 		if ($user_id == -1 && ! empty($_COOKIE['username'])) {
-			if ($try_user_id = $this->db->get_one("SELECT user_id FROM #__users WHERE username = '". a_safe($_COOKIE['username']) ."' AND password = '". md5(md5($_COOKIE['password'])) ."'")) {
+			if ($try_user_id = $this->db->get_one("SELECT user_id FROM #__users WHERE username = '". a_safe($_COOKIE['username']) ."' AND password = '". a_safe($_COOKIE['password']) ."'")) {
 				$user_id = $try_user_id;
 				$_SESSION['user_id'] = $user_id;
 			}

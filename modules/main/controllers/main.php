@@ -91,5 +91,9 @@ class Main_Controller extends Controller {
 			for($i = 0; $i < $empty_stars; $i++) echo $star_empty;
 		}
 	}
+
+	public function action_go() {
+		echo '1';
+	}
 }
 ?>
