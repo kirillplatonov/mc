@@ -45,7 +45,7 @@ class modules {
 		# Получаем остальные модули из ФС
 		$dir = opendir(ROOT .'modules/');
 		while($f = readdir($dir)) {
-			if($f == '.' || $f == '..' || $f == 'main' || $f == 'user' || $f == 'modules' || $f == 'themes' || $f == 'index_page') continue;
+			if($f == '.' || $f == '..' || $f == '.htaccess' || $f == '.gitignore' || $f == 'main' || $f == 'user' || $f == 'modules' || $f == 'themes' || $f == 'index_page') continue;
 			# проверяем, есть ли модуль в базе
 			if(array_key_exists($f, $modules)) continue;
 

@@ -61,7 +61,7 @@ class Main_Admin_Controller extends Controller {
 			$admin_themes = array();
 			$dir = opendir(ROOT .'views');
 			while($theme = readdir($dir)) {
-				if($theme == '.' || $theme == '..') continue;
+				if($theme == '.' || $theme == '..' || $theme == '.htaccess' || $theme == '.gitignore') continue;
 				if(file_exists(ROOT .'views/'. $theme .'/theme.ini')) {
 					$theme_info = parse_ini_file(ROOT .'views/'. $theme .'/theme.ini');
 					if(!empty($theme_info['title'])) {
@@ -74,7 +74,7 @@ class Main_Admin_Controller extends Controller {
 			$mainpage_modules = array();
 			$dir = opendir(ROOT .'modules');
 			while($module = readdir($dir)) {
-				if($module == '.' || $module == '..') continue;
+				if($module == '.' || $module == '..' || $module == '.htaccess' || $module == '.gitignore') continue;
 				if(file_exists(ROOT .'modules/'. $module .'/module.ini')) {
 					$module_info = parse_ini_file(ROOT .'modules/'. $module .'/module.ini');
 					if($module_info['mainpage']) $mainpage_modules[] = $module_info;

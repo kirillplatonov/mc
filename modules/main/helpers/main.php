@@ -32,7 +32,7 @@ class main {
 	public static function tmp_clear($ttl = 86400) {
 		$dir = opendir(ROOT .'tmp/');
 		while($f = readdir($dir)) {
-			if($f == '.' || $f == '..' || $f == '.htaccess' || $f == '.svn') continue;
+			if($f == '.' || $f == '..' || $f == '.htaccess' || $f == '.gitignore' || $f == '.htaccess' || $f == '.svn') continue;
 			$file = ROOT .'tmp/'. $f;
 			if(@filemtime($file) < (time() - $ttl)) {
 				if(is_file($file)) unlink($file);
