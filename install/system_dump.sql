@@ -11,6 +11,17 @@ INSERT INTO `a_ads_manager_areas` (`area_id`, `title`, `ident`) VALUES
 (1, 'Верх всех страниц', 'all_pages_up'),
 (2, 'Низ всех страниц', 'all_pages_down');
 //=====================================//
+CREATE TABLE IF NOT EXISTS `a_blog` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `title` varchar(256) NOT NULL,
+  `message` text NOT NULL,
+  `time` int(11) NOT NULL,
+  `rating` float NOT NULL,
+  `rating_voices` smallint(6) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+//=====================================//
 CREATE TABLE IF NOT EXISTS `a_ads_manager_links` (
   `link_id` int(11) NOT NULL auto_increment,
   `area_id` int(11) NOT NULL,
@@ -249,7 +260,8 @@ INSERT INTO `a_index_page_widgets` (`widget_id`, `block_id`, `title`, `module`, 
 (13, 4, 'Анимация', 'downloads', 'directory_id = "4"\r\ndirectory_name = "Анимация"', 4),
 (14, 4, 'Видео', 'downloads', 'directory_id = "5"\r\ndirectory_name = "Видео"', 5),
 (18, 5, 'Библиотека', 'lib', '', 2),
-(20, 1, 'Фотоальбомы', 'photo', '', 6);
+(20, 1, 'Фотоальбомы', 'photo', '', 6),
+(21,1,'Блоги','blog','',7);
 //=====================================//
 CREATE TABLE IF NOT EXISTS `a_lib_books` (
   `book_id` int(11) NOT NULL auto_increment,
@@ -296,7 +308,8 @@ INSERT INTO `a_modules` (`id`, `name`, `title`, `admin_link`, `description`, `in
 (20, 'private', 'Личные сообщения', '', 'Модуль личных сообщений', 1, 'on'),
 (21, 'html', 'HTML/текстовые вставки', '', 'HTML/текстовые вставки в главную страницу', 1, 'on'),
 (22, 'lib', 'Библиотека', 'lib/admin', 'Модуль библиотеки', 1, 'on'),
-(23, 'photo', 'Фотоальбомы', '', 'Модуль фотоальбомов', 1, 'on');
+(23, 'photo', 'Фотоальбомы', '', 'Модуль фотоальбомов', 1, 'on'),
+(24, 'blog', 'Блоги', '', 'Модуль блогов', 1, 'on');
 //=====================================//
 CREATE TABLE IF NOT EXISTS `a_news` (
   `news_id` int(11) NOT NULL auto_increment,
@@ -507,23 +520,23 @@ INSERT INTO a_config SET `module` = 'system', `key` = 'keywords', `value` = 'Mob
 INSERT INTO a_config SET `module` = 'system', `key` = 'guestbook_posting', `value` = 'all';
 //=====================================//
 CREATE TABLE IF NOT EXISTS a_photo_albums (
-	`album_id` int(11) NOT NULL auto_increment,
-	`user_id` int(11) NOT NULL,
-	`name` varchar(30) NOT NULL,
-	`about` varchar(3000) NOT NULL,
-	PRIMARY KEY  (`album_id`)
+  `album_id` int(11) NOT NULL auto_increment,
+  `user_id` int(11) NOT NULL,
+  `name` varchar(30) NOT NULL,
+  `about` varchar(3000) NOT NULL,
+  PRIMARY KEY  (`album_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 //=====================================//
 CREATE TABLE IF NOT EXISTS a_photo (
-	`photo_id` int(11) NOT NULL auto_increment,
-	`album_id` int(11) NOT NULL,
-	`user_id` int(11) NOT NULL,
-	`name` varchar(30) NOT NULL,
-	`about` varchar(3000) NOT NULL,
-	`time` int(11) NOT NULL,
-	`rating` int(11) default '0',
+  `photo_id` int(11) NOT NULL auto_increment,
+  `album_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `name` varchar(30) NOT NULL,
+  `about` varchar(3000) NOT NULL,
+  `time` int(11) NOT NULL,
+  `rating` int(11) default '0',
   `file_ext` varchar(30) NOT NULL, 
-	PRIMARY KEY  (`photo_id`)
+  PRIMARY KEY  (`photo_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 //=====================================//
 INSERT INTO a_config (`id`, `module`, `key` , `value`) VALUES
@@ -563,16 +576,16 @@ INSERT INTO a_config (`id`, `module`, `key` , `value`) VALUES
 (NULL , 'downloads', 'moderation', '0');
 //=====================================//
 CREATE TABLE IF NOT EXISTS a_guests (
-	`id` int(11) NOT NULL auto_increment,
-	`ip` varchar(100) NOT NULL,
-	`user_agent` varchar(512) NOT NULL,
-	`last_time` int(11) NOT NULL,
-	PRIMARY KEY  (`id`)
+  `id` int(11) NOT NULL auto_increment,
+  `ip` varchar(100) NOT NULL,
+  `user_agent` varchar(512) NOT NULL,
+  `last_time` int(11) NOT NULL,
+  PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 //=====================================//
 CREATE TABLE IF NOT EXISTS a_ip_ban (
-	`id` int(11) NOT NULL auto_increment,
-	`ip` varchar(100) NOT NULL,
-	PRIMARY KEY  (`id`)
+  `id` int(11) NOT NULL auto_increment,
+  `ip` varchar(100) NOT NULL,
+  PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 //=====================================//
