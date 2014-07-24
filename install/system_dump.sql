@@ -309,7 +309,8 @@ INSERT INTO `a_modules` (`id`, `name`, `title`, `admin_link`, `description`, `in
 (21, 'html', 'HTML/текстовые вставки', '', 'HTML/текстовые вставки в главную страницу', 1, 'on'),
 (22, 'lib', 'Библиотека', 'lib/admin', 'Модуль библиотеки', 1, 'on'),
 (23, 'photo', 'Фотоальбомы', '', 'Модуль фотоальбомов', 1, 'on'),
-(24, 'blog', 'Блоги', '', 'Модуль блогов', 1, 'on');
+(24, 'blog', 'Блоги', '', 'Модуль блогов', 1, 'on'),
+(25,'web_version','Web версия','web_version/admin','Модуль web версии',1,'on');
 //=====================================//
 CREATE TABLE IF NOT EXISTS `a_news` (
   `news_id` int(11) NOT NULL auto_increment,
@@ -573,7 +574,8 @@ INSERT INTO a_config (`id`, `module`, `key` , `value`) VALUES
 (NULL , 'user', 'user_moderate', '1'),
 (NULL , 'user', 'registration_stop', '0'),
 (NULL , 'downloads', 'user_upload', '1'),
-(NULL , 'downloads', 'moderation', '0');
+(NULL , 'downloads', 'moderation', '0'),
+(NULL,'system','web_theme','web_default');
 //=====================================//
 CREATE TABLE IF NOT EXISTS a_guests (
   `id` int(11) NOT NULL auto_increment,
