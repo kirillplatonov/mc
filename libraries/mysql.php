@@ -106,7 +106,7 @@ class MySQL {
 	* Кодировка БД
 	*/
 	public function charset($charset){
-		$this->query("SET NAMES $charset");
+            mysqli_set_charset($this->db_link, $charset);
 	}
 
 	/**
