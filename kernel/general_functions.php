@@ -162,7 +162,8 @@ function a_url($path, $query = '', $header = FALSE) {
 * Обработка строки для помещения ее в базу данных
 */
 function a_safe($str) {
-	return htmlspecialchars(mysql_real_escape_string(trim($str)));
+    $db = Registry::get('db');
+	return htmlspecialchars(mysqli_real_escape_string($db->db_link, trim($str)));
 }
 
 
