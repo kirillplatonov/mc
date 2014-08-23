@@ -91,7 +91,7 @@ class Downloads_Admin_Controller extends Controller {
 			}
 		}
 
-		$directory_path = downloads::get_path($directory_id, &$this->db);
+		$directory_path = downloads::get_path($directory_id, $this->db);
 		$namepath = downloads::get_namepath($directory_path, '/', TRUE);
 
 		# Получаем список папок и файлов
@@ -216,7 +216,7 @@ class Downloads_Admin_Controller extends Controller {
 
 					# Создаем папку в файловой системе
 					# Получаем директорию для папки
-					$directory_path = downloads::get_path($directory_id, &$this->db);
+					$directory_path = downloads::get_path($directory_id, $this->db);
 					$realpath = downloads::get_realpath($directory_path);
 
 					mkdir(ROOT . DOWNLOADS_DIRECTORY . $realpath .'/'. $directory_id);
@@ -286,7 +286,7 @@ class Downloads_Admin_Controller extends Controller {
 		}
 
 		# Удаление из ФС
-		$directory_path = downloads::get_path($directory_id, &$this->db);
+		$directory_path = downloads::get_path($directory_id, $this->db);
 		$realpath = downloads::get_realpath($directory_path);
 		main::delete_dir(ROOT . DOWNLOADS_DIRECTORY . $realpath .'/'. $directory_id);
 
@@ -338,7 +338,7 @@ class Downloads_Admin_Controller extends Controller {
 			main::is_demo();
 			if(!$this->error) {
 				# Получаем путь к папке
-				$directory_path = downloads::get_path($directory_id, &$this->db);
+				$directory_path = downloads::get_path($directory_id, $this->db);
 		   		$realpath = downloads::get_realpath($directory_path);
 				$realpath = ($realpath != '' ? $realpath . '/' :  '') . ($directory_id == 0 ? '' : $directory_id . '/');
 
@@ -458,7 +458,7 @@ class Downloads_Admin_Controller extends Controller {
 					$file = downloads::filetype_actions($file);
 
 					# Изменяем файл в базе
-					downloads::update_file(&$this->db, $file_id, $file, $new_file);
+					downloads::update_file($this->db, $file_id, $file, $new_file);
 
 					if($action == 'add') $message = 'Файл успешно добавлен!';
 					if($action == 'edit') $message = 'Файл успешно изменен!';
@@ -619,7 +619,7 @@ class Downloads_Admin_Controller extends Controller {
 	*/
 	private function _ftp_upload_copy_files($directory_id, $ftp_directory, $translite = TRUE) {
 		# Получаем путь к папке
-		$directory_path = downloads::get_path($directory_id, &$this->db);
+		$directory_path = downloads::get_path($directory_id, $this->db);
 		$directory_realpath = downloads::get_realpath($directory_path) .'/'. $directory_id;
 
 		# Сканируем фтп папку
@@ -675,7 +675,7 @@ class Downloads_Admin_Controller extends Controller {
 				$file = downloads::filetype_actions($file);
 
 				# Изменяем файл в базе
-				downloads::update_file(&$this->db, $new_file_id, $file);
+				downloads::update_file($this->db, $new_file_id, $file);
 				$file = '';
 			}
 		}

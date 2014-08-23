@@ -51,7 +51,7 @@ class user_events {
 		$moderation_users = $db->get_one("SELECT COUNT(*) FROM #__users WHERE account = 'moderate' AND pin_code = ''"); 
 		
 		// Массив пользователей онлайн (для веб версии)
-		if (WEB_VERSION == 1 && $users_online > 0) {
+		if ($users_online > 0) {
 			$users_array = $db->get_array("SELECT SQL_CALC_FOUND_ROWS user_id, username FROM #__users WHERE user_id != -1 AND account = 'active' AND last_visit > UNIX_TIMESTAMP() - 180 ORDER BY user_id ASC LIMIT 15");
             $tpl->assign('users_online', $users_array);
 		}

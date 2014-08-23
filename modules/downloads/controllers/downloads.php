@@ -525,7 +525,7 @@ class Downloads_Controller extends Controller {
 						$this->db->query("INSERT INTO #__downloads_files SET file_id = 'NULL'");
 						$file_id = $this->db->insert_id();
 
-						$directory_path = downloads::get_path($directory['directory_id'], &$this->db);
+						$directory_path = downloads::get_path($directory['directory_id'], $this->db);
 		   				$realpath = downloads::get_realpath($directory_path);
 						$realpath = ($realpath != '' ? $realpath . '/' :  '') . ($directory['directory_id'] == 0 ? '' : $directory['directory_id'] . '/');
 
@@ -580,7 +580,7 @@ class Downloads_Controller extends Controller {
 						$file = downloads::filetype_actions($file);
 
 						// Изменение файла в базе
-						downloads::update_file(&$this->db, $file_id, $file);
+						downloads::update_file($this->db, $file_id, $file);
 
 						a_notice($this->config['downloads']['moderation'] == 1 ? 'Файл успешно загружен. Он будет доступен для скачиваниями другими пользователями после прохождения модерации' : 'Файл успешно загружен', URL .'downloads/view/'. $file_id);
 					}
@@ -689,7 +689,7 @@ class Downloads_Controller extends Controller {
 						$file = downloads::filetype_actions($file);
 
 						// Изменение файла в базе
-						downloads::update_file(&$this->db, $file_id, $file);
+						downloads::update_file($this->db, $file_id, $file);
 
 						a_notice($this->config['downloads']['moderation'] == 1 ? 'Файл успешно изменен. Он будет доступен для скачиваниями другими пользователями после прохождения модерации' : 'Файл успешно загружен', URL .'downloads/view/'. $file_id);
 					}

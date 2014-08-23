@@ -192,8 +192,12 @@ class web_version_events {
       }
     } else {
       # Запускаем веб версию (для текущего браузера)
-      if ($type == 'web') define('WEB_VERSION', '1');
-    }  
+      if ($type == 'web') {
+        define('WEB_VERSION', '1');
+      } else {
+        define('WEB_VERSION', '0');
+      }
+    }
 	}
 }
 ?>
