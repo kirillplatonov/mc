@@ -78,7 +78,7 @@ class MySQL {
 	/**
 	* Получение строки
 	*/
-	public function get_row($query, $restype = MYSQL_ASSOC) {
+	public function get_row($query, $restype = MYSQLI_ASSOC) {
 		$result = $this->query($query);
 		if($row = mysqli_fetch_array($result, $restype)) return array_map('stripslashes', $row);
 		return FALSE;
