@@ -153,7 +153,7 @@ class Modules_Admin_Controller extends Controller {
 		if(file_exists(ROOT .'modules/'. $module_name .'/helpers/'. $module_name .'_installer.php')) {
 			a_import('modules/'. $module_name .'/helpers/'. $module_name .'_installer');
 			$installer_class = $module_name .'_installer';
-			call_user_func(array($installer_class, 'install'), &$this->db);
+			call_user_func(array($installer_class, 'install'), $this->db);
 		}
 
 		header('Location: '. a_url('modules/admin', '', TRUE));

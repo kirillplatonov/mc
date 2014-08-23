@@ -40,7 +40,9 @@ abstract class Controller {
 
 		// Определение старта для пагинации
 		$this->start = !empty($_GET['start']) ? intval($_GET['start']) : 0;
-		$this->start = is_numeric($_GET['page']) ? $_GET['page'] * $this->per_page - 1 : $this->start;
+		if (!empty($_GET['page']) && is_numeric($_GET['page'])) {
+			$this->start = $_GET['page'] * $this->per_page - 1;
+		}
 		if ($this->start < 0) a_error('Не верный формат данных');
         
 		// Подключение шаблонизатора
@@ -114,7 +116,7 @@ abstract class Controller {
 		define('ACCESS_LEVEL', $access_level);
 
 		// Выполнение событий до вызова контроллера
-		main::events_exec(&$this->db, 'pre_controller');
+		main::events_exec($this->db, 'pre_controller');
 
 		if (ACCESS_LEVEL < $this->access_level) {
 			if (USER_ID == -1) {

@@ -76,7 +76,7 @@ class Smiles_Admin_Controller extends Controller {
 	* Обновление смайлов
 	*/
 	public function action_smiles_update() {
-		smiles::smiles_update(&$this->db);
+		smiles::smiles_update($this->db);
 		a_notice("Смайлы успешно обновлены!", a_url('smiles/admin'));
 	}
 }

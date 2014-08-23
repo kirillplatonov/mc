@@ -72,7 +72,7 @@ class Lib_Admin_Controller extends Controller {
             main::is_demo();
     		if(!$this->error) {
     			# Определяем путь для загрузки
-    			$directory_path = lib::get_path($directory_id, &$this->db);
+    			$directory_path = lib::get_path($directory_id, $this->db);
 				$realpath = lib::get_realpath($directory_path);
 				$path_to_file = ($realpath != '' ? $realpath . '/' :  '') . ($directory_id == 0 ? '' : $directory_id . '/');
 
@@ -152,7 +152,7 @@ class Lib_Admin_Controller extends Controller {
             }
         }
 
-      	$directory_path = lib::get_path($directory_id, &$this->db);
+      	$directory_path = lib::get_path($directory_id, $this->db);
 		$namepath = lib::get_namepath($directory_path, '/', TRUE);
 
       	# Получаем список папок и файлов
@@ -257,7 +257,7 @@ class Lib_Admin_Controller extends Controller {
 
 	           		# Создаем папку в файловой системе
 	                # Получаем директорию для папки
-	                $directory_path = lib::get_path($directory_id, &$this->db);
+	                $directory_path = lib::get_path($directory_id, $this->db);
 					$realpath = lib::get_realpath($directory_path);
 
 					mkdir(ROOT .'files/lib/'. $realpath .'/'. $directory_id);
@@ -353,7 +353,7 @@ class Lib_Admin_Controller extends Controller {
 		}
 
 		# Удаление из ФС
-		$directory_path = lib::get_path($directory_id, &$this->db);
+		$directory_path = lib::get_path($directory_id, $this->db);
         $realpath = lib::get_realpath($directory_path);
 		rmdir(ROOT .'files/lib/'. $realpath .'/'. $directory_id);
 

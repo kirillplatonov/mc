@@ -55,7 +55,7 @@ class Lib_Controller extends Controller {
 			FROM #__lib_books AS b LEFT JOIN #__lib_directories AS d USING(directory_id) WHERE b.book_id = '". intval($_GET['book_id']) ."'"))
 			a_error("Книга не найдена!");
 
-		$directory_path = lib::get_path($book['directory_id'], &$this->db);
+		$directory_path = lib::get_path($book['directory_id'], $this->db);
 		$namepath = lib::get_namepath($directory_path, '/');
 
 		# Получаем навигацию
@@ -202,7 +202,7 @@ class Lib_Controller extends Controller {
 					}
 				}
 
-				$directory_path = lib::get_path($directory_id, &$this->db);
+				$directory_path = lib::get_path($directory_id, $this->db);
 				$namepath = lib::get_namepath($directory_path, '/', TRUE);
 
 				# Получаем навигацию

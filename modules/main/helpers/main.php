@@ -171,7 +171,7 @@ class main {
 				$module = trim(str_replace('.'. $type .'.event', '', $f));
 				if(!empty($module)) {
 					a_import('modules/'. $module .'/helpers/'. $module .'_events');
-					call_user_func(array($module .'_events', $type), &$db);
+					call_user_func(array($module .'_events', $type), $db);
 				}
 			}
 		}
