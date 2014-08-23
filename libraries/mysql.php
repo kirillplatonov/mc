@@ -35,8 +35,8 @@ class MySQL {
 	* Соединение с базой
 	*/
 	public function connect(){
-		$this->db_link = mysql_connect(DB_HOST, DB_USER, DB_PASS, 0, 65536) or $this->error("Не возможно подключиться к MySQL серверу");
-		mysql_select_db(DB_BASE) or $this->error("Не возможно выбрать базу данных ". DB_BASE);
+            $this->db_link = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_BASE, 3306) or 
+                    $this->error("Не возможно подключиться к MySQL серверу");
 	}
 
 	/**
@@ -49,7 +49,8 @@ class MySQL {
 		$start_time = microtime(true);
 
 		# Выполняем запрос
-		$result = mysql_query($query, $this->db_link) or $this->error($query . PHP_EOL . mysql_error($this->db_link));
+		$result = mysqli_query($this->db_link, $query) or 
+                        $this->error($query . PHP_EOL . mysqli_error($this->db_link));
 
 		# Получаем время по окончанию запроса
 		$end_time = microtime(true);
@@ -70,7 +71,7 @@ class MySQL {
 	*/
 	public function get_one($query){
 		$result = $this->query($query);
-		if($row = mysql_fetch_row($result)) return stripslashes($row[0]);
+		if($row = mysqli_fetch_row($result)) return stripslashes($row[0]);
 		return FALSE;
 	}
 
@@ -79,7 +80,7 @@ class MySQL {
 	*/
 	public function get_row($query, $restype = MYSQL_ASSOC) {
 		$result = $this->query($query);
-		if($row = mysql_fetch_array($result, $restype)) return array_map('stripslashes', $row);
+		if($row = mysqli_fetch_array($result, $restype)) return array_map('stripslashes', $row);
 		return FALSE;
 	}
 
@@ -97,7 +98,7 @@ class MySQL {
 	* Закрытие соединения
 	*/
 	public function close(){
-		if($this->db_link) mysql_close($this->db_link);
+		if($this->db_link) mysqli_close($this->db_link);
 		$this->db_link = NULL;
 	}
 
@@ -105,28 +106,28 @@ class MySQL {
 	* Кодировка БД
 	*/
 	public function charset($charset){
-		$this->query("SET NAMES $charset");
+            mysqli_set_charset($this->db_link, $charset);
 	}
 
 	/**
 	* Последний вставленный id
 	*/
 	public function insert_id() {
-		return mysql_insert_id($this->db_link);
+		return mysqli_insert_id($this->db_link);
 	}
 
 	/**
 	* Аналог mysql_fetch_array()
 	*/
 	public function fetch_array($result){
-		return mysql_fetch_array($result);
+		return mysqli_fetch_array($result);
 	}
 
 	/**
 	* Аналог mysql_num_rows()
 	*/
 	public function num_rows($result) {
-		return mysql_num_rows($result);
+		return mysqli_num_rows($result);
 	}
 
 	/**
@@ -144,4 +145,3 @@ class MySQL {
 		exit;
 	}
 }
-?>
