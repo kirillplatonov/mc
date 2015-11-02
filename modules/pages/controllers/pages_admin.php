@@ -1,14 +1,14 @@
 <?php
 /**
- * MobileCMS
- *
- * Open source content management system for mobile sites
- *
- * @author MobileCMS Team <support@mobilecms.ru>
- * @copyright Copyright (c) 2011, MobileCMS Team
- * @link http://mobilecms.ru Official site
- * @license http://opensource.org/licenses/gpl-license.php GNU Public License
- */
+	 * MobileCMS
+	 *
+	 * Open source content management system for mobile sites
+	 *
+	 * @author MobileCMS Team <support@mobilecms.ru>
+	 * @copyright Copyright (c) 2011, MobileCMS Team
+	 * @link http://mobilecms.ru Official site
+	 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+	 */
 
 defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
 
@@ -19,28 +19,28 @@ defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
  */
 class Pages_Admin_Controller extends Controller {
 	/**
-	* Уровень пользовательского доступа
-	*/
+	 * Уровень пользовательского доступа
+	 */
 	public $access_level = 10;
 	/**
-	* Тема
-	*/
+	 * Тема
+	 */
 	public $template_theme = 'admin';
 
 	/**
-	* Метод по умолчанию
-	*/
+	 * Метод по умолчанию
+	 */
 	public function action_index() {
 		$this->action_list_pages();
 	}
 
 	/**
-	* Добавление / редактирование страниц
-	*/
+	 * Добавление / редактирование страниц
+	 */
 	public function action_page_edit() {
-		if(is_numeric($_GET['page_id'])) {
+		if (is_numeric($_GET['page_id'])) {
 			$action = 'edit';
-			if(!$page = $this->db->get_row("SELECT * FROM #__pages WHERE page_id = '". intval($_GET['page_id']) ."'"))
+			if (!$page = $this->db->get_row("SELECT * FROM #__pages WHERE page_id = '".intval($_GET['page_id'])."'"))
 				a_error('Страница не найдена!');
 		}
 		else {
@@ -48,29 +48,29 @@ class Pages_Admin_Controller extends Controller {
 			$page = array();
 		}
 
-		if(isset($_POST['submit'])) {
+		if (isset($_POST['submit'])) {
 			main::is_demo();
-			if(empty($_POST['title'])) {
+			if (empty($_POST['title'])) {
 				$this->error .= 'Укажите заголовок страницы!<br />';
 			}
-			if(empty($_POST['editor_content'])) {
+			if (empty($_POST['editor_content'])) {
 				$this->error .= 'Укажите содержимое страницы!<br />';
 			}
 
-			if(!$this->error) {
-				if($action == 'add') {
+			if (!$this->error) {
+				if ($action == 'add') {
 					$this->db->query("INSERT INTO #__pages SET
-						`title` = '". a_safe($_POST['title']) ."',
-						`content` = '". mysql_real_escape_string(main::tinymce_p_br($_POST['editor_content'])) ."'
+						`title` = '". a_safe($_POST['title'])."',
+						`content` = '". mysql_real_escape_string(main::tinymce_p_br($_POST['editor_content']))."'
 					");
 					$message = 'Страница успешно добавлена!';
 				}
-				elseif($action == 'edit') {
+				elseif ($action == 'edit') {
 					$this->db->query("UPDATE #__pages SET
-						`title` = '". a_safe($_POST['title']) ."',
-						`content` = '". mysql_real_escape_string(main::tinymce_p_br($_POST['editor_content'])) ."'
+						`title` = '". a_safe($_POST['title'])."',
+						`content` = '". mysql_real_escape_string(main::tinymce_p_br($_POST['editor_content']))."'
 						WHERE
-						page_id = '". intval($_GET['page_id']) ."'
+						page_id = '". intval($_GET['page_id'])."'
 					");
 					$message = 'Страница успешно изменена!';
 				}
@@ -78,7 +78,7 @@ class Pages_Admin_Controller extends Controller {
 				a_notice($message, a_url('pages/admin'));
 			}
 		}
-		if(!isset($_POST['submit']) || $this->error) {
+		if (!isset($_POST['submit']) || $this->error) {
 			$this->tpl->assign(array(
 				'error' => $this->error,
 				'page' => $page,
@@ -90,8 +90,8 @@ class Pages_Admin_Controller extends Controller {
 	}
 
 	/**
-	* Листинг страниц
-	*/
+	 * Листинг страниц
+	 */
 	public function action_list_pages() {
 		$this->per_page = 20;
 		# Получение данных
@@ -119,14 +119,14 @@ class Pages_Admin_Controller extends Controller {
 	}
 
 	/**
-	* Удаление страницы
-	*/
+	 * Удаление страницы
+	 */
 	public function action_page_delete() {
 		main::is_demo();
-		if(!$page = $this->db->get_row("SELECT * FROM #__pages WHERE page_id = '". intval($_GET['page_id']) ."'"))
+		if (!$page = $this->db->get_row("SELECT * FROM #__pages WHERE page_id = '".intval($_GET['page_id'])."'"))
 			a_error('Страница не найдена!');
 
-		$this->db->query("DELETE FROM #__pages WHERE page_id = '". intval($_GET['page_id']) ."'");
+		$this->db->query("DELETE FROM #__pages WHERE page_id = '".intval($_GET['page_id'])."'");
 		a_notice('Страница успешно удалена!', a_url('pages/admin'));
 	}
 }

@@ -36,7 +36,7 @@ class Mail {
 	приоритеты
 	@var array
 	*/
-	var $priorities = array( '1 (Highest)', '2 (High)', '3 (Normal)', '4 (Low)', '5 (Lowest)' );
+	var $priorities = array('1 (Highest)', '2 (High)', '3 (Normal)', '4 (Low)', '5 (Lowest)');
 	/*
 	кодировка по умолчанию
 	@var string
@@ -44,8 +44,8 @@ class Mail {
 	var  $charset = "windows-1251";
 	var  $ctencoding = "8bit";
 	var  $receipt = 0;
-	var  $text_html="text/plain"; // формат письма. по умолчанию текстовый
-	var  $smtp_on=false;    // отправка через smtp. по умолчанию выключена
+	var  $text_html = "text/plain"; // формат письма. по умолчанию текстовый
+	var  $smtp_on = false; // отправка через smtp. по умолчанию выключена
 
 	/*
 	конструктор тоже по старому объявлен для совместимости со старыми версиями php
@@ -54,15 +54,15 @@ class Mail {
 	внесено изменение webi.ru
 	*/
 
-	function Mail($charset="")
+	function Mail($charset = "")
 	{
-		$this->autoCheck( true );
-		$this->boundary= "--" . md5( uniqid("myboundary") );
+		$this->autoCheck(true);
+		$this->boundary = "--".md5(uniqid("myboundary"));
 
 
-		if( $charset != "" ) {
+		if ($charset != "") {
 			$this->charset = strtolower($charset);
-			if( $this->charset == "us-ascii" )
+			if ($this->charset == "us-ascii")
 			$this->ctencoding = "7bit";
 		}
 	}
@@ -76,12 +76,17 @@ class Mail {
 
 
 	*/
+
+	/**
+	 * @param boolean $bool
+	 */
 	function autoCheck( $bool )
 	{
-		if( $bool )
-		$this->checkAddress = true;
-		else
-		$this->checkAddress = false;
+		if( $bool ) {
+				$this->checkAddress = true;
+		} else {
+				$this->checkAddress = false;
+		}
 	}
 
 
@@ -91,6 +96,10 @@ class Mail {
 	внесено изменения кодирования не латинских символов
 
 	*/
+
+	/**
+	 * @param string $subject
+	 */
 	function Subject( $subject )
 	{
 
@@ -104,10 +113,10 @@ class Mail {
 	от кого
 	*/
 
-	function From( $from )
+	function From($from)
 	{
 
-		if( ! is_string($from) ) {
+		if (!is_string($from)) {
 			echo "ошибка, From должен быть строкой";
 			exit;
 		}
@@ -118,10 +127,10 @@ class Mail {
 	на какой адрес отвечать
 
 	*/
-	function ReplyTo( $address )
+	function ReplyTo($address)
 	{
 
-		if( ! is_string($address) )
+		if (!is_string($address))
 		return false;
 
 		$this->xheaders["Reply-To"] = $address;
@@ -146,13 +155,13 @@ class Mail {
 
 	*/
 
-	function To( $to )
+	function To($to)
 	{
 
 		// если это массив
-		if( is_array( $to ) )
+		if (is_array($to))
 		{
-			$this->sendto= $to;
+			$this->sendto = $to;
 			foreach ($to as $key => $value) // перебираем массив и добавляем в массив для отправки через smtp
 			{
 				$this->smtpsendto[$value] = $value; // ключи и значения одинаковые, чтобы исключить дубли адресов
@@ -164,8 +173,8 @@ class Mail {
 			$this->smtpsendto[$to] = $to; // ключи и значения одинаковые, чтобы исключить дубли адресов
 		}
 
-		if( $this->checkAddress == true )
-		$this->CheckAdresses( $this->sendto );
+		if ($this->checkAddress == true)
+		$this->CheckAdresses($this->sendto);
 
 	}
 
@@ -175,11 +184,11 @@ class Mail {
 	*		$cc : email address(es), accept both array and string
 	*/
 
-	function Cc( $cc )
+	function Cc($cc)
 	{
-		if( is_array($cc) )
+		if (is_array($cc))
 		{
-			$this->acc= $cc;
+			$this->acc = $cc;
 
 			foreach ($cc as $key => $value) // перебираем массив и добавляем в массив для отправки через smtp
 			{
@@ -188,12 +197,12 @@ class Mail {
 		}
 		else
 		{
-			$this->acc[]= $cc;
+			$this->acc[] = $cc;
 			$this->smtpsendto[$cc] = $cc; // ключи и значения одинаковые, чтобы исключить дубли адресов
 		}
 
-		if( $this->checkAddress == true )
-		$this->CheckAdresses( $this->acc );
+		if ($this->checkAddress == true)
+		$this->CheckAdresses($this->acc);
 
 	}
 
@@ -204,35 +213,44 @@ class Mail {
 	*		$bcc : email address(es), accept both array and string
 	*/
 
-	function Bcc( $bcc )
+	function Bcc($bcc)
 	{
-		if( is_array($bcc) )
+		if (is_array($bcc))
 		{
 			$this->abcc = $bcc;
-			foreach ($bcc as $key => $value) // перебираем массив и добавляем в массив для отправки через smtp
+			foreach ($bcc as $key => $value) {
+				// перебираем массив и добавляем в массив для отправки через smtp
 			{
-				$this->smtpsendto[$value] = $value; // ключи и значения одинаковые, чтобы исключить дубли адресов
+				$this->smtpsendto[$value] = $value;
 			}
-		}
-		else
+			// ключи и значения одинаковые, чтобы исключить дубли адресов
+			}
+		} else
 		{
 			$this->abcc[]= $bcc;
 			$this->smtpsendto[$bcc] = $bcc; // ключи и значения одинаковые, чтобы исключить дубли адресов
 		}
 
-		if( $this->checkAddress == true )
-		$this->CheckAdresses( $this->abcc );
+		if( $this->checkAddress == true ) {
+				$this->CheckAdresses( $this->abcc );
+		}
 	}
 
 
 	/*		Body( text [ text_html ] )
 	*		$text_html в каком формате будет письмо, в тексте или html. по умолчанию стоит текст
 	*/
+
+	/**
+	 * @param string $body
+	 */
 	function Body( $body, $text_html="" )
 	{
 		$this->body = $body;
 
-		if( $text_html == "html" ) $this->text_html = "text/html";
+		if( $text_html == "html" ) {
+			$this->text_html = "text/html";
+		}
 
 	}
 
@@ -241,9 +259,9 @@ class Mail {
 	*		set the Organization header
 	*/
 
-	function Organization( $org )
+	function Organization($org)
 	{
-		if( trim( $org != "" )  )
+		if (trim($org != ""))
 		$this->xheaders['Organization'] = $org;
 	}
 
@@ -254,15 +272,15 @@ class Mail {
 	*		ex: $mail->Priority(1) ; => Highest
 	*/
 
-	function Priority( $priority )
+	function Priority($priority)
 	{
-		if( ! intval( $priority ) )
+		if (!intval($priority))
 		return false;
 
-		if( ! isset( $this->priorities[$priority-1]) )
+		if (!isset($this->priorities[$priority - 1]))
 		return false;
 
-		$this->xheaders["X-Priority"] = $this->priorities[$priority-1];
+		$this->xheaders["X-Priority"] = $this->priorities[$priority - 1];
 
 		return true;
 
@@ -278,10 +296,10 @@ class Mail {
 	@param string $disposition : инструкция почтовому клиенту как отображать прикрепленный файл ("inline") как часть письма или ("attachment") как прикрепленный файл
 	*/
 
-	function Attach( $filename, $webi_filename="", $filetype = "", $disposition = "inline" )
+	function Attach($filename, $webi_filename = "", $filetype = "", $disposition = "inline")
 	{
 		// TODO : если типа файла не указан, ставим неизвестный тип
-		if( $filetype == "" )
+		if ($filetype == "")
 		$filetype = "application/x-unknown-content-type";
 
 		$this->aattach[] = $filename;
@@ -304,23 +322,23 @@ class Mail {
 
 
 
-		$this->xheaders['To'] = implode( ", ", $this->sendto ); // этот заголовок будет не нужен при отправке через mail()
+		$this->xheaders['To'] = implode(", ", $this->sendto); // этот заголовок будет не нужен при отправке через mail()
 
-		if( count($this->acc) > 0 )
-		$this->xheaders['CC'] = implode( ", ", $this->acc );
+		if (count($this->acc) > 0)
+		$this->xheaders['CC'] = implode(", ", $this->acc);
 
-		if( count($this->abcc) > 0 )
-		$this->xheaders['BCC'] = implode( ", ", $this->abcc );  // этот заголовок будет не нужен при отправке через smtp
+		if (count($this->abcc) > 0)
+		$this->xheaders['BCC'] = implode(", ", $this->abcc); // этот заголовок будет не нужен при отправке через smtp
 
 
-		if( $this->receipt ) {
-			if( isset($this->xheaders["Reply-To"] ) )
+		if ($this->receipt) {
+			if (isset($this->xheaders["Reply-To"]))
 			$this->xheaders["Disposition-Notification-To"] = $this->xheaders["Reply-To"];
 			else
 			$this->xheaders["Disposition-Notification-To"] = $this->xheaders['From'];
 		}
 
-		if( $this->charset != "" ) {
+		if ($this->charset != "") {
 			$this->xheaders["Mime-Version"] = "1.0";
 			$this->xheaders["Content-Type"] = $this->text_html."; charset=$this->charset";
 			$this->xheaders["Content-Transfer-Encoding"] = $this->ctencoding;
@@ -329,7 +347,7 @@ class Mail {
 		//$this->xheaders["X-Mailer"] = "Php_libMail_v_1.5(webi.ru)";
 
 		// вставаляем файлы
-		if( count( $this->aattach ) > 0 ) {
+		if (count($this->aattach) > 0) {
 			$this->_build_attachement();
 		} else {
 			$this->fullBody = $this->body;
@@ -338,18 +356,18 @@ class Mail {
 
 
 		// создание заголовков если отправка идет через smtp
-		if($this->smtp_on)
+		if ($this->smtp_on)
 		{
 
 			// разбиваем (FROM - от кого) на юзера и домен. домен понадобится в заголовке
-			$user_domen=explode('@',$this->xheaders['From']);
+			$user_domen = explode('@', $this->xheaders['From']);
 			$this->headers = "Date: ".date("D, j M Y G:i:s")." +0700\r\n";
 			$this->headers .= "Message-ID: <".rand().".".date("YmjHis")."@".$user_domen[1].">\r\n";
 
 
 			reset($this->xheaders);
-			while( list( $hdr,$value ) = each( $this->xheaders )  ) {
-				if( $hdr != "BCC") $this->headers .= $hdr.": ".$value."\r\n"; // пропускаем заголовок для отправки скрытой копии
+			while (list($hdr, $value) = each($this->xheaders)) {
+				if ($hdr != "BCC") $this->headers .= $hdr.": ".$value."\r\n"; // пропускаем заголовок для отправки скрытой копии
 			}
 
 
@@ -360,8 +378,8 @@ class Mail {
 		else
 		{
 			reset($this->xheaders);
-			while( list( $hdr,$value ) = each( $this->xheaders )  ) {
-				if( $hdr != "Subject" and $hdr != "To") $this->headers .= "$hdr: $value\n"; // пропускаем заголовки кому и тему... они вставятся сами
+			while (list($hdr, $value) = each($this->xheaders)) {
+				if ($hdr != "Subject" and $hdr != "To") $this->headers .= "$hdr: $value\n"; // пропускаем заголовки кому и тему... они вставятся сами
 			}
 		}
 
@@ -373,24 +391,24 @@ class Mail {
 	// включение отправки через smtp используя сокеты
 	// после запуска этой функции отправка через smtp включена
 	// для отправки через защищенное соединение сервер нужно указывать с добавлением "ssl://" например так "ssl://smtp.gmail.com"
-	function smtp_on($smtp_serv, $login, $pass, $port=25,$timeout=5)
+	function smtp_on($smtp_serv, $login, $pass, $port = 25, $timeout = 5)
 	{
-		$this->smtp_on=true; // включаем отправку через smtp
+		$this->smtp_on = true; // включаем отправку через smtp
 
-		$this->smtp_serv=$smtp_serv;
-		$this->smtp_login=$login;
-		$this->smtp_pass=$pass;
-		$this->smtp_port=$port;
-		$this->smtp_timeout=$timeout;
+		$this->smtp_serv = $smtp_serv;
+		$this->smtp_login = $login;
+		$this->smtp_pass = $pass;
+		$this->smtp_port = $port;
+		$this->smtp_timeout = $timeout;
 	}
 
 	function get_data($smtp_conn)
 	{
-		$data="";
-		while($str = fgets($smtp_conn,515))
+		$data = "";
+		while ($str = fgets($smtp_conn, 515))
 		{
 			$data .= $str;
-			if(substr($str,3,1) == " ") { break; }
+			if (substr($str, 3, 1) == " ") { break; }
 		}
 		return $data;
 	}
@@ -402,12 +420,12 @@ class Mail {
 	function Send()
 	{
 		$this->BuildMail();
-		$this->strTo = implode( ", ", $this->sendto );
+		$this->strTo = implode(", ", $this->sendto);
 
 		// если отправка без использования smtp
-		if(!$this->smtp_on)
+		if (!$this->smtp_on)
 		{
-			$res = @mail( $this->strTo, $this->xheaders['Subject'], $this->fullBody, $this->headers );
+			$res = @mail($this->strTo, $this->xheaders['Subject'], $this->fullBody, $this->headers);
 		}
 		else // если через smtp
 		{
@@ -417,82 +435,82 @@ class Mail {
 
 
 			// разбиваем (FROM - от кого) на юзера и домен. юзер понадобится в приветсвии с сервом
-			$user_domen=explode('@',$this->xheaders['From']);
+			$user_domen = explode('@', $this->xheaders['From']);
 
 
-			$this->smtp_log='';
+			$this->smtp_log = '';
 			$smtp_conn = fsockopen($this->smtp_serv, $this->smtp_port, $errno, $errstr, $this->smtp_timeout);
-			if(!$smtp_conn) {$this->smtp_log .= "соединение с сервером не прошло\n\n"; fclose($smtp_conn); return; }
+			if (!$smtp_conn) {$this->smtp_log .= "соединение с сервером не прошло\n\n"; fclose($smtp_conn); return; }
 
 			$this->smtp_log .= $data = $this->get_data($smtp_conn)."\n";
 
-			fputs($smtp_conn,"EHLO ".$user_domen[0]."\r\n");
+			fputs($smtp_conn, "EHLO ".$user_domen[0]."\r\n");
 			$this->smtp_log .= "Я: EHLO ".$user_domen[0]."\n";
 			$this->smtp_log .= $data = $this->get_data($smtp_conn)."\n";
-			$code = substr($data,0,3); // получаем код ответа
+			$code = substr($data, 0, 3); // получаем код ответа
 
-			if($code != 250) {$this->smtp_log .= "ошибка приветсвия EHLO \n"; fclose($smtp_conn); return; }
+			if ($code != 250) {$this->smtp_log .= "ошибка приветсвия EHLO \n"; fclose($smtp_conn); return; }
 
-			fputs($smtp_conn,"AUTH LOGIN\r\n");
+			fputs($smtp_conn, "AUTH LOGIN\r\n");
 			$this->smtp_log .= "Я: AUTH LOGIN\n";
 			$this->smtp_log .= $data = $this->get_data($smtp_conn)."\n";
-			$code = substr($data,0,3);
+			$code = substr($data, 0, 3);
 
-			if($code != 334) {$this->smtp_log .= "сервер не разрешил начать авторизацию \n"; fclose($smtp_conn); return;}
+			if ($code != 334) {$this->smtp_log .= "сервер не разрешил начать авторизацию \n"; fclose($smtp_conn); return; }
 
-			fputs($smtp_conn,base64_encode($this->smtp_login)."\r\n");
+			fputs($smtp_conn, base64_encode($this->smtp_login)."\r\n");
 			$this->smtp_log .= "Я: ".base64_encode($this->smtp_login)."\n";
 			$this->smtp_log .= $data = $this->get_data($smtp_conn)."\n";
 
-			$code = substr($data,0,3);
-			if($code != 334) {$this->smtp_log .= "ошибка доступа к такому юзеру\n"; fclose($smtp_conn); return ;}
+			$code = substr($data, 0, 3);
+			if ($code != 334) {$this->smtp_log .= "ошибка доступа к такому юзеру\n"; fclose($smtp_conn); return; }
 
 
-			fputs($smtp_conn,base64_encode($this->smtp_pass)."\r\n");
-			$this->smtp_log .="Я: ". base64_encode($this->smtp_pass)."\n";
+			fputs($smtp_conn, base64_encode($this->smtp_pass)."\r\n");
+			$this->smtp_log .= "Я: ".base64_encode($this->smtp_pass)."\n";
 			$this->smtp_log .= $data = $this->get_data($smtp_conn)."\n";
 
-			$code = substr($data,0,3);
-			if($code != 235) {$this->smtp_log .= "не правильный пароль\n"; fclose($smtp_conn); return ;}
+			$code = substr($data, 0, 3);
+			if ($code != 235) {$this->smtp_log .= "не правильный пароль\n"; fclose($smtp_conn); return; }
 
-			fputs($smtp_conn,"MAIL FROM:<".$this->xheaders['From']."> SIZE=".strlen($this->headers."\r\n".$this->fullBody)."\r\n");
+			fputs($smtp_conn, "MAIL FROM:<".$this->xheaders['From']."> SIZE=".strlen($this->headers."\r\n".$this->fullBody)."\r\n");
 			$this->smtp_log .= "Я: MAIL FROM:<".$this->xheaders['From']."> SIZE=".strlen($this->headers."\r\n".$this->fullBody)."\n";
 			$this->smtp_log .= $data = $this->get_data($smtp_conn)."\n";
 
-			$code = substr($data,0,3);
-			if($code != 250) {$this->smtp_log .= "сервер отказал в команде MAIL FROM\n"; fclose($smtp_conn); return ;}
+			$code = substr($data, 0, 3);
+			if ($code != 250) {$this->smtp_log .= "сервер отказал в команде MAIL FROM\n"; fclose($smtp_conn); return; }
 
 
 
 			foreach ($this->smtpsendto as $keywebi => $valuewebi)
 			{
-				fputs($smtp_conn,"RCPT TO:<".$valuewebi.">\r\n");
+				fputs($smtp_conn, "RCPT TO:<".$valuewebi.">\r\n");
 				$this->smtp_log .= "Я: RCPT TO:<".$valuewebi.">\n";
 				$this->smtp_log .= $data = $this->get_data($smtp_conn)."\n";
-				$code = substr($data,0,3);
-				if($code != 250 AND $code != 251) {$this->smtp_log .= "Сервер не принял команду RCPT TO\n"; fclose($smtp_conn); return ;}
+				$code = substr($data, 0, 3);
+				if ($code != 250 AND $code != 251) {$this->smtp_log .= "Сервер не принял команду RCPT TO\n"; fclose($smtp_conn); return; }
 			}
 
 
 
 
-			fputs($smtp_conn,"DATA\r\n");
-			$this->smtp_log .="Я: DATA\n";
+			fputs($smtp_conn, "DATA\r\n");
+			$this->smtp_log .= "Я: DATA\n";
 			$this->smtp_log .= $data = $this->get_data($smtp_conn)."\n";
 
-			$code = substr($data,0,3);
-			if($code != 354) {$this->smtp_log .= "сервер не принял DATA\n"; fclose($smtp_conn); return ;}
+			$code = substr($data, 0, 3);
+			if ($code != 354) {$this->smtp_log .= "сервер не принял DATA\n"; fclose($smtp_conn); return; }
 
-			fputs($smtp_conn,$this->headers."\r\n".$this->fullBody."\r\n.\r\n");
+			fputs($smtp_conn, $this->headers."\r\n".$this->fullBody."\r\n.\r\n");
 			$this->smtp_log .= "Я: ".$this->headers."\r\n".$this->fullBody."\r\n.\r\n";
 
 			$this->smtp_log .= $data = $this->get_data($smtp_conn)."\n";
 
-			$code = substr($data,0,3);
-			if($code != 250) {$this->smtp_log .= "ошибка отправки письма\n"; fclose($smtp_conn); return ;}
+			$code = substr($data, 0, 3);
+			if ($code != 250) {$this->smtp_log .= "ошибка отправки письма\n"; fclose($smtp_conn); return; }
 
-			fputs($smtp_conn,"QUIT\r\n");
-			$this->smtp_log .="QUIT\r\n";
+			fputs($smtp_conn, "QUIT\r\n");
+			$this->smtp_log .= "QUIT\r\n";
 			$this->smtp_log .= $data = $this->get_data($smtp_conn)."\n";
 			fclose($smtp_conn);
 		}
@@ -508,7 +526,7 @@ class Mail {
 
 	function Get()
 	{
-		if(isset($this->smtp_log))
+		if (isset($this->smtp_log))
 		{
 			if ($this->smtp_log)
 			{
@@ -517,7 +535,7 @@ class Mail {
 		}
 
 		$this->BuildMail();
-		$mail = $this->headers . "\n\n";
+		$mail = $this->headers."\n\n";
 		$mail .= $this->fullBody;
 		return $mail;
 	}
@@ -540,10 +558,10 @@ class Mail {
 		}
 		else // а если php еще старой версии, то проверка валидности пойдет старым способом
 		{
-			if( ereg( ".*<(.+)>", $address, $regs ) ) {
+			if (ereg(".*<(.+)>", $address, $regs)) {
 				$address = $regs[1];
 			}
-			if(ereg( "^[^@  ]+@([a-zA-Z0-9\-]+\.)+([a-zA-Z0-9\-]{2}|net|com|gov|mil|org|edu|int)\$",$address) )
+			if (ereg("^[^@  ]+@([a-zA-Z0-9\-]+\.)+([a-zA-Z0-9\-]{2}|net|com|gov|mil|org|edu|int)\$", $address))
 			return true;
 			else
 			return false;
@@ -558,10 +576,10 @@ class Mail {
 
 	*/
 
-	function CheckAdresses( $aad )
+	function CheckAdresses($aad)
 	{
-		for($i=0;$i< count( $aad); $i++ ) {
-			if( ! $this->ValidEmail( $aad[$i]) ) {
+		for ($i = 0; $i < count($aad); $i++) {
+			if (!$this->ValidEmail($aad[$i])) {
 				echo "ошибка : не верный email ".$aad[$i];
 				exit;
 			}
@@ -579,34 +597,34 @@ class Mail {
 		$this->xheaders["Content-Type"] = "multipart/mixed;\n boundary=\"$this->boundary\"";
 
 		$this->fullBody = "This is a multi-part message in MIME format.\n--$this->boundary\n";
-		$this->fullBody .= "Content-Type: ".$this->text_html."; charset=$this->charset\nContent-Transfer-Encoding: $this->ctencoding\n\n" . $this->body ."\n";
+		$this->fullBody .= "Content-Type: ".$this->text_html."; charset=$this->charset\nContent-Transfer-Encoding: $this->ctencoding\n\n".$this->body."\n";
 
-		$sep= chr(13) . chr(10);
+		$sep = chr(13).chr(10);
 
-		$ata= array();
-		$k=0;
+		$ata = array();
+		$k = 0;
 
 		// перебираем файлы
-		for( $i=0; $i < count( $this->aattach); $i++ ) {
+		for ($i = 0; $i < count($this->aattach); $i++) {
 
 			$filename = $this->aattach[$i];
 
-			$webi_filename =$this->webi_filename[$i]; // имя файла, которое может приходить в класс, и имеет другое имя файла
-			if(strlen($webi_filename)) $basename=basename($webi_filename); // если есть другое имя файла, то оно будет таким
+			$webi_filename = $this->webi_filename[$i]; // имя файла, которое может приходить в класс, и имеет другое имя файла
+			if (strlen($webi_filename)) $basename = basename($webi_filename); // если есть другое имя файла, то оно будет таким
 			else $basename = basename($filename); // а если нет другого имени файла, то имя будет выдернуто из самого загружаемого файла
 
-			$ctype = $this->actype[$i];	// content-type
+			$ctype = $this->actype[$i]; // content-type
 			$disposition = $this->adispo[$i];
 
-			if( ! file_exists( $filename) ) {
+			if (!file_exists($filename)) {
 				echo "ошибка прикрепления файла : файл $filename не существует"; exit;
 			}
-			$subhdr= "--$this->boundary\nContent-type: $ctype;\n name=\"$basename\"\nContent-Transfer-Encoding: base64\nContent-Disposition: $disposition;\n  filename=\"$basename\"\n";
+			$subhdr = "--$this->boundary\nContent-type: $ctype;\n name=\"$basename\"\nContent-Transfer-Encoding: base64\nContent-Disposition: $disposition;\n  filename=\"$basename\"\n";
 			$ata[$k++] = $subhdr;
 			// non encoded line length
-			$linesz= filesize( $filename)+1;
-			$fp= fopen( $filename, 'r' );
-			$ata[$k++] = chunk_split(base64_encode(fread( $fp, $linesz)));
+			$linesz = filesize($filename) + 1;
+			$fp = fopen($filename, 'r');
+			$ata[$k++] = chunk_split(base64_encode(fread($fp, $linesz)));
 			fclose($fp);
 		}
 		$this->fullBody .= implode($sep, $ata);

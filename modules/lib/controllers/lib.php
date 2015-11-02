@@ -1,14 +1,14 @@
 <?php
 /**
- * MobileCMS
- *
- * Open source content management system for mobile sites
- *
- * @author MobileCMS Team <support@mobilecms.ru>
- * @copyright Copyright (c) 2011, MobileCMS Team
- * @link http://mobilecms.ru Official site
- * @license http://opensource.org/licenses/gpl-license.php GNU Public License
- */
+	 * MobileCMS
+	 *
+	 * Open source content management system for mobile sites
+	 *
+	 * @author MobileCMS Team <support@mobilecms.ru>
+	 * @copyright Copyright (c) 2011, MobileCMS Team
+	 * @link http://mobilecms.ru Official site
+	 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+	 */
 
 defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
 
@@ -19,13 +19,13 @@ defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
  */
 class Lib_Controller extends Controller {
 	/**
-	* Уровень пользовательского доступа
-	*/
+	 * Уровень пользовательского доступа
+	 */
 	public $access_level = 0;
 
 	/**
-	* Construct
-	*/
+	 * Construct
+	 */
 	public function __construct() {
 		parent::__construct();
 
@@ -34,51 +34,51 @@ class Lib_Controller extends Controller {
 	}
 
 	/**
-	* Метод по умолчанию
-	*/
+	 * Метод по умолчанию
+	 */
 	public function action_index() {
 		$this->action_list_books();
 	}
 
 	/**
-	* Чтение книги
-	*/
+	 * Чтение книги
+	 */
 	public function action_read_book() {
 		$this->per_page = 300;
 
 		# Обновляем количество просмотров
-		if($this->start == 0)
-			$this->db->query("UPDATE #__lib_books SET `reads` = `reads` + 1 WHERE book_id = '". intval($_GET['book_id']) ."'");
+		if ($this->start == 0)
+			$this->db->query("UPDATE #__lib_books SET `reads` = `reads` + 1 WHERE book_id = '".intval($_GET['book_id'])."'");
 
-		if(!$book = $this->db->get_row("SELECT b.*, d.name AS directory_name,
+		if (!$book = $this->db->get_row("SELECT b.*, d.name AS directory_name,
 			(SELECT COUNT(*) FROM #__comments_posts WHERE module = 'lib' AND item_id = b.book_id) AS comments
-			FROM #__lib_books AS b LEFT JOIN #__lib_directories AS d USING(directory_id) WHERE b.book_id = '". intval($_GET['book_id']) ."'"))
+			FROM #__lib_books AS b LEFT JOIN #__lib_directories AS d USING(directory_id) WHERE b.book_id = '". intval($_GET['book_id'])."'"))
 			a_error("Книга не найдена!");
 
 		$directory_path = lib::get_path($book['directory_id'], $this->db);
 		$namepath = lib::get_namepath($directory_path, '/');
 
 		# Получаем навигацию
-		$navigation = '<a href="'. a_url('lib') .'">Библиотека</a> ';
-		if(!empty($namepath))
-			$navigation .= '» '. $namepath;
-		if($book['directory_id'] > 0)
-			$navigation .= '» <a href="'. a_url('lib/list_books', 'directory_id='. $book['directory_id']) .'">'. $book['directory_name'] .'</a>';
+		$navigation = '<a href="'.a_url('lib').'">Библиотека</a> ';
+		if (!empty($namepath))
+			$navigation .= '» '.$namepath;
+		if ($book['directory_id'] > 0)
+			$navigation .= '» <a href="'.a_url('lib/list_books', 'directory_id='.$book['directory_id']).'">'.$book['directory_name'].'</a>';
 
 		# Получаем контент и делаем разбивку по страницам
-		$text = file_get_contents(ROOT .'files/lib'. $book['path_to_file'] . $book['book_id'] .'.txt');
+		$text = file_get_contents(ROOT.'files/lib'.$book['path_to_file'].$book['book_id'].'.txt');
 		$ex = explode(' ', $text);
 		$total = count($ex);
 		$text_page = '';
-		for($i = $this->start; $i < $this->start + $this->per_page && $i <= $total; $i++) {
-			$text_page .= $ex[$i] .' ';
+		for ($i = $this->start; $i < $this->start + $this->per_page && $i <= $total; $i++) {
+			$text_page .= $ex[$i].' ';
 		}
 		$text_page = htmlspecialchars(stripslashes($text_page));
 		$text_page = nl2br($text_page);
 		$text_page = main::bbcode($text_page);
 
 		# Пагинация
-		$pg_conf['base_url'] = a_url('lib/read_book', 'book_id='. $book['book_id'] .'&amp;start=');
+		$pg_conf['base_url'] = a_url('lib/read_book', 'book_id='.$book['book_id'].'&amp;start=');
 		$pg_conf['total_rows'] = $total;
 		$pg_conf['per_page'] = $this->per_page;
 
@@ -96,13 +96,14 @@ class Lib_Controller extends Controller {
 	}
 
 	/**
-	* Скачать книгу
-	*/
+	 * Скачать книгу
+	 */
 	public function action_download_book() {
 		$this->per_page = 7;
 
-		if(!$book = $this->db->get_row("SELECT b.* FROM #__lib_books AS b WHERE b.book_id = '". intval($_GET['book_id']) ."'"))
-			a_error("Книга не найдена!");
+		if(!$book = $this->db->get_row("SELECT b.* FROM #__lib_books AS b WHERE b.book_id = '". intval($_GET['book_id']) ."'")) {
+					a_error("Книга не найдена!");
+		}
 
 		$file_path = ROOT .'files/lib'. $book['path_to_file'];
 		$jar_path = ROOT .'modules/lib/jar_data';
@@ -142,7 +143,7 @@ class Lib_Controller extends Controller {
 				$tmp_name = ROOT .'tmp/'. main::get_unique_code(32);
 				$archive = new PclZip($tmp_name);
 				$list = $archive->create($file_path . $book['book_id'] .'.txt',
-					    PCLZIP_OPT_REMOVE_PATH, $file_path);
+						PCLZIP_OPT_REMOVE_PATH, $file_path);
 				$content = file_get_contents($tmp_name);
 				unlink($tmp_name);
 				break;
@@ -165,35 +166,35 @@ class Lib_Controller extends Controller {
 	}
 
 	/**
-	* Список книг и папок
-	*/
+	 * Список книг и папок
+	 */
 	public function action_list_books() {
-		switch($_GET['type']) {
+		switch ($_GET['type']) {
 			# Самые популярные
 			case 'top':
 				$sql = "SELECT *, (SELECT 'book') AS type FROM #__lib_books ORDER BY `reads` DESC LIMIT $this->start, $this->per_page";
-				$navigation = '<a href="'. a_url('lib') .'">Библиотека</a>';
+				$navigation = '<a href="'.a_url('lib').'">Библиотека</a>';
 				$type = 'top';
 				break;
 
 			# Поиск
 			case 'search':
-				$sql = "SELECT *, (SELECT 'book') AS type FROM #__lib_books WHERE name LIKE '%". a_safe($_GET['search_word']) ."%' ORDER BY `reads` DESC LIMIT $this->start, $this->per_page";
-				$navigation = '<a href="'. a_url('lib') .'">Библиотека</a>';
+				$sql = "SELECT *, (SELECT 'book') AS type FROM #__lib_books WHERE name LIKE '%".a_safe($_GET['search_word'])."%' ORDER BY `reads` DESC LIMIT $this->start, $this->per_page";
+				$navigation = '<a href="'.a_url('lib').'">Библиотека</a>';
 				$type = 'search';
 				break;
 
 			# Обычный листинг
 			default:
-				if(empty($_GET['directory_id']) OR !is_numeric($_GET['directory_id'])) $directory_id = 0;
+				if (empty($_GET['directory_id']) OR !is_numeric($_GET['directory_id'])) $directory_id = 0;
 				else $directory_id = intval($_GET['directory_id']);
 
-				if($directory_id != 0 && !$directory = $this->db->get_row("SELECT * FROM #__lib_directories WHERE directory_id = '$directory_id'")) {
+				if ($directory_id != 0 && !$directory = $this->db->get_row("SELECT * FROM #__lib_directories WHERE directory_id = '$directory_id'")) {
 					a_error('Папка не найдена!');
 				}
 				else {
 					# Определяем папка с файлами или папками
-					if($this->db->get_one("SELECT directory_id FROM #__lib_directories WHERE parent_id = $directory_id")) {
+					if ($this->db->get_one("SELECT directory_id FROM #__lib_directories WHERE parent_id = $directory_id")) {
 						$files_directory = FALSE;
 						$this->per_page = 100;
 					}
@@ -206,16 +207,16 @@ class Lib_Controller extends Controller {
 				$namepath = lib::get_namepath($directory_path, '/', TRUE);
 
 				# Получаем навигацию
-				if($directory_id > 0) {
-					$navigation = '<a href="'. a_url('lib') .'">Библиотека</a> ';
-					if(!empty($namepath))
-						$navigation .= '» '. $namepath;
-					if($directory['directory_id'] > 0)
-						$navigation .= '» <a href="'. a_url('lib/list_books', 'directory_id='. $directory['directory_id']) .'">'. $directory['name'] .'</a>';
+				if ($directory_id > 0) {
+					$navigation = '<a href="'.a_url('lib').'">Библиотека</a> ';
+					if (!empty($namepath))
+						$navigation .= '» '.$namepath;
+					if ($directory['directory_id'] > 0)
+						$navigation .= '» <a href="'.a_url('lib/list_books', 'directory_id='.$directory['directory_id']).'">'.$directory['name'].'</a>';
 				}
 
 				# Получаем список папок и файлов
-				$sql  = "SELECT SQL_CALC_FOUND_ROWS
+				$sql = "SELECT SQL_CALC_FOUND_ROWS
 		        			directory_id AS book_id,
 		        			name,
 		        			(SELECT 'directory') AS type,
@@ -225,8 +226,8 @@ class Lib_Controller extends Controller {
 						(SELECT 0) AS time,
 						(SELECT COUNT(*) FROM #__lib_books AS lb WHERE lb.path_to_file LIKE CONCAT('%/', ld.directory_id, '/%')) AS count_books,
 						(SELECT COUNT(*) FROM #__lib_books AS lb WHERE lb.path_to_file LIKE CONCAT('%/', ld.directory_id, '/%') AND time > UNIX_TIMESTAMP() - 86400) AS new_books
-		        			FROM #__lib_directories AS ld WHERE parent_id = '$directory_id' ". PHP_EOL;
-				$sql .= "UNION ALL ". PHP_EOL;
+		        			FROM #__lib_directories AS ld WHERE parent_id = '$directory_id' ".PHP_EOL;
+				$sql .= "UNION ALL ".PHP_EOL;
 				$sql .= "SELECT
 		        			book_id,
 		        			name,
@@ -237,7 +238,7 @@ class Lib_Controller extends Controller {
 						time,
 						(SELECT 0) AS count_books,
 						(SELECT 0) AS new_books
-		        			FROM #__lib_books WHERE directory_id = '$directory_id' ". PHP_EOL;
+		        			FROM #__lib_books WHERE directory_id = '$directory_id' ".PHP_EOL;
 
 				$sql .= "ORDER BY type DESC, position ASC, book_id DESC LIMIT $this->start, $this->per_page";
 
@@ -249,12 +250,12 @@ class Lib_Controller extends Controller {
 		$total = $this->db->get_one("SELECT FOUND_ROWS()");
 		
 		$books = array();
-		while($book = $this->db->fetch_array($result)) {
+		while ($book = $this->db->fetch_array($result)) {
 			$books[] = $book;
 		}
 
 		# Пагинация
-		$pg_conf['base_url'] = a_url('lib/list_books', 'type='. $_GET['type'] .'&amp;search_word='. $_GET['search_word'] .'&amp;directory_id='. intval($_GET['directory_id']) .'&amp;start=');
+		$pg_conf['base_url'] = a_url('lib/list_books', 'type='.$_GET['type'].'&amp;search_word='.$_GET['search_word'].'&amp;directory_id='.intval($_GET['directory_id']).'&amp;start=');
 		$pg_conf['total_rows'] = $total;
 		$pg_conf['per_page'] = $this->per_page;
 

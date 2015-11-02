@@ -1,14 +1,14 @@
 <?php
 /**
- * MobileCMS
- *
- * Open source content management system for mobile sites
- *
- * @author MobileCMS Team <support@mobilecms.ru>
- * @copyright Copyright (c) 2011, MobileCMS Team
- * @link http://mobilecms.ru Official site
- * @license http://opensource.org/licenses/gpl-license.php GNU Public License
- */
+	 * MobileCMS
+	 *
+	 * Open source content management system for mobile sites
+	 *
+	 * @author MobileCMS Team <support@mobilecms.ru>
+	 * @copyright Copyright (c) 2011, MobileCMS Team
+	 * @link http://mobilecms.ru Official site
+	 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+	 */
 
 defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
 
@@ -19,8 +19,8 @@ defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
  */
 class lib_installer {
 	/**
-	* Установка модуля
-	*/
+	 * Установка модуля
+	 */
 	public static function install(&$db) {
 		$db->query("CREATE TABLE IF NOT EXISTS `a_lib_books` (
 			  `book_id` int(11) NOT NULL auto_increment,
@@ -45,13 +45,13 @@ class lib_installer {
 			) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 		");
 
-		mkdir(ROOT .'files/lib', 0777);
-		chmod(ROOT .'files/lib', 0777);
+		mkdir(ROOT.'files/lib', 0777);
+		chmod(ROOT.'files/lib', 0777);
 	}
 
 	/**
-	* Деинсталляция модуля
-	*/
+	 * Деинсталляция модуля
+	 */
 	public static function uninstall(&$db) {
 	}
 }
