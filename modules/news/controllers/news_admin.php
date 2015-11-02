@@ -17,37 +17,36 @@ defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
  */
 class News_Admin_Controller extends Controller {
 	/**
-	* Уровень доступа
-	*/
+	 * Уровень доступа
+	 */
 	public $access_level = 10;
 	/**
-	* Тема шаблонов
-	*/
+	 * Тема шаблонов
+	 */
 	public $template_theme = 'admin';
 
 	/**
-	* Constructor
-	*/
+	 * Constructor
+	 */
 	public function __construct() {
 		parent::__construct();
 	}
 
 	/**
-	* Действие по умолчанию
-	*/
+	 * Действие по умолчанию
+	 */
 	public function action_index() {
 		$this->action_list_news();
 	}
 
 	/**
-	* Добавление / Редактирование новости
-	*/
+	 * Добавление / Редактирование новости
+	 */
 	public function action_edit() {
 		if (is_numeric($_GET['news_id'])) {
-			$news = $this->db->get_row("SELECT * FROM #__news WHERE news_id = '". intval($_GET['news_id']) ."'");
+			$news = $this->db->get_row("SELECT * FROM #__news WHERE news_id = '".intval($_GET['news_id'])."'");
 			$action = 'edit';
-		}
-		else {
+		} else {
 			$news = array('subject' => '', 'text' => '');
 			$action = 'add';
 		}
@@ -55,26 +54,30 @@ class News_Admin_Controller extends Controller {
   		if (isset($_POST['submit'])) {
   			main::is_demo();
 
-			if (empty($_POST['subject'])) $this->error .= 'Укажите тему новости<br />';
+			if (empty($_POST['subject'])) {
+				$this->error .= 'Укажите тему новости<br />';
+			}
 			
-  			if (empty($_POST['editor_text'])) $this->error .= 'Укажите текст новости<br />';
+  			if (empty($_POST['editor_text'])) {
+  				$this->error .= 'Укажите текст новости<br />';
+  			}
 
   			if (!$this->error) {
   				if ($action == 'add') {
   					$this->db->query("INSERT INTO #__news SET
-  						subject = '". a_safe($_POST['subject']) ."',
-  						text = '". mysql_real_escape_string(main::tinymce_p_br($_POST['editor_text'])) ."',
+  						subject = '". a_safe($_POST['subject'])."',
+  						text = '". mysql_real_escape_string(main::tinymce_p_br($_POST['editor_text']))."',
   						time = UNIX_TIMESTAMP()
   					");
   					
 					$message = 'Новость успешно добавлена!';
   				}
   				
-  				if($action == 'edit') {
+  				if ($action == 'edit') {
   					$this->db->query("UPDATE #__news SET
-  						subject = '". a_safe($_POST['subject']) ."',
-  						text = '". mysql_real_escape_string(main::tinymce_p_br($_POST['editor_text'])) ."'
-  						WHERE news_id = '". intval($_GET['news_id']) ."'
+  						subject = '". a_safe($_POST['subject'])."',
+  						text = '". mysql_real_escape_string(main::tinymce_p_br($_POST['editor_text']))."'
+  						WHERE news_id = '". intval($_GET['news_id'])."'
   					");
   					
   					$message = 'Новость успешно изменена!';
@@ -83,7 +86,7 @@ class News_Admin_Controller extends Controller {
 				a_notice($message, a_url('news/admin'));
   			}
 		}
-  		if(!isset($_POST['submit']) || $this->error) {
+  		if (!isset($_POST['submit']) || $this->error) {
 			$this->tpl->assign(array(
 				'news' => $news,
 				'error' => $this->error,
@@ -95,17 +98,17 @@ class News_Admin_Controller extends Controller {
   	}
 
 	/**
-	* Удаление новости
-	*/
+	 * Удаление новости
+	 */
 	public function action_delete() {
 		main::is_demo();
-		$this->db->query("DELETE FROM #__news WHERE news_id = '". intval($_GET['news_id']) ."'");
+		$this->db->query("DELETE FROM #__news WHERE news_id = '".intval($_GET['news_id'])."'");
 		a_notice('Новость успешно удалена!', a_url('news/admin'));
 	}
 
 	/**
-	* Листинг новостей
-	*/
+	 * Листинг новостей
+	 */
 	public function action_list_news() {
 		$this->per_page = 20;
 

@@ -15,21 +15,21 @@ error_reporting(7);
 // Название системы
 define('SYSTEM_NAME', 'MobileCMS');
 // Адрес сайта
-define('SITE_URL', 'http://'. $_SERVER['HTTP_HOST'] . str_replace('install/index.php', '', $_SERVER['PHP_SELF']));
+define('SITE_URL', 'http://'.$_SERVER['HTTP_HOST'].str_replace('install/index.php', '', $_SERVER['PHP_SELF']));
 
 // Шаги установки
 $steps = array(
-    'greeting' => 'Приветствие',
-    'license' => 'Лицензионное соглашение',
-    'chmod' => 'Настройка прав доступа к файлам',
-    'site_data' => 'Заполнение данных сайта',
-    'end_of_install' => 'Завершение установки',
+	'greeting' => 'Приветствие',
+	'license' => 'Лицензионное соглашение',
+	'chmod' => 'Настройка прав доступа к файлам',
+	'site_data' => 'Заполнение данных сайта',
+	'end_of_install' => 'Завершение установки',
 );
 
 $step = !empty($_GET['step']) ? $_GET['step'] : 'greeting';
 
 if ( ! array_key_exists($step, $steps))
-        die('Шаг не определён!');
+		die('Шаг не определён!');
 
 ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -61,11 +61,11 @@ if ( ! array_key_exists($step, $steps))
                 
                 <p>
                     <ul style="padding: 0 0 0 5px">
-                        <li><?php if($step == 'greeting'): ?><b>1. Приветствие</b><?php else: ?>1. Приветствие<?php endif; ?></li>
-                        <li><?php if($step == 'license'): ?><b>2. Лицензионное соглашение</b><?php else: ?>2. Лицензионное соглашение<?php endif; ?></li>
-                        <li><?php if($step == 'chmod'): ?><b>3. Настройка прав доступа</b><?php else: ?>3. Настройка прав доступа<?php endif; ?></li>
-                        <li><?php if($step == 'site_data'): ?><b>4. Заполнение данных сайта</b><?php else: ?>4. Заполнение данных сайта<?php endif; ?></li>
-                        <li><?php if($step == 'end_of_install'): ?><b>5. Завершение установки</b><?php else: ?>5. Завершение установки<?php endif; ?></li>
+                        <li><?php if ($step == 'greeting'): ?><b>1. Приветствие</b><?php else: ?>1. Приветствие<?php endif; ?></li>
+                        <li><?php if ($step == 'license'): ?><b>2. Лицензионное соглашение</b><?php else: ?>2. Лицензионное соглашение<?php endif; ?></li>
+                        <li><?php if ($step == 'chmod'): ?><b>3. Настройка прав доступа</b><?php else: ?>3. Настройка прав доступа<?php endif; ?></li>
+                        <li><?php if ($step == 'site_data'): ?><b>4. Заполнение данных сайта</b><?php else: ?>4. Заполнение данных сайта<?php endif; ?></li>
+                        <li><?php if ($step == 'end_of_install'): ?><b>5. Завершение установки</b><?php else: ?>5. Завершение установки<?php endif; ?></li>
                     </ul>
                 </p>
             </div>
@@ -76,9 +76,9 @@ if ( ! array_key_exists($step, $steps))
 <?php
 // Если установка уже произведена, выводим сообщение об ошибке
 if (file_exists('../data_files/config.php') && $step != 'end_of_install')
-    exit('<div class="box"><p>Установка была произведена ранее. Рекомендуем удалить папку install.</p></div></div></div></body></html>');
+	exit('<div class="box"><p>Установка была произведена ранее. Рекомендуем удалить папку install.</p></div></div></div></body></html>');
 
-switch($step) {
+switch ($step) {
 	// Приветствие
 	case 'greeting':
 ?>
@@ -115,19 +115,19 @@ switch($step) {
             </thead>
             
             <tbody align="left" valign="middle">
-		<?php foreach($chmod_files as $file): ?>
+		<?php foreach ($chmod_files as $file): ?>
                 <tr>
                     <td><b><?php echo str_replace('../', '', $file) ?></b></td>
                     <td>
                                                 <?php
-                                                if (is_writable(trim($file))) {
-                                                    echo '<span style="color: green">Записываемый</span>';
-                                                }
-                                                else {
-                                                    echo '<span style="color: red">Необходимо выставить chmod 777</span>';
-                                                    $flag = FALSE;
-                                                }
-                                                ?>
+												if (is_writable(trim($file))) {
+													echo '<span style="color: green">Записываемый</span>';
+												}
+												else {
+													echo '<span style="color: red">Необходимо выставить chmod 777</span>';
+													$flag = FALSE;
+												}
+												?>
                     </td>
                 </tr>
 		<?php endforeach; ?>
@@ -135,67 +135,67 @@ switch($step) {
         </table>
                 <?php
 		if ($flag == TRUE) {
-                    echo "<div class=\"box\"><p>Все необходимые файлы и папки доступны для записи, можно продолжать установку</p></div>";
-                    echo "<p><button onclick=\"location.href='?step=site_data'\">Далее</button></p>";
+					echo "<div class=\"box\"><p>Все необходимые файлы и папки доступны для записи, можно продолжать установку</p></div>";
+					echo "<p><button onclick=\"location.href='?step=site_data'\">Далее</button></p>";
 		}
 		else {
 			echo "<div class=\"box\"><p>Для продолжения установки необходимо чтобы все файлы и папки из списка выше были записываемыми</p></div>";
-			echo "<p><button onclick=\"location.href='?step=chmod&amp;". rand(111, 999) ."'\">Обновить</button></p>";
+			echo "<p><button onclick=\"location.href='?step=chmod&amp;".rand(111, 999)."'\">Обновить</button></p>";
 		}
 	break;
 
 	// Настройка базы данных и генерация файла конфигурации
 	case 'site_data':
-            if (isset($_POST['submit'])) {
-                $error = FALSE;
+			if (isset($_POST['submit'])) {
+				$error = FALSE;
                 
-            if (empty($_POST['db_server'])) $error .= 'Укажите MySQL сервер<br />';
+			if (empty($_POST['db_server'])) $error .= 'Укажите MySQL сервер<br />';
 
-            if (empty($_POST['db_user'])) $error .= 'Укажите имя пользователя базы MySQL<br />';
+			if (empty($_POST['db_user'])) $error .= 'Укажите имя пользователя базы MySQL<br />';
 
-            if (empty($_POST['db_base'])) $error .= 'Укажите имя базы данных<br />';
+			if (empty($_POST['db_base'])) $error .= 'Укажите имя базы данных<br />';
 
-            if (empty($_POST['site_url'])) $error .= 'Укажите адрес сайта<br />';
+			if (empty($_POST['site_url'])) $error .= 'Укажите адрес сайта<br />';
 
-            if (empty($_POST['admin_login'])) $error .= 'Укажите логин администратора<br />';
+			if (empty($_POST['admin_login'])) $error .= 'Укажите логин администратора<br />';
 
-            if (empty($_POST['admin_email'])) $error .= 'Укажите e-mail администратора<br />';
+			if (empty($_POST['admin_email'])) $error .= 'Укажите e-mail администратора<br />';
 
-            if (empty($_POST['admin_password'])) $error .= 'Укажите пароль администратора<br />';
+			if (empty($_POST['admin_password'])) $error .= 'Укажите пароль администратора<br />';
 
-            if ($_POST['admin_password'] != $_POST['admin_password2']) $error .= 'Пароли не совпадают<br />';
+			if ($_POST['admin_password'] != $_POST['admin_password2']) $error .= 'Пароли не совпадают<br />';
 
 			if(!$error) {
 				# Коннектимся к базе данных
-            	@mysql_connect($_POST['db_server'], $_POST['db_user'], $_POST['db_password'])
-               		or die ("Не возможно подключиться к MySQL серверу, проверьте правильность введенных данных</div></div></body></html>");
+				@mysql_connect($_POST['db_server'], $_POST['db_user'], $_POST['db_password'])
+			   		or die ("Не возможно подключиться к MySQL серверу, проверьте правильность введенных данных</div></div></body></html>");
 
-             	@mysql_select_db($_POST['db_base'])
-               		or die ("Не удалось выбрать базу данных ". $_POST['db_base']);
+			 	@mysql_select_db($_POST['db_base'])
+			   		or die ("Не удалось выбрать базу данных ". $_POST['db_base']);
 
-               	mysql_query("SET NAMES utf8");
+			   	mysql_query("SET NAMES utf8");
 
-               	# Заливаем дамп системы
-               	$dump = file_get_contents('./system_dump.sql');
-               	$dump = str_replace('{ADMIN_LOGIN}', $_POST['admin_login'], $dump);
-                $dump = str_replace('{ADMIN_EMAIL}', $_POST['admin_email'], $dump);
-                $dump = str_replace('{ADMIN_PASSWORD}', md5(md5($_POST['admin_password'])), $dump);
+			   	# Заливаем дамп системы
+			   	$dump = file_get_contents('./system_dump.sql');
+			   	$dump = str_replace('{ADMIN_LOGIN}', $_POST['admin_login'], $dump);
+				$dump = str_replace('{ADMIN_EMAIL}', $_POST['admin_email'], $dump);
+				$dump = str_replace('{ADMIN_PASSWORD}', md5(md5($_POST['admin_password'])), $dump);
 
-               	$queryes = explode('//=====================================//', $dump);
-               	foreach($queryes as $query) {
-                	mysql_query(trim($query));
-               	}
+			   	$queryes = explode('//=====================================//', $dump);
+			   	foreach($queryes as $query) {
+					mysql_query(trim($query));
+			   	}
 
-               	# Создаем файл конфигурации системы
-                $config_data = file_get_contents('./config_data.txt');
-                $config_data = str_replace('{DB_HOST}', $_POST['db_server'], $config_data);
-                $config_data = str_replace('{DB_USER}', $_POST['db_user'], $config_data);
-                $config_data = str_replace('{DB_PASS}', $_POST['db_password'], $config_data);
-                $config_data = str_replace('{DB_BASE}', $_POST['db_base'], $config_data);
-                $config_data = str_replace('{SITE_URL}', $_POST['site_url'], $config_data);
+			   	# Создаем файл конфигурации системы
+				$config_data = file_get_contents('./config_data.txt');
+				$config_data = str_replace('{DB_HOST}', $_POST['db_server'], $config_data);
+				$config_data = str_replace('{DB_USER}', $_POST['db_user'], $config_data);
+				$config_data = str_replace('{DB_PASS}', $_POST['db_password'], $config_data);
+				$config_data = str_replace('{DB_BASE}', $_POST['db_base'], $config_data);
+				$config_data = str_replace('{SITE_URL}', $_POST['site_url'], $config_data);
 
-                file_put_contents('../data_files/config.php', $config_data);
-                ?>
+				file_put_contents('../data_files/config.php', $config_data);
+				?>
                 <div class="box">
                 <p>
                 Файл конфигурации системы успешно создан, дамп базы данных залит.
@@ -205,13 +205,13 @@ switch($step) {
                 <?php
 			}
 		}
-		if(!isset($_POST['submit']) OR $error) {
-			if($error) {
+		if (!isset($_POST['submit']) OR $error) {
+			if ($error) {
 				echo "<div class=\"error\">";
 				echo $error;
 				echo "</div>";
 			}
-        	?>
+			?>
             <form action="?step=site_data" method="post">
             <div class="box">
             <p>

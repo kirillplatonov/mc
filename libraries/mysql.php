@@ -1,14 +1,14 @@
 <?php
 /**
- * MobileCMS
- *
- * Open source content management system for mobile sites
- *
- * @author MobileCMS Team <support@mobilecms.ru>
- * @copyright Copyright (c) 2011, MobileCMS Team
- * @link http://mobilecms.ru Official site
- * @license http://opensource.org/licenses/gpl-license.php GNU Public License
- */
+	 * MobileCMS
+	 *
+	 * Open source content management system for mobile sites
+	 *
+	 * @author MobileCMS Team <support@mobilecms.ru>
+	 * @copyright Copyright (c) 2011, MobileCMS Team
+	 * @link http://mobilecms.ru Official site
+	 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+	 */
 
 defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
 
@@ -17,31 +17,31 @@ defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
 */
 class MySQL {
 	/**
-	* Ссылка соединения
-	*/
+	 * Ссылка соединения
+	 */
 	public $db_link;
 
 	/**
-	* Режим отладки
-	*/
+	 * Режим отладки
+	 */
 	public $debugging = true;
 
 	/**
-	* Запросы
-	*/
+	 * Запросы
+	 */
 	public $list_queries = array();
 
 	/**
-	* Соединение с базой
-	*/
+	 * Соединение с базой
+	 */
 	public function connect(){
-            $this->db_link = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_BASE, 3306) or 
-                    $this->error("Не возможно подключиться к MySQL серверу");
+			$this->db_link = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_BASE, 3306) or 
+					$this->error("Не возможно подключиться к MySQL серверу");
 	}
 
 	/**
-	* Выполнение запроса к базе
- 	*/
+	 * Выполнение запроса к базе
+	 */
 	public function query($query){
 		$query = $this->replace($query);
 
@@ -50,7 +50,7 @@ class MySQL {
 
 		# Выполняем запрос
 		$result = mysqli_query($this->db_link, $query) or 
-                        $this->error($query . PHP_EOL . mysqli_error($this->db_link));
+						$this->error($query . PHP_EOL . mysqli_error($this->db_link));
 
 		# Получаем время по окончанию запроса
 		$end_time = microtime(true);
@@ -67,30 +67,36 @@ class MySQL {
 	}
 
 	/**
-	* Получение одной ячейки
-	*/
+	 * Получение одной ячейки
+	 */
 	public function get_one($query){
 		$result = $this->query($query);
-		if($row = mysqli_fetch_row($result)) return stripslashes($row[0]);
+		if($row = mysqli_fetch_row($result)) {
+			return stripslashes($row[0]);
+		}
 		return FALSE;
 	}
 
 	/**
-	* Получение строки
-	*/
+	 * Получение строки
+	 */
 	public function get_row($query, $restype = MYSQLI_ASSOC) {
 		$result = $this->query($query);
-		if($row = mysqli_fetch_array($result, $restype)) return array_map('stripslashes', $row);
+		if($row = mysqli_fetch_array($result, $restype)) {
+			return array_map('stripslashes', $row);
+		}
 		return FALSE;
 	}
 
 	/**
-	* Получение нескольких строк
-	*/
+	 * Получение нескольких строк
+	 */
 	public function get_array($query){
 		$data = array();
 		$result = $this->query($query);
-		while($row = $this->fetch_array($result)) $data[] = array_map('stripslashes', $row);
+		while($row = $this->fetch_array($result)) {
+			$data[] = array_map('stripslashes', $row);
+		}
 		return $data;
 	}
 
@@ -98,7 +104,9 @@ class MySQL {
 	* Закрытие соединения
 	*/
 	public function close(){
-		if($this->db_link) mysqli_close($this->db_link);
+		if($this->db_link) {
+			mysqli_close($this->db_link);
+		}
 		$this->db_link = NULL;
 	}
 
@@ -119,7 +127,7 @@ class MySQL {
 	/**
 	* Аналог mysql_fetch_array()
 	*/
-	public function fetch_array($result){
+	public function fetch_array($result) {
 		return mysqli_fetch_array($result);
 	}
 
@@ -139,9 +147,12 @@ class MySQL {
 
 	/**
 	* Вывод ошибки и завершение работы
+	* @param string $error
 	*/
 	protected function error($error){
-		if($this->debugging) print "<pre>". $error ."</pre>";
+		if($this->debugging) {
+			print "<pre>". $error ."</pre>";
+		}
 		exit;
 	}
 }

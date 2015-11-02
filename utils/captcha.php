@@ -1,14 +1,14 @@
 <?php
 /**
- * MobileCMS
- *
- * Open source content management system for mobile sites
- *
- * @author MobileCMS Team <support@mobilecms.ru>
- * @copyright Copyright (c) 2011, MobileCMS Team
- * @link http://mobilecms.ru Official site
- * @license http://opensource.org/licenses/gpl-license.php GNU Public License
- */
+	 * MobileCMS
+	 *
+	 * Open source content management system for mobile sites
+	 *
+	 * @author MobileCMS Team <support@mobilecms.ru>
+	 * @copyright Copyright (c) 2011, MobileCMS Team
+	 * @link http://mobilecms.ru Official site
+	 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+	 */
 
 ini_set('session.save_path', '../tmp/');
 session_name('sid');
@@ -44,29 +44,31 @@ $fonts = array();
 $dir = opendir($data['path_fonts']);
 
 while($fontName = readdir($dir)) {
-	if ($fontName != '.' && $fontName != '..') $fonts[] = $fontName;
-}
+	if ($fontName != '.' && $fontName != '..') {
+		$fonts[] = $fontName;
+	}
+	}
 
 closedir($dir);
 
 // Нанесение "помех"
 for($i=0; $i<$data['fon_let_amount']; $i++) {
-    $color = imagecolorallocatealpha($src, rand(0, 255), rand(0, 255), rand(0, 255), 100);
-    $font = $data['path_fonts'] . $fonts[rand(0, sizeof($fonts)-1)];
-    $letter = $data['letters'][rand(0, sizeof($data['letters'])-1)];
-    $size = rand($data['font_size']-2, $data['font_size']+2);
-    imagettftext($src, $size, rand(0, 45), rand($data['width']*0.1, $data['width']-$data['width']*0.1), rand($data['height']*0.2, $data['height']), $color, $font, $letter);
+	$color = imagecolorallocatealpha($src, rand(0, 255), rand(0, 255), rand(0, 255), 100);
+	$font = $data['path_fonts'] . $fonts[rand(0, sizeof($fonts)-1)];
+	$letter = $data['letters'][rand(0, sizeof($data['letters'])-1)];
+	$size = rand($data['font_size']-2, $data['font_size']+2);
+	imagettftext($src, $size, rand(0, 45), rand($data['width']*0.1, $data['width']-$data['width']*0.1), rand($data['height']*0.2, $data['height']), $color, $font, $letter);
 }
 
 // Нанесение символов
 for($i=0; $i<$data['let_amount']; $i++) {
-    $color = imagecolorallocatealpha($src, $data['colors'][rand(0, sizeof($data['colors'])-1)], $data['colors'][rand(0, sizeof($data['colors'])-1)], $data['colors'][rand(0, sizeof($data['colors'])-1)], rand(20,40));
-    $font = $data['path_fonts'] . $fonts[rand(0, sizeof($fonts)-1)];
-    $letter = $data['letters'][rand(0, sizeof($data['letters'])-1)];
-    $size = rand($data['font_size']*2.1-2, $data['font_size']*2.1+2);
-    $x = ($i+1)*$data['font_size'] + rand(4, 7);
-    $y = (($data['height']*2)/3) + rand(0, 5);
-    $cod[] = $letter;
+	$color = imagecolorallocatealpha($src, $data['colors'][rand(0, sizeof($data['colors'])-1)], $data['colors'][rand(0, sizeof($data['colors'])-1)], $data['colors'][rand(0, sizeof($data['colors'])-1)], rand(20,40));
+	$font = $data['path_fonts'] . $fonts[rand(0, sizeof($fonts)-1)];
+	$letter = $data['letters'][rand(0, sizeof($data['letters'])-1)];
+	$size = rand($data['font_size']*2.1-2, $data['font_size']*2.1+2);
+	$x = ($i+1)*$data['font_size'] + rand(4, 7);
+	$y = (($data['height']*2)/3) + rand(0, 5);
+	$cod[] = $letter;
 	imagettftext($src, $size, rand(0, 15), $x, $y, $color, $font, $letter);
 }
 
@@ -80,16 +82,13 @@ header("Pragma: no-cache");
 if (function_exists("imagepng")) {
 	header("Content-type: image/png");
 	imagepng($src);
-}
-elseif (function_exists("imagegif")) {
+} elseif (function_exists("imagegif")) {
 	header("Content-type: image/gif");
 	imagegif($src);
-}
-elseif (function_exists("imagejpeg")) {
+} elseif (function_exists("imagejpeg")) {
 	header("Content-type: image/jpeg");
 	imagejpeg($src);
-}
-else {
+} else {
 	die("No image support in this PHP server!");
 }
 

@@ -17,19 +17,19 @@ defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
  */
 class photo_widget {
 	/**
-	* Показ виджета
-	*/
+	 * Показ виджета
+	 */
 	public static function display($widget_id) {
 		$db = Registry::get('db');
 		$albums = $db->get_one("SELECT COUNT(*) FROM #__photo_albums");
 		$photos = $db->get_one("SELECT COUNT(*) FROM #__photo");
 		
-		return '<img src="'. URL .'modules/photo/images/album.png" alt="" /> <a href="'. a_url('photo') .'">Фотоальбомы</a> <span class="count">['. $albums .'/'. $photos .']</span><br />';
+		return '<img src="'.URL.'modules/photo/images/album.png" alt="" /> <a href="'.a_url('photo').'">Фотоальбомы</a> <span class="count">['.$albums.'/'.$photos.']</span><br />';
 	}
 
 	/**
-	* Настройка виджета
-	*/
+	 * Настройка виджета
+	 */
 	public static function setup($widget) {
   	a_notice('Данный виджет не требует настройки', a_url('index_page/admin'));
 	}

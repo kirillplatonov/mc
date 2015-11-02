@@ -1,14 +1,14 @@
 <?php
 /**
- * MobileCMS
- *
- * Open source content management system for mobile sites
- *
- * @author MobileCMS Team <support@mobilecms.ru>
- * @copyright Copyright (c) 2011, MobileCMS Team
- * @link http://mobilecms.ru Official site
- * @license http://opensource.org/licenses/gpl-license.php GNU Public License
- */
+	 * MobileCMS
+	 *
+	 * Open source content management system for mobile sites
+	 *
+	 * @author MobileCMS Team <support@mobilecms.ru>
+	 * @copyright Copyright (c) 2011, MobileCMS Team
+	 * @link http://mobilecms.ru Official site
+	 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+	 */
 
 
 /**
@@ -16,12 +16,12 @@
  */
 class Main_Admin_Controller extends Controller {
 	/**
-	* Уровень пользовательского доступа
-	*/
+	 * Уровень пользовательского доступа
+	 */
 	protected $access_level = 10;
 	/**
-	* Тема
-	*/
+	 * Тема
+	 */
 	protected $template_theme = 'admin';
 
 	/**
@@ -37,47 +37,47 @@ class Main_Admin_Controller extends Controller {
 	public function action_config() {
 		$_config = $this->config['system'];
 
-		if(isset($_POST['submit'])) {
+		if (isset($_POST['submit'])) {
 			main::is_demo();
 			$_config = $_POST;
 
-			foreach($_config as $key => $value) {
-				if($key == 'submit') continue;
+			foreach ($_config as $key => $value) {
+				if ($key == 'submit') continue;
 				$sql  = "UPDATE #__config SET \n";
-				$sql .= "`value` = '". mysql_real_escape_string(stripslashes($value)) ."'\n";
-				$sql .= "WHERE `key` = '". $key ."'";
+				$sql .= "`value` = '".mysql_real_escape_string(stripslashes($value))."'\n";
+				$sql .= "WHERE `key` = '".$key."'";
 				$this->db->query($sql);
 			}
 
 			# Чистим кеш главной
-			@unlink(ROOT .'cache/file_cache/'. md5('index_page'));
+			@unlink(ROOT.'cache/file_cache/'.md5('index_page'));
 
 			a_notice('Данные успешно изменены!', a_url('main/admin/config'));
 		}
 
-		if(!isset($_POST['submit']) || $error) {
+		if (!isset($_POST['submit']) || $error) {
 			# Получаем темы
 			$default_themes = array();
 			$admin_themes = array();
-			$dir = opendir(ROOT .'views');
-			while($theme = readdir($dir)) {
-				if($theme == '.' || $theme == '..' || $theme == '.htaccess' || $theme == '.gitignore') continue;
-				if(file_exists(ROOT .'views/'. $theme .'/theme.ini')) {
-					$theme_info = parse_ini_file(ROOT .'views/'. $theme .'/theme.ini');
-					if(!empty($theme_info['title'])) {
-						if(strpos($theme, 'admin') === 0) $admin_themes[] = $theme_info;
+			$dir = opendir(ROOT.'views');
+			while ($theme = readdir($dir)) {
+				if ($theme == '.' || $theme == '..' || $theme == '.htaccess' || $theme == '.gitignore') continue;
+				if (file_exists(ROOT.'views/'.$theme.'/theme.ini')) {
+					$theme_info = parse_ini_file(ROOT.'views/'.$theme.'/theme.ini');
+					if (!empty($theme_info['title'])) {
+						if (strpos($theme, 'admin') === 0) $admin_themes[] = $theme_info;
 						else $default_themes[] = $theme_info;
 					}
 				}
 			}
 
 			$mainpage_modules = array();
-			$dir = opendir(ROOT .'modules');
-			while($module = readdir($dir)) {
-				if($module == '.' || $module == '..' || $module == '.htaccess' || $module == '.gitignore') continue;
-				if(file_exists(ROOT .'modules/'. $module .'/module.ini')) {
-					$module_info = parse_ini_file(ROOT .'modules/'. $module .'/module.ini');
-					if($module_info['mainpage']) $mainpage_modules[] = $module_info;
+			$dir = opendir(ROOT.'modules');
+			while ($module = readdir($dir)) {
+				if ($module == '.' || $module == '..' || $module == '.htaccess' || $module == '.gitignore') continue;
+				if (file_exists(ROOT.'modules/'.$module.'/module.ini')) {
+					$module_info = parse_ini_file(ROOT.'modules/'.$module.'/module.ini');
+					if ($module_info['mainpage']) $mainpage_modules[] = $module_info;
 				}
 			}
 
@@ -93,16 +93,16 @@ class Main_Admin_Controller extends Controller {
 	}
 	
 	/**
-	* Конфигурация модуля
-	*/
+	 * Конфигурация модуля
+	 */
 	public function action_ftp_config() {
 		$_config = $this->config['ftp'];
 
-		if(isset($_POST['submit'])) {
+		if (isset($_POST['submit'])) {
 			main::is_demo();
 			$_config = $_POST;
 			
-			if(!class_exists('main_ftp')) a_import('modules/main/helpers/main_ftp');
+			if (!class_exists('main_ftp')) a_import('modules/main/helpers/main_ftp');
 			
 			# Тестируем подключение и папку скрипта
 			$connect_data = array(
@@ -112,18 +112,18 @@ class Main_Admin_Controller extends Controller {
 				'password' => $_POST['password']
 			);
 			
-			if(!$ftp_handle = main_ftp::connect($connect_data))
+			if (!$ftp_handle = main_ftp::connect($connect_data))
 				$this->error .= 'Не удалось подключиться к указанному фтп серверу, проверьте правильность указанных данных<br />';
 			
-			if(!$this->error) {	
-				$test_file = 'tmp/'. main::get_unique_code();
+			if (!$this->error) {	
+				$test_file = 'tmp/'.main::get_unique_code();
 				
-				file_put_contents(ROOT . $test_file, 'ftp test');
+				file_put_contents(ROOT.$test_file, 'ftp test');
 				
-				if(!@ftp_get($ftp_handle, ROOT .'tmp/'. main::get_unique_code(), $_POST['path'] .'/'. $test_file, FTP_ASCII))
+				if (!@ftp_get($ftp_handle, ROOT.'tmp/'.main::get_unique_code(), $_POST['path'].'/'.$test_file, FTP_ASCII))
 					$this->error .= 'Фтп папка скрипта указана не верно!';
 				
-				if(!$this->error) {
+				if (!$this->error) {
 					main::config($_config, 'ftp', $this->db);
 		
 					a_notice('Данные успешно изменены!', a_url('main/admin/ftp_config'));
@@ -131,7 +131,7 @@ class Main_Admin_Controller extends Controller {
 			}
 		}
 
-		if(!isset($_POST['submit']) || $this->error) {
+		if (!isset($_POST['submit']) || $this->error) {
 			$this->tpl->assign(array(
 				'error' => $this->error,
 				'_config' => $_config
@@ -145,7 +145,7 @@ class Main_Admin_Controller extends Controller {
 	 * Загрузка модулей, тем и обновлений по фтп
 	 */
 	public function action_upload() {
-		switch($_GET['action']) {
+		switch ($_GET['action']) {
 			case 'module':
 				$action = 'module';
 				$title = 'Загрузить модуль';
@@ -169,17 +169,17 @@ class Main_Admin_Controller extends Controller {
 				break;
 		}
 		
-		if(isset($_POST['submit'])) {
-			if(empty($_FILES['file']['tmp_name']))
+		if (isset($_POST['submit'])) {
+			if (empty($_FILES['file']['tmp_name']))
 				$this->error .= "Укажите файл для загрузки<br />";
 		
-			if(!$this->error) {
+			if (!$this->error) {
 				# Создаем объект архива
 				a_import('libraries/pclzip.lib');
 				$archive = new PclZip($_FILES['file']['tmp_name']);
 				
 				# Подключаемся по фтп
-				if(!class_exists('main_ftp')) a_import('modules/main/helpers/main_ftp');
+				if (!class_exists('main_ftp')) a_import('modules/main/helpers/main_ftp');
 			
 				$connect_data = array(
 					'server' => $this->config['ftp']['server'],
@@ -188,65 +188,65 @@ class Main_Admin_Controller extends Controller {
 					'password' => $this->config['ftp']['password']
 				);
 				
-				if(!$ftp_handle = main_ftp::connect($connect_data))
+				if (!$ftp_handle = main_ftp::connect($connect_data))
 					a_notice('Не удалось подключиться к указанному фтп серверу, проверьте настройки FTP', a_url('main/admin/ftp_config'));
 				
-				$test_file = 'tmp/'. main::get_unique_code();
+				$test_file = 'tmp/'.main::get_unique_code();
 				
-				file_put_contents(ROOT . $test_file, 'ftp test');
+				file_put_contents(ROOT.$test_file, 'ftp test');
 				
-				if(!@ftp_get($ftp_handle, ROOT .'tmp/'. main::get_unique_code(), $this->config['ftp']['path'] .'/'. $test_file, FTP_ASCII))
+				if (!@ftp_get($ftp_handle, ROOT.'tmp/'.main::get_unique_code(), $this->config['ftp']['path'].'/'.$test_file, FTP_ASCII))
 					a_notice('Не удалось проверить корневую папку MobileCMS, проверьте настройки FTP', a_url('main/admin/ftp_config'));
 				
-				switch($action) {
+				switch ($action) {
 					# Подготовка к загрузке для модуля
 					case 'module':
 						$module_ini = $archive->extract(PCLZIP_OPT_BY_NAME, 'module.ini', PCLZIP_OPT_EXTRACT_AS_STRING);
 						$ini_string = $module_ini[0]['content'];
-						if(empty($ini_string))
+						if (empty($ini_string))
 							a_error("Не найден файл <b>module.ini</b> загружаемого модуля!");
 		
 						$module = parse_ini_string($ini_string);
 						$module['name'] = trim($module['name']);
-						if(empty($module['name']))
+						if (empty($module['name']))
 							a_error("Не указано имя модуля в файле module.ini!");
 		
-						if(is_dir(ROOT .'modules/'. $module['name']))
+						if (is_dir(ROOT.'modules/'.$module['name']))
 							a_error("Папка с именем нового модуля уже существует, возможно, модуль быз загружен ранее!");
 		
-						if(!preg_match("~^[0-9a-z_]*$~", $module['name']))
+						if (!preg_match("~^[0-9a-z_]*$~", $module['name']))
 							a_error("Имя модуля имеет не правильный формат, оно должно состоять только из латинских букв в нижнем регистре, цифр и подчеркивания");
 							
 						# Создаем папку модуля
-						if(!@ftp_mkdir($ftp_handle, $this->config['ftp']['path'] .'/modules/'. $module['name']))
+						if (!@ftp_mkdir($ftp_handle, $this->config['ftp']['path'].'/modules/'.$module['name']))
 							a_error("Не удалось создать папку модуля");
 							
-						$upload_path = $this->config['ftp']['path'] .'/modules/'. $module['name'];
+						$upload_path = $this->config['ftp']['path'].'/modules/'.$module['name'];
 						break;
 					
 					# Подготовка к загрузке для темы
 					case 'theme':
 						$theme_ini = $archive->extract(PCLZIP_OPT_BY_NAME, 'theme.ini', PCLZIP_OPT_EXTRACT_AS_STRING);
 						$ini_string = $theme_ini[0]['content'];
-						if(empty($ini_string))
+						if (empty($ini_string))
 							a_error("Не найден файл <b>theme.ini</b> загружаемой темы!");
 		
 						$theme = parse_ini_string($ini_string);
 						$theme['name'] = trim($theme['name']);
-						if(empty($theme['name']))
+						if (empty($theme['name']))
 							a_error("Не указано имя темы в файле theme.ini!");
 		
-						if(is_dir(ROOT .'views/'. $theme['name']))
+						if (is_dir(ROOT.'views/'.$theme['name']))
 							a_error("Папка с именем новой темы уже существует, возможно, тема была загружена ранее!");
 		
-						if(!preg_match("~^[0-9a-z_]*$~", $theme['name']))
+						if (!preg_match("~^[0-9a-z_]*$~", $theme['name']))
 							a_error("Имя темы имеет не правильный формат, оно должно состоять только из латинских букв в нижнем регистре, цифр и подчеркивания");
 							
 						# Создаем папку темы
-						if(!@ftp_mkdir($ftp_handle, $this->config['ftp']['path'] .'/views/'. $theme['name']))
+						if (!@ftp_mkdir($ftp_handle, $this->config['ftp']['path'].'/views/'.$theme['name']))
 							a_error("Не удалось создать папку темы");
 							
-						$upload_path = $this->config['ftp']['path'] .'/views/'. $theme['name'];
+						$upload_path = $this->config['ftp']['path'].'/views/'.$theme['name'];
 						break;
 					
 					# Подготовка к загрузке для обновления
@@ -256,7 +256,7 @@ class Main_Admin_Controller extends Controller {
 				}
 				
 				# Распаковываем архив во временную папку
-				$tmp_path = ROOT .'tmp/'. main::get_unique_code();
+				$tmp_path = ROOT.'tmp/'.main::get_unique_code();
 				mkdir($tmp_path);
 				$result = $archive->extract(PCLZIP_OPT_PATH, $tmp_path);
 				
@@ -265,7 +265,7 @@ class Main_Admin_Controller extends Controller {
 				a_notice($notice_message, $notice_url);
 			}
 		}
-		if(!isset($_POST['submit']) or $this->error) {
+		if (!isset($_POST['submit']) or $this->error) {
 			$this->tpl->assign(array(
 				'error' => $this->error,
 				'action' => $action,
@@ -283,111 +283,111 @@ class Main_Admin_Controller extends Controller {
 	
 	# Парсер SQL запросов
   function parse_sql($sql) {
-    $queries = array();
-    $strlen = strlen($sql);
-    $position = 0;
-    $query = '';
+	$queries = array();
+	$strlen = strlen($sql);
+	$position = 0;
+	$query = '';
 
-    for (;$position<$strlen;++$position) {
-      $char = $sql{$position};
+	for (;$position<$strlen;++$position) {
+	  $char = $sql{$position};
 
-      switch ($char) {
-        case '-':
-          if (substr($sql, $position, 3) !== '-- ') {
-            $query .= $char;
+	  switch ($char) {
+		case '-':
+		  if (substr($sql, $position, 3) !== '-- ') {
+			$query .= $char;
             
-            break;
-          }
+			break;
+		  }
 
-        case '#':
-          while ($char !== "\r" && $char !== "\n" && $position < $strlen - 1) $char = $sql{++$position};
-        break;
+		case '#':
+		  while ($char !== "\r" && $char !== "\n" && $position < $strlen - 1) $char = $sql{++$position};
+		break;
 
-        case '`':
-        case '\'':
-        case '"':
-          $quote  = $char;
-          $query .= $quote;
+		case '`':
+		case '\'':
+		case '"':
+		  $quote  = $char;
+		  $query .= $quote;
 
-          while ($position < $strlen - 1) {
-            $char = $sql{++$position};
+		  while ($position < $strlen - 1) {
+			$char = $sql{++$position};
 
-            if ($char === '\\') {
-              $query .= $char;
+			if ($char === '\\') {
+			  $query .= $char;
 
-              if ($position < $strlen - 1) {
-                $char = $sql{++$position};
-                $query .= $char;
+			  if ($position < $strlen - 1) {
+				$char = $sql{++$position};
+				$query .= $char;
 
-                if ($position < $strlen - 1) $char = $sql{++$position};
-              } else {
-                break;
-              }
-            }
+				if ($position < $strlen - 1) $char = $sql{++$position};
+			  } else {
+				break;
+			  }
+			}
 
-            if ($char === $quote) break;
+			if ($char === $quote) break;
 
-            $query .= $char;
-          }
+			$query .= $char;
+		  }
 
-          $query .= $quote;
+		  $query .= $quote;
           
-          break;
+		  break;
 
-        case ';':
-          $query = trim($query);
+		case ';':
+		  $query = trim($query);
                     
-          if ($query) $queries[] = $query;
+		  if ($query) $queries[] = $query;
           
-          $query = '';
-        break;
+		  $query = '';
+		break;
 
-        default:
-          $query .= $char;
-        break;
-      }
-    }
+		default:
+		  $query .= $char;
+		break;
+	  }
+	}
 
-    $query = trim($query);
+	$query = trim($query);
         
-    if ($query) $queries[] = $query;
+	if ($query) $queries[] = $query;
 
-    return $queries;
+	return $queries;
   }
 	
-    if (isset($_POST['submit'])) {
-      main::is_demo();
+	if (isset($_POST['submit'])) {
+	  main::is_demo();
     
-      if (empty($_POST['queries']))
-        a_error('Запросы отсутствуют');
+	  if (empty($_POST['queries']))
+		a_error('Запросы отсутствуют');
         
-      if (!$error) {
-        $sql = parse_sql($_POST['queries']);
+	  if (!$error) {
+		$sql = parse_sql($_POST['queries']);
         
-        # Кол-во выполненных запросов
-        $num_queries = 0;
+		# Кол-во выполненных запросов
+		$num_queries = 0;
         
-        # Выполнение запросов
-        for ($i=0;$i<count($sql);$i++) {
-          if ($sql[$i] != '') {
-            if ($this->db->query($sql[$i])) {
-              $num_queries++;
-            }
-          }
-        }
-      }  
+		# Выполнение запросов
+		for ($i=0;$i<count($sql);$i++) {
+		  if ($sql[$i] != '') {
+			if ($this->db->query($sql[$i])) {
+			  $num_queries++;
+			}
+		  }
+		}
+	  }  
 
 		  a_notice('Выполнено '. $num_queries .' запросов', a_url('main/admin/mysql'));
-    }
+	}
 
-    if(!isset($_POST['submit']) || $error) {
-      $this->tpl->assign(array(
+	if(!isset($_POST['submit']) || $error) {
+	  $this->tpl->assign(array(
 			 'error' => $this->error,
 			 'title' => 'MySQL запросы'
 		  ));
 			
 		  $this->tpl->display('mysql'); 
-    } 
+	} 
 	}
 }
 

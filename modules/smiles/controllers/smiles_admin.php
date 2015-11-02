@@ -1,14 +1,14 @@
 <?php
 /**
- * MobileCMS
- *
- * Open source content management system for mobile sites
- *
- * @author MobileCMS Team <support@mobilecms.ru>
- * @copyright Copyright (c) 2011, MobileCMS Team
- * @link http://mobilecms.ru Official site
- * @license http://opensource.org/licenses/gpl-license.php GNU Public License
- */
+	 * MobileCMS
+	 *
+	 * Open source content management system for mobile sites
+	 *
+	 * @author MobileCMS Team <support@mobilecms.ru>
+	 * @copyright Copyright (c) 2011, MobileCMS Team
+	 * @link http://mobilecms.ru Official site
+	 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+	 */
 
 defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
 
@@ -19,38 +19,38 @@ defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
  */
 class Smiles_Admin_Controller extends Controller {
 	/**
-	* Уровень пользовательского доступа
-	*/
+	 * Уровень пользовательского доступа
+	 */
 	public $access_level = 10;
 	/**
-	* Тема
-	*/
+	 * Тема
+	 */
 	public $template_theme = 'admin';
 
 	/**
-	* Конструктор
-	*/
+	 * Конструктор
+	 */
 	public function __construct() {
 		parent::__construct();
-		if(!class_exists('smiles')) a_import('modules/smiles/helpers/smiles');
+		if (!class_exists('smiles')) a_import('modules/smiles/helpers/smiles');
 	}
 
 	/**
-	* Метод по умолчанию
-	*/
+	 * Метод по умолчанию
+	 */
 	public function action_index() {
 		$this->action_list_smiles();
 	}
 
 	/**
-	* Листинг смайлов
-	*/
+	 * Листинг смайлов
+	 */
 	public function action_list_smiles() {
 		$this->per_page = 20;
 		# Получение данных
   		$group = TRUE;
   		$smiles = $this->db->get_array("SELECT SQL_CALC_FOUND_ROWS *
-  			FROM #__smiles ". ($group ? 'GROUP BY image ' : '') ." LIMIT $this->start, $this->per_page
+  			FROM #__smiles ". ($group ? 'GROUP BY image ' : '')." LIMIT $this->start, $this->per_page
   		");
 
   		$total = $this->db->get_one("SELECT FOUND_ROWS()");
@@ -73,8 +73,8 @@ class Smiles_Admin_Controller extends Controller {
 	}
 
 	/**
-	* Обновление смайлов
-	*/
+	 * Обновление смайлов
+	 */
 	public function action_smiles_update() {
 		smiles::smiles_update($this->db);
 		a_notice("Смайлы успешно обновлены!", a_url('smiles/admin'));

@@ -15,8 +15,8 @@ defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
  */
 class web_version_installer {
 	/**
-	* Установка модуля
-	*/
+	 * Установка модуля
+	 */
 	public static function install(&$db) {
 		$db->query("INSERT INTO #__config SET
 		    `module` = 'system',
@@ -28,8 +28,8 @@ class web_version_installer {
 	}
 
 	/**
-	* Деинсталляция модуля
-	*/
+	 * Деинсталляция модуля
+	 */
 	public static function uninstall(&$db) {
 		$db->query("DELETE FROM #__config WHERE 
         `key` = 'web_theme';");
