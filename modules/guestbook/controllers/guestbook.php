@@ -52,10 +52,10 @@ class Guestbook_Controller extends Controller {
 		$total = $this->db->get_one("SELECT FOUND_ROWS()");
 
 		// Подключение помощника смайлов
-		if ( ! class_exists('smiles')) a_import('modules/smiles/helpers/smiles');
+		if (!class_exists('smiles')) a_import('modules/smiles/helpers/smiles');
 
 		// Форматирование сообщений
-		while($message = $this->db->fetch_array($result)) {
+		while ($message = $this->db->fetch_array($result)) {
 			$message['message'] = smiles::smiles_replace(main::bbcode(nl2br($message['message'])));
 
 			$messages[] = $message;
@@ -90,8 +90,8 @@ class Guestbook_Controller extends Controller {
 	}
 
 	/**
-	* Написать сообщение
-	*/
+	 * Написать сообщение
+	 */
 	public function action_say() {
 	 $_config = $this->config['system'];
 
@@ -100,8 +100,8 @@ class Guestbook_Controller extends Controller {
 
 
 			if ($_config['guestbook_posting'] == 'users' && USER_ID == -1) {
-        $this->error .= 'Для написания сообщений вам необходимо авторизироваться на сайте<br />';
-      }
+		$this->error .= 'Для написания сообщений вам необходимо авторизироваться на сайте<br />';
+	  }
 			if(empty($_POST['message'])) {
 				$this->error .= 'Укажите сообщение<br />';
 			}
@@ -130,11 +130,11 @@ class Guestbook_Controller extends Controller {
 
 				user::rating_update();
 
-				header("Location: ". a_url('guestbook', '', true));
+				header("Location: ".a_url('guestbook', '', true));
 				exit;
 			}
 		}
-		if(!isset($_POST['submit']) OR $this->error) {
+		if (!isset($_POST['submit']) OR $this->error) {
 			$_SESSION['captcha_code'] = main::get_unique_code(4);
 
 			$this->tpl->assign(array(
@@ -146,21 +146,21 @@ class Guestbook_Controller extends Controller {
 	}
 
 	/**
-	* Удаление сообщения
-	*/
+	 * Удаление сообщения
+	 */
 	public function action_delete_message() {
-		if(!$message = $this->db->get_row("SELECT #__guestbook.*, #__users.status AS user_status FROM #__guestbook LEFT JOIN #__users USING(user_id) WHERE message_id = '". intval($_GET['message_id']) ."'"))
+		if (!$message = $this->db->get_row("SELECT #__guestbook.*, #__users.status AS user_status FROM #__guestbook LEFT JOIN #__users USING(user_id) WHERE message_id = '".intval($_GET['message_id'])."'"))
 			a_error('Сообщение не найдено!');
 
-		if(!a_check_rights($message['user_id'], $message['user_status'])) a_error('У вас нет прав на выполнение этой операции!');
+		if (!a_check_rights($message['user_id'], $message['user_status'])) a_error('У вас нет прав на выполнение этой операции!');
 
-		if(!empty($_GET['confirm'])) {
-			$this->db->query("DELETE FROM #__guestbook WHERE message_id = '". intval($_GET['message_id']) ."'");
+		if (!empty($_GET['confirm'])) {
+			$this->db->query("DELETE FROM #__guestbook WHERE message_id = '".intval($_GET['message_id'])."'");
 			user::rating_update(-1, $message['user_id']);
 			a_notice('Сообщение удалено!', a_url('guestbook'));
 		}
 		else {
-			a_confirm('Подтверждаете удаление данного сообщения?', a_url('guestbook/delete_message', 'message_id='. $_GET['message_id'] .'&amp;confirm=ok'), a_url('guestbook'));
+			a_confirm('Подтверждаете удаление данного сообщения?', a_url('guestbook/delete_message', 'message_id='.$_GET['message_id'].'&amp;confirm=ok'), a_url('guestbook'));
 		}
 	}
 }

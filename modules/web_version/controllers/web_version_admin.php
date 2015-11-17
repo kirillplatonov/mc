@@ -15,17 +15,17 @@ defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
  */
 class Web_Version_Admin_Controller extends Controller {
 	/**
-	* Уровень пользовательского доступа
-	*/
+	 * Уровень пользовательского доступа
+	 */
 	public $access_level = 10;
 	/**
-	* Тема
-	*/
+	 * Тема
+	 */
 	public $template_theme = 'admin';
 
 	/**
-	* Метод по умолчанию
-	*/
+	 * Метод по умолчанию
+	 */
 	public function action_index() {
 		$this->action_config();
 	}
@@ -38,34 +38,34 @@ class Web_Version_Admin_Controller extends Controller {
 		
 		echo $config['web_theme'];
 
-		if(isset($_POST['submit'])) {
+		if (isset($_POST['submit'])) {
 			main::is_demo();
 			$_config = $_POST;
 
-			foreach($_config as $key => $value) {
-				if($key == 'submit') continue;
+			foreach ($_config as $key => $value) {
+				if ($key == 'submit') continue;
 				$sql  = "UPDATE #__config SET \n";
-				$sql .= "`value` = '". mysql_real_escape_string(stripslashes($value)) ."'\n";
-				$sql .= "WHERE `key` = '". $key ."'";
+				$sql .= "`value` = '".mysql_real_escape_string(stripslashes($value))."'\n";
+				$sql .= "WHERE `key` = '".$key."'";
 				$this->db->query($sql);
 			}
 
 			# Чистим кеш главной
-			@unlink(ROOT .'cache/file_cache/'. md5('index_page'));
+			@unlink(ROOT.'cache/file_cache/'.md5('index_page'));
 
 			a_notice('Данные успешно изменены!', a_url('web_version/admin/config'));
 		}
 
-		if(!isset($_POST['submit']) || $error) {
+		if (!isset($_POST['submit']) || $error) {
 			# Получаем темы
 			$web_theme = array();
-			$dir = opendir(ROOT .'views');
-			while($theme = readdir($dir)) {
-				if($theme == '.' || $theme == '..' || !preg_match('/^web_/i', $theme)) continue;
-				if(file_exists(ROOT .'views/'. $theme .'/theme.ini')) {
-					$theme_info = parse_ini_file(ROOT .'views/'. $theme .'/theme.ini');
-					if(!empty($theme_info['title'])) {
-						if(strpos($theme, 'admin') === 0) $admin_themes[] = $theme_info;
+			$dir = opendir(ROOT.'views');
+			while ($theme = readdir($dir)) {
+				if ($theme == '.' || $theme == '..' || !preg_match('/^web_/i', $theme)) continue;
+				if (file_exists(ROOT.'views/'.$theme.'/theme.ini')) {
+					$theme_info = parse_ini_file(ROOT.'views/'.$theme.'/theme.ini');
+					if (!empty($theme_info['title'])) {
+						if (strpos($theme, 'admin') === 0) $admin_themes[] = $theme_info;
 						else $web_theme[] = $theme_info;
 					}
 				}
@@ -81,11 +81,12 @@ class Web_Version_Admin_Controller extends Controller {
 	}   	
 
 	/**
-	* Загрузка новой темы
-	*/
+	 * Загрузка новой темы
+	 */
 	public function action_upload_theme() {
-		if(!is_writable(ROOT .'views'))
-			a_error("Папка тем не доступна для записи, установите права 777 на папку <b>views</b>");
+		if(!is_writable(ROOT .'views')) {
+					a_error("Папка тем не доступна для записи, установите права 777 на папку <b>views</b>");
+		}
 
 		if(isset($_POST['submit'])) {
 			main::is_demo();
@@ -115,7 +116,7 @@ class Web_Version_Admin_Controller extends Controller {
 					a_error("Имя темы имеет не правильный формат, оно должно состоять только из латинских букв в нижнем регистре, цифр и подчеркивания");
 					
 				if (!preg_match('/^web_/i', $theme['name']))
-          a_error("Загружена не web тема. Отсутствует префикс &quot;web_&quot; в её названии!"); 
+		  a_error("Загружена не web тема. Отсутствует префикс &quot;web_&quot; в её названии!"); 
 
 				# Создаем папку темы
 				$theme_path = ROOT .'views/'. $theme['name'];
@@ -124,10 +125,11 @@ class Web_Version_Admin_Controller extends Controller {
 				# Извлекаем содержимое архива в папку модуля
 				$result = $archive->extract(PCLZIP_OPT_PATH, $theme_path);
 
-				if($result[0]['status'] == 'ok')
-					a_notice("Тема успешно загружена, теперь перейдите в раздел &quot;Выбор web темы&quot; и активируйте её.", a_url('web_version/admin/config'));
-				else
-					a_notice("При извлечении архива произошла ошибка", a_url('web_version/admin'));
+				if($result[0]['status'] == 'ok') {
+									a_notice("Тема успешно загружена, теперь перейдите в раздел &quot;Выбор web темы&quot; и активируйте её.", a_url('web_version/admin/config'));
+				} else {
+									a_notice("При извлечении архива произошла ошибка", a_url('web_version/admin'));
+				}
 			}
 		}
 		if(!isset($_POST['submit']) || $this->error) {

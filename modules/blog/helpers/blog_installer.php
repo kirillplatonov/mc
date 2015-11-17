@@ -17,8 +17,8 @@ defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
  */
 class blog_installer {
 	/**
-	* Установка модуля
-	*/
+	 * Установка модуля
+	 */
 	public static function install(&$db) {
 		// Добавление таблицы в базу данных
 		$db->query("CREATE TABLE IF NOT EXISTS `a_blog` (
@@ -34,14 +34,14 @@ class blog_installer {
 		");
 		
 		// Добавление правила роутинга
-		$rules  = 'profile/([a-zA-Z0-9]*)/blog#segment1=blog&segment2=view&username=$1'. PHP_EOL;
+		$rules = 'profile/([a-zA-Z0-9]*)/blog#segment1=blog&segment2=view&username=$1'.PHP_EOL;
 
 		main::add_route_rules('blog', $rules);
 	}
 
 	/**
-	* Деинсталляция модуля
-	*/
+	 * Деинсталляция модуля
+	 */
 	public static function uninstall(&$db) {
 		// Удаление таблицы из базы данных
 		$db->query("DROP TABLE #__blog");

@@ -1,14 +1,14 @@
 <?php
 /**
- * MobileCMS
- *
- * Open source content management system for mobile sites
- *
- * @author MobileCMS Team <support@mobilecms.ru>
- * @copyright Copyright (c) 2011, MobileCMS Team
- * @link http://mobilecms.ru Official site
- * @license http://opensource.org/licenses/gpl-license.php GNU Public License
- */
+	 * MobileCMS
+	 *
+	 * Open source content management system for mobile sites
+	 *
+	 * @author MobileCMS Team <support@mobilecms.ru>
+	 * @copyright Copyright (c) 2011, MobileCMS Team
+	 * @link http://mobilecms.ru Official site
+	 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+	 */
 
 defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
 
@@ -19,10 +19,10 @@ defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
  */
 class downloads_installer {
 	/**
-	* Установка модуля
-	*/
+	 * Установка модуля
+	 */
 	public static function install(&$db) {
-    	$db->query("CREATE TABLE IF NOT EXISTS #__downloads_directories (
+		$db->query("CREATE TABLE IF NOT EXISTS #__downloads_directories (
 			  `directory_id` int(11) NOT NULL auto_increment,
 			  `parent_id` int(11) default '0',
 			  `name` varchar(30) NOT NULL,
@@ -72,32 +72,32 @@ class downloads_installer {
 			(NULL , 'downloads', 'directories_per_page', '50');
 		");
 
-		if(!is_dir(ROOT .'files/downloads')) {
-			mkdir(ROOT .'files/downloads');
-			chmod(ROOT .'files/downloads', 0777);
+		if (!is_dir(ROOT.'files/downloads')) {
+			mkdir(ROOT.'files/downloads');
+			chmod(ROOT.'files/downloads', 0777);
 		}
-		if(!is_dir(ROOT .'files/downloads/_ftp_upload')) {
-			mkdir(ROOT .'files/downloads/_ftp_upload');
-			chmod(ROOT .'files/downloads/ftp_upload', 0777);
+		if (!is_dir(ROOT.'files/downloads/_ftp_upload')) {
+			mkdir(ROOT.'files/downloads/_ftp_upload');
+			chmod(ROOT.'files/downloads/ftp_upload', 0777);
 		}
 
 		# Добавляем правила в реврайт
-		if(!strstr(file_get_contents(ROOT .'.htaccess'), '[DOWNLOADS MODULE]')) {
-			$rules  = "\t# [DOWNLOADS MODULE]". PHP_EOL;
-			$rules .= "\t# Скачать файл". PHP_EOL;
-			$rules .= "\tRewriteRule ^download_file/(.*)?$ index.php?segment1=downloads&segment2=download_file&file=$1 [L,QSA]". PHP_EOL;
-			$rules .= "\t# Листинг папок". PHP_EOL;
-			$rules .= "\tRewriteRule ^downloads/([0-9*])(/)?$ index.php?segment1=downloads&directory_id=$1 [L,QSA]". PHP_EOL;
-			$rules .= "\t# Просмотр файла". PHP_EOL;
-			$rules .= "\tRewriteRule ^downloads/view/([0-9*])(/)?$ index.php?segment1=downloads&segment2=view_file&file_id=$1 [L,QSA]". PHP_EOL;
+		if (!strstr(file_get_contents(ROOT.'.htaccess'), '[DOWNLOADS MODULE]')) {
+			$rules  = "\t# [DOWNLOADS MODULE]".PHP_EOL;
+			$rules .= "\t# Скачать файл".PHP_EOL;
+			$rules .= "\tRewriteRule ^download_file/(.*)?$ index.php?segment1=downloads&segment2=download_file&file=$1 [L,QSA]".PHP_EOL;
+			$rules .= "\t# Листинг папок".PHP_EOL;
+			$rules .= "\tRewriteRule ^downloads/([0-9*])(/)?$ index.php?segment1=downloads&directory_id=$1 [L,QSA]".PHP_EOL;
+			$rules .= "\t# Просмотр файла".PHP_EOL;
+			$rules .= "\tRewriteRule ^downloads/view/([0-9*])(/)?$ index.php?segment1=downloads&segment2=view_file&file_id=$1 [L,QSA]".PHP_EOL;
 	
 			main::add_rewrite_rules($rules);
 		}
 	}
 
 	/**
-	* Деинсталляция модуля
-	*/
+	 * Деинсталляция модуля
+	 */
 	public static function uninstall(&$db) {
 		#$db->query("DROP TABLE #__downloads_directories, #__downloads_files");
 	}

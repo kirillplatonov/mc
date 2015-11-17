@@ -1,14 +1,14 @@
 <?php
 /**
- * MobileCMS
- *
- * Open source content management system for mobile sites
- *
- * @author MobileCMS Team <support@mobilecms.ru>
- * @copyright Copyright (c) 2011, MobileCMS Team
- * @link http://mobilecms.ru Official site
- * @license http://opensource.org/licenses/gpl-license.php GNU Public License
- */
+	 * MobileCMS
+	 *
+	 * Open source content management system for mobile sites
+	 *
+	 * @author MobileCMS Team <support@mobilecms.ru>
+	 * @copyright Copyright (c) 2011, MobileCMS Team
+	 * @link http://mobilecms.ru Official site
+	 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+	 */
 
 defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
 
@@ -19,8 +19,8 @@ defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
  */
 class smiles_installer {
 	/**
-	* Установка модуля
-	*/
+	 * Установка модуля
+	 */
 	public static function install(&$db) {
 		$db->query("CREATE TABLE #__smiles (
 			  smile_id int(11) NOT NULL auto_increment,
@@ -253,13 +253,13 @@ class smiles_installer {
 			(221, '*SEX_BEHIND2*', 'ic.gif', 'enable')
 		");
 
-		if(!class_exists('smiles')) a_import('modules/smiles/helpers/smiles');
+		if (!class_exists('smiles')) a_import('modules/smiles/helpers/smiles');
 		smiles::smiles_update(&$db);
 	}
 
 	/**
-	* Деинсталляция модуля
-	*/
+	 * Деинсталляция модуля
+	 */
 	public static function uninstall(&$db) {
 		$db->query("DROP TABLE #__smiles;");
 	}

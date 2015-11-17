@@ -17,11 +17,11 @@ defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
  */
 class user_events {
 	/**
-	* Перед выполнением контроллера
-	*/
+	 * Перед выполнением контроллера
+	 */
 	public static function pre_controller(&$db) {
-	     $tpl = Registry::get('tpl');
-             $config = Registry::get('config');
+		 $tpl = Registry::get('tpl');
+			 $config = Registry::get('config');
 	
 		# Проверяем наличие пользователя в списке забаненых
 		if (USER_ID != -1 && $ban = $db->get_row("SELECT * FROM #__users_ban WHERE user_id = '". USER_ID ."' AND status = 'enable'") AND empty($_SESSION['check_user_id'])) {
@@ -29,11 +29,13 @@ class user_events {
 			if ($ban['to_time'] <= TIME()) {
 				$db->query("UPDATE #__users_ban SET status = 'disable' WHERE ban_id = '". $ban['ban_id'] ."'");
 			} else {
-			    header('Location: '. URL .'user/');
+				header('Location: '. URL .'user/');
 			}
 			
 			# Удаляем мусор
-			if ($db->get_one("SELECT COUNT(*) FROM #__users_ban WHERE user_id = '". USER_ID ."' AND status = 'enable' AND ban_id != '". $ban['ban_id'] ."'") != 0) $db->query("DELETE FROM #__users_ban WHERE user_id = '". USER_ID ."' AND status = 'enable' AND ban_id != '". $ban['ban_id'] ."'");
+			if ($db->get_one("SELECT COUNT(*) FROM #__users_ban WHERE user_id = '". USER_ID ."' AND status = 'enable' AND ban_id != '". $ban['ban_id'] ."'") != 0) {
+				$db->query("DELETE FROM #__users_ban WHERE user_id = '". USER_ID ."' AND status = 'enable' AND ban_id != '". $ban['ban_id'] ."'");
+			}
 		}
 		
 		// Бан по IP
@@ -53,19 +55,19 @@ class user_events {
 		// Массив пользователей онлайн (для веб версии)
 		if ($users_online > 0) {
 			$users_array = $db->get_array("SELECT SQL_CALC_FOUND_ROWS user_id, username FROM #__users WHERE user_id != -1 AND account = 'active' AND last_visit > UNIX_TIMESTAMP() - 180 ORDER BY user_id ASC LIMIT 15");
-            $tpl->assign('users_online', $users_array);
+			$tpl->assign('users_online', $users_array);
 		}
                 
 		define('USERS_ONLINE', $users_online);
 		define('GUESTS_ONLINE', $guests_online);
 		define('MODERATION_USERS', $moderation_users);
                 
-		$user = $db->get_row("SELECT * FROM #__users LEFT JOIN #__users_profiles USING(user_id) WHERE user_id = '". USER_ID ."'");
+		$user = $db->get_row("SELECT * FROM #__users LEFT JOIN #__users_profiles USING(user_id) WHERE user_id = '".USER_ID."'");
                 
 		// Проверка подтверждения E-mail
 		if ($config['user']['email_confirmation'] == 1) {
 			if ($user['account'] == 'moderate' && $user['pin_code'] != '' && ROUTE_ACTION != 'email_confirm')
-				header('Location: '. a_url('user/email_confirm'));
+				header('Location: '.a_url('user/email_confirm'));
 		}
                 
 		// Проверка модерации пользователя

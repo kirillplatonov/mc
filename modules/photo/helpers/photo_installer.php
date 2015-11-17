@@ -17,10 +17,10 @@ defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
  */
 class photo_installer {
 	/**
-	* Установка модуля
-	*/
+	 * Установка модуля
+	 */
 	public static function install(&$db) {
-    $db->query("CREATE TABLE IF NOT EXISTS #__photo_albums (
+	$db->query("CREATE TABLE IF NOT EXISTS #__photo_albums (
 			`album_id` int(11) NOT NULL auto_increment,
 			`user_id` int(11) NOT NULL,
 			`name` varchar(30) NOT NULL,
@@ -46,23 +46,23 @@ class photo_installer {
 			(NULL , 'photo', 'max_size', '5');
 		");
 		
-		if (!is_dir(ROOT .'files/photo')) {
-			mkdir(ROOT .'files/photo');
-			chmod(ROOT .'files/photo', 0777);
+		if (!is_dir(ROOT.'files/photo')) {
+			mkdir(ROOT.'files/photo');
+			chmod(ROOT.'files/photo', 0777);
 		}		
 		
-		$rules  = 'photo/view/([0-9]*)#segment1=user_id&segment2=album_id&photo_id=$1';
+		$rules = 'photo/view/([0-9]*)#segment1=user_id&segment2=album_id&photo_id=$1';
 
 		main::add_route_rules('photo', $rules);
 	}
 
 	/**
-	* Деинсталляция модуля
-	*/
+	 * Деинсталляция модуля
+	 */
 	public static function uninstall(&$db) {
 		$db->query("DROP TABLE #__photo_albums, #__photo");
 		
-		main::delete_dir(ROOT .'files/photo');
+		main::delete_dir(ROOT.'files/photo');
 		
 		main::delete_route_rules('photo');
 	}

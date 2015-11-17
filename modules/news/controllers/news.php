@@ -1,13 +1,13 @@
 <?php
 /**
- * Ant0ha's project
- *
- * @package
- * @author Anton Pisarenko <wapwork@bk.ru>
- * @copyright Copyright (c) 2006 - 2010, Anton Pisarenko
- * @license http://ant0ha.ru/license.txt
- * @link http://ant0ha.ru
- */
+	 * Ant0ha's project
+	 *
+	 * @package
+	 * @author Anton Pisarenko <wapwork@bk.ru>
+	 * @copyright Copyright (c) 2006 - 2010, Anton Pisarenko
+	 * @license http://ant0ha.ru/license.txt
+	 * @link http://ant0ha.ru
+	 */
 
 //---------------------------------------------
 
@@ -18,26 +18,26 @@ defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
  */
 final class News_Controller extends Controller {
 	/**
-	* Constructor
-	*/
+	 * Constructor
+	 */
 	public function __construct() {
 		parent::__construct();
 	}
 
 	/**
-	* Действие по умолчанию
-	*/
+	 * Действие по умолчанию
+	 */
 	public function action_index() {
 		$this->action_list_news();
 	}
 
 	/**
-	* Детализирование новости
-	*/
+	 * Детализирование новости
+	 */
 	public function action_detail() {
-		if(!$news = $this->db->get_row("SELECT * FROM #__news WHERE news_id = '". intval($_GET['news_id']) ."'")) a_error('Новость не найдена!');
+		if (!$news = $this->db->get_row("SELECT * FROM #__news WHERE news_id = '".intval($_GET['news_id'])."'")) a_error('Новость не найдена!');
 		
-		$news['comments'] = $this->db->get_one("SELECT COUNT(*) FROM #__comments_posts WHERE module = 'news' AND item_id = '". intval($_GET['news_id']) ."'");
+		$news['comments'] = $this->db->get_one("SELECT COUNT(*) FROM #__comments_posts WHERE module = 'news' AND item_id = '".intval($_GET['news_id'])."'");
 
 		// Добавляем bbcod'ы
 		$news['text'] = nl2br(main::bbcode($news['text']));
@@ -50,8 +50,8 @@ final class News_Controller extends Controller {
 	}
 
 	/**
-	* Листинг новостей
-	*/
+	 * Листинг новостей
+	 */
 	public function action_list_news() {
 		# Получение данных
   		$result = $this->db->query("SELECT SQL_CALC_FOUND_ROWS n.*,
@@ -61,7 +61,7 @@ final class News_Controller extends Controller {
   		$total = $this->db->get_one("SELECT FOUND_ROWS()");
 
   		$list_news = array();
-  		while($news = $this->db->fetch_array($result)) {
+  		while ($news = $this->db->fetch_array($result)) {
   			$news['text'] = nl2br(main::bbcode($news['text']));
   			$list_news[] = $news;
   		}
@@ -84,14 +84,14 @@ final class News_Controller extends Controller {
 	}
 
 	/**
-	* Скрыть последнюю новость
-	*/
+	 * Скрыть последнюю новость
+	 */
 	public function action_hide_last_news() {
-		if(ACCESS_LEVEL < 5) a_error('У вас нет прав на выполнение этой операции!');
+		if (ACCESS_LEVEL < 5) a_error('У вас нет прав на выполнение этой операции!');
 	
-		$this->db->query("UPDATE #__users SET hide_last_news = 'yes' WHERE user_id = '". USER_ID ."'");
+		$this->db->query("UPDATE #__users SET hide_last_news = 'yes' WHERE user_id = '".USER_ID."'");
 	
-		header("Location: ". URL);
+		header("Location: ".URL);
 		exit;
 	}
 }

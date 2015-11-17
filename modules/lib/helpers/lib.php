@@ -1,14 +1,14 @@
 <?php
 /**
- * MobileCMS
- *
- * Open source content management system for mobile sites
- *
- * @author MobileCMS Team <support@mobilecms.ru>
- * @copyright Copyright (c) 2011, MobileCMS Team
- * @link http://mobilecms.ru Official site
- * @license http://opensource.org/licenses/gpl-license.php GNU Public License
- */
+	 * MobileCMS
+	 *
+	 * Open source content management system for mobile sites
+	 *
+	 * @author MobileCMS Team <support@mobilecms.ru>
+	 * @copyright Copyright (c) 2011, MobileCMS Team
+	 * @link http://mobilecms.ru Official site
+	 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+	 */
 
 defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
 
@@ -19,14 +19,14 @@ defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
  */
 class lib {
 	/**
-	* Получение реального пути к папке
-	*/
+	 * Получение реального пути к папке
+	 */
 	public static function get_path($directory_id, &$db, $directory_path = array(), $i = 0) {
 		$parent = $db->get_row("SELECT * FROM #__lib_directories WHERE
-	 		directory_id = (SELECT parent_id FROM #__lib_directories WHERE directory_id = '". intval($directory_id) ."')
+	 		directory_id = (SELECT parent_id FROM #__lib_directories WHERE directory_id = '". intval($directory_id)."')
 	 	");
 	 	$i++;
-	 	if($parent['directory_id'] != 0) {
+	 	if ($parent['directory_id'] != 0) {
 	 		$directory_path[$i]['directory_id'] = $parent['directory_id'];
 	  		$directory_path[$i]['name'] = $parent['name'];
 	  		$directory_path = self::get_path($parent['directory_id'], $db, $directory_path, $i);
@@ -35,19 +35,18 @@ class lib {
 	}
 
 	/**
-	* Получение полного пути к папке
-	*/
+	 * Получение полного пути к папке
+	 */
 	public static function get_realpath($directories_array) {
-		if(empty($directories_array)) return;
+		if (empty($directories_array)) return;
 
-		foreach($directories_array AS $directory) {
+		foreach ($directories_array AS $directory) {
 			$directory_path[] = $directory['directory_id'];
 		}
-		if(count($directory_path) > 1) {
+		if (count($directory_path) > 1) {
 	   		$realpath = array_reverse($directory_path);
 	   		$realpath = implode('/', $realpath);
-	  	}
-	  	else {
+	  	} else {
 	   		$realpath = $directory_path[0];
 	  	}
 
@@ -55,13 +54,15 @@ class lib {
 	}
 
 	/**
-	* @desc получение полного пути к папке
-	* @param $array
-	*/
+	 * @desc получение полного пути к папке
+	 * @param $array
+	 */
 	public static function get_namepath($directories_array, $delim = '/', $admin = FALSE) {
-		if(empty($directories_array)) return;
+		if(empty($directories_array)) {
+			return;
+		}
 
-	        $segment = $admin ? 'lib/admin' : 'lib';
+			$segment = $admin ? 'lib/admin' : 'lib';
 
 		foreach($directories_array AS $directory) {
 			$directory_path[] = '<a href="'. a_url($segment, 'directory_id='. $directory['directory_id']) .'">'. $directory['name'] .'</a>';
@@ -69,8 +70,7 @@ class lib {
 		if(count($directory_path) > 1) {
 	   		$realpath = array_reverse($directory_path);
 	   		$realpath = implode($delim, $realpath);
-	  	}
-	  	else {
+	  	} else {
 	   		$realpath = $directory_path[0];
 	  	}
 
@@ -79,20 +79,22 @@ class lib {
 
 	/**
 	* Функция рекурсивного копирования
+	* @param string $source
+	* @param string $dest
 	*/
 	public static function r_copy($source, $dest) {
 		# Simple copy for a file
-		if(is_file($source)) {
+		if (is_file($source)) {
 			return copy($source, $dest);
 		}
 
 		# Make destination directory
-		if(!is_dir($dest)) {
+		if (!is_dir($dest)) {
 			mkdir($dest);
 		}
 
 		# If the source is a symlink
-		if(is_link($source)) {
+		if (is_link($source)) {
 			$link_dest = readlink($source);
 			return symlink($link_dest, $dest);
 		}

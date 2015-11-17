@@ -16,11 +16,11 @@ defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
  * Хелпер установки модуля
  */
 class comments_installer {
-    /**
-     * Установка модуля
-     */
-    public static function install(&$db) {
-        $db->query("CREATE TABLE IF NOT EXISTS #__comments_posts ( 
+	/**
+	 * Установка модуля
+	 */
+	public static function install(&$db) {
+		$db->query("CREATE TABLE IF NOT EXISTS #__comments_posts ( 
               `comment_id` int(11) NOT NULL auto_increment, 
               `module` varchar(30) NOT NULL, 
               `item_id` int(11) NOT NULL, 
@@ -33,17 +33,17 @@ class comments_installer {
             ) ENGINE=MyISAM  DEFAULT CHARSET=utf8; 
         ");
         
-        $db->query("INSERT INTO #__config SET `module` = 'system', `key` = 'comments_posting', `value` = 'all'; 
+		$db->query("INSERT INTO #__config SET `module` = 'system', `key` = 'comments_posting', `value` = 'all'; 
         ");
-    }
+	}
     
-    /**
-     * Деинсталляция модуля
-     */
-    public static function uninstall(&$db) {
-        $db->query("DROP TABLE #__comments_posts;");
-        $db->query("DELETE FROM #__config WHERE `key` = 'comments_posting';");
-    }
+	/**
+	 * Деинсталляция модуля
+	 */
+	public static function uninstall(&$db) {
+		$db->query("DROP TABLE #__comments_posts;");
+		$db->query("DELETE FROM #__config WHERE `key` = 'comments_posting';");
+	}
 }
 
 ?>
