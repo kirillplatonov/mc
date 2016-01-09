@@ -66,7 +66,7 @@ class News_Admin_Controller extends Controller {
   				if ($action == 'add') {
   					$this->db->query("INSERT INTO #__news SET
   						subject = '". a_safe($_POST['subject'])."',
-  						text = '". mysql_real_escape_string(main::tinymce_p_br($_POST['editor_text']))."',
+  						text = '". mysqli_real_escape_string($this->db->db_link, main::tinymce_p_br($_POST['editor_text']))."',
   						time = UNIX_TIMESTAMP()
   					");
   					
@@ -76,7 +76,7 @@ class News_Admin_Controller extends Controller {
   				if ($action == 'edit') {
   					$this->db->query("UPDATE #__news SET
   						subject = '". a_safe($_POST['subject'])."',
-  						text = '". mysql_real_escape_string(main::tinymce_p_br($_POST['editor_text']))."'
+  						text = '". mysqli_real_escape_string($this->db->db_link, main::tinymce_p_br($_POST['editor_text']))."'
   						WHERE news_id = '". intval($_GET['news_id'])."'
   					");
   					

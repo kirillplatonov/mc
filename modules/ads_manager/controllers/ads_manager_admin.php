@@ -155,7 +155,7 @@ class Ads_Manager_Admin_Controller extends Controller {
 					$this->db->query("INSERT INTO #__ads_manager_links SET
 						title = '". a_safe($_POST['title'])."',
 						url = '". a_safe($_POST['url'])."',
-						names = '". mysql_real_escape_string($_POST['names'])."',
+						names = '". mysqli_real_escape_string($this->db_link, $_POST['names'])."',
 						area_id = '". $area['area_id']."',
 						area_ident = '". $area['ident']."',
 						position = '". $position."'
@@ -166,7 +166,7 @@ class Ads_Manager_Admin_Controller extends Controller {
 					$this->db->query("UPDATE #__ads_manager_links SET
 						title = '". a_safe($_POST['title'])."',
 						url = '". a_safe($_POST['url'])."',
-						names = '". mysql_real_escape_string($_POST['names'])."',
+						names = '". mysqli_real_escape_string($this->db_link, $_POST['names'])."',
 						area_id = '". $area['area_id']."',
 						area_ident = '". $area['ident']."'
 						WHERE link_id = '". $link['link_id']."'"
