@@ -36,8 +36,7 @@ CREATE TABLE IF NOT EXISTS `a_ads_manager_links` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 //=====================================//
 INSERT INTO `a_ads_manager_links` (`link_id`, `area_id`, `area_ident`, `title`, `url`, `names`, `position`, `count_all`) VALUES
-(1, 1, 'all_pages_up', 'Ссылка вверху', 'http://jaze.ru', 'Бесплатная эротика!', 1, 7),
-(3, 2, 'all_pages_down', 'Ссылка снизу', 'http://mobilecms.ru', '[red]Первое название[/red]\r\n[green]Второе название[/green]\r\n[blue]Третье название[/blue]', 1, 0);
+(3, 2, 'all_pages_down', 'Ссылка снизу', 'https://github.com/KpuTuK/MobileCMS', '[red]MobileCMS download[/red]\r\n[green]MobileCMS repository[/green]\r\n[blue]new MobileCMS[/blue]', 1, 0);
 //=====================================//
 CREATE TABLE IF NOT EXISTS `a_chat_messages` (
   `message_id` int(11) NOT NULL auto_increment,
@@ -322,7 +321,7 @@ CREATE TABLE IF NOT EXISTS `a_news` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 //=====================================//
 INSERT INTO `a_news` (`subject`, `text`, `time`) VALUES
-('Установка MobileCMS v2.x', 'Здравствуйте. Вы установили на сайт MobileCMS - профессиональную CMS для создания мобильных сайтов. Перед началом работы мы настоятельно рекомендуем ознакомиться с документацией, которая находится по адресу <b>http://ваш_сайт.ру/docs/</b>. Изменить содержимое этой новости вы можете в панеле управления сайтом, раздел <b>новости</b>. Получить техническую поддержку, а также скачать последнюю версию CMS вы всегда можете на официальном сайте <a href="http://mobilecms">http://mobilecms</a>. С уважением, разработчики MobileCMS.', 1307462472);
+('Установка MobileCMS v2.6.1', 'Здравствуйте. Вы установили на сайт MobileCMS - профессиональную CMS для создания мобильных сайтов. Перед началом работы мы настоятельно рекомендуем ознакомиться с документацией, которая находится по адресу <b>http://ваш_сайт.ру/docs/</b>. Изменить содержимое этой новости вы можете в панеле управления сайтом, раздел <b>новости</b>. Получить техническую поддержку, а также скачать последнюю версию CMS вы всегда можете на официальном репозитории <a href="https://github.com/KpuTuK/MobileCMS">MobileCMS</a>. С уважением, разработчики MobileCMS.', 1307462472);
 //=====================================//
 CREATE TABLE IF NOT EXISTS `a_pages` (
   `page_id` int(11) NOT NULL auto_increment,
