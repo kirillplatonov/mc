@@ -45,7 +45,7 @@ class html_widget {
 				$code = str_replace("\n", "", $_POST['code']);
 				$code = str_replace("\r", "", $code);
 
-				$config = 'code = "'.mysqli_real_escape_string($this->db_link, $code).'"';
+				$config = 'code = "'.mysqli_real_escape_string($this->db->db_link, $code).'"';
 
 				$db->query("UPDATE #__index_page_widgets SET
 					config = '$config'
