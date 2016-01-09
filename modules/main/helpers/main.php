@@ -21,8 +21,8 @@ class main {
 		foreach ($config_data as $key => $value) {
 			if ($key == 'submit') continue;
 			$sql  = "UPDATE #__config SET \n";
-			$sql .= "`value` = '".mysql_real_escape_string(stripslashes($value))."'\n";
-			$sql .= "WHERE `key` = '".mysql_real_escape_string($key)."' AND module = '".mysql_real_escape_string($module)."'";
+			$sql .= "`value` = '".mysqli_real_escape_string($db, stripslashes($value))."'\n";
+			$sql .= "WHERE `key` = '".mysqli_real_escape_string($db, $key)."' AND module = '".mysqli_real_escape_string($db, $module)."'";
 			$db->query($sql);
 		}
 	}

@@ -61,14 +61,14 @@ class Pages_Admin_Controller extends Controller {
 				if ($action == 'add') {
 					$this->db->query("INSERT INTO #__pages SET
 						`title` = '". a_safe($_POST['title'])."',
-						`content` = '". mysql_real_escape_string(main::tinymce_p_br($_POST['editor_content']))."'
+						`content` = '". mysqli_real_escape_string($this->db, main::tinymce_p_br($_POST['editor_content']))."'
 					");
 					$message = 'Страница успешно добавлена!';
 				}
 				elseif ($action == 'edit') {
 					$this->db->query("UPDATE #__pages SET
 						`title` = '". a_safe($_POST['title'])."',
-						`content` = '". mysql_real_escape_string(main::tinymce_p_br($_POST['editor_content']))."'
+						`content` = '". mysqli_real_escape_string($this->db, main::tinymce_p_br($_POST['editor_content']))."'
 						WHERE
 						page_id = '". intval($_GET['page_id'])."'
 					");
