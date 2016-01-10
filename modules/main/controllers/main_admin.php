@@ -44,7 +44,7 @@ class Main_Admin_Controller extends Controller {
 			foreach ($_config as $key => $value) {
 				if ($key == 'submit') continue;
 				$sql  = "UPDATE #__config SET \n";
-				$sql .= "`value` = '".mysql_real_escape_string(stripslashes($value))."'\n";
+				$sql .= "`value` = '".mysqli_real_escape_string($this->db->db_link, stripslashes($value))."'\n";
 				$sql .= "WHERE `key` = '".$key."'";
 				$this->db->query($sql);
 			}

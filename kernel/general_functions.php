@@ -103,6 +103,8 @@ function error($error_message = '', $link = '') {
 function a_notice($message, $link, $timeout = 5) {
 	$tpl = Registry::get('tpl');
 
+        $message = str_safe($message);
+        $link = str_safe($link);
 	if (isset($tpl)) {
 		$tpl->assign(array(
 			'title' => 'Информация',
@@ -127,7 +129,9 @@ function a_notice($message, $link, $timeout = 5) {
 */
 function a_confirm($message, $link_ok, $link_cancel) {
 	$tpl = Registry::get('tpl');
-
+        $message = str_safe($message);
+        $link_ok = str_safe($link_ok);
+        $link_cancel = str_safe($link_cancel);
 	if (empty($message)) $message = 'Подтверждаете выполнение данного действия?';
 
 	if (isset($tpl)) {

@@ -20,6 +20,14 @@
 		      <?php endforeach; ?>
 		      </select>
 	        </p>
+                <p>
+		      <label>WEB тема сайта по умолчанию</label>
+		      <select name="web_theme">
+		      <?php foreach($default_themes as $theme): ?>
+		        <option value="<?php echo $theme['name'] ?>"<?php if($_config['web_theme'] == $theme['name']): ?> selected='selected'<?php ENDIF ?>><?php echo $theme['title'] ?></option>
+		      <?php endforeach; ?>
+		      </select>
+	        </p>
 	        <p>
 		      <label>Тема админки</label>
 		      <select name="admin_theme">
