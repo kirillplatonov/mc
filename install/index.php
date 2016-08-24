@@ -167,13 +167,9 @@ switch ($step) {
 
 			if(!$error) {
 				# Коннектимся к базе данных
-				@mysql_connect($_POST['db_server'], $_POST['db_user'], $_POST['db_password'])
+				$link = mysqli_connect($_POST['db_server'], $_POST['db_user'], $_POST['db_password'], $_POST['db_base'], 3306)
 			   		or die ("Не возможно подключиться к MySQL серверу, проверьте правильность введенных данных</div></div></body></html>");
-
-			 	@mysql_select_db($_POST['db_base'])
-			   		or die ("Не удалось выбрать базу данных ". $_POST['db_base']);
-
-			   	mysql_query("SET NAMES utf8");
+			   	mysqli_query($link, "SET NAMES utf8");
 
 			   	# Заливаем дамп системы
 			   	$dump = file_get_contents('./system_dump.sql');
@@ -183,7 +179,7 @@ switch ($step) {
 
 			   	$queryes = explode('//=====================================//', $dump);
 			   	foreach($queryes as $query) {
-					mysql_query(trim($query));
+					@mysqli_query($link, trim($query));
 			   	}
 
 			   	# Создаем файл конфигурации системы
