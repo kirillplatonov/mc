@@ -16,6 +16,16 @@ $start_time = microtime(true);
 defined('ROOT') or define('ROOT', str_replace('\\', '/', realpath(dirname(__FILE__))).'/');
 define('IN_SYSTEM', TRUE);
 
+require ROOT .'PositiveCode/ClassLoader.php';
+$loader = new PositiveCode\ClassLoader(ROOT);
+$loader->withPathes([
+   'File_Cache' => 'libraries\file_cache',
+   'PclZip' => 'libraries\pclzip.lib',
+   'smiles' => 'modules/smiles/helpers/smiles',
+    'main_ftp' => 'modules/main/helpers/main_ftp',
+    'main_form' => 'modules/main/helpers/main_form'
+]);
+$loader->register();
 // Конфигурация системы
 if (file_exists(ROOT.'data_files/config.php')) {
 	require_once(ROOT.'data_files/config.php');
@@ -37,7 +47,7 @@ session_start();
 
 // Легкий XSS clean =)
 $_GET = array_map('htmlspecialchars_array', $_GET);
-
+Registry::set('classLoader', $loader);
 // Подключаем MySQL класс
 a_import('libraries/mysql');
 $db = new MySQL();

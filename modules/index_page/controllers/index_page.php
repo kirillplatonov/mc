@@ -44,9 +44,13 @@ class Index_Page_Controller extends Controller {
 				$result1 = $this->db->query("SELECT * FROM #__index_page_widgets WHERE block_id = '".$block['block_id']."' ORDER BY position ASC");
 				$block['widgets'] = array();
 				while ($widget = $this->db->fetch_array($result1)) {
+                                    Registry::get('classLoader')->withPath(
+                                        $widget['module'].'_widget',
+                                        'modules/'.$widget['module'].'/helpers/'.$widget['module'].'_widget'
+                                    );
 					# Подключаем класс виджета
 					if (!class_exists($widget['module'].'_widget'))
-						a_import('modules/'.$widget['module'].'/helpers/'.$widget['module'].'_widget.php');
+					a_import('modules/'.$widget['module'].'/helpers/'.$widget['module'].'_widget.php');
 					# Получаем display виджета
 					$block['widgets'][] = call_user_func(array($widget['module'].'_widget', 'display'), $widget['widget_id']);
 				}

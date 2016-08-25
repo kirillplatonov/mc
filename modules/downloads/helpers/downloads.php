@@ -179,7 +179,7 @@ class downloads {
 		
 		$file_path = ROOT.$file['path_to_file'].'/'.$file['real_name'];
 
-		if (class_exists('ffmpeg_movie')) {
+		if (in_array('ffmpeg', get_loaded_extensions())) {
 			# Работаем с видео файлами
 			if ($file['file_ext'] == '3gp' || $file['file_ext'] == 'mp4' || $file['file_ext'] == 'avi') {
 				$ff = new ffmpeg_movie($file_path);

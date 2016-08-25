@@ -124,7 +124,10 @@ class Index_Page_Admin_Controller extends Controller {
 	public function action_widget_setup() {
 		if(!$widget = $this->db->get_row("SELECT * FROM #__index_page_widgets WHERE widget_id = '". intval($_GET['widget_id']) ."'"))
 			a_error('Виджет не найден!');
-
+                                    Registry::get('classLoader')->withPath(
+                                        $widget['module'].'_widget',
+                                        'modules/'.$widget['module'].'/helpers/'.$widget['module'].'_widget'
+                                    );
 		# Подключаем класс виджета
   		if(!class_exists($widget['module'] .'_widget'))
 			a_import('modules/'. $widget['module'] .'/helpers/'. $widget['module'] .'_widget.php');
