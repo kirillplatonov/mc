@@ -517,34 +517,34 @@ class main {
 	public static function bbcode($markup){
 		$preg = array(
 			# Text arrtibutes
-			'~\[b\](.*?)\[\/b\]~si' => '<b>$1</b>',
-			'~\[i\](.*?)\[\/i\]~si' => '<i>$1</i>',
-			'~\[u\](.*?)\[\/u\]~si' => '<u>$1</u>',
+			'/\[b\](.*?)\[\/b\]/si' => '<b>$1</b>',
+			'/\[i\](.*?)\[\/i\]/si' => '<i>$1</i>',
+			'/\[u\](.*?)\[\/u\]/si' => '<u>$1</u>',
 
 			# цвет текста
-			'~\[red\](.*?)\[\/red\]~si' => '<font color="red">$1</font>',
-			'~\[green\](.*?)\[\/green\]~si' => '<font color="green">$1</font>',
-			'~\[blue\](.*?)\[\/blue\]~si' => '<font color="blue">$1</font>',
+			'/\[red\](.*?)\[\/red\]/si' => '<font color="red">$1</font>',
+			'/\[green\](.*?)\[\/green\]/si' => '<font color="green">$1</font>',
+			'/\[blue\](.*?)\[\/blue\]/si' => '<font color="blue">$1</font>',
 
 			# выравнивания
-			'~\[center\](.*?)\[\/center\]~si' => '<div style="text-align: center">$1</div>',
-			'~\[left\](.*?)\[\/left\]~si' => '<div style="text-align: left">$1</div>',
-			'~\[right\](.*?)\[\/right\]~si' => '<div style="text-align: right">$1</div>',
+			'/\[center\](.*?)\[\/center\]/si' => '<div style="text-align: center">$1</div>',
+			'/\[left\](.*?)\[\/left\]/si' => '<div style="text-align: left">$1</div>',
+			'/\[right\](.*?)\[\/right\]/si' => '<div style="text-align: right">$1</div>',
 
 			# код
-			'/\[code\](.*)\[\/code\]/Usie' => "highlight('$1')",
+			'/\[code\](.*?)\[\/code\]/si' => "highlight('$1')",
 
 			# цитаты
-			'~\[q\](.*?)\[\/q\]~si' => '<div class="q">$1</div>',
+			'/\[q\](.*?)\[\/q\]/si' => '<div class="q">$1</div>',
 
 			# e-mail
-			'~\[email\](.*?)\[\/email\]~sei' => "'<a rel=\"noindex\" href=\"mailto:'.str_replace('@', '[dog]','$1').'\">'.str_replace('@', '[dog]','$1').'</a>'",
+			'/\[email\](.*?)\[\/email\]/si' => "'<a rel=\"noindex\" href=\"mailto:'.str_replace('@', '[dog]','$1').'\">'.str_replace('@', '[dog]','$1').'</a>'",
 
 			# ссылки
-			'~\[url=(.*?)?\](.*?)\[\/url\]~si'      => '<a href="$1">$2</a>',
+			'/\[url\=(.*?)\](.*?)\[\/url\]/si'      => '<a href="$1">$2</a>',
 
 			# images
-			'~\[img\](.*?)\[\/img\]~si'             => "<img src=\"$1\" alt=\"\" style=\"max-width: 150px;\" />",
+			'/\[img\](.*?)\[\/img\]/si'             => "<img src=\"$1\" alt=\"\" style=\"max-width: 150px;\" />",
 		);
 
 	  	return preg_replace(array_keys($preg), array_values($preg), $markup);
