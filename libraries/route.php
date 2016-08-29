@@ -67,9 +67,9 @@ class Route {
 			if (strstr($f, '.rules')) $rules .= trim(file_get_contents($rules_dir.'/'.$f)).PHP_EOL;
 		}
 		
-		$rules .= '([a-z0-9_\-]*)([\.a-z0-9]*)#segment1=$1'.PHP_EOL;
-		$rules .= '([a-z0-9_\-]*)/([a-z0-9_\-]*)([\.a-z0-9]*)#segment1=$1&segment2=$2'.PHP_EOL;
-		$rules .= '([a-z0-9_\-]*)/([a-z0-9_\-]*)/([a-z0-9_\-]*)([\.a-z0-9]*)#segment1=$1&segment2=$2&segment3=$3'.PHP_EOL;
+		$rules .= '([A-z0-9_\-]*)([\.A-z0-9]*)#segment1=$1'.PHP_EOL;
+		$rules .= '([A-z0-9_\-]*)/([A-z0-9_\-]*)([\.A-z0-9]*)#segment1=$1&segment2=$2'.PHP_EOL;
+		$rules .= '([A-z0-9_\-]*)/([A-z0-9_\-]*)/([A-z0-9_\-]*)([\.A-z0-9]*)#segment1=$1&segment2=$2&segment3=$3'.PHP_EOL;
 		
 		$rules = explode("\n", $rules);
 	
@@ -161,15 +161,15 @@ class Route {
 	protected function _check_segments() {
 		$check_segments = true;
 		if (!empty($_GET['segment1'])) {
-			if (preg_match('~^[0-9a-z_-]*$~', $_GET['segment1'])) $this->segment1 = $_GET['segment1'];
+			if (preg_match('~^[0-9A-z_-]*$~', $_GET['segment1'])) $this->segment1 = $_GET['segment1'];
 			else $check_segments = false;
 		}
 		if (!empty($_GET['segment2'])) {
-			if (preg_match('~^[0-9a-z_-]*$~', $_GET['segment2'])) $this->segment2 = $_GET['segment2'];
+			if (preg_match('~^[0-9A-z_-]*$~', $_GET['segment2'])) $this->segment2 = $_GET['segment2'];
 			else $check_segments = false;
 		}
 		if (!empty($_GET['segment3'])) {
-			if (preg_match('~^[0-9a-z_-]*$~', $_GET['segment3'])) $this->segment3 = $_GET['segment3'];
+			if (preg_match('~^[0-9A-z_-]*$~', $_GET['segment3'])) $this->segment3 = $_GET['segment3'];
 			else $check_segments = false;
 		}
 		if (!$check_segments) a_error('Ошибка регистрации сегментов!');
