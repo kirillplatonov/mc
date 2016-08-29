@@ -17,7 +17,7 @@ class web_version_events {
 	/**
 	 * Перед выполнением контроллера
 	 */
-	public static function pre_controller(&$db) {
+	public static function pre_controller($db) {
 
 	$user_agent = $_SERVER['HTTP_USER_AGENT'];
 	$type = 'wap';

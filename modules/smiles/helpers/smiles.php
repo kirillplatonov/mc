@@ -31,7 +31,7 @@ class smiles {
 	/**
 	 * Обновление смайлов
 	 */
-	public static function smiles_update(&$db) {
+	public static function smiles_update($db) {
 		$result = $db->query("SELECT * FROM #__smiles WHERE status = 'enable'");
 		while ($smile = $db->fetch_array($result)) {
 			$smiles_array[$smile['code']] = '<img src="{%URL%}modules/smiles/smiles/'.$smile['image'].'" alt="'.$smile['code'].'" />';

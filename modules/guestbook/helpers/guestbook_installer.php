@@ -19,7 +19,7 @@ class guestbook_installer {
 	/**
 	 * Установка модуля
 	 */
-	public static function install(&$db) {
+	public static function install($db) {
 		$db->query("CREATE TABLE #__guestbook (
 			`message_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
 			`user_id` INT NOT NULL ,
@@ -33,7 +33,7 @@ class guestbook_installer {
 	/**
 	 * Деинсталляция модуля
 	 */
-	public static function uninstall(&$db) {
+	public static function uninstall($db) {
 		$db->query("DROP TABLE #__guestbook ;");
 	}
 }

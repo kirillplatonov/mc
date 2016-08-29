@@ -21,7 +21,7 @@ class pages_installer {
 	/**
 	 * Установка модуля
 	 */
-	public static function install(&$db) {
+	public static function install($db) {
 		$db->query("CREATE TABLE IF NOT EXISTS #__pages (
 			  `page_id` int(11) NOT NULL AUTO_INCREMENT,
 			  `user_id` int(11) NOT NULL,
@@ -35,7 +35,7 @@ class pages_installer {
 	/**
 	 * Деинсталляция модуля
 	 */
-	public static function uninstall(&$db) {
+	public static function uninstall($db) {
 		$db->query("DROP TABLE #__pages;");
 	}
 }

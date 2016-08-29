@@ -19,7 +19,7 @@ class comments_installer {
 	/**
 	 * Установка модуля
 	 */
-	public static function install(&$db) {
+	public static function install($db) {
 		$db->query("CREATE TABLE IF NOT EXISTS #__comments_posts ( 
               `comment_id` int(11) NOT NULL auto_increment, 
               `module` varchar(30) NOT NULL, 
@@ -40,7 +40,7 @@ class comments_installer {
 	/**
 	 * Деинсталляция модуля
 	 */
-	public static function uninstall(&$db) {
+	public static function uninstall($db) {
 		$db->query("DROP TABLE #__comments_posts;");
 		$db->query("DELETE FROM #__config WHERE `key` = 'comments_posting';");
 	}

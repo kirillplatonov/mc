@@ -177,7 +177,7 @@ class main {
 	* Выполнение событий
 	* @param string $type
 	*/
-	public static function events_exec(&$db, $type) {
+	public static function events_exec($db, $type) {
 		$dir = opendir(ROOT.'data_files/events');
 		while ($f = readdir($dir)) {
 			if (strstr($f, $type.'.event')) {

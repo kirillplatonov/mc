@@ -21,7 +21,7 @@ class lib {
 	/**
 	 * Получение реального пути к папке
 	 */
-	public static function get_path($directory_id, &$db, $directory_path = array(), $i = 0) {
+	public static function get_path($directory_id, $db, $directory_path = array(), $i = 0) {
 		$parent = $db->get_row("SELECT * FROM #__lib_directories WHERE
 	 		directory_id = (SELECT parent_id FROM #__lib_directories WHERE directory_id = '". intval($directory_id)."')
 	 	");
