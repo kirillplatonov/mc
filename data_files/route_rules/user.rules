@@ -1,1 +1,0 @@
-profile/([a-zA-Z0-9]*)#segment1=user&segment2=view&username=$1

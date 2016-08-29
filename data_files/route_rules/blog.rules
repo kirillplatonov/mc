@@ -1,1 +1,0 @@
-profile/([a-zA-Z0-9]*)/blog#segment1=blog&segment2=view&username=$1
