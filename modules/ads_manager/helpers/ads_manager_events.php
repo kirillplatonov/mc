@@ -20,7 +20,7 @@ class ads_manager_events {
 	/**
 	 * Перед выполнением контроллера
 	 */
-	public static function pre_controller(&$db) {
+	public static function pre_controller($db) {
 		a_import('modules/ads_manager/helpers/ads_manager');
 		$ads_manager_links = ads_manager::get_links($db);
 		

@@ -19,7 +19,7 @@ class photo_installer {
 	/**
 	 * Установка модуля
 	 */
-	public static function install(&$db) {
+	public static function install($db) {
 	$db->query("CREATE TABLE IF NOT EXISTS #__photo_albums (
 			`album_id` int(11) NOT NULL auto_increment,
 			`user_id` int(11) NOT NULL,
@@ -59,7 +59,7 @@ class photo_installer {
 	/**
 	 * Деинсталляция модуля
 	 */
-	public static function uninstall(&$db) {
+	public static function uninstall($db) {
 		$db->query("DROP TABLE #__photo_albums, #__photo");
 		
 		main::delete_dir(ROOT.'files/photo');

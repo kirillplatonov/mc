@@ -20,7 +20,7 @@ class chat_installer {
 	/**
 	 * Установка модуля
 	 */
-	public static function install(&$db) {
+	public static function install($db) {
 		$db->query("CREATE TABLE IF NOT EXISTS #__chat_messages (
 			  `message_id` int(11) NOT NULL auto_increment,
 			  `user_id` int(11) NOT NULL,
@@ -58,7 +58,7 @@ class chat_installer {
 	/**
 	 * Деинсталляция модуля
 	 */
-	public static function uninstall(&$db) {
+	public static function uninstall($db) {
 		$db->query("DROP TABLE #__chat_messages, #__chat_rooms;");
 
 		$db->query("ALTER TABLE #__users

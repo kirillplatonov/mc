@@ -21,7 +21,7 @@ class smiles_installer {
 	/**
 	 * Установка модуля
 	 */
-	public static function install(&$db) {
+	public static function install($db) {
 		$db->query("CREATE TABLE #__smiles (
 			  smile_id int(11) NOT NULL auto_increment,
 			  code varchar(50) NOT NULL,
@@ -254,13 +254,13 @@ class smiles_installer {
 		");
 
 		if (!class_exists('smiles')) a_import('modules/smiles/helpers/smiles');
-		smiles::smiles_update(&$db);
+		smiles::smiles_update($db);
 	}
 
 	/**
 	 * Деинсталляция модуля
 	 */
-	public static function uninstall(&$db) {
+	public static function uninstall($db) {
 		$db->query("DROP TABLE #__smiles;");
 	}
 }

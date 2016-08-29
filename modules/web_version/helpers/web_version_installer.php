@@ -17,7 +17,7 @@ class web_version_installer {
 	/**
 	 * Установка модуля
 	 */
-	public static function install(&$db) {
+	public static function install($db) {
 		$db->query("INSERT INTO #__config SET
 		    `module` = 'system',
 		    `key` = 'web_theme',
@@ -30,7 +30,7 @@ class web_version_installer {
 	/**
 	 * Деинсталляция модуля
 	 */
-	public static function uninstall(&$db) {
+	public static function uninstall($db) {
 		$db->query("DELETE FROM #__config WHERE 
         `key` = 'web_theme';");
 		main::delete_event('web_version');

@@ -19,7 +19,7 @@ class user_events {
 	/**
 	 * Перед выполнением контроллера
 	 */
-	public static function pre_controller(&$db) {
+	public static function pre_controller($db) {
 		 $tpl = Registry::get('tpl');
 			 $config = Registry::get('config');
 	

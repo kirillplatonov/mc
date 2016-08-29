@@ -20,7 +20,7 @@ class downloads {
 	 * @desc получение реального пути к папке
 	 * @param $int
 	 */
-	public static function get_path($directory_id, &$db, $directory_path = array(), $i = 0) {
+	public static function get_path($directory_id, $db, $directory_path = array(), $i = 0) {
 		$parent = $db->get_row("SELECT * FROM #__downloads_directories WHERE
 	 		directory_id = (SELECT parent_id FROM #__downloads_directories WHERE directory_id = '". intval($directory_id)."')
 	 	");
@@ -266,7 +266,7 @@ class downloads {
 	/**
 	 * Изменение данных файла в базе
 	 */
-	public static function update_file(&$db, $file_id, $file, $new_file = true) {
+	public static function update_file($db, $file_id, $file, $new_file = true) {
 		$db->query("UPDATE #__downloads_files SET
 			directory_id = '". intval($file['directory_id'])."',
 			user_id = '". (!empty($file['user_id']) ? $file['user_id'] : USER_ID)."',

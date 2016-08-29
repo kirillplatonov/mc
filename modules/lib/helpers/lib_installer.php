@@ -21,7 +21,7 @@ class lib_installer {
 	/**
 	 * Установка модуля
 	 */
-	public static function install(&$db) {
+	public static function install($db) {
 		$db->query("CREATE TABLE IF NOT EXISTS `a_lib_books` (
 			  `book_id` int(11) NOT NULL auto_increment,
 			  `directory_id` int(11) NOT NULL,
@@ -52,7 +52,7 @@ class lib_installer {
 	/**
 	 * Деинсталляция модуля
 	 */
-	public static function uninstall(&$db) {
+	public static function uninstall($db) {
 	}
 }
 ?>

@@ -19,7 +19,7 @@ class forum_installer {
 	/**
 	 * Установка модуля
 	 */
-	public static function install(&$db) {
+	public static function install($db) {
 		$db->query("CREATE TABLE IF NOT EXISTS #__forum_forums (
 			  `forum_id` int(11) NOT NULL auto_increment,
 			  `section_id` int(11) NOT NULL,
@@ -91,7 +91,7 @@ class forum_installer {
 	/**
 	 * Деинсталляция модуля
 	 */
-	public static function uninstall(&$db) {
+	public static function uninstall($db) {
 		$db->query("DROP TABLE #__forum_forums, #__forum_messages, #__forum_sections, #__forum_topics;");
 		$db->query("DELETE FROM #__config WHERE module = 'forum'");
 	}
