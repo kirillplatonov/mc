@@ -324,7 +324,7 @@ INSERT INTO `a_news` (`subject`, `text`, `time`) VALUES
 ('Установка MobileCMS {CMS_VERSION}', 'Здравствуйте. Вы установили на сайт MobileCMS - профессиональную CMS для создания мобильных сайтов.
  Изменить содержимое этой новости вы можете в панеле управления сайтом, раздел <b>новости</b>. 
 Получить техническую поддержку, а также скачать последнюю версию CMS вы всегда можете на официальном репозитории <a href="https://github.com/kirillplatonov/mc">MobileCMS</a>.
- С уважением, разработчики MobileCMS.', TIME);
+ С уважением, разработчики MobileCMS.', UNIX_TIMESTAMP());
 //=====================================//
 CREATE TABLE IF NOT EXISTS `a_pages` (
   `page_id` int(11) NOT NULL auto_increment,
