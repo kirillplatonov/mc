@@ -8,7 +8,7 @@
  * @author MobileCMS Team <support@mobilecms.pro>
  * @copyright Copyright (c) 2011-2019, MobileCMS Team
  * @link https://mobilecms.pro Official site
- * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @license MIT license
  */
 // Начало подсчета времени генерации страницы
 $start_time = microtime(true);
