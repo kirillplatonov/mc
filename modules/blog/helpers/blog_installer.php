@@ -30,7 +30,7 @@ class blog_installer {
 			`rating` float NOT NULL,
 			`rating_voices` smallint(6) NOT NULL,
 			PRIMARY KEY (`id`)
-			) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 		");
 		
 		// Добавление правила роутинга

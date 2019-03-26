@@ -26,7 +26,7 @@ class ads_manager_installer {
 			  `title` varchar(50) NOT NULL,
 			  `ident` varchar(50) NOT NULL,
 			  PRIMARY KEY  (`area_id`)
-			) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
+			) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;
 		");
 
 		$db->query("CREATE TABLE IF NOT EXISTS #__ads_manager_links (
@@ -40,7 +40,7 @@ class ads_manager_installer {
 			  `count_all` int(11) NOT NULL,
 			  PRIMARY KEY  (`link_id`),
 			  KEY `area_id` (`area_id`)
-			) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+			) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 		");
 
 		main::add_event('ads_manager', 'pre_controller');

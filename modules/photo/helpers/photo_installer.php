@@ -26,7 +26,7 @@ class photo_installer {
 			`name` varchar(30) NOT NULL,
 			`about` varchar(3000) NOT NULL,
 			PRIMARY KEY  (`album_id`)
-		) ENGINE=MyISAM DEFAULT CHARSET=utf8;");
+		) ENGINE=InnoDB DEFAULT CHARSET=utf8;");
 		
 		$db->query("CREATE TABLE IF NOT EXISTS #__photo (
 			`photo_id` int(11) NOT NULL auto_increment,
@@ -38,7 +38,7 @@ class photo_installer {
 			`rating` int(11) default '0',
       `file_ext` varchar(30) NOT NULL, 
 			PRIMARY KEY  (`photo_id`)
-		) ENGINE=MyISAM DEFAULT CHARSET=utf8;");
+		) ENGINE=InnoDB DEFAULT CHARSET=utf8;");
 		
 		$db->query("INSERT INTO #__config (`id`, `module`, `key` , `value`) VALUES
 			(NULL , 'photo', 'preview_widht', '150'),

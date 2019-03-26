@@ -26,7 +26,7 @@ class news_installer {
 			  `text` text NOT NULL,
 			  `time` int(11) NOT NULL,
 			  PRIMARY KEY  (`news_id`)
-			) ENGINE=MyISAM DEFAULT CHARSET=utf8 ;
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
 		");
 	}
 

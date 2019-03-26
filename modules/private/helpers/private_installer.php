@@ -32,7 +32,7 @@ class private_installer {
 			  `time` int(11) NOT NULL,
 			  PRIMARY KEY  (`message_id`),
 			  KEY `user_id` (`user_id`,`user_from_id`,`user_to_id`)
-			) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 		");
 
 		main::add_event('private', 'pre_controller');

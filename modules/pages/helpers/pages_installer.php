@@ -28,7 +28,7 @@ class pages_installer {
 			  `title` varchar(50) NOT NULL,
 			  `content` text NOT NULL,
 			  PRIMARY KEY (`page_id`)
-			) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
+			) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;
 		");
 	}
 

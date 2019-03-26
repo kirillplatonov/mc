@@ -28,7 +28,7 @@ class smiles_installer {
 			  image varchar(50) NOT NULL,
 			  status enum('enable','desable') NOT NULL default 'enable',
 			  PRIMARY KEY  (`smile_id`)
-			) ENGINE=MyISAM AUTO_INCREMENT=222 DEFAULT CHARSET=utf8 AUTO_INCREMENT=222 ;
+			) ENGINE=InnoDB AUTO_INCREMENT=222 DEFAULT CHARSET=utf8 AUTO_INCREMENT=222 ;
 		");
 
 		$db->query("INSERT INTO `a_smiles` VALUES

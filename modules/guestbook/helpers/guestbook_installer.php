@@ -26,7 +26,7 @@ class guestbook_installer {
 			`username` VARCHAR( 30 ) NOT NULL ,
 			`message` VARCHAR( 300 ) NOT NULL ,
 			`time` INT NOT NULL
-			) ENGINE = MYISAM ;
+			) ENGINE = InnoDB ;
 		");
 	}
 

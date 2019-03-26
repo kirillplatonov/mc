@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS `a_ads_manager_areas` (
   `title` varchar(50) NOT NULL,
   `ident` varchar(50) NOT NULL,
   PRIMARY KEY  (`area_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 //=====================================//
 INSERT INTO `a_ads_manager_areas` (`area_id`, `title`, `ident`) VALUES
 (1, 'Верх всех страниц', 'all_pages_up'),
@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS `a_blog` (
   `rating` float NOT NULL,
   `rating_voices` smallint(6) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 //=====================================//
 CREATE TABLE IF NOT EXISTS `a_ads_manager_links` (
   `link_id` int(11) NOT NULL auto_increment,
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `a_ads_manager_links` (
   `count_all` int(11) NOT NULL,
   PRIMARY KEY  (`link_id`),
   KEY `area_id` (`area_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 //=====================================//
 INSERT INTO `a_ads_manager_links` (`link_id`, `area_id`, `area_ident`, `title`, `url`, `names`, `position`, `count_all`) VALUES
 (3, 2, 'all_pages_down', 'Ссылка снизу', 'https://github.com/kirillplatonov/mc', '[red]MobileCMS download[/red]\r\n[green]MobileCMS repository[/green]\r\n[blue]new MobileCMS[/blue]', 1, 0);
@@ -46,14 +46,14 @@ CREATE TABLE IF NOT EXISTS `a_chat_messages` (
   `time` int(11) NOT NULL,
   PRIMARY KEY  (`message_id`),
   KEY `user_id` (`user_id`,`room_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Модуль чата, таблица сообщений' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Модуль чата, таблица сообщений' AUTO_INCREMENT=1 ;
 //=====================================//
 CREATE TABLE IF NOT EXISTS `a_chat_rooms` (
   `room_id` tinyint(3) NOT NULL auto_increment,
   `position` tinyint(2) NOT NULL,
   `name` varchar(50) NOT NULL,
   PRIMARY KEY  (`room_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='Модуль чата таблица разделов' AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Модуль чата таблица разделов' AUTO_INCREMENT=2 ;
 //=====================================//
 INSERT INTO `a_chat_rooms` (`room_id`, `position`, `name`) VALUES
 (1, 1, 'Тестовая комната');
@@ -67,7 +67,7 @@ CREATE TABLE IF NOT EXISTS `a_comments_posts` (
   `time` int(11) NOT NULL,
   PRIMARY KEY  (`comment_id`),
   KEY `item_id` (`item_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 //=====================================//
 CREATE TABLE IF NOT EXISTS `a_config` (
   `id` int(11) NOT NULL auto_increment,
@@ -75,7 +75,7 @@ CREATE TABLE IF NOT EXISTS `a_config` (
   `key` varchar(30) NOT NULL,
   `value` varchar(255) NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=63 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=63 ;
 //=====================================//
 INSERT INTO `a_config` (`id`, `module`, `key`, `value`) VALUES
 (1, 'system', 'system_title', 'MobileCMS'),
@@ -119,7 +119,7 @@ CREATE TABLE IF NOT EXISTS `a_downloads_directories` (
   `position` int(11) default '0',
   PRIMARY KEY  (`directory_id`),
   KEY `parent_id` (`parent_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 //=====================================//
 INSERT INTO `a_downloads_directories` (`directory_id`, `parent_id`, `name`, `images`, `user_files`, `position`) VALUES
 (1, 0, 'Картинки', 'yes', 'no', 1),
@@ -155,7 +155,7 @@ CREATE TABLE IF NOT EXISTS `a_downloads_files` (
   `rating_voices` smallint(6) NOT NULL,
   PRIMARY KEY  (`file_id`),
   KEY `dirrectory_id` (`directory_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1000 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1000 ;
 //=====================================//
 CREATE TABLE IF NOT EXISTS `a_forum_forums` (
   `forum_id` int(11) NOT NULL auto_increment,
@@ -166,7 +166,7 @@ CREATE TABLE IF NOT EXISTS `a_forum_forums` (
   `messages` int(11) NOT NULL,
   PRIMARY KEY  (`forum_id`),
   KEY `section_id` (`section_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 //=====================================//
 CREATE TABLE IF NOT EXISTS `a_forum_messages` (
   `message_id` int(11) NOT NULL auto_increment,
@@ -186,14 +186,14 @@ CREATE TABLE IF NOT EXISTS `a_forum_messages` (
   KEY `forum_id` (`forum_id`),
   KEY `section_id` (`section_id`),
   FULLTEXT KEY `message` (`message`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 //=====================================//
 CREATE TABLE IF NOT EXISTS `a_forum_sections` (
   `section_id` int(11) NOT NULL auto_increment,
   `position` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   PRIMARY KEY  (`section_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 //=====================================//
 CREATE TABLE IF NOT EXISTS `a_forum_topics` (
   `topic_id` int(11) NOT NULL auto_increment,
@@ -213,7 +213,7 @@ CREATE TABLE IF NOT EXISTS `a_forum_topics` (
   KEY `section_id` (`section_id`),
   KEY `last_user_id` (`last_user_id`),
   FULLTEXT KEY `name` (`name`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 //=====================================//
 CREATE TABLE IF NOT EXISTS `a_guestbook` (
   `message_id` int(11) NOT NULL auto_increment,
@@ -222,14 +222,14 @@ CREATE TABLE IF NOT EXISTS `a_guestbook` (
   `message` varchar(300) NOT NULL,
   `time` int(11) NOT NULL,
   PRIMARY KEY  (`message_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 //=====================================//
 CREATE TABLE IF NOT EXISTS `a_index_page_blocks` (
   `block_id` smallint(6) NOT NULL auto_increment,
   `title` varchar(30) NOT NULL,
   `position` smallint(6) NOT NULL,
   PRIMARY KEY  (`block_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 //=====================================//
 INSERT INTO `a_index_page_blocks` (`block_id`, `title`, `position`) VALUES
 (1, 'Общение', 3),
@@ -246,7 +246,7 @@ CREATE TABLE IF NOT EXISTS `a_index_page_widgets` (
   `position` int(11) NOT NULL,
   PRIMARY KEY  (`widget_id`),
   KEY `block_id` (`block_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;
 //=====================================//
 INSERT INTO `a_index_page_widgets` (`widget_id`, `block_id`, `title`, `module`, `config`, `position`) VALUES
 (1, 1, 'Гостевая книга', 'guestbook', '', 3),
@@ -273,7 +273,7 @@ CREATE TABLE IF NOT EXISTS `a_lib_books` (
   `reads` int(11) NOT NULL,
   PRIMARY KEY  (`book_id`),
   KEY `directory_id` (`directory_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 //=====================================//
 CREATE TABLE IF NOT EXISTS `a_lib_directories` (
   `directory_id` int(11) NOT NULL auto_increment,
@@ -282,7 +282,7 @@ CREATE TABLE IF NOT EXISTS `a_lib_directories` (
   `position` int(11) NOT NULL,
   PRIMARY KEY  (`directory_id`),
   KEY `parent_id` (`parent_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 //=====================================//
 CREATE TABLE IF NOT EXISTS `a_modules` (
   `id` int(11) NOT NULL auto_increment,
@@ -293,7 +293,7 @@ CREATE TABLE IF NOT EXISTS `a_modules` (
   `installed` tinyint(1) NOT NULL,
   `status` enum('on','off') NOT NULL default 'off',
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=24 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=24 ;
 //=====================================//
 INSERT INTO `a_modules` (`id`, `name`, `title`, `admin_link`, `description`, `installed`, `status`) VALUES
 (5, 'downloads', 'Загрузки', 'downloads/admin', 'Модуль загрузок', 1, 'on'),
@@ -318,10 +318,13 @@ CREATE TABLE IF NOT EXISTS `a_news` (
   `text` text NOT NULL,
   `time` int(11) NOT NULL,
   PRIMARY KEY  (`news_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 //=====================================//
 INSERT INTO `a_news` (`subject`, `text`, `time`) VALUES
-('Установка MobileCMS v2.6.1', 'Здравствуйте. Вы установили на сайт MobileCMS - профессиональную CMS для создания мобильных сайтов. Перед началом работы мы настоятельно рекомендуем ознакомиться с документацией, которая находится по адресу <b>http://ваш_сайт.ру/docs/</b>. Изменить содержимое этой новости вы можете в панеле управления сайтом, раздел <b>новости</b>. Получить техническую поддержку, а также скачать последнюю версию CMS вы всегда можете на официальном репозитории <a href="https://github.com/kirillplatonov/mc">MobileCMS</a>. С уважением, разработчики MobileCMS.', 1307462472);
+('Установка MobileCMS {CMS_VERSION}', 'Здравствуйте. Вы установили на сайт MobileCMS - профессиональную CMS для создания мобильных сайтов.
+ Изменить содержимое этой новости вы можете в панеле управления сайтом, раздел <b>новости</b>. 
+Получить техническую поддержку, а также скачать последнюю версию CMS вы всегда можете на официальном репозитории <a href="https://github.com/kirillplatonov/mc">MobileCMS</a>.
+ С уважением, разработчики MobileCMS.', TIME);
 //=====================================//
 CREATE TABLE IF NOT EXISTS `a_pages` (
   `page_id` int(11) NOT NULL auto_increment,
@@ -329,7 +332,7 @@ CREATE TABLE IF NOT EXISTS `a_pages` (
   `title` varchar(50) NOT NULL,
   `content` text NOT NULL,
   PRIMARY KEY  (`page_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 //=====================================//
 CREATE TABLE IF NOT EXISTS `a_private_messages` (
   `message_id` int(11) NOT NULL auto_increment,
@@ -341,7 +344,7 @@ CREATE TABLE IF NOT EXISTS `a_private_messages` (
   `time` int(11) NOT NULL,
   PRIMARY KEY  (`message_id`),
   KEY `user_id` (`user_id`,`user_from_id`,`user_to_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 //=====================================//
 CREATE TABLE IF NOT EXISTS `a_rating_logs` (
   `id` int(11) NOT NULL auto_increment,
@@ -351,7 +354,7 @@ CREATE TABLE IF NOT EXISTS `a_rating_logs` (
   `time` int(11) NOT NULL,
   PRIMARY KEY  (`id`),
   KEY `user_id` (`ip`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 //=====================================//
 CREATE TABLE IF NOT EXISTS `a_smiles` (
   `smile_id` int(11) NOT NULL auto_increment,
@@ -359,7 +362,7 @@ CREATE TABLE IF NOT EXISTS `a_smiles` (
   `image` varchar(50) NOT NULL,
   `status` enum('enable','desable') NOT NULL default 'enable',
   PRIMARY KEY  (`smile_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=66 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=66 ;
 //=====================================//
 INSERT INTO `a_smiles` (`smile_id`, `code`, `image`, `status`) VALUES
 (1, 'O:-)', 'aa.gif', 'enable'),
@@ -444,7 +447,7 @@ CREATE TABLE IF NOT EXISTS `a_users` (
   `chat_update` tinyint(4) NOT NULL,
   `status` enum('guest','banned','user','moder','admin') NOT NULL default 'user',
   PRIMARY KEY  (`user_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 //=====================================//
 INSERT INTO `a_users` (`user_id`, `username`, `password`, `email`, `reg_time`, `last_visit`, `pin_code`, `pin_code_time`, `balance`, `rating`, `reputation_plus`, `reputation_minus`, `chat_room_id`, `chat_last_time`, `chat_update`, `status`) VALUES
 (-1, 'Guest', '', '', 1243421222, 0, '12462c1ac3bdf5f0673611834b405ec7', 1243430310, 10, 0, 0, 0, 0, 0, 0, 'guest'),
@@ -458,7 +461,7 @@ CREATE TABLE IF NOT EXISTS `a_users_ban` (
   `status` enum('enable','disable') default 'enable',
   PRIMARY KEY  (`ban_id`),
   KEY `user_id` (`user_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 //=====================================//
 CREATE TABLE IF NOT EXISTS `a_users_profiles` (
   `id` int(11) NOT NULL auto_increment,
@@ -471,7 +474,7 @@ CREATE TABLE IF NOT EXISTS `a_users_profiles` (
   `homepage` varchar(30) NOT NULL,
   PRIMARY KEY  (`id`),
   KEY `user_id` (`user_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 //=====================================//
 INSERT INTO `a_users_profiles` (`id`, `user_id`, `real_name`, `birthday_time`, `about`, `avatar`, `uin`, `homepage`) VALUES
 (1, 1, '', 0, '', 0, '', '');
@@ -482,7 +485,7 @@ CREATE TABLE IF NOT EXISTS `a_users_reputation_logs` (
   `user_to_id` int(11) NOT NULL,
   PRIMARY KEY  (`id`),
   KEY `user_to_id` (`user_to_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 //=====================================//
 ALTER TABLE `a_index_page_widgets` CHANGE `config` `config` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
 //=====================================//
@@ -512,7 +515,7 @@ CREATE TABLE IF NOT EXISTS `a_forum_files` (
   `file_downloads` int(11) NOT NULL,
   PRIMARY KEY (`file_id`),
   KEY `message_id` (`message_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 //=====================================//
 INSERT INTO a_config SET `module` = 'system', `key` = 'description', `value` = 'MobileCMS - Мобильный движок';
 //=====================================//
@@ -526,7 +529,7 @@ CREATE TABLE IF NOT EXISTS a_photo_albums (
   `name` varchar(30) NOT NULL,
   `about` varchar(3000) NOT NULL,
   PRIMARY KEY  (`album_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 //=====================================//
 CREATE TABLE IF NOT EXISTS a_photo (
   `photo_id` int(11) NOT NULL auto_increment,
@@ -538,7 +541,7 @@ CREATE TABLE IF NOT EXISTS a_photo (
   `rating` int(11) default '0',
   `file_ext` varchar(30) NOT NULL, 
   PRIMARY KEY  (`photo_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 //=====================================//
 INSERT INTO a_config (`id`, `module`, `key` , `value`) VALUES
 (NULL , 'photo', 'preview_widht', '150'),
@@ -583,10 +586,10 @@ CREATE TABLE IF NOT EXISTS a_guests (
   `user_agent` varchar(512) NOT NULL,
   `last_time` int(11) NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 //=====================================//
 CREATE TABLE IF NOT EXISTS a_ip_ban (
   `id` int(11) NOT NULL auto_increment,
   `ip` varchar(100) NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

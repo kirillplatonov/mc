@@ -29,7 +29,7 @@ class forum_installer {
 			  `messages` int(11) NOT NULL,
 			  PRIMARY KEY  (`forum_id`),
 			  KEY `section_id` (`section_id`)
-			) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
+			) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;
 		");
 
 		$db->query("CREATE TABLE IF NOT EXISTS #__forum_messages (
@@ -46,7 +46,7 @@ class forum_installer {
 			  KEY `forum_id` (`forum_id`),
 			  KEY `section_id` (`section_id`),
 			  FULLTEXT KEY `message` (`message`)
-			) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
+			) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;
 		");
 
 		$db->query("CREATE TABLE IF NOT EXISTS #__forum_sections (
@@ -54,7 +54,7 @@ class forum_installer {
 			  `position` int(11) NOT NULL,
 			  `name` varchar(255) NOT NULL,
 			  PRIMARY KEY  (`section_id`)
-			) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
+			) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;
 		");
 
 		$db->query("CREATE TABLE IF NOT EXISTS #__forum_topics (
@@ -75,7 +75,7 @@ class forum_installer {
 			  KEY `section_id` (`section_id`),
 			  KEY `last_user_id` (`last_user_id`),
 			  FULLTEXT KEY `name` (`name`)
-			) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
+			) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;
 		");
 
 		$db->query("INSERT INTO #__config (`id` , `module` , `key` , `value` )

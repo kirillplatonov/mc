@@ -30,7 +30,7 @@ class comments_installer {
               `time` int(11) NOT NULL, 
               PRIMARY KEY  (`comment_id`), 
               KEY `item_id` (`item_id`) 
-            ) ENGINE=MyISAM  DEFAULT CHARSET=utf8; 
+            ) ENGINE=InnoDB  DEFAULT CHARSET=utf8; 
         ");
         
 		$db->query("INSERT INTO #__config SET `module` = 'system', `key` = 'comments_posting', `value` = 'all'; 
