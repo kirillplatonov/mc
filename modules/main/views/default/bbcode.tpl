@@ -16,7 +16,7 @@
 [q]Цитата[/q]<br />
 <div class="q">Цитата</div>
 <br />
-[img]http://mobilecms.ru/modules/smiles/smiles/ab.gif[/img]: <img src="http://mobilecms.ru/modules/smiles/smiles/ab.gif" alt="" /><br />
+[img]https://mobilecms.pro/modules/smiles/smiles/ab.gif[/img]: <img src="https://mobilecms.pro/modules/smiles/smiles/ab.gif" alt="" /><br />
 <br />
 [url=http://ant0ha.ru]Ссылка[/url]: <a href="http://ant0ha.ru">Ссылка</a><br />
 [email]mne@ant0ha.ru[/email]: <a rel="noindex" href="mailto:mne[dog]ant0ha.ru">mne[dog]ant0ha.ru</a>

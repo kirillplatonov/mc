@@ -4,9 +4,9 @@
 	 *
 	 * Open source content management system for mobile sites
 	 *
-	 * @author MobileCMS Team <support@mobilecms.ru>
-	 * @copyright Copyright (c) 2011, MobileCMS Team
-	 * @link http://mobilecms.ru Official site
+	 * @author MobileCMS Team <support@mobilecms.pro>
+	 * @copyright Copyright (c) 2011-2019, MobileCMS Team
+	 * @link https://mobilecms.pro Official site
 	 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 	 */
 
@@ -29,7 +29,7 @@ class chat_installer {
 			  `time` int(11) NOT NULL,
 			  PRIMARY KEY  (`message_id`),
 			  KEY `user_id` (`user_id`,`room_id`)
-			) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Модуль чата, таблица сообщений' AUTO_INCREMENT=1 ;
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Модуль чата, таблица сообщений' AUTO_INCREMENT=1 ;
 		");
 
 		$db->query("CREATE TABLE IF NOT EXISTS #__chat_rooms (
@@ -37,7 +37,7 @@ class chat_installer {
 			  `position` tinyint(2) NOT NULL,
 			  `name` varchar(50) NOT NULL,
 			  PRIMARY KEY  (`room_id`)
-			) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Модуль чата таблица разделов' AUTO_INCREMENT=1 ;
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Модуль чата таблица разделов' AUTO_INCREMENT=1 ;
 		");
 
 		$db->query("INSERT INTO #__config (`id` , `module` , `key` , `value` )

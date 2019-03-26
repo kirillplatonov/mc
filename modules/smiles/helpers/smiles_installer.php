@@ -4,9 +4,9 @@
 	 *
 	 * Open source content management system for mobile sites
 	 *
-	 * @author MobileCMS Team <support@mobilecms.ru>
-	 * @copyright Copyright (c) 2011, MobileCMS Team
-	 * @link http://mobilecms.ru Official site
+	 * @author MobileCMS Team <support@mobilecms.pro>
+	 * @copyright Copyright (c) 2011-2019, MobileCMS Team
+	 * @link https://mobilecms.pro Official site
 	 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 	 */
 
@@ -28,7 +28,7 @@ class smiles_installer {
 			  image varchar(50) NOT NULL,
 			  status enum('enable','desable') NOT NULL default 'enable',
 			  PRIMARY KEY  (`smile_id`)
-			) ENGINE=MyISAM AUTO_INCREMENT=222 DEFAULT CHARSET=utf8 AUTO_INCREMENT=222 ;
+			) ENGINE=InnoDB AUTO_INCREMENT=222 DEFAULT CHARSET=utf8 AUTO_INCREMENT=222 ;
 		");
 
 		$db->query("INSERT INTO `a_smiles` VALUES

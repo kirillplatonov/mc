@@ -4,9 +4,9 @@
  *
  * Open source content management system for mobile sites
  *
- * @author MobileCMS Team <support@mobilecms.ru>
- * @copyright Copyright (c) 2011, MobileCMS Team
- * @link http://mobilecms.ru Official site
+ * @author MobileCMS Team <support@mobilecms.pro>
+ * @copyright Copyright (c) 2011-2019, MobileCMS Team
+ * @link https://mobilecms.pro Official site
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
  */
 
@@ -30,7 +30,7 @@ class blog_installer {
 			`rating` float NOT NULL,
 			`rating_voices` smallint(6) NOT NULL,
 			PRIMARY KEY (`id`)
-			) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 		");
 		
 		// Добавление правила роутинга

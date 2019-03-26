@@ -4,9 +4,9 @@
  *
  * Open source content management system for mobile sites
  *
- * @author MobileCMS Team <support@mobilecms.ru>
- * @copyright Copyright (c) 2011, MobileCMS Team
- * @link http://mobilecms.ru Official site
+ * @author MobileCMS Team <support@mobilecms.pro>
+ * @copyright Copyright (c) 2011-2019, MobileCMS Team
+ * @link https://mobilecms.pro Official site
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
  */
 
@@ -27,7 +27,7 @@ if ($_SERVER['REMOTE_ADDR'] != '127.0.0.1') {
     # Префикс таблиц
     define('DB_PREFIX', 'a_');
 
-    # URL скрипта (с http:// и слешем в конце). Например, http://mobilecms.ru/
+    # URL скрипта (с http:// и слешем в конце). Например, https://mobilecms.pro/
     define('URL', '{SITE_URL}');
 }
 
@@ -48,7 +48,7 @@ else {
     # Префикс таблиц
     define('DB_PREFIX', 'a_');
 
-    # URL скрипта (с http:// и слешем в конце). Например, http://mobilecms.ru/
+    # URL скрипта (с http:// и слешем в конце). Например, https://mobilecms.pro/
     define('URL', '{SITE_URL}');
 }
 ?>

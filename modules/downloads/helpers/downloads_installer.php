@@ -4,9 +4,9 @@
 	 *
 	 * Open source content management system for mobile sites
 	 *
-	 * @author MobileCMS Team <support@mobilecms.ru>
-	 * @copyright Copyright (c) 2011, MobileCMS Team
-	 * @link http://mobilecms.ru Official site
+	 * @author MobileCMS Team <support@mobilecms.pro>
+	 * @copyright Copyright (c) 2011-2019, MobileCMS Team
+	 * @link https://mobilecms.pro Official site
 	 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 	 */
 
@@ -31,7 +31,7 @@ class downloads_installer {
 			  `position` int(11) default '0',
 			  PRIMARY KEY  (`directory_id`),
 			  KEY `parent_id` (`parent_id`)
-			) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 		");
 
 		$db->query("CREATE TABLE IF NOT EXISTS #__downloads_files (
@@ -63,7 +63,7 @@ class downloads_installer {
 			  `previews` enum('yes','no') NOT NULL default 'no',
 			  PRIMARY KEY  (`file_id`),
 			  KEY `dirrectory_id` (`directory_id`)
-			) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+			) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 		");
 
 		$db->query("INSERT INTO #__config (`id`, `module`, `key` , `value`) VALUES

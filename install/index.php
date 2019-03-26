@@ -4,9 +4,9 @@
  *
  * Open source content management system for mobile sites
  *
- * @author MobileCMS Team <support@mobilecms.ru>
- * @copyright Copyright (c) 2011, MobileCMS Team
- * @link http://mobilecms.ru Official site
+ * @author MobileCMS Team <support@mobilecms.pro>
+ * @copyright Copyright (c) 2011-2019, MobileCMS Team
+ * @link https://mobilecms.pro Official site
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
  */
 
@@ -176,6 +176,7 @@ switch ($step) {
 			   	$dump = str_replace('{ADMIN_LOGIN}', $_POST['admin_login'], $dump);
 				$dump = str_replace('{ADMIN_EMAIL}', $_POST['admin_email'], $dump);
 				$dump = str_replace('{ADMIN_PASSWORD}', md5(md5($_POST['admin_password'])), $dump);
+                                $dump = str_replace('{CMS_VERSION}', '2.7.0 beta', $config_data);
 
 			   	$queryes = explode('//=====================================//', $dump);
 			   	foreach($queryes as $query) {

@@ -4,9 +4,9 @@
 	 *
 	 * Open source content management system for mobile sites
 	 *
-	 * @author MobileCMS Team <support@mobilecms.ru>
-	 * @copyright Copyright (c) 2011, MobileCMS Team
-	 * @link http://mobilecms.ru Official site
+	 * @author MobileCMS Team <support@mobilecms.pro>
+	 * @copyright Copyright (c) 2011-2019, MobileCMS Team
+	 * @link https://mobilecms.pro Official site
 	 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 	 */
 
@@ -32,7 +32,7 @@ class lib_installer {
 			  `reads` int(11) NOT NULL,
 			  PRIMARY KEY  (`book_id`),
 			  KEY `directory_id` (`directory_id`)
-			) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 		");
 
 		$db->query("CREATE TABLE IF NOT EXISTS `a_lib_directories` (
@@ -42,7 +42,7 @@ class lib_installer {
 			  `position` int(11) NOT NULL,
 			  PRIMARY KEY  (`directory_id`),
 			  KEY `parent_id` (`parent_id`)
-			) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 		");
 
 		mkdir(ROOT.'files/lib', 0777);
