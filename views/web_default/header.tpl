@@ -193,8 +193,6 @@ if (USER_ID == -1) {
 
 <div class="left_link"><a href="<?php echo a_url('guestbook') ?>">Гостевая</a> (<?php echo $db->get_one("SELECT COUNT(*) FROM #__guestbook"); ?>)</div>
 
-<div class="left_link"><a href="<?php echo a_url('chat') ?>">Чат</a></div>
-
 <div class="left_link"><a href="<?php echo a_url('downloads') ?>">Загрузки</a> (<?php echo $db->get_one("SELECT COUNT(*) FROM #__downloads_files"); ?>)<br /></div>
 
 <div class="left_link"><a href="<?php echo a_url('lib') ?>">Библиотека</a> (<?php echo $db->get_one("SELECT COUNT(*) FROM #__lib_books"); ?>)<br /></div>

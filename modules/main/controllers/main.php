@@ -30,12 +30,7 @@ class Main_Controller extends Controller {
 	public function action_index_page() {
 		$last_news = $this->db->get_row("SELECT * FROM #__news ORDER BY news_id DESC LIMIT 1");
 
-		$info = $this->db->get_row("SELECT
-			(SELECT COUNT(*) FROM #__users WHERE chat_last_time >= UNIX_TIMESTAMP() + ". $this->config['chat']['online_time']." * 60 AND user_id != '".USER_ID."') AS chat_users_online
-		");
-
 		$this->tpl->assign(array(
-			'info' => $info,
 			'last_news' => $last_news
 		));
 
