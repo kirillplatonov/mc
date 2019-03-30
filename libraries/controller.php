@@ -17,6 +17,12 @@
 abstract class Controller {
 
     /**
+     *
+     * @var model
+     */
+    protected $model;
+
+    /**
      * Переменная, в которую записываем ошибки при валидации форм
      */
     public $error = false;
@@ -56,6 +62,10 @@ abstract class Controller {
         a_import('libraries/template');
         $this->tpl = new Template;
 
+        if (file_exists(ROOT . 'modules/' . ROUTE_MODULE . '/models/' . ROUTE_CONTROLLER_NAME . '.php')) {
+            a_import('libraries/model');
+            $this->model = a_load_class(str_replace('controllers', 'models', ROUTE_CONTROLLER_PATH), 'model');
+        }
         // Добавляем объект шаблона в Registry
         Registry::set('tpl', $this->tpl);
 

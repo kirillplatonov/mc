@@ -1,15 +1,15 @@
 <?php
-/**
-	 * MobileCMS
-	 *
-	 * Open source content management system for mobile sites
-	 *
-	 * @author MobileCMS Team <support@mobilecms.pro>
-	 * @copyright Copyright (c) 2011-2019, MobileCMS Team
-	 * @link https://mobilecms.pro Official site
-	 * @license MIT license
-	 */
 
+/**
+ * MobileCMS
+ *
+ * Open source content management system for mobile sites
+ *
+ * @author MobileCMS Team <support@mobilecms.pro>
+ * @copyright Copyright (c) 2011-2019, MobileCMS Team
+ * @link https://mobilecms.pro Official site
+ * @license MIT license
+ */
 defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
 
 //---------------------------------------------
@@ -18,11 +18,12 @@ defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
  * Хелпер установки модуля
  */
 class downloads_installer {
-	/**
-	 * Установка модуля
-	 */
-	public static function install($db) {
-		$db->query("CREATE TABLE IF NOT EXISTS #__downloads_directories (
+
+    /**
+     * Установка модуля
+     */
+    public static function install($db) {
+        $db->query("CREATE TABLE IF NOT EXISTS #__downloads_directories (
 			  `directory_id` int(11) NOT NULL auto_increment,
 			  `parent_id` int(11) default '0',
 			  `name` varchar(30) NOT NULL,
@@ -34,7 +35,7 @@ class downloads_installer {
 			) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 		");
 
-		$db->query("CREATE TABLE IF NOT EXISTS #__downloads_files (
+        $db->query("CREATE TABLE IF NOT EXISTS #__downloads_files (
 			  `file_id` int(11) NOT NULL auto_increment,
 			  `user_id` int(11) NOT NULL,
 			  `directory_id` int(11) default '0',
@@ -66,40 +67,42 @@ class downloads_installer {
 			) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 		");
 
-		$db->query("INSERT INTO #__config (`id`, `module`, `key` , `value`) VALUES
+        $db->query("INSERT INTO #__config (`id`, `module`, `key` , `value`) VALUES
 			(NULL , 'downloads', 'files_prefix', 'site'),
 			(NULL , 'downloads', 'files_per_page', '7'),
 			(NULL , 'downloads', 'directories_per_page', '50');
 		");
 
-		if (!is_dir(ROOT.'files/downloads')) {
-			mkdir(ROOT.'files/downloads');
-			chmod(ROOT.'files/downloads', 0777);
-		}
-		if (!is_dir(ROOT.'files/downloads/_ftp_upload')) {
-			mkdir(ROOT.'files/downloads/_ftp_upload');
-			chmod(ROOT.'files/downloads/ftp_upload', 0777);
-		}
+        if (!is_dir(ROOT . 'files/downloads')) {
+            mkdir(ROOT . 'files/downloads');
+            chmod(ROOT . 'files/downloads', 0777);
+        }
+        if (!is_dir(ROOT . 'files/downloads/_ftp_upload')) {
+            mkdir(ROOT . 'files/downloads/_ftp_upload');
+            chmod(ROOT . 'files/downloads/ftp_upload', 0777);
+        }
 
-		# Добавляем правила в реврайт
-		if (!strstr(file_get_contents(ROOT.'.htaccess'), '[DOWNLOADS MODULE]')) {
-			$rules  = "\t# [DOWNLOADS MODULE]".PHP_EOL;
-			$rules .= "\t# Скачать файл".PHP_EOL;
-			$rules .= "\tRewriteRule ^download_file/(.*)?$ index.php?segment1=downloads&segment2=download_file&file=$1 [L,QSA]".PHP_EOL;
-			$rules .= "\t# Листинг папок".PHP_EOL;
-			$rules .= "\tRewriteRule ^downloads/([0-9*])(/)?$ index.php?segment1=downloads&directory_id=$1 [L,QSA]".PHP_EOL;
-			$rules .= "\t# Просмотр файла".PHP_EOL;
-			$rules .= "\tRewriteRule ^downloads/view/([0-9*])(/)?$ index.php?segment1=downloads&segment2=view_file&file_id=$1 [L,QSA]".PHP_EOL;
-	
-			main::add_rewrite_rules($rules);
-		}
-	}
+        # Добавляем правила в реврайт
+        if (!strstr(file_get_contents(ROOT . '.htaccess'), '[DOWNLOADS MODULE]')) {
+            $rules = "\t# [DOWNLOADS MODULE]" . PHP_EOL;
+            $rules .= "\t# Скачать файл" . PHP_EOL;
+            $rules .= "\tRewriteRule ^download_file/(.*)?$ index.php?segment1=downloads&segment2=download_file&file=$1 [L,QSA]" . PHP_EOL;
+            $rules .= "\t# Листинг папок" . PHP_EOL;
+            $rules .= "\tRewriteRule ^downloads/([0-9*])(/)?$ index.php?segment1=downloads&directory_id=$1 [L,QSA]" . PHP_EOL;
+            $rules .= "\t# Просмотр файла" . PHP_EOL;
+            $rules .= "\tRewriteRule ^downloads/view/([0-9*])(/)?$ index.php?segment1=downloads&segment2=view_file&file_id=$1 [L,QSA]" . PHP_EOL;
 
-	/**
-	 * Деинсталляция модуля
-	 */
-	public static function uninstall($db) {
-		#$db->query("DROP TABLE #__downloads_directories, #__downloads_files");
-	}
+            main::add_rewrite_rules($rules);
+        }
+    }
+
+    /**
+     * Деинсталляция модуля
+     */
+    public static function uninstall($db) {
+        #$db->query("DROP TABLE #__downloads_directories, #__downloads_files");
+    }
+
 }
+
 ?>

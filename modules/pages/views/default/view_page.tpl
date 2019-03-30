@@ -5,11 +5,11 @@
 <?php $this->display('title', array('text' => $page['title'])) ?>
 
 <div class="menu">
-<?php echo $page['content'] ?>
+    <?php echo $page['content'] ?>
 </div>
 
 <div class="block">
-<a href="<?php echo URL ?>">На главную</a>
+    <a href="<?php echo URL ?>">На главную</a>
 </div>
 
 <?php $this->display('footer') ?>

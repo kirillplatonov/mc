@@ -18,7 +18,7 @@ class Template {
 
     public $admin = false;
     public $vars = array();
-    public $theme = 'default';
+    public $theme = 'bootstrap_default';
     public $code_added = 0;
 
     /**
@@ -66,7 +66,7 @@ class Template {
             } elseif (file_exists(ROOT . '/views/' . $this->theme . '/' . $filename)) {
                 $this->template_file = ROOT . '/views/' . $this->theme . '/' . $filename;
             } else {
-                die('Файл <b>' . $filename . '</b> не является шаблоном или не найден.');
+                die('Файл <b>' . ROOT . '/views/' . $this->theme . '/' . $filename . '</b> не является шаблоном или не найден.');
             }
         }
 
@@ -104,7 +104,7 @@ class Template {
     }
 
     public function __destruct() {
-        if (!$this->admin) {
+        if (!$this->admin && !isset($_GET['rate'])) {
             echo $this->parse('page.tpl', ['mc_page_content' => ob_get_clean()]);
         }
     }
