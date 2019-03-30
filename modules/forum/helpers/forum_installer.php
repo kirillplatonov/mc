@@ -1,26 +1,27 @@
 <?php
-/**
-	 * MobileCMS
-	 *
-	 * Open source content management system for mobile sites
-	 *
-	 * @author MobileCMS Team <support@mobilecms.pro>
-	 * @copyright Copyright (c) 2011-2019, MobileCMS Team
-	 * @link https://mobilecms.pro Official site
-	 * @license MIT license
-	 */
 
+/**
+ * MobileCMS
+ *
+ * Open source content management system for mobile sites
+ *
+ * @author MobileCMS Team <support@mobilecms.pro>
+ * @copyright Copyright (c) 2011-2019, MobileCMS Team
+ * @link https://mobilecms.pro Official site
+ * @license MIT license
+ */
 defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
 
 /**
  * Хелпер установки модуля
  */
 class forum_installer {
-	/**
-	 * Установка модуля
-	 */
-	public static function install($db) {
-		$db->query("CREATE TABLE IF NOT EXISTS #__forum_forums (
+
+    /**
+     * Установка модуля
+     */
+    public static function install($db) {
+        $db->query("CREATE TABLE IF NOT EXISTS #__forum_forums (
 			  `forum_id` int(11) NOT NULL auto_increment,
 			  `section_id` int(11) NOT NULL,
 			  `position` int(11) NOT NULL,
@@ -32,7 +33,7 @@ class forum_installer {
 			) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;
 		");
 
-		$db->query("CREATE TABLE IF NOT EXISTS #__forum_messages (
+        $db->query("CREATE TABLE IF NOT EXISTS #__forum_messages (
 			  `message_id` int(11) NOT NULL auto_increment,
 			  `topic_id` int(11) NOT NULL,
 			  `section_id` int(11) NOT NULL,
@@ -49,7 +50,7 @@ class forum_installer {
 			) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;
 		");
 
-		$db->query("CREATE TABLE IF NOT EXISTS #__forum_sections (
+        $db->query("CREATE TABLE IF NOT EXISTS #__forum_sections (
 			  `section_id` int(11) NOT NULL auto_increment,
 			  `position` int(11) NOT NULL,
 			  `name` varchar(255) NOT NULL,
@@ -57,7 +58,7 @@ class forum_installer {
 			) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;
 		");
 
-		$db->query("CREATE TABLE IF NOT EXISTS #__forum_topics (
+        $db->query("CREATE TABLE IF NOT EXISTS #__forum_topics (
 			  `topic_id` int(11) NOT NULL auto_increment,
 			  `section_id` int(11) NOT NULL,
 			  `forum_id` int(11) NOT NULL,
@@ -78,7 +79,7 @@ class forum_installer {
 			) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;
 		");
 
-		$db->query("INSERT INTO #__config (`id` , `module` , `key` , `value` )
+        $db->query("INSERT INTO #__config (`id` , `module` , `key` , `value` )
 			VALUES
 			(NULL , 'forum', 'show_forums_in_list_sections', '1'),
 			(NULL , 'forum', 'messages_per_page', '7'),
@@ -86,14 +87,16 @@ class forum_installer {
 			(NULL , 'forum', 'guests_create_topics', '0'),
 			(NULL , 'forum', 'guests_write_messages', '0');
 		");
-	}
+    }
 
-	/**
-	 * Деинсталляция модуля
-	 */
-	public static function uninstall($db) {
-		$db->query("DROP TABLE #__forum_forums, #__forum_messages, #__forum_sections, #__forum_topics;");
-		$db->query("DELETE FROM #__config WHERE module = 'forum'");
-	}
+    /**
+     * Деинсталляция модуля
+     */
+    public static function uninstall($db) {
+        $db->query("DROP TABLE #__forum_forums, #__forum_messages, #__forum_sections, #__forum_topics;");
+        $db->query("DELETE FROM #__config WHERE module = 'forum'");
+    }
+
 }
+
 ?>

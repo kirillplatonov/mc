@@ -1,15 +1,15 @@
 <?php
-/**
-	 * MobileCMS
-	 *
-	 * Open source content management system for mobile sites
-	 *
-	 * @author MobileCMS Team <support@mobilecms.pro>
-	 * @copyright Copyright (c) 2011-2019, MobileCMS Team
-	 * @link https://mobilecms.pro Official site
-	 * @license MIT license
-	 */
 
+/**
+ * MobileCMS
+ *
+ * Open source content management system for mobile sites
+ *
+ * @author MobileCMS Team <support@mobilecms.pro>
+ * @copyright Copyright (c) 2011-2019, MobileCMS Team
+ * @link https://mobilecms.pro Official site
+ * @license MIT license
+ */
 defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
 
 //---------------------------------------------
@@ -18,11 +18,12 @@ defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
  * Хелпер установки модуля
  */
 class lib_installer {
-	/**
-	 * Установка модуля
-	 */
-	public static function install($db) {
-		$db->query("CREATE TABLE IF NOT EXISTS `a_lib_books` (
+
+    /**
+     * Установка модуля
+     */
+    public static function install($db) {
+        $db->query("CREATE TABLE IF NOT EXISTS `a_lib_books` (
 			  `book_id` int(11) NOT NULL auto_increment,
 			  `directory_id` int(11) NOT NULL,
 			  `name` varchar(50) NOT NULL,
@@ -35,7 +36,7 @@ class lib_installer {
 			) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 		");
 
-		$db->query("CREATE TABLE IF NOT EXISTS `a_lib_directories` (
+        $db->query("CREATE TABLE IF NOT EXISTS `a_lib_directories` (
 			  `directory_id` int(11) NOT NULL auto_increment,
 			  `parent_id` int(11) NOT NULL,
 			  `name` varchar(100) NOT NULL,
@@ -45,14 +46,17 @@ class lib_installer {
 			) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 		");
 
-		mkdir(ROOT.'files/lib', 0777);
-		chmod(ROOT.'files/lib', 0777);
-	}
+        mkdir(ROOT . 'files/lib', 0777);
+        chmod(ROOT . 'files/lib', 0777);
+    }
 
-	/**
-	 * Деинсталляция модуля
-	 */
-	public static function uninstall($db) {
-	}
+    /**
+     * Деинсталляция модуля
+     */
+    public static function uninstall($db) {
+        
+    }
+
 }
+
 ?>

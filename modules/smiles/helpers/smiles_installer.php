@@ -1,15 +1,15 @@
 <?php
-/**
-	 * MobileCMS
-	 *
-	 * Open source content management system for mobile sites
-	 *
-	 * @author MobileCMS Team <support@mobilecms.pro>
-	 * @copyright Copyright (c) 2011-2019, MobileCMS Team
-	 * @link https://mobilecms.pro Official site
-	 * @license MIT license
-	 */
 
+/**
+ * MobileCMS
+ *
+ * Open source content management system for mobile sites
+ *
+ * @author MobileCMS Team <support@mobilecms.pro>
+ * @copyright Copyright (c) 2011-2019, MobileCMS Team
+ * @link https://mobilecms.pro Official site
+ * @license MIT license
+ */
 defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
 
 //---------------------------------------------
@@ -18,11 +18,12 @@ defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
  * Установщик / деинсталлятор модуля смайлов
  */
 class smiles_installer {
-	/**
-	 * Установка модуля
-	 */
-	public static function install($db) {
-		$db->query("CREATE TABLE #__smiles (
+
+    /**
+     * Установка модуля
+     */
+    public static function install($db) {
+        $db->query("CREATE TABLE #__smiles (
 			  smile_id int(11) NOT NULL auto_increment,
 			  code varchar(50) NOT NULL,
 			  image varchar(50) NOT NULL,
@@ -31,7 +32,7 @@ class smiles_installer {
 			) ENGINE=InnoDB AUTO_INCREMENT=222 DEFAULT CHARSET=utf8 AUTO_INCREMENT=222 ;
 		");
 
-		$db->query("INSERT INTO `a_smiles` VALUES
+        $db->query("INSERT INTO `a_smiles` VALUES
 			(1, 'O:-)', 'aa.gif', 'enable'),
 			(2, 'O=)', 'aa.gif', 'enable'),
 			(3, ':-)', 'ab.gif', 'enable'),
@@ -253,15 +254,18 @@ class smiles_installer {
 			(221, '*SEX_BEHIND2*', 'ic.gif', 'enable')
 		");
 
-		if (!class_exists('smiles')) a_import('modules/smiles/helpers/smiles');
-		smiles::smiles_update($db);
-	}
+        if (!class_exists('smiles'))
+            a_import('modules/smiles/helpers/smiles');
+        smiles::smiles_update($db);
+    }
 
-	/**
-	 * Деинсталляция модуля
-	 */
-	public static function uninstall($db) {
-		$db->query("DROP TABLE #__smiles;");
-	}
+    /**
+     * Деинсталляция модуля
+     */
+    public static function uninstall($db) {
+        $db->query("DROP TABLE #__smiles;");
+    }
+
 }
+
 ?>

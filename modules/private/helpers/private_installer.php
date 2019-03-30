@@ -1,15 +1,15 @@
 <?php
-/**
-	 * MobileCMS
-	 *
-	 * Open source content management system for mobile sites
-	 *
-	 * @author MobileCMS Team <support@mobilecms.pro>
-	 * @copyright Copyright (c) 2011-2019, MobileCMS Team
-	 * @link https://mobilecms.pro Official site
-	 * @license MIT license
-	 */
 
+/**
+ * MobileCMS
+ *
+ * Open source content management system for mobile sites
+ *
+ * @author MobileCMS Team <support@mobilecms.pro>
+ * @copyright Copyright (c) 2011-2019, MobileCMS Team
+ * @link https://mobilecms.pro Official site
+ * @license MIT license
+ */
 defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
 
 //---------------------------------------------
@@ -18,11 +18,12 @@ defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
  * Хелпер установки модуля
  */
 class private_installer {
-	/**
-	 * Установка модуля
-	 */
-	public static function install($db) {
-		$db->query("CREATE TABLE IF NOT EXISTS #__private_messages (
+
+    /**
+     * Установка модуля
+     */
+    public static function install($db) {
+        $db->query("CREATE TABLE IF NOT EXISTS #__private_messages (
 			  `message_id` int(11) NOT NULL auto_increment,
 			  `user_id` int(11) NOT NULL,
 			  `user_from_id` int(11) NOT NULL,
@@ -35,15 +36,17 @@ class private_installer {
 			) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 		");
 
-		main::add_event('private', 'pre_controller');
-	}
+        main::add_event('private', 'pre_controller');
+    }
 
-	/**
-	 * Деинсталляция модуля
-	 */
-	public static function uninstall($db) {
-		$db->query("DROP TABLE #__private_messages ;");
-		main::delete_event('private');
-	}
+    /**
+     * Деинсталляция модуля
+     */
+    public static function uninstall($db) {
+        $db->query("DROP TABLE #__private_messages ;");
+        main::delete_event('private');
+    }
+
 }
+
 ?>

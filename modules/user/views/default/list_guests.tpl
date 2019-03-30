@@ -5,23 +5,23 @@
 <?php $this->display('title', array('text' => 'Список гостей')) ?>
 
 <?php if ( ! empty($guests)): ?>
-    <?php foreach($guests as $guest): ?>
-        <div class="menu">
-            <table cellpadding="0" cellspacing="0">
-                <tr>
-                    <td><?php echo '<img src="'. URL .'files/avatars/guest_32.png" alt="" />'; ?>&#160;</td>
-                    <td>
-                        <b><?php echo $guest['ip'] .'/'. $guest['user_agent'] ?></b> [<?php echo a_is_online($guest['last_time']) ?>]<br />
-				<span style="color: grey; font-size: 11px;">[<?php echo date('d.m.Y в H:i', $guest['last_time']) ?>]</span>
-                    </td>
-                </tr>
-            </table>
-	</div>
-    <?php endforeach; ?>
+<?php foreach($guests as $guest): ?>
+<div class="menu">
+    <table cellpadding="0" cellspacing="0">
+        <tr>
+            <td><?php echo '<img src="'. URL .'files/avatars/guest_32.png" alt="" />'; ?>&#160;</td>
+            <td>
+                <b><?php echo $guest['ip'] .'/'. $guest['user_agent'] ?></b> [<?php echo a_is_online($guest['last_time']) ?>]<br />
+                <span style="color: grey; font-size: 11px;">[<?php echo date('d.m.Y в H:i', $guest['last_time']) ?>]</span>
+            </td>
+        </tr>
+    </table>
+</div>
+<?php endforeach; ?>
 <?php else: ?>
-    <div class="menu">
-        Гостей нет
-    </div>
+<div class="menu">
+    Гостей нет
+</div>
 <?php endif ?>
 
 <?php if ($pagination) echo '<div class="block">'. $pagination .'</div>' ?>

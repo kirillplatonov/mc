@@ -142,6 +142,7 @@ class Mail {
       set the mail recipient
       @param string $to email address, accept both a single address or an array of addresses
      */
+
     function To($to) {
 
         // если это массив
@@ -367,9 +368,10 @@ class Mail {
         if (!$this->smtp_on) {
             $res = @mail($this->strTo, $this->xheaders['Subject'], $this->fullBody, $this->headers);
         } else { // если через smtp
-
             if (!$this->smtp_serv OR ! $this->smtp_login OR ! $this->smtp_pass OR ! $this->smtp_port)
                 return false; // если нет хотя бы одного из основных данных для коннекта, выходим с ошибкой
+
+
 
 
 

@@ -1,27 +1,27 @@
 <?php
+
 /**
-	 * MobileCMS
-	 *
-	 * Open source content management system for mobile sites
-	 *
-	 * @author MobileCMS Team <support@mobilecms.pro>
-	 * @copyright Copyright (c) 2011-2019, MobileCMS Team
-	 * @link https://mobilecms.pro Official site
-	 * @license MIT license
-	 */
-
+ * MobileCMS
+ *
+ * Open source content management system for mobile sites
+ *
+ * @author MobileCMS Team <support@mobilecms.pro>
+ * @copyright Copyright (c) 2011-2019, MobileCMS Team
+ * @link https://mobilecms.pro Official site
+ * @license MIT license
+ */
 defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
-
 
 /**
  * Хелпер установки модуля
  */
 class ads_manager_installer {
-	/**
-	 * Установка модуля
-	 */
-	public static function install($db) {
-		$db->query("CREATE TABLE IF NOT EXISTS #__ads_manager_areas (
+
+    /**
+     * Установка модуля
+     */
+    public static function install($db) {
+        $db->query("CREATE TABLE IF NOT EXISTS #__ads_manager_areas (
 			  `area_id` int(11) NOT NULL auto_increment,
 			  `title` varchar(50) NOT NULL,
 			  `ident` varchar(50) NOT NULL,
@@ -29,7 +29,7 @@ class ads_manager_installer {
 			) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;
 		");
 
-		$db->query("CREATE TABLE IF NOT EXISTS #__ads_manager_links (
+        $db->query("CREATE TABLE IF NOT EXISTS #__ads_manager_links (
 			  `link_id` int(11) NOT NULL auto_increment,
 			  `area_id` int(11) NOT NULL,
 			  `area_ident` varchar(50) NOT NULL,
@@ -43,15 +43,17 @@ class ads_manager_installer {
 			) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 		");
 
-		main::add_event('ads_manager', 'pre_controller');
-	}
+        main::add_event('ads_manager', 'pre_controller');
+    }
 
-	/**
-	 * Деинсталляция модуля
-	 */
-	public static function uninstall($db) {
-		$db->query("DROP TABLE #__ads_manager_areas, #__ads_manager_links ;");
-		main::delete_event('ads_manager');
-	}
+    /**
+     * Деинсталляция модуля
+     */
+    public static function uninstall($db) {
+        $db->query("DROP TABLE #__ads_manager_areas, #__ads_manager_links ;");
+        main::delete_event('ads_manager');
+    }
+
 }
+
 ?>

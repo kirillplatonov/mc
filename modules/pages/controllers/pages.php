@@ -1,15 +1,15 @@
 <?php
-/**
-	 * MobileCMS
-	 *
-	 * Open source content management system for mobile sites
-	 *
-	 * @author MobileCMS Team <support@mobilecms.pro>
-	 * @copyright Copyright (c) 2011-2019, MobileCMS Team
-	 * @link https://mobilecms.pro Official site
-	 * @license MIT license
-	 */
 
+/**
+ * MobileCMS
+ *
+ * Open source content management system for mobile sites
+ *
+ * @author MobileCMS Team <support@mobilecms.pro>
+ * @copyright Copyright (c) 2011-2019, MobileCMS Team
+ * @link https://mobilecms.pro Official site
+ * @license MIT license
+ */
 defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
 
 //---------------------------------------------
@@ -18,34 +18,37 @@ defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
  * Контроллер страниц
  */
 class Pages_Controller extends Controller {
-	/**
-	 * Уровень пользовательского доступа
-	 */
-	public $access_level = 0;
 
-	/**
-	 * Метод по умолчанию
-	 */
-	public function action_index() {
-		$this->action_view_page();
-	}
+    /**
+     * Уровень пользовательского доступа
+     */
+    public $access_level = 0;
 
-	/**
-	 * Просмотр страницы
-	 */
-	public function action_view_page() {
-		$page_id = intval($_GET['page_id']);
+    /**
+     * Метод по умолчанию
+     */
+    public function action_index() {
+        $this->action_view_page();
+    }
 
-		if (!$page = $this->db->get_row("SELECT * FROM #__pages WHERE page_id = '".intval($page_id)."'"))
-			a_error('Запрашиваемой страницы не существует!');
+    /**
+     * Просмотр страницы
+     */
+    public function action_view_page() {
+        $page_id = intval($_GET['page_id']);
 
-		$page['content'] = main::bbcode(nl2br($page['content']));
+        if (!$page = $this->db->get_row("SELECT * FROM #__pages WHERE page_id = '" . intval($page_id) . "'"))
+            a_error('Запрашиваемой страницы не существует!');
 
-		$this->tpl->assign(array(
-			'page' => $page
-		));
+        $page['content'] = main::bbcode(nl2br($page['content']));
 
-		$this->tpl->display('view_page');
-	}
+        $this->tpl->assign(array(
+            'page' => $page
+        ));
+
+        $this->tpl->display('view_page');
+    }
+
 }
+
 ?>

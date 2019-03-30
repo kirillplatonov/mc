@@ -1,4 +1,5 @@
 <?php
+
 /**
  * MobileCMS
  *
@@ -9,19 +10,19 @@
  * @link https://mobilecms.pro Official site
  * @license MIT license
  */
-
 defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
 
 /**
  * Хелпер установки модуля
  */
 class blog_installer {
-	/**
-	 * Установка модуля
-	 */
-	public static function install($db) {
-		// Добавление таблицы в базу данных
-		$db->query("CREATE TABLE IF NOT EXISTS `a_blog` (
+
+    /**
+     * Установка модуля
+     */
+    public static function install($db) {
+        // Добавление таблицы в базу данных
+        $db->query("CREATE TABLE IF NOT EXISTS `a_blog` (
 			`id` int(11) NOT NULL AUTO_INCREMENT,
 			`user_id` int(11) NOT NULL,
 			`title` varchar(256) NOT NULL,
@@ -32,19 +33,21 @@ class blog_installer {
 			PRIMARY KEY (`id`)
 			) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 		");
-		
-		// Добавление правила роутинга
-		$rules = 'profile/([a-zA-Z0-9]*)/blog#segment1=blog&segment2=view&username=$1'.PHP_EOL;
 
-		main::add_route_rules('blog', $rules);
-	}
+        // Добавление правила роутинга
+        $rules = 'profile/([a-zA-Z0-9]*)/blog#segment1=blog&segment2=view&username=$1' . PHP_EOL;
 
-	/**
-	 * Деинсталляция модуля
-	 */
-	public static function uninstall($db) {
-		// Удаление таблицы из базы данных
-		$db->query("DROP TABLE #__blog");
-	}
+        main::add_route_rules('blog', $rules);
+    }
+
+    /**
+     * Деинсталляция модуля
+     */
+    public static function uninstall($db) {
+        // Удаление таблицы из базы данных
+        $db->query("DROP TABLE #__blog");
+    }
+
 }
+
 ?>
