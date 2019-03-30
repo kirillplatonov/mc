@@ -1,158 +1,160 @@
 <?php
-/**
-	 * MobileCMS
-	 *
-	 * Open source content management system for mobile sites
-	 *
-	 * @author MobileCMS Team <support@mobilecms.pro>
-	 * @copyright Copyright (c) 2011-2019, MobileCMS Team
-	 * @link https://mobilecms.pro Official site
-	 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
-	 */
 
+/**
+ * MobileCMS
+ *
+ * Open source content management system for mobile sites
+ *
+ * @author MobileCMS Team <support@mobilecms.pro>
+ * @copyright Copyright (c) 2011-2019, MobileCMS Team
+ * @link https://mobilecms.pro Official site
+ * @license MIT license
+ */
 defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
 
 /**
-* Класс для работы с MySQL
-*/
+ * Класс для работы с MySQL
+ */
 class MySQL {
-	/**
-	 * Ссылка соединения
-	 */
-	public $db_link;
 
-	/**
-	 * Режим отладки
-	 */
-	public $debugging = true;
+    /**
+     * Ссылка соединения
+     */
+    public $db_link;
 
-	/**
-	 * Запросы
-	 */
-	public $list_queries = array();
+    /**
+     * Режим отладки
+     */
+    public $debugging = true;
 
-	/**
-	 * Соединение с базой
-	 */
-	public function connect(){
-			$this->db_link = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_BASE, 3306) or 
-					$this->error("Не возможно подключиться к MySQL серверу");
-	}
+    /**
+     * Запросы
+     */
+    public $list_queries = array();
 
-	/**
-	 * Выполнение запроса к базе
-	 */
-	public function query($query){
-		$query = $this->replace($query);
+    /**
+     * Соединение с базой
+     */
+    public function connect() {
+        $this->db_link = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_BASE, 3306) or
+                $this->error("Не возможно подключиться к MySQL серверу");
+    }
 
-		# Засекаем время выполнения запроса
-		$start_time = microtime(true);
+    /**
+     * Выполнение запроса к базе
+     */
+    public function query($query) {
+        $query = $this->replace($query);
 
-		# Выполняем запрос
-		$result = mysqli_query($this->db_link, $query) or 
-						$this->error($query . PHP_EOL . mysqli_error($this->db_link));
+        # Засекаем время выполнения запроса
+        $start_time = microtime(true);
 
-		# Получаем время по окончанию запроса
-		$end_time = microtime(true);
+        # Выполняем запрос
+        $result = mysqli_query($this->db_link, $query) or
+                $this->error($query . PHP_EOL . mysqli_error($this->db_link));
 
-		# Высчитываем время на запрос
-		$query_time = $end_time - $start_time;
+        # Получаем время по окончанию запроса
+        $end_time = microtime(true);
 
-		$this->list_queries[] = array(
-			'query' => $query,
-			'time' => $query_time
-		);
+        # Высчитываем время на запрос
+        $query_time = $end_time - $start_time;
 
-		return $result;
-	}
+        $this->list_queries[] = array(
+            'query' => $query,
+            'time' => $query_time
+        );
 
-	/**
-	 * Получение одной ячейки
-	 */
-	public function get_one($query){
-		$result = $this->query($query);
-		if($row = mysqli_fetch_row($result)) {
-			return stripslashes($row[0]);
-		}
-		return FALSE;
-	}
+        return $result;
+    }
 
-	/**
-	 * Получение строки
-	 */
-	public function get_row($query, $restype = MYSQLI_ASSOC) {
-		$result = $this->query($query);
-		if($row = mysqli_fetch_array($result, $restype)) {
-			return array_map('stripslashes', $row);
-		}
-		return FALSE;
-	}
+    /**
+     * Получение одной ячейки
+     */
+    public function get_one($query) {
+        $result = $this->query($query);
+        if ($row = mysqli_fetch_row($result)) {
+            return stripslashes($row[0]);
+        }
+        return FALSE;
+    }
 
-	/**
-	 * Получение нескольких строк
-	 */
-	public function get_array($query){
-		$data = array();
-		$result = $this->query($query);
-		while($row = $this->fetch_array($result)) {
-			$data[] = array_map('stripslashes', $row);
-		}
-		return $data;
-	}
+    /**
+     * Получение строки
+     */
+    public function get_row($query, $restype = MYSQLI_ASSOC) {
+        $result = $this->query($query);
+        if ($row = mysqli_fetch_array($result, $restype)) {
+            return array_map('stripslashes', $row);
+        }
+        return FALSE;
+    }
 
-	/**
-	* Закрытие соединения
-	*/
-	public function close(){
-		if($this->db_link) {
-			mysqli_close($this->db_link);
-		}
-		$this->db_link = NULL;
-	}
+    /**
+     * Получение нескольких строк
+     */
+    public function get_array($query) {
+        $data = array();
+        $result = $this->query($query);
+        while ($row = $this->fetch_array($result)) {
+            $data[] = array_map('stripslashes', $row);
+        }
+        return $data;
+    }
 
-	/**
-	* Кодировка БД
-	*/
-	public function charset($charset){
-            mysqli_set_charset($this->db_link, $charset);
-	}
+    /**
+     * Закрытие соединения
+     */
+    public function close() {
+        if ($this->db_link) {
+            mysqli_close($this->db_link);
+        }
+        $this->db_link = NULL;
+    }
 
-	/**
-	* Последний вставленный id
-	*/
-	public function insert_id() {
-		return mysqli_insert_id($this->db_link);
-	}
+    /**
+     * Кодировка БД
+     */
+    public function charset($charset) {
+        mysqli_set_charset($this->db_link, $charset);
+    }
 
-	/**
-	* Аналог mysql_fetch_array()
-	*/
-	public function fetch_array($result) {
-		return mysqli_fetch_array($result);
-	}
+    /**
+     * Последний вставленный id
+     */
+    public function insert_id() {
+        return mysqli_insert_id($this->db_link);
+    }
 
-	/**
-	* Аналог mysql_num_rows()
-	*/
-	public function num_rows($result) {
-		return mysqli_num_rows($result);
-	}
+    /**
+     * Аналог mysql_fetch_array()
+     */
+    public function fetch_array($result) {
+        return mysqli_fetch_array($result);
+    }
 
-	/**
-	* Замена префикса
-	*/
-	protected function replace($query){
-		return str_replace('#__', DB_PREFIX, $query);
-	}
+    /**
+     * Аналог mysql_num_rows()
+     */
+    public function num_rows($result) {
+        return mysqli_num_rows($result);
+    }
 
-	/**
-	* Вывод ошибки и завершение работы
-	* @param string $error
-	*/
-	protected function error($error){
-		if($this->debugging) {
-			print "<pre>". $error ."</pre>";
-		}
-		exit;
-	}
+    /**
+     * Замена префикса
+     */
+    protected function replace($query) {
+        return str_replace('#__', DB_PREFIX, $query);
+    }
+
+    /**
+     * Вывод ошибки и завершение работы
+     * @param string $error
+     */
+    protected function error($error) {
+        if ($this->debugging) {
+            print "<pre>" . $error . "</pre>";
+        }
+        exit;
+    }
+
 }

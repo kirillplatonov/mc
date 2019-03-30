@@ -8,7 +8,7 @@
  * @author MobileCMS Team <support@mobilecms.pro>
  * @copyright Copyright (c) 2011-2019, MobileCMS Team
  * @link https://mobilecms.pro Official site
- * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @license MIT license
  */
 
 defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');

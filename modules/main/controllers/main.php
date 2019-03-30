@@ -7,7 +7,7 @@
 	 * @author MobileCMS Team <support@mobilecms.pro>
 	 * @copyright Copyright (c) 2011-2019, MobileCMS Team
 	 * @link https://mobilecms.pro Official site
-	 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+	 * @license MIT license
 	 */
 
 defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
@@ -30,12 +30,7 @@ class Main_Controller extends Controller {
 	public function action_index_page() {
 		$last_news = $this->db->get_row("SELECT * FROM #__news ORDER BY news_id DESC LIMIT 1");
 
-		$info = $this->db->get_row("SELECT
-			(SELECT COUNT(*) FROM #__users WHERE chat_last_time >= UNIX_TIMESTAMP() + ". $this->config['chat']['online_time']." * 60 AND user_id != '".USER_ID."') AS chat_users_online
-		");
-
 		$this->tpl->assign(array(
-			'info' => $info,
 			'last_news' => $last_news
 		));
 

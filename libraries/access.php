@@ -1,4 +1,5 @@
 <?php
+
 /**
  * MobileCMS
  *
@@ -7,64 +8,67 @@
  * @author MobileCMS Team <support@mobilecms.pro>
  * @copyright Copyright (c) 2011-2019, MobileCMS Team
  * @link https://mobilecms.pro Official site
- * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @license MIT license
  */
-
 defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
 
 /**
-* Простенький класс управления доступом
-*/
+ * Простенький класс управления доступом
+ */
 class Access {
-	/**
-	 * Роли и права
-	 */
-	public $levels = array(
-		'admin' => 10,
-		'moder' => 8,
-		'user' => 5,
-		'banned' => 2,
-		'guest' => 1,
-	);
 
-	/**
-	 * Русские названия ролей
-	 */
-	public $ru_roles = array(
-		'admin' => 'Администратор',
-		'moder' => 'Модератор',
-		'user' => 'Пользователь',
-		'banned' => 'Забаненый',
-		'guest' => 'Гость',
-	);
+    /**
+     * Роли и права
+     */
+    public $levels = array(
+        'admin' => 10,
+        'moder' => 8,
+        'user' => 5,
+        'banned' => 2,
+        'guest' => 1,
+    );
 
-	/**
-	 * Назначение прав
-	 */
-	function set_levels($levels) {
-		$this->levels = $levels;
-	}
+    /**
+     * Русские названия ролей
+     */
+    public $ru_roles = array(
+        'admin' => 'Администратор',
+        'moder' => 'Модератор',
+        'user' => 'Пользователь',
+        'banned' => 'Забаненый',
+        'guest' => 'Гость',
+    );
 
-	/**
-	 * Получить уровень по роли
-	 */
-	function get_level($status) {
-		return $this->levels[$status];
-	}
+    /**
+     * Назначение прав
+     */
+    function set_levels($levels) {
+        $this->levels = $levels;
+    }
 
-	/**
-	 * Проверка доступа
-	 */
-	function check_access($level) {
-		if ($level >= $this->get_level($GLOBALS['USER']['status'])) return TRUE;
-		return FALSE;
-	}
+    /**
+     * Получить уровень по роли
+     */
+    function get_level($status) {
+        return $this->levels[$status];
+    }
 
-	/**
-	 * Проверка уровня доступа и сообщение об ошибке, если доступ запрещен
-	 */
-	function check($level) {
-			if ($level > ACCESS_LEVEL) a_error('Доступ запрещен!');
-	}
+    /**
+     * Проверка доступа
+     */
+    function check_access($level) {
+        if ($level >= $this->get_level($GLOBALS['USER']['status']))
+            return TRUE;
+        return FALSE;
+    }
+
+    /**
+     * Проверка уровня доступа и сообщение об ошибке, если доступ запрещен
+     */
+    function check($level) {
+        if ($level > ACCESS_LEVEL) {
+            a_error('Доступ запрещен!');
+        }
+    }
+
 }
-?>

@@ -59,10 +59,6 @@
 		Сообщений в форуме: <?php echo $profile['forum_messages'] ?><br />
 	<?php endif ?>
 		
-	<?php if (modules::is_active_module('chat')): ?>
-		Сообщений в чате: <?php echo $profile['chat_messages'] ?><br />
-	<?php endif ?>
-		
 	<?php if (modules::is_active_module('guestbook')): ?>
 		Сообщений в гостевой: <?php echo $profile['guestbook_messages'] ?><br />
 	<?php endif ?>

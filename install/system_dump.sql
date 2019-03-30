@@ -38,26 +38,6 @@ CREATE TABLE IF NOT EXISTS `a_ads_manager_links` (
 INSERT INTO `a_ads_manager_links` (`link_id`, `area_id`, `area_ident`, `title`, `url`, `names`, `position`, `count_all`) VALUES
 (3, 2, 'all_pages_down', 'Ссылка снизу', 'https://github.com/kirillplatonov/mc', '[red]MobileCMS download[/red]\r\n[green]MobileCMS repository[/green]\r\n[blue]new MobileCMS[/blue]', 1, 0);
 //=====================================//
-CREATE TABLE IF NOT EXISTS `a_chat_messages` (
-  `message_id` int(11) NOT NULL auto_increment,
-  `user_id` int(11) NOT NULL,
-  `room_id` tinyint(3) NOT NULL,
-  `message` text NOT NULL,
-  `time` int(11) NOT NULL,
-  PRIMARY KEY  (`message_id`),
-  KEY `user_id` (`user_id`,`room_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Модуль чата, таблица сообщений' AUTO_INCREMENT=1 ;
-//=====================================//
-CREATE TABLE IF NOT EXISTS `a_chat_rooms` (
-  `room_id` tinyint(3) NOT NULL auto_increment,
-  `position` tinyint(2) NOT NULL,
-  `name` varchar(50) NOT NULL,
-  PRIMARY KEY  (`room_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Модуль чата таблица разделов' AUTO_INCREMENT=2 ;
-//=====================================//
-INSERT INTO `a_chat_rooms` (`room_id`, `position`, `name`) VALUES
-(1, 1, 'Тестовая комната');
-//=====================================//
 CREATE TABLE IF NOT EXISTS `a_comments_posts` (
   `comment_id` int(11) NOT NULL auto_increment,
   `module` varchar(30) NOT NULL,
@@ -94,10 +74,6 @@ INSERT INTO `a_config` (`id`, `module`, `key`, `value`) VALUES
 (45, 'downloads', 'files_per_page', '7'),
 (46, 'downloads', 'directories_per_page', '50'),
 (47, 'downloads', 'make_screens_from_video', '1'),
-(48, 'chat', 'online_time', '10'),
-(49, 'chat', 'messages_per_page', '7'),
-(50, 'chat', 'message_max_len', '300'),
-(51, 'chat', 'guests_in_chat', '0'),
 (52, 'forum', 'show_forums_in_list_sections', '0'),
 (53, 'forum', 'messages_per_page', '7'),
 (54, 'forum', 'topics_per_page', '7'),
@@ -251,7 +227,6 @@ CREATE TABLE IF NOT EXISTS `a_index_page_widgets` (
 INSERT INTO `a_index_page_widgets` (`widget_id`, `block_id`, `title`, `module`, `config`, `position`) VALUES
 (1, 1, 'Гостевая книга', 'guestbook', '', 3),
 (17, 5, 'Пользователи', 'user', '', 3),
-(6, 1, 'Чат', 'chat', '', 4),
 (5, 3, 'Последняя новость', 'news', 'view_last_news = "1"', 1),
 (7, 1, 'Форум', 'forum', '', 5),
 (10, 4, 'Картинки', 'downloads', 'directory_id = "1"\r\ndirectory_name = "Картинки"', 1),
@@ -297,7 +272,6 @@ CREATE TABLE IF NOT EXISTS `a_modules` (
 //=====================================//
 INSERT INTO `a_modules` (`id`, `name`, `title`, `admin_link`, `description`, `installed`, `status`) VALUES
 (5, 'downloads', 'Загрузки', 'downloads/admin', 'Модуль загрузок', 1, 'on'),
-(6, 'chat', 'Чат', 'chat/admin', 'Модуль чата', 1, 'on'),
 (7, 'forum', 'Форум', 'forum/admin', 'Модуль форума', 1, 'on'),
 (8, 'smiles', 'Смайлы', 'smiles/admin', 'Модуль смайлов и управления ими', 1, 'on'),
 (9, 'pages', 'Страницы', 'pages/admin', 'Модуль управления пользовательскими страницами', 1, 'on'),
@@ -442,16 +416,12 @@ CREATE TABLE IF NOT EXISTS `a_users` (
   `rating` float NOT NULL,
   `reputation_plus` smallint(6) NOT NULL,
   `reputation_minus` smallint(6) NOT NULL,
-  `chat_room_id` tinyint(4) NOT NULL,
-  `chat_last_time` int(11) NOT NULL,
-  `chat_update` tinyint(4) NOT NULL,
   `status` enum('guest','banned','user','moder','admin') NOT NULL default 'user',
   PRIMARY KEY  (`user_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 //=====================================//
-INSERT INTO `a_users` (`user_id`, `username`, `password`, `email`, `reg_time`, `last_visit`, `pin_code`, `pin_code_time`, `balance`, `rating`, `reputation_plus`, `reputation_minus`, `chat_room_id`, `chat_last_time`, `chat_update`, `status`) VALUES
-(-1, 'Guest', '', '', 1243421222, 0, '12462c1ac3bdf5f0673611834b405ec7', 1243430310, 10, 0, 0, 0, 0, 0, 0, 'guest'),
-(1, '{ADMIN_LOGIN}', '{ADMIN_PASSWORD}', '{ADMIN_EMAIL}', UNIX_TIMESTAMP(), UNIX_TIMESTAMP(), NULL, 0, 0, 0, 0, 0, 0, 1285658320, 0, 'admin');
+INSERT INTO `a_users` (`user_id`, `username`, `password`, `email`, `reg_time`, `last_visit`, `pin_code`, `pin_code_time`, `balance`, `rating`, `reputation_plus`, `reputation_minus`, `status`) VALUES
+(1, '{ADMIN_LOGIN}', '{ADMIN_PASSWORD}', '{ADMIN_EMAIL}', UNIX_TIMESTAMP(), UNIX_TIMESTAMP(), NULL, 0, 0, 0, 0, 0, 'admin');
 //=====================================//
 CREATE TABLE IF NOT EXISTS `a_users_ban` (
   `ban_id` bigint(20) NOT NULL auto_increment,

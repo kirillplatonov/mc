@@ -19,7 +19,6 @@
 
 <div class="title"><img src="<?php echo URL ?>views/<?php echo THEME ?>/img/titl.gif" class="ico" alt="" /><b>Общение</b></div>
 <div class="menu">
-<img src="<?php echo URL ?>views/<?php echo THEME ?>/img/ic.png" alt="" /> <a href="<?php echo a_url('chat') ?>">Чат</a> (<?php echo $info['chat_users_online'] ?>)<br />
 <img src="<?php echo URL ?>views/<?php echo THEME ?>/img/ic.png" alt="" /> <a href="<?php echo a_url('forum') ?>">Форум</a><br />
 <img src="<?php echo URL ?>views/<?php echo THEME ?>/img/ic.png" alt="" /> <a href="<?php echo a_url('guestbook') ?>">Гостевая книга</a>
 </div>

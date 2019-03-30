@@ -7,7 +7,7 @@
 	 * @author MobileCMS Team <support@mobilecms.pro>
 	 * @copyright Copyright (c) 2011-2019, MobileCMS Team
 	 * @link https://mobilecms.pro Official site
-	 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+	 * @license MIT license
 	 */
 
 defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
@@ -54,11 +54,6 @@ class User_Profile_Controller extends Controller {
 	 * Просмотр анкеты
 	 */
 	public function action_view() {
-		// Количество сообщений в чате
-		if (modules::is_active_module('chat')) {
-			$this->profile['chat_messages'] = $this->db->get_one("SELECT COUNT(*) FROM #__chat_messages WHERE user_id = '". $this->profile['user_id'] ."'");
-		}
-	
 		// Количество сообщений в форуме
 		if (modules::is_active_module('forum')) {
 			$this->profile['forum_messages'] = $this->db->get_one("SELECT COUNT(*) FROM #__forum_messages WHERE user_id = '". $this->profile['user_id'] ."'");
