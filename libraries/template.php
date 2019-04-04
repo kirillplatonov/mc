@@ -103,10 +103,4 @@ class Template {
         return FALSE;
     }
 
-    public function __destruct() {
-        if (!$this->admin && !isset($_GET['rate'])) {
-            echo $this->parse('page.tpl', ['mc_page_content' => ob_get_clean()]);
-        }
-    }
-
 }
