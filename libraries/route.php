@@ -61,10 +61,7 @@ class Route {
      * Парсинг запроса
      */
     public function parse_query() {
-        $query = str_replace(URL, '', 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
-        $ex = explode('?', $query);
-        $query = $ex[0];
-
+        $query = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
         # Считываем все файлы с правилами роутинга в строку для парсинга
         $rules = '';
         $rules_dir = ROOT . 'data_files/route_rules';
