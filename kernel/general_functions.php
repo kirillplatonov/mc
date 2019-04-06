@@ -123,8 +123,8 @@ function a_notice($message, $link, $timeout = 5) {
 function a_confirm($message, $link_ok, $link_cancel) {
     $tpl = Registry::get('tpl');
     $message = str_safe($message);
-    $link_ok = str_safe($link_ok);
-    $link_cancel = str_safe($link_cancel);
+    $link_ok = str_safe(strtr($link_ok, '&amp', '&'));
+    $link_cancel = str_safe(strtr($link_cancel, '&amp', '&'));
     if (empty($message))
         $message = 'Подтверждаете выполнение данного действия?';
 
