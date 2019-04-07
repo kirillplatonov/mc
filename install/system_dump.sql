@@ -421,7 +421,8 @@ CREATE TABLE IF NOT EXISTS `a_users` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 //=====================================//
 INSERT INTO `a_users` (`user_id`, `username`, `password`, `email`, `reg_time`, `last_visit`, `pin_code`, `pin_code_time`, `balance`, `rating`, `reputation_plus`, `reputation_minus`, `status`) VALUES
-(1, '{ADMIN_LOGIN}', '{ADMIN_PASSWORD}', '{ADMIN_EMAIL}', UNIX_TIMESTAMP(), UNIX_TIMESTAMP(), NULL, 0, 0, 0, 0, 0, 'admin');
+(1, '{ADMIN_LOGIN}', '{ADMIN_PASSWORD}', '{ADMIN_EMAIL}', UNIX_TIMESTAMP(), UNIX_TIMESTAMP(), NULL, 0, 0, 0, 0, 0, 'admin'),
+ (-1, 'Guest', '', '', 1243421222, 0, '12462c1ac3bdf5f0673611834b405ec7', 1243430310, 10, 0, 0, 0, 'guest');
 //=====================================//
 CREATE TABLE IF NOT EXISTS `a_users_ban` (
   `ban_id` bigint(20) NOT NULL auto_increment,
