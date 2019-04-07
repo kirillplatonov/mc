@@ -13,12 +13,6 @@
     <div class="foot">
     <?php echo date('Y', time()) ?> &copy; <a href="<?php echo URL ?>"><?php echo $GLOBALS['CONFIG']['system']['system_title'] ?></a> (<a title="Гостей онлайн" href="<?php echo a_url('user/list_guests') ?>"><?php echo GUESTS_ONLINE ?></a>/<a title="Пользователей онлайн" href="<?php echo a_url('user/list_users', 'type=online') ?>"><?php echo USERS_ONLINE ?></a>) :: Design by <a href="http://7art.org.ua">7art</a>
     </div>
-    
-    <?php if (modules::is_active_module('web_version')): ?>
-        <div align="center">
-            Версия: <?php echo (WEB_VERSION == '1' ? '<a href="'. URL .'?version=wap">Wap</a> | <u>Web</u>' : '<u>Wap</u> | <a href="'. URL .'?version=web">Web</a>') ?>
-        </div> 
-    <?php endif ?>
 
     <!-- copyright -->
 
