@@ -13,12 +13,6 @@
     ?>
     </div>
     <?php endif ?>
-    
-    <?php if (modules::is_active_module('web_version')): ?>
-        <div align="center">
-            Версия: <?php echo (WEB_VERSION == '1' ? '<a href="'. URL .'?version=wap">Wap</a> | <u>Web</u>' : '<u>Wap</u> | <a href="'. URL .'?version=web">Web</a>') ?>
-        </div> 
-    <?php endif ?>
 
     <!-- copyright -->
 

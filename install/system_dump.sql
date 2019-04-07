@@ -69,7 +69,6 @@ INSERT INTO `a_config` (`id`, `module`, `key`, `value`) VALUES
 (9, 'system', 'display_errors', '1'),
 (10, 'system', 'admin_theme', 'admin'),
 (11, 'system', 'default_theme', 'default'),
-(12, 'system', 'web_theme', 'default'),
 (44, 'downloads', 'files_prefix', ''),
 (45, 'downloads', 'files_per_page', '7'),
 (46, 'downloads', 'directories_per_page', '50'),
@@ -284,7 +283,6 @@ INSERT INTO `a_modules` (`id`, `name`, `title`, `admin_link`, `description`, `in
 (22, 'lib', 'Библиотека', 'lib/admin', 'Модуль библиотеки', 1, 'on'),
 (23, 'photo', 'Фотоальбомы', '', 'Модуль фотоальбомов', 1, 'on'),
 (24, 'blog', 'Блоги', '', 'Модуль блогов', 1, 'on'),
-(25,'web_version','Web версия','web_version/admin','Модуль web версии',1,'on');
 //=====================================//
 CREATE TABLE IF NOT EXISTS `a_news` (
   `news_id` int(11) NOT NULL auto_increment,
@@ -545,7 +543,6 @@ INSERT INTO a_config (`id`, `module`, `key` , `value`) VALUES
 (NULL , 'user', 'registration_stop', '0'),
 (NULL , 'downloads', 'user_upload', '1'),
 (NULL , 'downloads', 'moderation', '0'),
-(NULL,'system','web_theme','web_default');
 //=====================================//
 CREATE TABLE IF NOT EXISTS a_guests (
   `id` int(11) NOT NULL auto_increment,
