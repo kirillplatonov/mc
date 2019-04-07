@@ -534,8 +534,6 @@ ADD `provider` VARCHAR( 256 ) NOT NULL AFTER `mobile` ,
 ADD `skype` VARCHAR( 256 ) NOT NULL AFTER `provider` ,
 ADD `jabber` VARCHAR( 256 ) NOT NULL AFTER `skype`
 //=====================================//
-ALTER TABLE `a_users` CHANGE `real_name` `real_name` VARCHAR(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
-//=====================================//
 ALTER TABLE `a_private_messages` CHANGE `message` `message` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
 //=====================================//
 INSERT INTO a_config (`id`, `module`, `key` , `value`) VALUES
