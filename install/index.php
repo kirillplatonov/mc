@@ -180,7 +180,7 @@ if (!array_key_exists($step, $steps))
                                 $dump = str_replace('{ADMIN_LOGIN}', $_POST['admin_login'], $dump);
                                 $dump = str_replace('{ADMIN_EMAIL}', $_POST['admin_email'], $dump);
                                 $dump = str_replace('{ADMIN_PASSWORD}', md5(md5($_POST['admin_password'])), $dump);
-                                $dump = str_replace('{CMS_VERSION}', '2.7.0 beta', $dump);
+                                $dump = str_replace('{CMS_VERSION}', '2.7.1 beta', $dump);
 
                                 $queryes = explode('//=====================================//', $dump);
                                 foreach ($queryes as $query) {
