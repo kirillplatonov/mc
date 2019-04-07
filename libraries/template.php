@@ -18,7 +18,7 @@ class Template {
 
     public $admin = false;
     public $vars = array();
-    public $theme = 'bootstrap_default';
+    public $theme = 'default';
     public $code_added = 0;
 
     /**
