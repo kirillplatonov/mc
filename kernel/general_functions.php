@@ -122,9 +122,8 @@ function a_notice($message, $link, $timeout = 5) {
  */
 function a_confirm($message, $link_ok, $link_cancel) {
     $tpl = Registry::get('tpl');
-    $message = str_safe($message);
-    $link_ok = str_safe(strtr($link_ok, '&amp', '&'));
-    $link_cancel = str_safe(strtr($link_cancel, '&amp', '&'));
+    $link_ok = str_safe(str_replace('&amp;', '&', $link_ok));
+    $link_cancel = str_safe(str_replace('&amp;', '&', $link_cancel));
     if (empty($message))
         $message = 'Подтверждаете выполнение данного действия?';
 
@@ -328,48 +327,6 @@ function htmlspecialchars_array($var) {
     if (!is_array($var))
         return htmlspecialchars($var);
     return false;
-}
-
-if (!function_exists('file_put_contents')) {
-
-    /**
-     * @param string $file
-     */
-    function file_put_contents($file, $data) {
-        $fp = fopen($file, "w+");
-        fwrite($fp, $data);
-        fclose($fp);
-    }
-
-}
-
-if (!function_exists('parse_ini_string')) {
-
-    function parse_ini_string($string) {
-        $array = Array();
-
-        $lines = explode("\n", $string);
-
-        foreach ($lines as $line) {
-            $statement = preg_match("/^(?!;)(?P<key>[\w+\.\-]+?)\s*=\s*(?P<value>.+?)\s*$/", $line, $match);
-
-            if ($statement) {
-                $key = $match['key'];
-                $value = $match['value'];
-
-                # Remove quote
-                if (preg_match("/^\".*\"$/", $value) || preg_match("/^'.*'$/", $value)) {
-                    $win_value = iconv('utf-8', 'windows-1251', $value);
-                    $win_value = substr($win_value, 1, strlen($win_value) - 2);
-                    $value = iconv('windows-1251', 'utf-8', $win_value);
-                }
-
-                $array[$key] = $value;
-            }
-        }
-        return $array;
-    }
-
 }
 
 function highlight($str) {
