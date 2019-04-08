@@ -81,19 +81,37 @@ class downloads_installer {
             mkdir(ROOT . 'files/downloads/_ftp_upload');
             chmod(ROOT . 'files/downloads/ftp_upload', 0777);
         }
+        $rules = 'download_file/([0-9]*)#segment1=downloads&segment2=download_file&file_id=$1
+                downloads/([0-9]*)#segment1=downloads&directory_id=$1
+                downloads/view/([0-9]*)#segment1=downloads&segment2=view_file&file_id=$1
+                downloads/get_jad/([0-9]*).jad#segment1=downloads&segment2=get_jad&file_id=$1
+                downloads/get_jad/([0-9])/([0-9]*).jad#segment1=downloads&segment2=get_jad&file_id=$2&add_file=$1
 
+                # Добавление файла пользователями
+                downloads/([0-9]*)/add#segment1=downloads&segment2=add_file&action=add&directory_id=$1
+                #downloads/([0-9]*)/add/#segment1=downloads&segment2=add_file&action=add&directory_id=$1
+
+                # Изменение файла пользователями
+                downloads/([0-9])/edit/([0-9]*)#segment1=downloads&segment2=add_file&action=edit&directory_id=$1&file_id=$2
+                downloads/([0-9])/edit/([0-9]*)/#segment1=downloads&segment2=add_file&action=edit&directory_id=$1&file_id=$2
+
+                # Удаление файла пользователями
+                downloads/([0-9])/delete/([0-9]*)#segment1=downloads&segment2=add_file&action=delete&directory_id=$1&file_id=$2
+                downloads/([0-9])/delete/([0-9]*)/#segment1=downloads&segment2=add_file&action=delete&directory_id=$1&file_id=$2
+
+                # Поиск файлов
+                downloads/([0-9]*)/search#segment1=downloads&segment2=search_form&directory_id=$1
+                downloads/([0-9]*)/search/#segment1=downloads&segment2=search_form&directory_id=$1
+
+                # Поиск файлов (по всему сайту)
+                downloads/search#segment1=downloads&segment2=search_form&directory_id=0
+                downloads/search/#segment1=downloads&segment2=search_form&directory_id=0
+
+                # Поиск файлов (результаты)
+                downloads/([0-9]*)/search/([А-я]*)#segment1=downloads&segment2=list_files&action=search&directory_id=$1&search_word=$2
+                downloads/([0-9]*)/search/([0-9A-z_+%]*)#segment1=downloads&segment2=list_files&action=search&directory_id=$1&search_word=$2';
         # Добавляем правила в реврайт
-        if (!strstr(file_get_contents(ROOT . '.htaccess'), '[DOWNLOADS MODULE]')) {
-            $rules = "\t# [DOWNLOADS MODULE]" . PHP_EOL;
-            $rules .= "\t# Скачать файл" . PHP_EOL;
-            $rules .= "\tRewriteRule ^download_file/(.*)?$ index.php?segment1=downloads&segment2=download_file&file=$1 [L,QSA]" . PHP_EOL;
-            $rules .= "\t# Листинг папок" . PHP_EOL;
-            $rules .= "\tRewriteRule ^downloads/([0-9*])(/)?$ index.php?segment1=downloads&directory_id=$1 [L,QSA]" . PHP_EOL;
-            $rules .= "\t# Просмотр файла" . PHP_EOL;
-            $rules .= "\tRewriteRule ^downloads/view/([0-9*])(/)?$ index.php?segment1=downloads&segment2=view_file&file_id=$1 [L,QSA]" . PHP_EOL;
-
-            main::add_rewrite_rules($rules);
-        }
+        main::add_route_rules('downloads', $rules);
     }
 
     /**
