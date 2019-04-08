@@ -23,7 +23,7 @@ class smiles_installer {
      * Установка модуля
      */
     public static function install($db) {
-        $db->query("CREATE TABLE #__smiles (
+        $db->query("CREATE TABLE IF NOT EXISTS #__smiles (
 			  smile_id int(11) NOT NULL auto_increment,
 			  code varchar(50) NOT NULL,
 			  image varchar(50) NOT NULL,

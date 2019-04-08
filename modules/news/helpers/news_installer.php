@@ -21,7 +21,7 @@ class news_installer {
      * Установка модуля
      */
     public static function install($db) {
-        $db->query("CREATE TABLE #__news (
+        $db->query("CREATE TABLE IF NOT EXISTS #__news (
 			  `news_id` int(11) NOT NULL auto_increment,
 			  `subject` varchar(100) NOT NULL,
 			  `text` text NOT NULL,

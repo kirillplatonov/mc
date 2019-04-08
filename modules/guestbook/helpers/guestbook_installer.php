@@ -21,7 +21,7 @@ class guestbook_installer {
      * Установка модуля
      */
     public static function install($db) {
-        $db->query("CREATE TABLE #__guestbook (
+        $db->query("CREATE TABLE IF NOT EXISTS #__guestbook (
 			`message_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
 			`user_id` INT NOT NULL ,
 			`username` VARCHAR( 30 ) NOT NULL ,
