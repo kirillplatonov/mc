@@ -118,10 +118,7 @@ class Guestbook_Controller extends Controller {
             if (!$this->error) {
                 a_antiflud();
 
-                setcookie('username', $_POST['username'], time() + 999999999, '/');
-
                 $this->db->query("INSERT INTO #__guestbook SET
-					username = '',
 					user_id = '" . USER_ID . "',
 					message = '" . a_safe($_POST['message']) . "',
 					time = UNIX_TIMESTAMP()
