@@ -24,7 +24,6 @@ class guestbook_installer {
         $db->query("CREATE TABLE IF NOT EXISTS #__guestbook (
 			`message_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
 			`user_id` INT NOT NULL ,
-			`username` VARCHAR( 30 ) NOT NULL ,
 			`message` VARCHAR( 300 ) NOT NULL ,
 			`time` INT NOT NULL
 			) ENGINE = InnoDB ;
