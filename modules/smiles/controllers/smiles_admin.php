@@ -17,7 +17,8 @@ defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
 /**
  * Админская часть модуля формат
  */
-class Smiles_Admin_Controller extends Controller {
+class Smiles_Admin_Controller extends Controller
+{
 
     /**
      * Уровень пользовательского доступа
@@ -32,7 +33,8 @@ class Smiles_Admin_Controller extends Controller {
     /**
      * Конструктор
      */
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
         if (!class_exists('smiles'))
             a_import('modules/smiles/helpers/smiles');
@@ -41,14 +43,16 @@ class Smiles_Admin_Controller extends Controller {
     /**
      * Метод по умолчанию
      */
-    public function action_index() {
+    public function action_index()
+    {
         $this->action_list_smiles();
     }
 
     /**
      * Листинг смайлов
      */
-    public function action_list_smiles() {
+    public function action_list_smiles()
+    {
         $this->per_page = 20;
         # Получение данных
         $group = TRUE;
@@ -78,7 +82,8 @@ class Smiles_Admin_Controller extends Controller {
     /**
      * Обновление смайлов
      */
-    public function action_smiles_update() {
+    public function action_smiles_update()
+    {
         smiles::smiles_update($this->db);
         a_notice("Смайлы успешно обновлены!", a_url('smiles/admin'));
     }

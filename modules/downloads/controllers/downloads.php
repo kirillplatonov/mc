@@ -18,12 +18,14 @@ define('FORCE_DOWNLOAD_MAX_FILESIZE', 0);
 /**
  * Контроллер пользовательской части загруз-центра
  */
-class Downloads_Controller extends Controller {
+class Downloads_Controller extends Controller
+{
 
     /**
      * Construct
      */
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
         if (isset($_GET['preview'])) {
             if ($_GET['preview'] == 0 || $_GET['preview'] == 20 || $_GET['preview'] == 60 || $_GET['preview'] == 100)
@@ -40,14 +42,16 @@ class Downloads_Controller extends Controller {
     /**
      * Метод по умолчанию
      */
-    public function action_index() {
+    public function action_index()
+    {
         $this->action_list_files();
     }
 
     /**
      * Выбор превьюшек
      */
-    public function change_previews() {
+    public function change_previews()
+    {
         $this->tpl->display('preview');
         exit;
     }
@@ -55,7 +59,8 @@ class Downloads_Controller extends Controller {
     /**
      * Листинг файлов
      */
-    public function action_list_files() {
+    public function action_list_files()
+    {
         if (!isset($_SESSION['downloads_preview']))
             $_SESSION['downloads_preview'] = 60;
 
@@ -285,7 +290,8 @@ class Downloads_Controller extends Controller {
     /**
      * Форма поиска
      */
-    public function action_search_form() {
+    public function action_search_form()
+    {
         if (empty($_GET['directory_id']) || !is_numeric($_GET['directory_id'])) {
             $directory_id = 0;
         } else {
@@ -324,7 +330,8 @@ class Downloads_Controller extends Controller {
     /**
      * Скачивание файла
      */
-    public function action_download_file() {
+    public function action_download_file()
+    {
         $file_id = intval($_GET['file_id']);
 
         if (!$file = $this->db->get_row("SELECT * FROM #__downloads_files WHERE file_id = '$file_id'"))
@@ -349,13 +356,16 @@ class Downloads_Controller extends Controller {
      * Получение jad из jar
      * @deprecated since 2.8 
      */
-    public function action_get_jad() {
+    public function action_get_jad()
+    {
+        
     }
 
     /**
      * Просмотр деталей файла
      */
-    public function action_view_file() {
+    public function action_view_file()
+    {
         # Инфо о файле
         if (!$file = $this->db->get_row("SELECT *,
 		 	(SELECT username FROM #__users AS u WHERE u.user_id = df.user_id) AS username,
@@ -409,7 +419,8 @@ class Downloads_Controller extends Controller {
     /**
      * Изменение рейтинга файла
      */
-    public function action_rating_change() {
+    public function action_rating_change()
+    {
         if (!$file = $this->db->get_row("SELECT file_id, user_id FROM a_downloads_files WHERE file_id = '" . intval($_GET['file_id']) . "'"))
             a_error("Файл не найден!");
 
@@ -444,7 +455,8 @@ class Downloads_Controller extends Controller {
     /**
      * Управление файлами пользователей
      */
-    public function action_user_files() {
+    public function action_user_files()
+    {
         // Запрет выгрузки гостям
         if (USER_ID == -1)
             a_error('Для выгрузки файлов на сайт необходимо <a href="' . a_url('user/login') . '">войти</a> или <a href="' . a_url('user/registration') . '">зарегистрироваться</a>');
@@ -743,7 +755,8 @@ class Downloads_Controller extends Controller {
     /**
      * Файлы и комментарии пользователя
      */
-    public function action_my() {
+    public function action_my()
+    {
         // Запрет доступа гостям
         if (USER_ID == -1)
             a_error('Для доступа к странице необходимо <a href="' . a_url('user/login') . '">войти</a> или <a href="' . a_url('user/registration') . '">зарегистрироваться</a>');

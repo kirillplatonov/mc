@@ -15,13 +15,15 @@ defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
 /**
  * Хелпер загрузок
  */
-class downloads {
+class downloads
+{
 
     /**
      * @desc получение реального пути к папке
      * @param $int
      */
-    public static function get_path($directory_id, $db, $directory_path = array(), $i = 0) {
+    public static function get_path($directory_id, $db, $directory_path = array(), $i = 0)
+    {
         $parent = $db->get_row("SELECT * FROM #__downloads_directories WHERE
 	 		directory_id = (SELECT parent_id FROM #__downloads_directories WHERE directory_id = '" . intval($directory_id) . "')
 	 	");
@@ -38,7 +40,8 @@ class downloads {
      * @desc получение полного пути к папке
      * @param $array
      */
-    public static function get_realpath($directories_array) {
+    public static function get_realpath($directories_array)
+    {
         if (empty($directories_array))
             return;
 
@@ -59,7 +62,8 @@ class downloads {
      * @desc получение полного пути к папке
      * @param $array
      */
-    public static function get_namepath($directories_array, $delim = '/', $admin = FALSE) {
+    public static function get_namepath($directories_array, $delim = '/', $admin = FALSE)
+    {
         if (empty($directories_array)) {
             return;
         }
@@ -82,7 +86,8 @@ class downloads {
     /**
      * @desc скачка файла
      */
-    public static function force_download($filename = '', $data = '', $prefix = '', $attachment = TRUE) {
+    public static function force_download($filename = '', $data = '', $prefix = '', $attachment = TRUE)
+    {
         if ($filename == '' OR $data == '') {
             return FALSE;
         }
@@ -138,7 +143,8 @@ class downloads {
      * @desc Рекурсивный подсчет файлов в папке
      * @param $string
      */
-    public static function count_files($directory_id) {
+    public static function count_files($directory_id)
+    {
         $db = Registry::get('db');
 
         $files = $db->get_one("SELECT COUNT(*) FROM #__downloads_files WHERE directory_id = '" . intval($directory_id) . "' AND real_name != ''");
@@ -153,7 +159,8 @@ class downloads {
      * @desc определение имени файла
      * @param $string
      */
-    public static function get_filename($string) {
+    public static function get_filename($string)
+    {
         $headers = get_headers($string);
 
         foreach ($headers AS $header) {
@@ -169,7 +176,8 @@ class downloads {
     /**
      * Действия над файлом
      */
-    public static function filetype_actions($file) {
+    public static function filetype_actions($file)
+    {
         $config = Registry::get('config');
 
         $file_path = ROOT . $file['path_to_file'] . '/' . $file['real_name'];
@@ -267,7 +275,8 @@ class downloads {
     /**
      * Изменение данных файла в базе
      */
-    public static function update_file($db, $file_id, $file, $new_file = true) {
+    public static function update_file($db, $file_id, $file, $new_file = true)
+    {
         $db->query("UPDATE #__downloads_files SET
 			directory_id = '" . intval($file['directory_id']) . "',
 			user_id = '" . (!empty($file['user_id']) ? $file['user_id'] : USER_ID) . "',
@@ -297,7 +306,8 @@ class downloads {
     /**
      * Получение размера удаленного файла
      */
-    public static function get_filesize($file_path) {
+    public static function get_filesize($file_path)
+    {
         $headers = get_headers($file_path, 1);
         if ((!array_key_exists('Content-Length', $headers))) {
             return false;
@@ -309,7 +319,8 @@ class downloads {
      * Получение настоящего адреса файла
      * @return string
      */
-    public static function get_real_file_path($file_path) {
+    public static function get_real_file_path($file_path)
+    {
         $headers = get_headers($file_path, 1);
         if (!array_key_exists('Location', $headers)) {
             return $file_path;
@@ -326,7 +337,8 @@ class downloads {
      * Получение настоящего адреса файла
      * @param integer $directory_id
      */
-    public static function delete_directories($directory_id) {
+    public static function delete_directories($directory_id)
+    {
         $db = Registry::get('db');
 
         $result = $db->query("SELECT * FROM #__downloads_directories WHERE parent_id = $directory_id");

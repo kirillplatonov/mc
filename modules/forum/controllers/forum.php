@@ -15,19 +15,22 @@ defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
 /**
  * Контроллер форума, пользовательская часть
  */
-class Forum_Controller extends Controller {
+class Forum_Controller extends Controller
+{
 
     /**
      * Метод по умолчанию
      */
-    public function action_index() {
+    public function action_index()
+    {
         $this->action_list_sections();
     }
 
     /**
      * Список разделов
      */
-    public function action_list_sections() {
+    public function action_list_sections()
+    {
         $sections = array();
         $result = $this->db->query("SELECT * FROM #__forum_sections ORDER BY position");
         while ($section = $this->db->fetch_array($result)) {
@@ -50,7 +53,8 @@ class Forum_Controller extends Controller {
     /**
      * Просмотр форума
      */
-    public function action_viewforum() {
+    public function action_viewforum()
+    {
         $this->per_page = $this->config['forum']['topics_per_page'];
 
         if ($_GET['type'] != 'new') {
@@ -103,7 +107,8 @@ class Forum_Controller extends Controller {
     /**
      * Просмотр темы
      */
-    public function action_viewtopic() {
+    public function action_viewtopic()
+    {
         $this->per_page = $this->config['forum']['messages_per_page'];
 
         if (!$topic = $this->db->get_row("SELECT * FROM #__forum_topics WHERE topic_id = '" . intval($_GET['topic_id']) . "'"))
@@ -156,7 +161,8 @@ class Forum_Controller extends Controller {
     /**
      * Закрепление / открепление темы
      */
-    public function action_topic_top() {
+    public function action_topic_top()
+    {
         if (!$topic = $this->db->get_row("SELECT * FROM #__forum_topics WHERE topic_id = '" . intval($_GET['topic_id']) . "'"))
             a_error("Тема не найдена!");
 
@@ -173,7 +179,8 @@ class Forum_Controller extends Controller {
     /**
      * Закрытие / окрытие темы
      */
-    public function action_topic_close() {
+    public function action_topic_close()
+    {
         if (!$topic = $this->db->get_row("SELECT * FROM #__forum_topics WHERE topic_id = '" . intval($_GET['topic_id']) . "'"))
             a_error("Тема не найдена!");
 
@@ -190,7 +197,8 @@ class Forum_Controller extends Controller {
     /**
      * Закрытие / окрытие темы
      */
-    public function action_topic_delete() {
+    public function action_topic_delete()
+    {
         if (!$topic = $this->db->get_row("SELECT * FROM #__forum_topics WHERE topic_id = '" . intval($_GET['topic_id']) . "'")) {
             a_error("Тема не найдена!");
         }
@@ -221,7 +229,8 @@ class Forum_Controller extends Controller {
     /**
      * Удаление сообщения
      */
-    public function action_message_delete() {
+    public function action_message_delete()
+    {
         if (!$message = $this->db->get_row("SELECT m.*,
 			(SELECT status FROM #__users AS u WHERE u.user_id = m.user_id) AS user_status
 			FROM #__forum_messages AS m
@@ -253,7 +262,8 @@ class Forum_Controller extends Controller {
     /**
      * Постинг
      */
-    public function action_posting() {
+    public function action_posting()
+    {
         if (!empty($_GET['new_topic'])) {
             if (!$forum = $this->db->get_row("SELECT * FROM #__forum_forums WHERE forum_id = '" . intval($_GET['forum_id']) . "'")) {
                 a_error("Форум не найден!");
@@ -504,7 +514,8 @@ class Forum_Controller extends Controller {
     /**
      * Листинг новых сообщений
      */
-    public function action_new_messages() {
+    public function action_new_messages()
+    {
         $this->per_page = $this->config['forum']['messages_per_page'];
 
         $sql = "SELECT SQL_CALC_FOUND_ROWS m.*, t.name AS topic_name, u.username, u.last_visit, up.avatar AS avatar_exists,
@@ -548,7 +559,8 @@ class Forum_Controller extends Controller {
     /**
      * Скачивание прикрепленного файла
      */
-    public function action_download_attach() {
+    public function action_download_attach()
+    {
         if (!$file = $this->db->get_row("SELECT * FROM #__forum_files WHERE file_id = '" . intval($_GET['file_id']) . "'"))
             a_error('Файл не найден!');
 

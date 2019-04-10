@@ -15,7 +15,8 @@ defined('IN_SYSTEM') or die('<b>403<br />Access denied</b>');
 /**
  * Controller guestbook module
  */
-class Guestbook_Controller extends Controller {
+class Guestbook_Controller extends Controller
+{
 
     /**
      * Уровень доступа к модулю
@@ -25,7 +26,8 @@ class Guestbook_Controller extends Controller {
     /**
      * Метод по умолчанию
      */
-    public function action_index() {
+    public function action_index()
+    {
         // Перенаправляем к листингу сообщений
         $this->action_listing();
     }
@@ -33,7 +35,8 @@ class Guestbook_Controller extends Controller {
     /**
      * Листинг сообщений
      */
-    public function action_listing() {
+    public function action_listing()
+    {
         // Проверка доступа к модулю
         if ($this->config['guestbook']['only_for_users'] == 1 AND USER_ID == -1) {
             // Перенаправление на страницу авторизации
@@ -86,14 +89,16 @@ class Guestbook_Controller extends Controller {
     /**
      * Управление сообщениями
      */
-    public function action_control() {
+    public function action_control()
+    {
         //
     }
 
     /**
      * Написать сообщение
      */
-    public function action_say() {
+    public function action_say()
+    {
         $_config = $this->config['system'];
 
         if (isset($_POST['submit'])) {
@@ -146,7 +151,8 @@ class Guestbook_Controller extends Controller {
     /**
      * Удаление сообщения
      */
-    public function action_delete_message() {
+    public function action_delete_message()
+    {
         if (!$message = $this->db->get_row("SELECT #__guestbook.*, #__users.status AS user_status FROM #__guestbook LEFT JOIN #__users USING(user_id) WHERE message_id = '" . intval($_GET['message_id']) . "'"))
             a_error('Сообщение не найдено!');
 

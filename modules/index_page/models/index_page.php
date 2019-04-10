@@ -11,13 +11,16 @@
  *
  * @author Олег
  */
-class Index_Page_Model extends model {
+class Index_Page_Model extends model
+{
 
-    public function getPageBlocks() {
+    public function getPageBlocks()
+    {
         return $this->db->query("SELECT * FROM #__index_page_blocks ORDER BY position ASC");
     }
 
-    public function getPageWidgets($blockId) {
+    public function getPageWidgets($blockId)
+    {
         return $this->db->query("SELECT * FROM #__index_page_widgets WHERE block_id = '" . $blockId . "' ORDER BY position ASC");
         ;
     }

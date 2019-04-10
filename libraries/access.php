@@ -15,7 +15,8 @@ defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
 /**
  * Простенький класс управления доступом
  */
-class Access {
+class Access
+{
 
     /**
      * Роли и права
@@ -42,21 +43,24 @@ class Access {
     /**
      * Назначение прав
      */
-    function set_levels($levels) {
+    function set_levels($levels)
+    {
         $this->levels = $levels;
     }
 
     /**
      * Получить уровень по роли
      */
-    function get_level($status) {
+    function get_level($status)
+    {
         return $this->levels[$status];
     }
 
     /**
      * Проверка доступа
      */
-    function check_access($level) {
+    function check_access($level)
+    {
         if ($level >= $this->get_level($GLOBALS['USER']['status']))
             return TRUE;
         return FALSE;
@@ -65,7 +69,8 @@ class Access {
     /**
      * Проверка уровня доступа и сообщение об ошибке, если доступ запрещен
      */
-    function check($level) {
+    function check($level)
+    {
         if ($level > ACCESS_LEVEL) {
             a_error('Доступ запрещен!');
         }

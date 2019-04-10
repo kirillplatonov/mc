@@ -12,13 +12,15 @@
  */
 defined('IN_SYSTEM') or die('<b>Access error</b>');
 
-class main {
+class main
+{
 
     /**
      * Конфигурация для модулей
      * @param string $module
      */
-    public static function config($config_data, $module, $db) {
+    public static function config($config_data, $module, $db)
+    {
         foreach ($config_data as $key => $value) {
             if ($key == 'submit')
                 continue;
@@ -32,7 +34,8 @@ class main {
     /**
      * Функция удаления старых файлов в tmp
      */
-    public static function tmp_clear($ttl = 86400) {
+    public static function tmp_clear($ttl = 86400)
+    {
         $dir = opendir(ROOT . 'tmp/');
         while ($f = readdir($dir)) {
             if ($f == '.' || $f == '..' || $f == '.htaccess' || $f == '.gitignore' || $f == '.htaccess' || $f == '.svn')
@@ -50,14 +53,16 @@ class main {
     /**
      * Получение папки для файлов
      */
-    public static function get_dir($item_id) {
+    public static function get_dir($item_id)
+    {
         return strval(ceil($item_id / 30000));
     }
 
     /**
      * Конвертирование строки в windows-1251
      */
-    public static function wtext($text) {
+    public static function wtext($text)
+    {
         return iconv('utf-8', 'windows-1251', $text);
     }
 
@@ -65,14 +70,16 @@ class main {
      * Конвертирование строки в utf-8
      * @param string $text
      */
-    public static function utext($text) {
+    public static function utext($text)
+    {
         return iconv('windows-1251', 'utf-8', $text);
     }
 
     /**
      * Генерация случайной строки
      */
-    public static function get_unique_code($length = 0) {
+    public static function get_unique_code($length = 0)
+    {
         $code = md5(uniqid(rand(), true));
         if ($length != 0) {
             return substr($code, 0, $length);
@@ -85,7 +92,8 @@ class main {
      * Транслитерация латиницы
      * @param string $str
      */
-    public static function translite($str) {
+    public static function translite($str)
+    {
         $table = array('_' => ' ', 'a' => 'а', 'b' => 'б', 'v' => 'в', 'g' => 'г', 'd' => 'д', 'e' => 'е', 'yo' => 'ё', 'zh' => 'ж', 'z' => 'з', 'i' => 'и', 'j' => 'й', 'k' => 'к', 'l' => 'л', 'm' => 'м', 'n' => 'н', 'o' => 'о', 'p' => 'п', 'r' => 'р', 's' => 'с', 't' => 'т', 'u' => 'у', 'f' => 'ф', 'h' => 'х', 'c' => 'ц', 'ch' => 'ч', 'sh' => 'ш', 'sch' => 'щ', 'q' => 'ь', 'x' => 'ы', 'q' => 'ь', 'ye' => 'э', 'yu' => 'ю', 'ya' => 'я',
             'A' => 'А', 'B' => 'Б', 'V' => 'В', 'G' => 'Г', 'D' => 'Д', 'E' => 'Е', 'YO' => 'Ё', 'ZH' => 'Ж', 'Z' => 'З', 'I' => 'И', 'J' => 'Й', 'K' => 'К', 'L' => 'Л', 'M' => 'М', 'N' => 'Н', 'O' => 'О', 'P' => 'П', 'R' => 'Р', 'S' => 'С', 'T' => 'Т', 'U' => 'У', 'F' => 'Ф', 'H' => 'Х', 'C' => 'Ц', 'CH' => 'Ч', 'SH' => 'Ш', 'SCH' => 'Щ', 'Q' => 'Ь', 'X' => 'Ы', 'YE' => 'Э', 'YU' => 'Ю', 'YA' => 'Я');
 
@@ -95,7 +103,8 @@ class main {
     /**
      * Получение размера удаленного файла
      */
-    public static function get_filesize($file_path) {
+    public static function get_filesize($file_path)
+    {
         $headers = get_headers($file_path, 1);
         if ((!array_key_exists('Content-Length', $headers))) {
             return false;
@@ -106,7 +115,8 @@ class main {
     /**
      * Транслитерация кирилицы
      */
-    public static function detranslite($str) {
+    public static function detranslite($str)
+    {
         $str = strtr($str, array(' ' => '_', 'а' => 'a', 'б' => 'b', 'в' => 'v', 'г' => 'g', 'д' => 'd', 'е' => 'e', 'ё' => 'yo', 'ж' => 'zh', 'з' => 'z', 'и' => 'i', 'й' => 'j', 'к' => 'k', 'л' => 'l', 'м' => 'm', 'н' => 'n', 'о' => 'o', 'п' => 'p', 'р' => 'r', 'с' => 's', 'т' => 't', 'у' => 'u', 'ф' => 'f', 'х' => 'h', 'ц' => 'c', 'ч' => 'ch', 'ш' => 'sh', 'щ' => 'sch', 'ь' => 'q', 'ы' => 'x', 'э' => 'ye', 'ю' => 'yu', 'я' => 'ya',
             'А' => 'A', 'Б' => 'B', 'В' => 'V', 'Г' => 'G', 'Д' => 'D', 'Е' => 'E', 'Ё' => 'YO', 'Ж' => 'ZH', 'З' => 'Z', 'И' => 'I', 'Й' => 'J', 'К' => 'K', 'Л' => 'L', 'М' => 'M', 'Н' => 'N', 'О' => 'O', 'П' => 'P', 'Р' => 'R', 'С' => 'S', 'Т' => 'T', 'У' => 'U', 'Ф' => 'F', 'Х' => 'H', 'Ц' => 'C', 'Ч' => 'CH', 'Ш' => 'SH', 'Щ' => 'SCH', 'Ь' => 'Q', 'Ы' => 'X', 'Э' => 'YE', 'Ю' => 'YU', 'Я' => 'YA')
         );
@@ -118,7 +128,8 @@ class main {
      * @param string $block_name
      * @param string $new_rules
      */
-    public static function add_route_rules($block_name, $new_rules) {
+    public static function add_route_rules($block_name, $new_rules)
+    {
         file_put_contents(ROOT . 'data_files/route_rules/' . $block_name . '.rules', $new_rules);
     }
 
@@ -126,14 +137,16 @@ class main {
      * Удаление правил роутинга
      * @param string $block_name
      */
-    public static function delete_route_rules($block_name) {
+    public static function delete_route_rules($block_name)
+    {
         unlink(ROOT . 'data_files/route_rules/' . $block_name . '.rules');
     }
 
     /**
      * Запрет действий в демо версии
      */
-    public static function is_demo() {
+    public static function is_demo()
+    {
         if (file_exists(ROOT . 'is_demo')) {
             a_error('В демо версии данное действие запрещено!');
         }
@@ -142,7 +155,8 @@ class main {
     /**
      * Функция рекурсивного копирования
      */
-    public static function r_copy($source, $dest) {
+    public static function r_copy($source, $dest)
+    {
         # Simple copy for a file
         if (is_file($source)) {
             return copy($source, $dest);
@@ -182,7 +196,8 @@ class main {
      * Выполнение событий
      * @param string $type
      */
-    public static function events_exec($db, $type) {
+    public static function events_exec($db, $type)
+    {
         $dir = opendir(ROOT . 'data_files/events');
         while ($f = readdir($dir)) {
             if (strstr($f, $type . '.event')) {
@@ -200,7 +215,8 @@ class main {
      * @param string $module
      * @param string $place
      */
-    public static function add_event($module, $place) {
+    public static function add_event($module, $place)
+    {
         $filename = ROOT . 'data_files/events/' . $module . '.' . $place . '.event';
         file_put_contents($filename, '');
         chmod($filename, 0777);
@@ -210,7 +226,8 @@ class main {
      * Удаление события
      * @param string $module
      */
-    public static function delete_event($module) {
+    public static function delete_event($module)
+    {
         $dir = opendir(ROOT . 'data_files/events');
         while ($f = readdir($dir)) {
             if (preg_match('~^' . $module . '\.~', $f))
@@ -223,7 +240,8 @@ class main {
      * @param int, string, string, string
      * @using echo end_str(2,'сообщение','сообщения','сообщений');
      */
-    public static function end_str($count, $k_1, $k_234, $k_many) {
+    public static function end_str($count, $k_1, $k_234, $k_many)
+    {
         $count = (string) $count;
         $num_xx = (int) $count[self::strlen($count) - 2] . $count[self::strlen($count) - 1];
         $num_x = (int) $count[self::strlen($count) - 1];
@@ -244,7 +262,8 @@ class main {
     /**
      * Получение длины строки для utf-8
      */
-    public static function strlen($str) {
+    public static function strlen($str)
+    {
         return strlen(self::wtext($str));
     }
 
@@ -252,14 +271,16 @@ class main {
      * substr для utf-8
      * @param string $string, int $start [int $lenght]
      */
-    public static function substr($string, $start, $lenght = NULL) {
+    public static function substr($string, $start, $lenght = NULL)
+    {
         return self::utext(substr(self::wtext($string), $start, $lenght));
     }
 
     /**
      * Обновление файлового счетчика
      */
-    public static function update_file_counter($file, $number) {
+    public static function update_file_counter($file, $number)
+    {
         # Получаем текущее число
         $old_number = floatval(implode('', file($file)));
         # Прибавляем (отбавляем) число
@@ -276,7 +297,8 @@ class main {
      * Обрезание части строки по словам
      * @param integer $limit
      */
-    public static function limit_words($string, $limit) {
+    public static function limit_words($string, $limit)
+    {
         $words = explode(' ', $string);
         $i = 0;
         $string = '';
@@ -292,7 +314,8 @@ class main {
      * Рекурсивное удаление папки
      * @param string $arg
      */
-    public static function delete_dir($arg, $clear = FALSE) {
+    public static function delete_dir($arg, $clear = FALSE)
+    {
         $d = opendir($arg);
         while ($f = readdir($d)) {
             if ($f != "." && $f != "..") {
@@ -313,7 +336,8 @@ class main {
      * @param	mixed	// will be cast as int
      * @return	string
      */
-    public static function byte_format($num) {
+    public static function byte_format($num)
+    {
         if (!$num)
             $num = 0;
 
@@ -350,7 +374,8 @@ class main {
      * @param int $quality качество изображения в процентах
      * @return boolean
      */
-    public static function image_resize($path_to_file, $path_to_save, $width, $height = 0, $quality = 100) {
+    public static function image_resize($path_to_file, $path_to_save, $width, $height = 0, $quality = 100)
+    {
         // Проверка наличия изображения на сервере
         if (!file_exists($path_to_file))
             return FALSE;
@@ -444,7 +469,8 @@ class main {
     /**
      * Получение названия месяца на русском
      */
-    public static function get_month_name($month_num, $ucfirst = false, $type = 1) {
+    public static function get_month_name($month_num, $ucfirst = false, $type = 1)
+    {
         $months = array(
             1 => array('январь', 'января'),
             2 => array('февраль', 'февраля'),
@@ -468,7 +494,8 @@ class main {
      * Замена <p> на <br />
      * @return string
      */
-    public function tinymce_p_br($content) {
+    public function tinymce_p_br($content)
+    {
         $content = preg_replace('/<p[^>]*>/', '', $content);
         $content = str_replace('</p>', '<br />', $content);
         if (substr(self::wtext($content), self::strlen($content) - 6) == '<br />') {
@@ -481,7 +508,8 @@ class main {
      * Проверка данных регуляркой
      * @param string $type
      */
-    public static function check_input($value, $type, $mode = 'check') {
+    public static function check_input($value, $type, $mode = 'check')
+    {
         $filterinput = array(
             "MAIL" => array("^[a-zA-Z0-9_.-]+\@[a-zA-Z0-9_.-]+\.[a-zA-Z]{2,5}$", "xxx@yyy.zz"),
             "LOGIN" => array("^[a-zA-Z0-9]{3,50}$", "латинские буквы и цифры, не менее трех символов"),
@@ -514,7 +542,8 @@ class main {
     /**
      * BBcode
      */
-    public static function bbcode($markup) {
+    public static function bbcode($markup)
+    {
         $preg = array(
             # Text arrtibutes
             '/\[b\](.*?)\[\/b\]/si' => '<b>$1</b>',
@@ -552,7 +581,8 @@ class main {
      * @param string $message сообщение
      * @return mixed
      */
-    public function send_mail($from, $to, $title, $message) {
+    public function send_mail($from, $to, $title, $message)
+    {
         mail($to, '=?utf-8?B?' . base64_encode($title) . '?=', $message, "From: $from <$from>\nContent-Type: text; charset=utf-8") or die('Не удалось отправить письмо на E-mail.');
     }
 
@@ -562,7 +592,8 @@ class main {
      * @param int $time
      * @return string
      */
-    public function display_time($time = NULL) {
+    public function display_time($time = NULL)
+    {
         if (!$time)
             $time = time();
 

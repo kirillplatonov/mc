@@ -1,108 +1,108 @@
 html{
-	padding:5px;
-	background-color: #797979
+    padding:5px;
+    background-color: #797979
 }
 body {
-	color : #fff;
-	font-size : 11px;
-	font-family : Tahoma;
-	background-color : #666;
-	max-width : 400px;
-	margin : auto;
-	border: 1px #000 solid;
-	border-radius:3px;
-	box-shadow:0px 0px 5px  #000;
+    color : #fff;
+    font-size : 11px;
+    font-family : Tahoma;
+    background-color : #666;
+    max-width : 400px;
+    margin : auto;
+    border: 1px #000 solid;
+    border-radius:3px;
+    box-shadow:0px 0px 5px  #000;
 }
 a:link, a:active, a:visited {
-	color : #FC3;
-	text-decoration : none;
-	text-shadow : #000 1px 1px 0px;
+    color : #FC3;
+    text-decoration : none;
+    text-shadow : #000 1px 1px 0px;
 }
 a:hover, a:focus {
-	color : #FF0;
+    color : #FF0;
 }
 
 input, select, textarea {
-	color : #FFF;
-	background-color : #333;
-	margin : 1px;
-	padding : 2px;
-	border : 1px solid #000;
+    color : #FFF;
+    background-color : #333;
+    margin : 1px;
+    padding : 2px;
+    border : 1px solid #000;
 }
 img{
-border-style : none;
+    border-style : none;
 }
 
 .head {
-background : #111111 url(../images/head.png) repeat-x;
-border-bottom : 1px solid #000;
+    background : #111111 url(../images/head.png) repeat-x;
+    border-bottom : 1px solid #000;
 }
 
 
 .auth {
-background : #595959 url(../images/rek.gif) repeat-x;
-padding : 2px;
-border-bottom : 1px solid #000;
-font-size:10px;
-text-align:center;
+    background : #595959 url(../images/rek.gif) repeat-x;
+    padding : 2px;
+    border-bottom : 1px solid #000;
+    font-size:10px;
+    text-align:center;
 }
 
 .auth a {
-color : #FFF;
+    color : #FFF;
 }
 
 .auth a + a{border-left:1px solid orange; padding-left:5px;}
 
 .adv {
-background : #595959 url(../images/rek.gif) repeat-x;
-padding : 1px;
-border : 1px solid #000;
-margin:1px;
-font-size:10px;
+    background : #595959 url(../images/rek.gif) repeat-x;
+    padding : 1px;
+    border : 1px solid #000;
+    margin:1px;
+    font-size:10px;
 }
 
 .adv a {
-color : #fff;
-padding-left : 5px;
-text-shadow:none;
+    color : #fff;
+    padding-left : 5px;
+    text-shadow:none;
 }
 .adv a:hover, .nav a:hover {
-color : #939393;
+    color : #939393;
 }
 
 .title {
-color : #CCC;
-background : #111111 url(../images/head.png) repeat-x;
-	margin: 2px;
-	border : 1px solid #000;
-	padding:3px;
-	padding-left: 5px;
-	font-size:11px;
-	text-shadow:0px 0px 3px #000;
-	font-weight:bold
+    color : #CCC;
+    background : #111111 url(../images/head.png) repeat-x;
+    margin: 2px;
+    border : 1px solid #000;
+    padding:3px;
+    padding-left: 5px;
+    font-size:11px;
+    text-shadow:0px 0px 3px #000;
+    font-weight:bold
 }
 .title + .menu{margin-top:-2px; border-top:0}
 
 .menu {
-margin :2px;
-margin-top:0px;
-border : 1px solid #000;
-background: url(../images/rek.png) repeat-x #595959;
-padding:5px;
+    margin :2px;
+    margin-top:0px;
+    border : 1px solid #000;
+    background: url(../images/rek.png) repeat-x #595959;
+    padding:5px;
 }
 
 .block{
-margin : 2px;
-border : 1px solid #000;
-padding: 3px;
-background : #111111 url(../images/head.png) repeat-x ;
+    margin : 2px;
+    border : 1px solid #000;
+    padding: 3px;
+    background : #111111 url(../images/head.png) repeat-x ;
 }
 
 .block[style="margin: 1px 0px 0px 5px;"] {
-margin : 2px !important;
-border : 1px solid #000;
-padding: 3px;
-background : #111111 url(../images/head.png) repeat-x ;
+    margin : 2px !important;
+    border : 1px solid #000;
+    padding: 3px;
+    background : #111111 url(../images/head.png) repeat-x ;
 }
 
 
@@ -111,39 +111,39 @@ background : #111111 url(../images/head.png) repeat-x ;
 img[src*="http://wap7ka.ru/files/downloads"]{ vertical-align:middle; border: 1px solid #333;}
 
 .foot  {
-text-align : left;
-padding : 4px;
-border-top : 1px solid #000;
-background : #111111 url(../images/head.png) repeat-x;
+    text-align : left;
+    padding : 4px;
+    border-top : 1px solid #000;
+    background : #111111 url(../images/head.png) repeat-x;
 }
 .foot a {
-color : #fff;
+    color : #fff;
 }
 .foot a:hover {
-	color : #FF0;
+    color : #FF0;
 }
 
 .stat  {
-text-align: center;
+    text-align: center;
 }
 .stat a img {
-opacity : 0.6;
+    opacity : 0.6;
 }
 .stat a:hover img {
-opacity : 0.9;
+    opacity : 0.9;
 }
 
 .fy{vertical-align: middle;opacity : 1; }
 .fy:hover{vertical-align: middle;opacity : 1; }
 
 .error {
-text-align : left;
-padding : 3px;
-border : 1px solid #000;
-background : #111111 url(../images/head.png) repeat-x;
-font-size: 11px;
-color : #FF0000;
-margin:2px;
+    text-align : left;
+    padding : 3px;
+    border : 1px solid #000;
+    background : #111111 url(../images/head.png) repeat-x;
+    font-size: 11px;
+    color : #FF0000;
+    margin:2px;
 }
 
 span.small_text {font-size: 10px; color:#fff;}
@@ -151,16 +151,16 @@ span.new_files {font-size: 10px; color: #FF0;}
 span[style="font-size: 11px; color: red;"]{font-size: 10px !important; color: #FF0 !important;}
 
 .copy{
-text-align : left;
-padding : 3px;
-border-top : 1px solid #000;
-background : #111111 url(../images/head.png) repeat-x;
+    text-align : left;
+    padding : 3px;
+    border-top : 1px solid #000;
+    background : #111111 url(../images/head.png) repeat-x;
 }
 
 .copy + div{
-text-align : left;
-padding : 3px;
-border-top : 1px solid #000;
-background : #111111 url(../images/head.png) repeat-x;
-font-size:10px;
+    text-align : left;
+    padding : 3px;
+    border-top : 1px solid #000;
+    background : #111111 url(../images/head.png) repeat-x;
+    font-size:10px;
 }

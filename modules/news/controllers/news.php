@@ -16,26 +16,30 @@ defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
 /**
  * Новости, пользовательская часть
  */
-final class News_Controller extends Controller {
+final class News_Controller extends Controller
+{
 
     /**
      * Constructor
      */
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
     }
 
     /**
      * Действие по умолчанию
      */
-    public function action_index() {
+    public function action_index()
+    {
         $this->action_list_news();
     }
 
     /**
      * Детализирование новости
      */
-    public function action_detail() {
+    public function action_detail()
+    {
         if (!$news = $this->db->get_row("SELECT * FROM #__news WHERE news_id = '" . intval($_GET['news_id']) . "'"))
             a_error('Новость не найдена!');
 
@@ -54,7 +58,8 @@ final class News_Controller extends Controller {
     /**
      * Листинг новостей
      */
-    public function action_list_news() {
+    public function action_list_news()
+    {
         # Получение данных
         $result = $this->db->query("SELECT SQL_CALC_FOUND_ROWS n.*,
   		 (SELECT COUNT(*) FROM #__comments_posts WHERE module = 'news' AND item_id = n.news_id) AS comments
@@ -88,7 +93,8 @@ final class News_Controller extends Controller {
     /**
      * Скрыть последнюю новость
      */
-    public function action_hide_last_news() {
+    public function action_hide_last_news()
+    {
         if (ACCESS_LEVEL < 5)
             a_error('У вас нет прав на выполнение этой операции!');
 

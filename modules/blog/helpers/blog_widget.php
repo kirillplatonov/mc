@@ -12,12 +12,14 @@
  */
 defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
 
-class blog_widget {
+class blog_widget
+{
 
     /**
      * Показ виджета
      */
-    public static function display($widget_id) {
+    public static function display($widget_id)
+    {
         $db = Registry::get('db');
         $widget = $db->get_row("SELECT * FROM #__index_page_widgets WHERE widget_id = $widget_id");
         $config = parse_ini_string($widget['config']);
@@ -37,7 +39,8 @@ class blog_widget {
     /**
      * Настройка виджета
      */
-    public static function setup($widget) {
+    public static function setup($widget)
+    {
         a_notice('Данный виджет не требует настройки', a_url('index_page/admin'));
     }
 

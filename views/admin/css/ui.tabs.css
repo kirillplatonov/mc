@@ -1,34 +1,34 @@
 ul.ui-tabs-nav {
-	list-style: none;
-	padding: 0;
-	margin: 0;
-	padding-left: 10px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    padding-left: 10px;
 }
 .ui-tabs-nav:after {
     display: block;
     clear: both;
-	content: " ";
+    content: " ";
 }
 
 .ui-tabs-hide {
-	display: none;
+    display: none;
 }
 
 ul.ui-tabs-nav li {
-	margin: 0;
-	padding:0;
-	margin-right: 5px;
-	padding: 0 5px;
-	float:left;
-	height: 20px;
+    margin: 0;
+    padding:0;
+    margin-right: 5px;
+    padding: 0 5px;
+    float:left;
+    height: 20px;
 }
 
 li.ui-tabs-selected {
-	background-color: #6884AB;
+    background-color: #6884AB;
 }
 
 li.ui-tabs-selected a {
-	color: #FFFFFF;
+    color: #FFFFFF;
 }
 
 /* Additional IE specific bug fixes... */

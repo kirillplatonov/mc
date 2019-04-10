@@ -15,12 +15,14 @@ defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
 /**
  * Виджет загрузок
  */
-class news_widget {
+class news_widget
+{
 
     /**
      * Показ виджета
      */
-    public static function display($widget_id) {
+    public static function display($widget_id)
+    {
         $db = Registry::get('db');
         $widget = $db->get_row("SELECT * FROM #__index_page_widgets WHERE widget_id = $widget_id");
         $config = parse_ini_string($widget['config']);
@@ -43,7 +45,8 @@ class news_widget {
     /**
      * Настройка виджета
      */
-    public static function setup($widget) {
+    public static function setup($widget)
+    {
         $db = Registry::get('db');
         $tpl = Registry::get('tpl');
 

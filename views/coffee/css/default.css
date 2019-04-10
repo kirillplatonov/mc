@@ -1,124 +1,124 @@
 /* Default design for MobileCMS (author Vatek) */
 
 body {
-	background: #2e2a2a url('../images/bg.png') repeat;
-	margin: auto;
-	max-width: 300px;
-	font-size: 11px;
-	font-family: Arial;
+    background: #2e2a2a url('../images/bg.png') repeat;
+    margin: auto;
+    max-width: 300px;
+    font-size: 11px;
+    font-family: Arial;
 }
 
 a:link, a:active, a:visited {
-	color: #866e68;
-	text-decoration: none;
+    color: #866e68;
+    text-decoration: none;
 }
 
 a:hover {
-	color: #fff;
-	border-bottom: 1px dotted #fff;
+    color: #fff;
+    border-bottom: 1px dotted #fff;
 }
 
 img {
-	vertical-align: middle;
-	border-style: none;
+    vertical-align: middle;
+    border-style: none;
 }
 
 .main {
-	padding: 7px; background: #1f1b18;
-	border-bottom: 1px dashed #50413c;
-	border-top: 1px dashed #50413c;
+    padding: 7px; background: #1f1b18;
+    border-bottom: 1px dashed #50413c;
+    border-top: 1px dashed #50413c;
 }
 
 .head {
-	height: 50px;
-	background: #72aacd url('../images/head.png') repeat-x top;
+    height: 50px;
+    background: #72aacd url('../images/head.png') repeat-x top;
 }
 
 .aut {
-	color: #AE8A81;
-	background: #231F1B url('../images/aut.png') repeat-x top;
-	margin: 0px 0px 0px 0px;
-	padding: 2px;
-	padding-left: 5%;
+    color: #AE8A81;
+    background: #231F1B url('../images/aut.png') repeat-x top;
+    margin: 0px 0px 0px 0px;
+    padding: 2px;
+    padding-left: 5%;
 }
 
 .aut a {
-	color: #AE8A81;
+    color: #AE8A81;
 }
 
 .title {
-	color: #AC8B71;
-	background: #231F1B;
-	padding: 3px;
-	padding-left: 5px;
-	font-weight: bold;
-	border-top: 1px solid #50413c;
-	border-left: 1px solid #50413c;
-	border-right: 1px solid #50413c;
-	border-radius: 8px 8px 0 0;
+    color: #AC8B71;
+    background: #231F1B;
+    padding: 3px;
+    padding-left: 5px;
+    font-weight: bold;
+    border-top: 1px solid #50413c;
+    border-left: 1px solid #50413c;
+    border-right: 1px solid #50413c;
+    border-radius: 8px 8px 0 0;
 }
 
 .title a {
-	color: #fff;
+    color: #fff;
 }
 
 .title {
-	font-size: 12px;
+    font-size: 12px;
 }
 
 .menu {
-	background: #231F1B url('../images/link.png') repeat-x bottom;
-	padding: 0px 2px 8px 6px;
-	color: #AE8A81;
-	margin: 0px 0px 4px 0px;
-	border-left: 1px solid #50413c;
-	border-right: 1px solid #50413c;
-	border-bottom: 1px solid #50413c;
-	border-radius: 0 0 8px 8px;
+    background: #231F1B url('../images/link.png') repeat-x bottom;
+    padding: 0px 2px 8px 6px;
+    color: #AE8A81;
+    margin: 0px 0px 4px 0px;
+    border-left: 1px solid #50413c;
+    border-right: 1px solid #50413c;
+    border-bottom: 1px solid #50413c;
+    border-radius: 0 0 8px 8px;
 }
 
 
 .block {
-	background: #231F1B url('../images/link.png') repeat-x bottom;
-	padding: 2px 2px 2px 6px;
-	color: #AE8A81;
-	margin: 0px 0px 4px 0px;
-	border-left: 1px solid #50413c;
-	border-right: 1px solid #50413c;
-	border-bottom: 1px solid #50413c;
-	border-top: 1px solid #50413c;
-	border-radius: 8px;
+    background: #231F1B url('../images/link.png') repeat-x bottom;
+    padding: 2px 2px 2px 6px;
+    color: #AE8A81;
+    margin: 0px 0px 4px 0px;
+    border-left: 1px solid #50413c;
+    border-right: 1px solid #50413c;
+    border-bottom: 1px solid #50413c;
+    border-top: 1px solid #50413c;
+    border-radius: 8px;
 }
 
 .foot {
-	color: #AC8B71;
-	background: #1e1818;
-	padding: 3px;
-	padding-left: 5px;
-	margin: 0px 0px 1px 0px;
-	border-bottom: 1px solid #50413c;
+    color: #AC8B71;
+    background: #1e1818;
+    padding: 3px;
+    padding-left: 5px;
+    margin: 0px 0px 1px 0px;
+    border-bottom: 1px solid #50413c;
 }
 
 .copy a {
-	color: #AC8B71;
+    color: #AC8B71;
 }
 
 .copy a:hover {
-	color: fff; border-bottom: 1px dotted #fff;
+    color: fff; border-bottom: 1px dotted #fff;
 }
 
 .error {
-	font-size: 11px;
-	color : #FF0000;
-	border: 1px #FF0000 solid;
-	margin: 1px 0px;
-	padding: 2px;
+    font-size: 11px;
+    color : #FF0000;
+    border: 1px #FF0000 solid;
+    margin: 1px 0px;
+    padding: 2px;
 }
 
 .q {
-	background-color: #000;
-	padding: 3px 3px 5px 3px;
-	margin: 0px 0px 1px 0px;
-	color: #fff;
-	border: 1px dashed #002644;
+    background-color: #000;
+    padding: 3px 3px 5px 3px;
+    margin: 0px 0px 1px 0px;
+    color: #fff;
+    border: 1px dashed #002644;
 }

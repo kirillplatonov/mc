@@ -11,7 +11,8 @@
  *
  * @author Олег
  */
-class model {
+class model
+{
 
     /**
      *
@@ -19,7 +20,8 @@ class model {
      */
     protected $db;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->db = Registry::get('db');
     }
 

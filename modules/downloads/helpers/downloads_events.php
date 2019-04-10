@@ -17,12 +17,14 @@ defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
 /**
  * Хелпер событий модуля событий
  */
-class downloads_events {
+class downloads_events
+{
 
     /**
      * Перед выполнением контроллера
      */
-    public static function pre_controller($db) {
+    public static function pre_controller($db)
+    {
         echo 'Событие модуля загрузок вызванное перед контроллером';
     }
 

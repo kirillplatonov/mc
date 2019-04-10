@@ -17,12 +17,14 @@ defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
 /**
  * Хелпер библиотеки
  */
-class lib {
+class lib
+{
 
     /**
      * Получение реального пути к папке
      */
-    public static function get_path($directory_id, $db, $directory_path = array(), $i = 0) {
+    public static function get_path($directory_id, $db, $directory_path = array(), $i = 0)
+    {
         $parent = $db->get_row("SELECT * FROM #__lib_directories WHERE
 	 		directory_id = (SELECT parent_id FROM #__lib_directories WHERE directory_id = '" . intval($directory_id) . "')
 	 	");
@@ -38,7 +40,8 @@ class lib {
     /**
      * Получение полного пути к папке
      */
-    public static function get_realpath($directories_array) {
+    public static function get_realpath($directories_array)
+    {
         if (empty($directories_array))
             return;
 
@@ -59,7 +62,8 @@ class lib {
      * @desc получение полного пути к папке
      * @param $array
      */
-    public static function get_namepath($directories_array, $delim = '/', $admin = FALSE) {
+    public static function get_namepath($directories_array, $delim = '/', $admin = FALSE)
+    {
         if (empty($directories_array)) {
             return;
         }
@@ -84,7 +88,8 @@ class lib {
      * @param string $source
      * @param string $dest
      */
-    public static function r_copy($source, $dest) {
+    public static function r_copy($source, $dest)
+    {
         # Simple copy for a file
         if (is_file($source)) {
             return copy($source, $dest);

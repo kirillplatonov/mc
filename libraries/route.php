@@ -15,7 +15,8 @@ defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа</b>');
 /**
  * Route class
  */
-class Route {
+class Route
+{
 
     /**
      * Путь к контроллеру
@@ -52,7 +53,8 @@ class Route {
     /**
      * Конструктор
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->parse_query();
         $this->route();
     }
@@ -60,7 +62,8 @@ class Route {
     /**
      * Парсинг запроса
      */
-    public function parse_query() {
+    public function parse_query()
+    {
         $query = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
         # Считываем все файлы с правилами роутинга в строку для парсинга
         $rules = '';
@@ -97,7 +100,8 @@ class Route {
     /**
      * Функция определяет контроллер и action
      */
-    public function route() {
+    public function route()
+    {
         # Определение сегментов
         if ($this->_check_segments()) {
             # Если нет сегментов, подключаем модуль по умолчанию
@@ -162,7 +166,8 @@ class Route {
     /**
      * Проверка правильности сегментов
      */
-    protected function _check_segments() {
+    protected function _check_segments()
+    {
         $check_segments = true;
         if (!empty($_GET['segment1'])) {
             if (preg_match('~^[0-9A-z_-]*$~', $_GET['segment1']))

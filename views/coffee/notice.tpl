@@ -3,8 +3,8 @@
 <?php echo $this->display('title', array('text' => 'Информация')) ?>
 
 <div class="menu">
-        <?php echo $message ?><br />
-        <a href="<?php echo $link ?>">Продолжить</a>
+    <?php echo $message ?><br />
+    <a href="<?php echo $link ?>">Продолжить</a>
 </div>
 
 <div class="block">

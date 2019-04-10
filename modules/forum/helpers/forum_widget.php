@@ -15,12 +15,14 @@ defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
 /**
  * Виджет гостевой книги
  */
-class forum_widget {
+class forum_widget
+{
 
     /**
      * Показ виджета
      */
-    public static function display($widget_id) {
+    public static function display($widget_id)
+    {
         $db = Registry::get('db');
 
         $stat = $db->get_row("SELECT
@@ -38,7 +40,8 @@ class forum_widget {
     /**
      * Настройка виджета
      */
-    public static function setup($widget) {
+    public static function setup($widget)
+    {
         a_notice('Данный виджет не требует настройки', a_url('index_page/admin'));
     }
 

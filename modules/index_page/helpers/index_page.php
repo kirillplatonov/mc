@@ -17,12 +17,14 @@ defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
 /**
  * Хелпер модуля главной страницы
  */
-class index_page {
+class index_page
+{
 
     /**
      * Получение списка доступных виджетов
      */
-    public static function get_widgets() {
+    public static function get_widgets()
+    {
         modules::initialize();
         $modules = Registry::get('modules');
 

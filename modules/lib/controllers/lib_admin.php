@@ -15,7 +15,8 @@ defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
 /**
  * Контроллер управления библиотекой
  */
-class Lib_Admin_Controller extends Controller {
+class Lib_Admin_Controller extends Controller
+{
 
     /**
      * Уровень пользовательского доступа
@@ -30,7 +31,8 @@ class Lib_Admin_Controller extends Controller {
     /**
      * Construct
      */
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
 
         # Хелпер библиотеки
@@ -40,14 +42,16 @@ class Lib_Admin_Controller extends Controller {
     /**
      * Метод по умолчанию
      */
-    public function action_index() {
+    public function action_index()
+    {
         $this->action_list_books();
     }
 
     /**
      * Загрузка книг
      */
-    public function action_add_books() {
+    public function action_add_books()
+    {
         # Получем данные о папке для загрузки
         if (empty($_GET['directory_id']) OR ! is_numeric($_GET['directory_id']))
             $directory_id = 0;
@@ -136,7 +140,8 @@ class Lib_Admin_Controller extends Controller {
     /**
      * Список книг и папок
      */
-    public function action_list_books() {
+    public function action_list_books()
+    {
         $this->per_page = 20;
 
         if (empty($_GET['directory_id']) OR ! is_numeric($_GET['directory_id']))
@@ -226,7 +231,8 @@ class Lib_Admin_Controller extends Controller {
     /**
      * Создание / редактирование папки
      */
-    public function action_directory_edit() {
+    public function action_directory_edit()
+    {
         if (is_numeric($_GET['directory_id'])) {
             $directory_id = intval($_GET['directory_id']);
             if (!$directory = $this->db->get_row("SELECT * FROM #__lib_directories WHERE directory_id = '$directory_id'")) {
@@ -295,7 +301,8 @@ class Lib_Admin_Controller extends Controller {
     /**
      * Увеличение позиции папки
      */
-    public function action_directory_up() {
+    public function action_directory_up()
+    {
         main::is_demo();
         if (!$directory = $this->db->get_row("SELECT * FROM #__lib_directories WHERE directory_id = " . intval($_GET['directory_id'])))
             a_error('Папка не найдена!');
@@ -311,7 +318,8 @@ class Lib_Admin_Controller extends Controller {
     /**
      * Уменьшение позиции папки
      */
-    public function action_directory_down() {
+    public function action_directory_down()
+    {
         main::is_demo();
         if (!$directory = $this->db->get_row("SELECT * FROM #__lib_directories WHERE directory_id = " . intval($_GET['directory_id'])))
             a_error('Папка не найдена!');
@@ -327,7 +335,8 @@ class Lib_Admin_Controller extends Controller {
     /**
      * Удаление книги
      */
-    public function action_book_delete() {
+    public function action_book_delete()
+    {
         main::is_demo();
         if (!$book = $this->db->get_row("SELECT * FROM #__lib_books WHERE book_id = '" . intval($_GET['book_id']) . "'"))
             a_error("Книга не найдена!");
@@ -344,7 +353,8 @@ class Lib_Admin_Controller extends Controller {
     /**
      * Удаление папки
      */
-    public function action_directory_delete() {
+    public function action_directory_delete()
+    {
         main::is_demo();
         $directory_id = intval($_GET['directory_id']);
 
@@ -374,7 +384,8 @@ class Lib_Admin_Controller extends Controller {
     /**
      * Удаление всех файлов в папке
      */
-    public function action_directory_clear() {
+    public function action_directory_clear()
+    {
         main::is_demo();
         $directory_id = empty($_GET['directory_id']) ? 0 : intval($_GET['directory_id']);
 

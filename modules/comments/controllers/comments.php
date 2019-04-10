@@ -15,7 +15,8 @@ defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
 /**
  *  Контроллер пользовательской части модуля комментариев
  */
-class Comments_Controller extends Controller {
+class Comments_Controller extends Controller
+{
 
     /**
      * Уровень пользовательского доступа
@@ -25,14 +26,16 @@ class Comments_Controller extends Controller {
     /**
      * Метод по умолчанию
      */
-    public function action_index() {
+    public function action_index()
+    {
         $this->action_list_comments();
     }
 
     /**
      * Список комментариев
      */
-    public function action_list_comments() {
+    public function action_list_comments()
+    {
         if (empty($_GET['module']) || empty($_GET['item_id']))
             a_error('Не указан модуль либо деталь');
 
@@ -103,7 +106,8 @@ class Comments_Controller extends Controller {
     /**
      * Добавление комментария
      */
-    public function action_say() {
+    public function action_say()
+    {
         if (isset($_POST['submit'])) {
 
             $_config = $this->config['system'];
@@ -167,7 +171,8 @@ class Comments_Controller extends Controller {
     /**
      * Удаление комментария
      */
-    public function action_comment_delete() {
+    public function action_comment_delete()
+    {
         if (!$comment = $this->db->get_row("SELECT *, (SELECT status FROM #__users WHERE user_id = cp.user_id) AS user_status FROM #__comments_posts AS cp WHERE comment_id = '" . intval($_GET['comment_id']) . "'"))
             a_error('Комментарий не найден');
 
@@ -188,7 +193,8 @@ class Comments_Controller extends Controller {
     /**
      * Изменение комментария
      */
-    public function action_comment_edit() {
+    public function action_comment_edit()
+    {
         if (!$comment = $this->db->get_row("SELECT *, (SELECT status FROM #__users WHERE user_id = cp.user_id) AS user_status FROM #__comments_posts AS cp WHERE comment_id = '" . intval($_GET['comment_id']) . "'"))
             a_error('Комментарий не найден');
 

@@ -15,12 +15,14 @@ defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
 /**
  * Хелпер установки модуля
  */
-class news_installer {
+class news_installer
+{
 
     /**
      * Установка модуля
      */
-    public static function install($db) {
+    public static function install($db)
+    {
         $db->query("CREATE TABLE IF NOT EXISTS #__news (
 			  `news_id` int(11) NOT NULL auto_increment,
 			  `subject` varchar(100) NOT NULL,
@@ -34,7 +36,8 @@ class news_installer {
     /**
      * Деинсталляция модуля
      */
-    public static function uninstall($db) {
+    public static function uninstall($db)
+    {
         $db->query("DROP TABLE #__news;");
     }
 

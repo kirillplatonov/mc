@@ -202,9 +202,9 @@ if (!array_key_exists($step, $steps))
                                 ?>
                                 <div class="box">
                                     <p>
-                                        <?php echo 'Запросов отправлено: '. count($queryes); ?>
+                                        <?php echo 'Запросов отправлено: ' . count($queryes); ?>
                                         <br />
-                                        <?php echo 'Успешно : '. count($queryes); ?>
+                                        <?php echo 'Успешно : ' . count($queryes); ?>
                                         <br />
                                         Файл конфигурации системы успешно создан, дамп базы данных залит.
                                     </p>

@@ -14,7 +14,8 @@
 /**
  * Контроллер управления загруз центром
  */
-class Downloads_Admin_Controller extends Controller {
+class Downloads_Admin_Controller extends Controller
+{
 
     /**
      * Доступ
@@ -34,7 +35,8 @@ class Downloads_Admin_Controller extends Controller {
     /**
      * Construct
      */
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
 
         define('DOWNLOADS_DIRECTORY', 'files/downloads/');
@@ -45,14 +47,16 @@ class Downloads_Admin_Controller extends Controller {
     /**
      * Метод по умолчанию
      */
-    public function action_index() {
+    public function action_index()
+    {
         $this->action_list_files();
     }
 
     /**
      * Конфигурация модуля
      */
-    public function action_config() {
+    public function action_config()
+    {
         $_config = $this->config['downloads'];
 
         if (isset($_POST['submit'])) {
@@ -76,7 +80,8 @@ class Downloads_Admin_Controller extends Controller {
     /**
      * Список файлов и папок
      */
-    public function action_list_files() {
+    public function action_list_files()
+    {
         if (empty($_GET['directory_id']) or ! is_numeric($_GET['directory_id']))
             $directory_id = 0;
         else
@@ -169,7 +174,8 @@ class Downloads_Admin_Controller extends Controller {
     /**
      * Создание / редактирование папки
      */
-    public function action_directory_edit() {
+    public function action_directory_edit()
+    {
         if (is_numeric(@$_GET['directory_id'])) {
             $directory_id = intval($_GET['directory_id']);
             if (!$directory = $this->db->get_row("SELECT * FROM #__downloads_directories WHERE directory_id = '$directory_id'")) {
@@ -260,7 +266,8 @@ class Downloads_Admin_Controller extends Controller {
     /**
      * Модерация файлов пользователей
      */
-    public function action_list_moderate_files() {
+    public function action_list_moderate_files()
+    {
         $sql = "SELECT SQL_CALC_FOUND_ROWS *, u.username, (SELECT name FROM #__downloads_directories WHERE directory_id = f.directory_id) AS directory_name
 			FROM #__downloads_files AS f LEFT JOIN #__users AS u USING(user_id) WHERE f.status = 'moderate'";
         $files = $this->db->get_array($sql);
@@ -285,7 +292,8 @@ class Downloads_Admin_Controller extends Controller {
     /**
      * Удаление папки
      */
-    public function action_directory_delete() {
+    public function action_directory_delete()
+    {
         main::is_demo();
         $directory_id = intval($_GET['directory_id']);
 
@@ -315,7 +323,8 @@ class Downloads_Admin_Controller extends Controller {
     /**
      * Загрузка файла
      */
-    public function action_file_upload() {
+    public function action_file_upload()
+    {
         if (function_exists('set_time_limit')) {
             set_time_limit(0);
         }
@@ -492,7 +501,8 @@ class Downloads_Admin_Controller extends Controller {
     /**
      * Удаление файла
      */
-    public function action_file_delete() {
+    public function action_file_delete()
+    {
         main::is_demo();
         # Получаем информацию о файле
         if (!$file = $this->db->get_row("SELECT * FROM #__downloads_files WHERE file_id = '" . intval($_GET['file_id']) . "'")) {
@@ -511,7 +521,8 @@ class Downloads_Admin_Controller extends Controller {
     /**
      * Переименование файла
      */
-    public function action_file_rename() {
+    public function action_file_rename()
+    {
         if (!$file = $this->db->get_row("SELECT * FROM #__downloads_files WHERE file_id = '" . intval($_GET['file_id']) . "'")) {
             a_error("Файл не найден!");
         }
@@ -550,7 +561,8 @@ class Downloads_Admin_Controller extends Controller {
     /**
      * Загрузка файлов с фтп
      */
-    public function action_ftp_upload() {
+    public function action_ftp_upload()
+    {
         set_time_limit(0);
         ignore_user_abort(TRUE);
 
@@ -581,7 +593,8 @@ class Downloads_Admin_Controller extends Controller {
     /**
      * Увеличение позиции папки
      */
-    public function action_directory_up() {
+    public function action_directory_up()
+    {
         if (!$directory = $this->db->get_row("SELECT * FROM #__downloads_directories WHERE directory_id = " . intval($_GET['directory_id'])))
             a_error('Папка не найдена!');
 
@@ -596,7 +609,8 @@ class Downloads_Admin_Controller extends Controller {
     /**
      * Уменьшение позиции папки
      */
-    public function action_directory_down() {
+    public function action_directory_down()
+    {
         if (!$directory = $this->db->get_row("SELECT * FROM #__downloads_directories WHERE directory_id = " . intval($_GET['directory_id'])))
             a_error('Папка не найдена!');
 
@@ -611,7 +625,8 @@ class Downloads_Admin_Controller extends Controller {
     /**
      * Получение списка файлов для загрузки файлов по фтп
      */
-    public function action_ftp_upload_get_directories() {
+    public function action_ftp_upload_get_directories()
+    {
         $directories = array();
         $directory = (!empty($_GET['directory']) ? $_GET['directory'] . '/' : '');
         $directory_for_scan = ROOT . DOWNLOADS_DIRECTORY . $this->ftp_directory . '/';
@@ -633,7 +648,8 @@ class Downloads_Admin_Controller extends Controller {
      *
      * @access private
      */
-    private function _ftp_upload_copy_files($directory_id, $ftp_directory, $translite = TRUE) {
+    private function _ftp_upload_copy_files($directory_id, $ftp_directory, $translite = TRUE)
+    {
         # Получаем путь к папке
         $directory_path = downloads::get_path($directory_id, $this->db);
         $directory_realpath = downloads::get_realpath($directory_path) . '/' . $directory_id;

@@ -12,7 +12,8 @@
  */
 defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
 
-class user {
+class user
+{
 
     /**
      * Довавление рейтинга пользователю
@@ -21,7 +22,8 @@ class user {
      * @param int $user_id
      * @return unknown
      */
-    public static function rating_update($rating = 1, $user_id = NULL) {
+    public static function rating_update($rating = 1, $user_id = NULL)
+    {
         if (!$user_id)
             $user_id = USER_ID;
         $rating = floatval($rating);
@@ -37,7 +39,8 @@ class user {
      * @param int $user_id
      * @return string
      */
-    public static function get_icon($user_id = NULL) {
+    public static function get_icon($user_id = NULL)
+    {
         if (!$user_id)
             $user_id = USER_ID;
 
@@ -72,7 +75,8 @@ class user {
      * @param bool $link
      * @return string
      */
-    public static function get_username($user_id = NULL, $link = FALSE) {
+    public static function get_username($user_id = NULL, $link = FALSE)
+    {
         if (!$user_id)
             $user_id = USER_ID;
 
@@ -112,7 +116,8 @@ class user {
      * @param int $last_visit время последнего посещения
      * @return string
      */
-    public static function online_status($last_visit) {
+    public static function online_status($last_visit)
+    {
         // Кол-во минут, в течении которых пользователь считается в онлайне
         $online_time = 3;
 

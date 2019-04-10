@@ -3,8 +3,8 @@
 <?php echo $this->display('title', array('text' => 'Подтверждение')) ?>
 
 <div class="menu">
-        <?php echo $message ?><br />
-        <a href="<?php echo $link_ok ?>">Да</a> | <a href="<?php echo $link_cancel ?>">Нет</a>
+    <?php echo $message ?><br />
+    <a href="<?php echo $link_ok ?>">Да</a> | <a href="<?php echo $link_cancel ?>">Нет</a>
 </div>
 
 <div class="block">

@@ -14,7 +14,8 @@
 /**
  * Главный контроллер
  */
-abstract class Controller {
+abstract class Controller
+{
 
     /**
      *
@@ -45,7 +46,8 @@ abstract class Controller {
     /**
      * Constructor
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->config = Registry::get('config');
         $this->db = Registry::get('db');
 

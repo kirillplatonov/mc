@@ -15,12 +15,14 @@ defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
 /**
  * Функции для работы с формами (часть кода взята из Smarty)
  */
-class main_form {
+class main_form
+{
 
     /**
      * Checkboxes
      */
-    public static function checkboxes($params) {
+    public static function checkboxes($params)
+    {
         $name = 'checkbox';
         $values = null;
         $options = null;
@@ -100,7 +102,8 @@ class main_form {
     /**
      * Options
      */
-    public static function options($params) {
+    public static function options($params)
+    {
         $name = null;
         $values = null;
         $options = null;
@@ -163,7 +166,8 @@ class main_form {
     /**
      * Select date
      */
-    public static function select_date($params) {
+    public static function select_date($params)
+    {
         global $q;
         /* Default values. */
         $prefix = "date_";
@@ -466,7 +470,8 @@ class main_form {
     /**
      * options_optoutput
      */
-    private static function options_optoutput($key, $value, $selected) {
+    private static function options_optoutput($key, $value, $selected)
+    {
         if (!is_array($value)) {
             $_html_result = '<option label="' . $value . '" value="' .
                     $key . '"';
@@ -482,7 +487,8 @@ class main_form {
     /**
      * options_optgroup
      */
-    private static function options_optgroup($key, $values, $selected) {
+    private static function options_optgroup($key, $values, $selected)
+    {
         $optgroup_html = '<optgroup label="' . $key . '">' . "\n";
         foreach ($values as $key => $value) {
             $optgroup_html .= self::options_optoutput($key, $value, $selected);
@@ -498,7 +504,8 @@ class main_form {
      * @param string $separator
      * @param boolean $labels
      */
-    private static function checkboxes_output($name, $value, $output, $selected, $extra, $separator, $labels) {
+    private static function checkboxes_output($name, $value, $output, $selected, $extra, $separator, $labels)
+    {
         $_output = '';
         if ($labels) {
             $_output .= '<label>';
