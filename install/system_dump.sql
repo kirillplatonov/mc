@@ -193,7 +193,6 @@ CREATE TABLE IF NOT EXISTS `a_forum_topics` (
 CREATE TABLE IF NOT EXISTS `a_guestbook` (
   `message_id` int(11) NOT NULL auto_increment,
   `user_id` int(11) NOT NULL,
-  `username` varchar(50) NOT NULL,
   `message` varchar(300) NOT NULL,
   `time` int(11) NOT NULL,
   PRIMARY KEY  (`message_id`)
