@@ -84,8 +84,6 @@ class downloads_installer {
         $rules = 'download_file/([0-9]*)#segment1=downloads&segment2=download_file&file_id=$1
                 downloads/([0-9]*)#segment1=downloads&directory_id=$1
                 downloads/view/([0-9]*)#segment1=downloads&segment2=view_file&file_id=$1
-                downloads/get_jad/([0-9]*).jad#segment1=downloads&segment2=get_jad&file_id=$1
-                downloads/get_jad/([0-9])/([0-9]*).jad#segment1=downloads&segment2=get_jad&file_id=$2&add_file=$1
 
                 # Добавление файла пользователями
                 downloads/([0-9]*)/add#segment1=downloads&segment2=add_file&action=add&directory_id=$1

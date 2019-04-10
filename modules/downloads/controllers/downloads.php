@@ -347,38 +347,9 @@ class Downloads_Controller extends Controller {
 
     /**
      * Получение jad из jar
+     * @deprecated since 2.8 
      */
     public function action_get_jad() {
-        if (!$file = $this->db->get_row("SELECT * FROM #__downloads_files WHERE file_id = '" . intval($_GET['file_id']) . "'"))
-            a_error("Файл не найден!");
-
-        if (is_numeric($_GET['add_file'])) {
-            if (!empty($file['add_file_real_name_' . $_GET['add_file']])) {
-                $jar_name = $file['add_file_real_name_' . $_GET['add_file']];
-                $file_ext = array_pop(explode('.', $jar_name));
-            } else
-                a_error("Дополнительный файл не найтен!");
-        } else {
-            $jar_name = $file['real_name'];
-            $file_ext = $file['file_ext'];
-        }
-
-        if ($file_ext != 'jar')
-            a_error("Это не JAR файл!");
-
-        # Увеличиваем количество скачиваний файла
-        $this->db->query("UPDATE a_downloads_files SET downloads = downloads + 1 WHERE file_id = '" . $file['file_id'] . "'");
-
-        if (!class_exists('PclZip'))
-            a_import('libraries/pclzip.lib');
-        a_import('libraries/j2me_tools');
-
-        $jar_path = ROOT . $file['path_to_file'] . '/' . $jar_name;
-        $jar_url = URL . $file['path_to_file'] . '/' . $jar_name;
-        $jad_contents = j2me_tools::get_jad($jar_path, $jar_url);
-
-        header('Content-type: text/vnd.sun.j2me.app-descriptor;charset=UTF-8');
-        echo $jad_contents;
     }
 
     /**

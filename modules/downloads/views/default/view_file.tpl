@@ -51,10 +51,10 @@
     <img src="<?php echo URL ?>modules/comments/images/comment.png" alt="" border="0" /> <a href="<?php echo a_url('comments', 'module=downloads&amp;item_id='. $file['file_id'] .'&amp;return='. urlencode(URL .'downloads/view/'. $file['file_id'])) ?>">Обсудить</a> <span class="small_text">[<?php echo $file['comments'] ?>]</span><br />
 
     <br />
-    <img src="<?php echo URL ?>modules/downloads/images/default/download.png" alt="" /> <a href="<?php echo URL ?>download_file/<?php echo $file['file_id'] ?>"><?php echo $file['real_name'] ?></a> <?php if($file['file_ext'] == 'jar'): ?>[<a href="<?php echo URL .'downloads/get_jad/'. $file['file_id'] .'.jad' ?>">jad</a>]<?php endif; ?> (<?php echo main::byte_format($file['filesize']) ?>)<br />
+    <img src="<?php echo URL ?>modules/downloads/images/default/download.png" alt="" /> <a href="<?php echo URL ?>download_file/<?php echo $file['file_id'] ?>"><?php echo $file['real_name'] ?></a> (<?php echo main::byte_format($file['filesize']) ?>)<br />
     <?php for($i = 0; $i <= 10; $i++): ?>
     <?php if(!empty($file['add_file_real_name_'. $i])): ?>
-    <img src="<?php echo URL ?>modules/downloads/images/default/download.png" alt="" /> <a href="<?php echo URL ?><?php echo $file['path_to_file'] .'/'. $file['add_file_real_name_'. $i] ?>"><?php echo $file['add_file_real_name_'. $i] ?></a> <?php if(array_pop(explode('.', $file['add_file_real_name_'. $i])) == 'jar'): ?>[<a href="<?php echo URL .'downloads/get_jad/'. $i .'/'. $file['file_id'] .'.jad' ?>">jad</a>]<?php endif; ?> (<?php echo main::byte_format(@filesize(ROOT . $file['path_to_file'] .'/'. $file['add_file_real_name_'. $i])) ?>)<br />
+    <img src="<?php echo URL ?>modules/downloads/images/default/download.png" alt="" /> <a href="<?php echo URL ?><?php echo $file['path_to_file'] .'/'. $file['add_file_real_name_'. $i] ?>"><?php echo $file['add_file_real_name_'. $i] ?></a> (<?php echo main::byte_format(@filesize(ROOT . $file['path_to_file'] .'/'. $file['add_file_real_name_'. $i])) ?>)<br />
     <?php endif; ?>
     <?php endfor; ?>
 </div>
