@@ -163,6 +163,7 @@ function a_url($path, $query = '', $header = FALSE)
     $url = URL . $path . EXT . '?' . SID . $query;
     $url = str_replace('?&amp;', '?', $url);
     $url = str_replace('?&', '?', $url);
+    $url = str_replace(' ', '', $url);
 
     if (substr($url, -1) == '?')
         $url = substr($url, 0, -1);
