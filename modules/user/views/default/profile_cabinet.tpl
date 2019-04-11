@@ -13,7 +13,7 @@
 
     <img src="<?php echo URL ?>views/<?php echo THEME ?>/images/icon.png" alt="" /> <a href="<?php echo a_url('user/profile/view') ?>">Ваша анкета</a><br />
 
-    <img src="<?php echo URL ?>views/<?php echo THEME ?>/images/icon.png" alt="" /> <a href="<?php echo a_url('private') ?>">Личные сообщения</a> <?php if (defined(PRIVATE_NEW_MESSAGES)) echo '('. PRIVATE_NEW_MESSAGES .')'; ?><br />
+    <img src="<?php echo URL ?>views/<?php echo THEME ?>/images/icon.png" alt="" /> <a href="<?php echo a_url('private') ?>">Личные сообщения</a> <?php if (defined('PRIVATE_NEW_MESSAGES')) echo '('. PRIVATE_NEW_MESSAGES .')'; ?><br />
 
     <?php if (modules::is_active_module('blog')): ?>
     <img src="<?php echo URL ?>views/<?php echo THEME ?>/images/icon.png" alt="" /> <a href="<?php echo a_url('blog/my') ?>">Ваш блог</a><br />
