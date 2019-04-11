@@ -39,8 +39,6 @@ class Index_Page_Controller extends Controller
     public function action_view_page()
     {
         $blocks = $this->cache->get('index_page', 180);
-        $blocks = $blocks;
-
         if (empty($blocks)) {
             $result = $this->model->getPageBlocks();
             $blocks = array();
