@@ -154,12 +154,12 @@ class Ads_Manager_Admin_Controller extends Controller
 
             if (!$this->error) {
                 if ($action == 'add') {
-                    $position = $this->db->get_one("SELECT MAX(position) FROM #__ads_manager_links WHERE area_id = '" . $area['area_id'] . "'") + 1;
+                    $position = $this->db->get_one("SELECT MAX(position) FROM #__ads_manager_links WHERE area_id = '" . (int)$area['area_id'] . "'") + 1;
 
                     $this->db->query("INSERT INTO #__ads_manager_links SET
 						title = '" . a_safe($_POST['title']) . "',
 						url = '" . a_safe($_POST['url']) . "',
-						names = '" . mysqli_real_escape_string($this->db_link, $_POST['names']) . "',
+						names = '" . mysqli_real_escape_string($this->db->db_link, $_POST['names']) . "',
 						area_id = '" . $area['area_id'] . "',
 						area_ident = '" . $area['ident'] . "',
 						position = '" . $position . "'
@@ -170,7 +170,7 @@ class Ads_Manager_Admin_Controller extends Controller
                     $this->db->query("UPDATE #__ads_manager_links SET
 						title = '" . a_safe($_POST['title']) . "',
 						url = '" . a_safe($_POST['url']) . "',
-						names = '" . mysqli_real_escape_string($this->db_link, $_POST['names']) . "',
+						names = '" . mysqli_real_escape_string($this->db->db_link, $_POST['names']) . "',
 						area_id = '" . $area['area_id'] . "',
 						area_ident = '" . $area['ident'] . "'
 						WHERE link_id = '" . $link['link_id'] . "'"
