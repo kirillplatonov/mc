@@ -15,7 +15,8 @@ defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
 /**
  * Контроллер админки форума
  */
-class Forum_Admin_Controller extends Controller {
+class Forum_Admin_Controller extends Controller
+{
 
     /**
      * Уровень пользовательского доступа
@@ -30,14 +31,16 @@ class Forum_Admin_Controller extends Controller {
     /**
      * Метод по умолчанию
      */
-    public function action_index() {
+    public function action_index()
+    {
         $this->action_sections();
     }
 
     /**
      * Конфигурация модуля
      */
-    public function action_config() {
+    public function action_config()
+    {
         $_config = $this->config['forum'];
 
         if (isset($_POST['submit'])) {
@@ -61,7 +64,8 @@ class Forum_Admin_Controller extends Controller {
     /**
      * Управление разделами форума
      */
-    public function action_sections() {
+    public function action_sections()
+    {
         switch ($_GET['a']) {
             # Создание раздела
             case 'create':
@@ -200,7 +204,8 @@ class Forum_Admin_Controller extends Controller {
     /**
      * Управление форумами
      */
-    public function action_forums() {
+    public function action_forums()
+    {
         switch ($_GET['a']) {
             # Редактирование форума
             case 'edit':

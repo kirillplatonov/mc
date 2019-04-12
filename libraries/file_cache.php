@@ -14,13 +14,15 @@
 /**
  * Кэширование
  */
-class File_Cache {
+class File_Cache
+{
 
     /**
      * Constructor
      * @param string $dir
      */
-    public function __construct($dir) {
+    public function __construct($dir)
+    {
         $this->dir = $dir;
 
         if (!is_dir($this->dir) OR ! is_writable($this->dir)) {
@@ -31,7 +33,8 @@ class File_Cache {
     /**
      * Получение данных
      */
-    public function get($key, $expiration = 3600) {
+    public function get($key, $expiration = 3600)
+    {
         $cache_path = $this->_name($key);
         if (!@file_exists($cache_path)) {
             return FALSE;
@@ -58,7 +61,8 @@ class File_Cache {
     /**
      * Запись данных
      */
-    public function set($key, $data) {
+    public function set($key, $data)
+    {
         $cache_path = $this->_name($key, true);
         if (!$fp = fopen($cache_path, 'wb')) {
             return FALSE;
@@ -77,7 +81,8 @@ class File_Cache {
     /**
      * Очистка кэша по ключу
      */
-    public function clear($key) {
+    public function clear($key)
+    {
         $cache_path = $this->_name($key);
 
         if (file_exists($cache_path)) {
@@ -91,7 +96,8 @@ class File_Cache {
     /**
      * Генерация имени файла
      */
-    private function _name($key, $is_set = false) {
+    private function _name($key, $is_set = false)
+    {
         $key_name = md5($key);
         $subdir = substr($key_name, 0, 1);
         if ($is_set) {

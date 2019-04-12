@@ -15,12 +15,14 @@ defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
 /**
  * Хелпер установки модуля
  */
-class blog_installer {
+class blog_installer
+{
 
     /**
      * Установка модуля
      */
-    public static function install($db) {
+    public static function install($db)
+    {
         // Добавление таблицы в базу данных
         $db->query("CREATE TABLE IF NOT EXISTS `a_blog` (
 			`id` int(11) NOT NULL AUTO_INCREMENT,
@@ -43,7 +45,8 @@ class blog_installer {
     /**
      * Деинсталляция модуля
      */
-    public static function uninstall($db) {
+    public static function uninstall($db)
+    {
         // Удаление таблицы из базы данных
         $db->query("DROP TABLE #__blog");
     }

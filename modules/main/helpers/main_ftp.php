@@ -15,12 +15,14 @@ defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
 /**
  * Хелпер фтп модуля main
  */
-class main_ftp {
+class main_ftp
+{
 
     /**
      * Подключение к фтп серверу
      */
-    public static function connect($args = array()) {
+    public static function connect($args = array())
+    {
         if (empty($args)) {
             if (!empty($_SESSION['ftp_manager_server'])) {
                 $args['server'] = $_SESSION['ftp_manager_server'];
@@ -47,7 +49,8 @@ class main_ftp {
     /**
      * Преобразование chmod
      */
-    public static function dechmod($str) {
+    public static function dechmod($str)
+    {
         $n1 = 0;
         $n2 = 0;
         $n3 = 0;
@@ -74,7 +77,8 @@ class main_ftp {
     /**
      * Получение преобразованного списка файлов
      */
-    public static function get_files($ftp_handle, $directory) {
+    public static function get_files($ftp_handle, $directory)
+    {
         $files = array();
         $directories = array();
         $lines = ftp_rawlist($ftp_handle, $directory);
@@ -109,7 +113,8 @@ class main_ftp {
     /**
      * Рекурсивное удаление папки на фтп
      */
-    public static function delete_dir($ftp_handle, $path) {
+    public static function delete_dir($ftp_handle, $path)
+    {
         $list = self::get_files($ftp_handle, $path);
 
         if ($list !== FALSE AND count($list) > 0) {
@@ -128,7 +133,8 @@ class main_ftp {
     /**
      * Копирование удаленной папки на локальный сервер
      */
-    public static function copy_remote_dir($ftp_handle, $remote_dir, $local_dir) {
+    public static function copy_remote_dir($ftp_handle, $remote_dir, $local_dir)
+    {
         # Получаем содержимое папки
         $files = self::get_files($ftp_handle, $remote_dir);
 
@@ -151,7 +157,8 @@ class main_ftp {
      * @param boolean $ftp_handle
      * @param string $local_dir
      */
-    public function copy_local_dir($ftp_handle, $local_dir, $remote_dir = null) {
+    public function copy_local_dir($ftp_handle, $local_dir, $remote_dir = null)
+    {
         $files_array = self::get_array_files($local_dir, $local_dir);
 
         foreach ($files_array as $key => $item) {
@@ -168,7 +175,8 @@ class main_ftp {
      * @param string $local_path  - path of the files
      * @return array - list files
      */
-    public function get_array_files($local_path, $delete_path = '') {
+    public function get_array_files($local_path, $delete_path = '')
+    {
         $local = scandir($local_path);
         foreach ($local as $key => $value) {
             if ($value == '.' OR $value == '..') {

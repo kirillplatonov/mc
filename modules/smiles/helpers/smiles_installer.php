@@ -17,12 +17,14 @@ defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
 /**
  * Установщик / деинсталлятор модуля смайлов
  */
-class smiles_installer {
+class smiles_installer
+{
 
     /**
      * Установка модуля
      */
-    public static function install($db) {
+    public static function install($db)
+    {
         $db->query("CREATE TABLE IF NOT EXISTS #__smiles (
 			  smile_id int(11) NOT NULL auto_increment,
 			  code varchar(50) NOT NULL,
@@ -262,7 +264,8 @@ class smiles_installer {
     /**
      * Деинсталляция модуля
      */
-    public static function uninstall($db) {
+    public static function uninstall($db)
+    {
         $db->query("DROP TABLE #__smiles;");
     }
 

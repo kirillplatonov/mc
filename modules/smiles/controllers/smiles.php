@@ -17,26 +17,30 @@ defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
 /**
  * Контроллер модуля смайлов и ббкода
  */
-class Smiles_Controller extends Controller {
+class Smiles_Controller extends Controller
+{
 
     /**
      * Метод по умолчанию
      */
-    public function action_index() {
+    public function action_index()
+    {
         $this->action_list_smiles();
     }
 
     /**
      * ББкоды
      */
-    public function action_bbcode() {
+    public function action_bbcode()
+    {
         $this->tpl->display('bbcode');
     }
 
     /**
      * Смайлы
      */
-    public function action_list_smiles() {
+    public function action_list_smiles()
+    {
         # Получение данных
         $group = true;
         $smiles = $this->db->get_array("SELECT SQL_CALC_FOUND_ROWS *

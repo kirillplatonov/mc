@@ -17,12 +17,14 @@ defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
 /**
  * Хелпер установки модуля
  */
-class private_installer {
+class private_installer
+{
 
     /**
      * Установка модуля
      */
-    public static function install($db) {
+    public static function install($db)
+    {
         $db->query("CREATE TABLE IF NOT EXISTS #__private_messages (
 			  `message_id` int(11) NOT NULL auto_increment,
 			  `user_id` int(11) NOT NULL,
@@ -42,7 +44,8 @@ class private_installer {
     /**
      * Деинсталляция модуля
      */
-    public static function uninstall($db) {
+    public static function uninstall($db)
+    {
         $db->query("DROP TABLE #__private_messages ;");
         main::delete_event('private');
     }

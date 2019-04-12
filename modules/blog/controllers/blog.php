@@ -10,12 +10,14 @@
  * @link https://mobilecms.pro Official site
  * @license MIT license
  */
-class Blog_Controller extends Controller {
+class Blog_Controller extends Controller
+{
 
     /**
      * Метод по умолчанию
      */
-    public function action_index() {
+    public function action_index()
+    {
         // Для пользователей их блог
         if (USER_ID != -1) {
             $this->action_my();
@@ -29,7 +31,8 @@ class Blog_Controller extends Controller {
     /**
      * Пользовательская страница
      */
-    public function action_my() {
+    public function action_my()
+    {
         // Запрет доступа гостям
         if (!is_user()) {
             redirect('user/login');
@@ -191,7 +194,8 @@ class Blog_Controller extends Controller {
     /**
      * Читать далее
      */
-    public function action_read_more() {
+    public function action_read_more()
+    {
         // Проверка существования записи
         if (!$post = $this->db->get_row("SELECT *,
 			(SELECT status FROM #__users WHERE user_id = b.user_id) AS user_status, 
@@ -229,7 +233,8 @@ class Blog_Controller extends Controller {
     /**
      * Просмотр блога
      */
-    public function action_view() {
+    public function action_view()
+    {
         $user = $this->db->get_row("SELECT * FROM #__users WHERE username = '" . a_safe($_GET['username']) . "'");
 
         if ($user['user_id'] == 0 || $user['user_id'] == -1) {
@@ -302,7 +307,8 @@ class Blog_Controller extends Controller {
     /**
      * Листинг блогов
      */
-    public function action_list() {
+    public function action_list()
+    {
         switch ($_GET['action']) {
             /**
              * Лучшие записи
@@ -413,7 +419,8 @@ class Blog_Controller extends Controller {
     /**
      * Изменение рейтинга
      */
-    public function action_rating_change() {
+    public function action_rating_change()
+    {
         // Проверка существования записи
         if (!$post = $this->db->get_row("SELECT * FROM #__blog WHERE id = '" . intval($_GET['post_id']) . "'"))
             a_error('Запись не найдена.', a_url('blog'));

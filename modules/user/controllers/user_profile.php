@@ -15,7 +15,8 @@ defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
 /**
  * Контроллер профайла пользователей
  */
-class User_Profile_Controller extends Controller {
+class User_Profile_Controller extends Controller
+{
 
     /**
      * Уровень пользовательского доступа
@@ -25,7 +26,8 @@ class User_Profile_Controller extends Controller {
     /**
      * Конструктор
      */
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
 
         // Получаем id пользователя
@@ -45,7 +47,8 @@ class User_Profile_Controller extends Controller {
     /**
      * Метод по умолчанию
      */
-    public function action_index() {
+    public function action_index()
+    {
         // Запрет доступа гостям
         if (USER_ID == -1) {
             redirect('user/login');
@@ -58,7 +61,8 @@ class User_Profile_Controller extends Controller {
     /**
      * Просмотр анкеты
      */
-    public function action_view() {
+    public function action_view()
+    {
         // Количество сообщений в форуме
         if (modules::is_active_module('forum')) {
             $this->profile['forum_messages'] = $this->db->get_one("SELECT COUNT(*) FROM #__forum_messages WHERE user_id = '" . $this->profile['user_id'] . "'");
@@ -90,7 +94,8 @@ class User_Profile_Controller extends Controller {
     /**
      * Кабинет пользователя
      */
-    public function action_cabinet() {
+    public function action_cabinet()
+    {
         // Запрет доступа гостям
         if (USER_ID == -1)
             a_error('Для доступа к этой странице <a href="' . a_url('user/login') . '">авторизируйтесь</a> или <a href="' . a_url('user/registration') . '">зарегистрируйтесь</a> зарегистрируйтесь на сайте.');
@@ -112,7 +117,8 @@ class User_Profile_Controller extends Controller {
     /**
      * Редактирование профиля
      */
-    public function action_edit() {
+    public function action_edit()
+    {
         // Запрет доступа гостям
         if (USER_ID == -1)
             a_error('Для доступа к этой странице <a href="' . a_url('user/login') . '">авторизируйтесь</a> или <a href="' . a_url('user/registration') . '">зарегистрируйтесь</a> зарегистрируйтесь на сайте.');
@@ -205,7 +211,8 @@ class User_Profile_Controller extends Controller {
     /**
      * Изменение репутации
      */
-    public function action_change_reputation() {
+    public function action_change_reputation()
+    {
         // Запрет доступа гостям
         if (USER_ID == -1)
             a_error('Для доступа к этой странице <a href="' . a_url('user/login') . '">авторизируйтесь</a> или <a href="' . a_url('user/registration') . '">зарегистрируйтесь</a> зарегистрируйтесь на сайте.');
@@ -260,7 +267,8 @@ class User_Profile_Controller extends Controller {
     /**
      * Автологин
      */
-    public function action_autologin() {
+    public function action_autologin()
+    {
         if (USER_ID == -1) {
             redirect('user/login');
         }
@@ -271,7 +279,8 @@ class User_Profile_Controller extends Controller {
     /**
      * Настройки
      */
-    public function action_settings() {
+    public function action_settings()
+    {
         if (USER_ID == -1)
             redirect('user/login');
 

@@ -15,7 +15,8 @@ defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа</b>');
 /**
  * Подключение файла
  */
-function a_import($file) {
+function a_import($file)
+{
     if (!strstr($file, '.php'))
         $file .= '.php';
     if (file_exists(ROOT . $file)) {
@@ -30,7 +31,8 @@ function a_import($file) {
 /**
  * Перенаправление
  */
-function redirect($url) {
+function redirect($url)
+{
     header('Location: ' . URL . $url);
     exit;
 }
@@ -38,7 +40,8 @@ function redirect($url) {
 /**
  * Проверка авторизации пользователя
  */
-function is_user() {
+function is_user()
+{
     if (USER_ID != -1) {
         return TRUE;
     } else {
@@ -49,7 +52,8 @@ function is_user() {
 /**
  * Вывод ошибки
  */
-function a_error($error_message = '', $link = '') {
+function a_error($error_message = '', $link = '')
+{
     $tpl = Registry::get('tpl');
 
     if (empty($error_message)) {
@@ -72,7 +76,8 @@ function a_error($error_message = '', $link = '') {
 /**
  * Вывод ошибки
  */
-function error($error_message = '', $link = '') {
+function error($error_message = '', $link = '')
+{
     $tpl = Registry::get('tpl');
 
     if (empty($error_message)) {
@@ -95,7 +100,8 @@ function error($error_message = '', $link = '') {
 /**
  * Вывод информирующего сообщения
  */
-function a_notice($message, $link, $timeout = 5) {
+function a_notice($message, $link, $timeout = 5)
+{
     $tpl = Registry::get('tpl');
 
     $message = str_safe($message);
@@ -120,7 +126,8 @@ function a_notice($message, $link, $timeout = 5) {
 /**
  * Подтверждение
  */
-function a_confirm($message, $link_ok, $link_cancel) {
+function a_confirm($message, $link_ok, $link_cancel)
+{
     $tpl = Registry::get('tpl');
     $link_ok = str_safe(str_replace('&amp;', '&', $link_ok));
     $link_cancel = str_safe(str_replace('&amp;', '&', $link_cancel));
@@ -145,7 +152,8 @@ function a_confirm($message, $link_ok, $link_cancel) {
 /**
  * Генерация URL адреса
  */
-function a_url($path, $query = '', $header = FALSE) {
+function a_url($path, $query = '', $header = FALSE)
+{
     if (!empty($query)) {
         if ($header)
             $query = '&' . $query;
@@ -155,6 +163,7 @@ function a_url($path, $query = '', $header = FALSE) {
     $url = URL . $path . EXT . '?' . SID . $query;
     $url = str_replace('?&amp;', '?', $url);
     $url = str_replace('?&', '?', $url);
+    $url = str_replace(' ', '', $url);
 
     if (substr($url, -1) == '?')
         $url = substr($url, 0, -1);
@@ -165,7 +174,8 @@ function a_url($path, $query = '', $header = FALSE) {
 /**
  * Обработка строки для помещения ее в базу данных
  */
-function a_safe($str) {
+function a_safe($str)
+{
     $db = Registry::get('db');
     return htmlspecialchars(mysqli_real_escape_string($db->db_link, trim($str)));
 }
@@ -173,7 +183,8 @@ function a_safe($str) {
 /**
  * Вывод дампа переменной
  */
-function a_debug($var, $exit = TRUE) {
+function a_debug($var, $exit = TRUE)
+{
     print '<pre>';
     print_r($var);
     print '</pre>';
@@ -185,7 +196,8 @@ function a_debug($var, $exit = TRUE) {
 /**
  * Онлайн ли пользователь
  */
-function a_is_online($last_visit) {
+function a_is_online($last_visit)
+{
     if ($last_visit > time() - 180)
         return '<span style="color: green;">On</span>';
     else
@@ -195,7 +207,8 @@ function a_is_online($last_visit) {
 /**
  * Аватар пользователя
  */
-function avatar($user_id) {
+function avatar($user_id)
+{
     if (file_exists(ROOT . 'files/avatars/' . $user_id . '_100' . '.png'))
         return '<img src="' . URL . 'files/avatars/' . $user_id . '_100.png' . '" alt="" /><br /><br />';
     elseif (file_exists(ROOT . 'files/avatars/' . $user_id . '_150' . '.png'))
@@ -217,7 +230,8 @@ function avatar($user_id) {
 /**
  * Небольшой профайлер приложения
  */
-function a_profiler($start_time) {
+function a_profiler($start_time)
+{
     GLOBAL $db;
 
     $end_time = microtime(true);
@@ -246,7 +260,8 @@ function a_profiler($start_time) {
 /**
  * Если переменная пуста, функция возвращает значение по умолчанию
  */
-function a_default($var, $default = 0) {
+function a_default($var, $default = 0)
+{
     if (empty($var))
         return $default;
     return $var;
@@ -259,7 +274,8 @@ function a_default($var, $default = 0) {
  * @param <type> $type
  * @return class_name
  */
-function a_load_class($path_to_class, $type = '') {
+function a_load_class($path_to_class, $type = '')
+{
     # Подключем файл класса
     a_import($path_to_class);
 
@@ -288,7 +304,8 @@ function a_load_class($path_to_class, $type = '') {
 /**
  * Функция антифлуда
  */
-function a_antiflud($error = '', $antiflud_time = 0) {
+function a_antiflud($error = '', $antiflud_time = 0)
+{
     $config = Registry::get('config');
 
     if ($antiflud_time == 0)
@@ -307,7 +324,8 @@ function a_antiflud($error = '', $antiflud_time = 0) {
 /**
  * Функция проверки прав пользователя на выполнение определенных действий
  */
-function a_check_rights($check_user_id, $check_user_status) {
+function a_check_rights($check_user_id, $check_user_status)
+{
     if (USER_ID == -1)
         return FALSE;
     if (!class_exists('Access'))
@@ -323,13 +341,15 @@ function a_check_rights($check_user_id, $check_user_status) {
 /**
  * htmlspecialchars for arrays
  */
-function htmlspecialchars_array($var) {
+function htmlspecialchars_array($var)
+{
     if (!is_array($var))
         return htmlspecialchars($var);
     return false;
 }
 
-function highlight($str) {
+function highlight($str)
+{
     $str = stripslashes(htmlspecialchars_decode($str));
     $str = highlight_string($str, true);
     return '<div style="border: 1px silver solid; margin: 10px; padding-left: 5px; background-color: #f1f2f1;">' . $str . '</div>';
@@ -338,21 +358,24 @@ function highlight($str) {
 /**
  * Вывод проверочного кода (капчи)
  */
-function captcha() {
+function captcha()
+{
     echo '<img src="' . URL . 'utils/captcha.php" alt="captcha" /><br />';
 }
 
 /**
  * Обработка содержимого строки
  */
-function str_safe($str) {
+function str_safe($str)
+{
     return htmlspecialchars(trim($str));
 }
 
 /**
  * Генерация URL адреса
  */
-function url($path, $query = '', $header = FALSE) {
+function url($path, $query = '', $header = FALSE)
+{
     if (!empty($query)) {
         if ($header)
             $query = '&' . $query;

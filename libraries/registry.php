@@ -14,7 +14,8 @@
 /**
  * Статический класс registry
  */
-class Registry {
+class Registry
+{
 
     /**
      * Статическое хранилище для данных
@@ -24,11 +25,13 @@ class Registry {
     /**
      * Защита от создания экземпляров статического класса
      */
-    protected function __construct() {
+    protected function __construct()
+    {
         
     }
 
-    protected function __clone() {
+    protected function __clone()
+    {
         
     }
 
@@ -38,7 +41,8 @@ class Registry {
      * @param string $name
      * @return bool
      */
-    public static function exists($name) {
+    public static function exists($name)
+    {
         return isset(self::$store[$name]);
     }
 
@@ -48,7 +52,8 @@ class Registry {
      * @param string $name
      * @return unknown
      */
-    public static function get($name) {
+    public static function get($name)
+    {
         return (isset(self::$store[$name])) ? self::$store[$name] : null;
     }
 
@@ -59,7 +64,8 @@ class Registry {
      * @param mixed $data
      * @return unknown
      */
-    public static function set($name, $data) {
+    public static function set($name, $data)
+    {
         return self::$store[$name] = $data;
     }
 

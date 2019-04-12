@@ -6,7 +6,8 @@
  * @author webi.ru <adm@webi.ru>
  * @link http://webi.ru/webi_files/php_libmail.html
  */
-class Mail {
+class Mail
+{
     /*     определение переменных идет через VAR, для обеспечения работы в php старых версий
       массивы адресов кому отправить
       @var	array
@@ -53,7 +54,8 @@ class Mail {
       внесено изменение webi.ru
      */
 
-    function Mail($charset = "") {
+    function Mail($charset = "")
+    {
         $this->autoCheck(true);
         $this->boundary = "--" . md5(uniqid("myboundary"));
 
@@ -78,7 +80,8 @@ class Mail {
     /**
      * @param boolean $bool
      */
-    function autoCheck($bool) {
+    function autoCheck($bool)
+    {
         if ($bool) {
             $this->checkAddress = true;
         } else {
@@ -96,7 +99,8 @@ class Mail {
     /**
      * @param string $subject
      */
-    function Subject($subject) {
+    function Subject($subject)
+    {
 
         $this->xheaders['Subject'] = "=?" . $this->charset . "?Q?" . str_replace("+", "_", str_replace("%", "=", urlencode(strtr($subject, "\r\n", "  ")))) . "?=";
     }
@@ -106,7 +110,8 @@ class Mail {
       от кого
      */
 
-    function From($from) {
+    function From($from)
+    {
 
         if (!is_string($from)) {
             echo "ошибка, From должен быть строкой";
@@ -120,7 +125,8 @@ class Mail {
 
      */
 
-    function ReplyTo($address) {
+    function ReplyTo($address)
+    {
 
         if (!is_string($address)) {
             return false;
@@ -134,7 +140,8 @@ class Mail {
 
      */
 
-    function Receipt() {
+    function Receipt()
+    {
         $this->receipt = 1;
     }
 
@@ -143,7 +150,8 @@ class Mail {
       @param string $to email address, accept both a single address or an array of addresses
      */
 
-    function To($to) {
+    function To($to)
+    {
 
         // если это массив
         if (is_array($to)) {
@@ -165,7 +173,8 @@ class Mail {
      * 		$cc : email address(es), accept both array and string
      */
 
-    function Cc($cc) {
+    function Cc($cc)
+    {
         if (is_array($cc)) {
             $this->acc = $cc;
 
@@ -186,7 +195,8 @@ class Mail {
      * 		$bcc : email address(es), accept both array and string
      */
 
-    function Bcc($bcc) {
+    function Bcc($bcc)
+    {
         if (is_array($bcc)) {
             $this->abcc = $bcc;
             foreach ($bcc as $key => $value) {
@@ -213,7 +223,8 @@ class Mail {
     /**
      * @param string $body
      */
-    function Body($body, $text_html = "") {
+    function Body($body, $text_html = "")
+    {
         $this->body = $body;
 
         if ($text_html == "html") {
@@ -225,7 +236,8 @@ class Mail {
      * 		set the Organization header
      */
 
-    function Organization($org) {
+    function Organization($org)
+    {
         if (trim($org != "")) {
             $this->xheaders['Organization'] = $org;
         }
@@ -237,7 +249,8 @@ class Mail {
      * 		ex: $mail->Priority(1) ; => Highest
      */
 
-    function Priority($priority) {
+    function Priority($priority)
+    {
         if (!intval($priority)) {
             return false;
         }
@@ -260,7 +273,8 @@ class Mail {
       @param string $disposition : инструкция почтовому клиенту как отображать прикрепленный файл ("inline") как часть письма или ("attachment") как прикрепленный файл
      */
 
-    function Attach($filename, $webi_filename = "", $filetype = "", $disposition = "inline") {
+    function Attach($filename, $webi_filename = "", $filetype = "", $disposition = "inline")
+    {
         // TODO : если типа файла не указан, ставим неизвестный тип
         if ($filetype == "") {
             $filetype = "application/x-unknown-content-type";
@@ -279,7 +293,8 @@ class Mail {
 
      */
 
-    function BuildMail() {
+    function BuildMail()
+    {
         $this->headers = "";
         $this->xheaders['To'] = implode(", ", $this->sendto); // этот заголовок будет не нужен при отправке через mail()
         if (count($this->acc) > 0) {
@@ -334,7 +349,8 @@ class Mail {
     // включение отправки через smtp используя сокеты
     // после запуска этой функции отправка через smtp включена
     // для отправки через защищенное соединение сервер нужно указывать с добавлением "ssl://" например так "ssl://smtp.gmail.com"
-    function smtp_on($smtp_serv, $login, $pass, $port = 25, $timeout = 5) {
+    function smtp_on($smtp_serv, $login, $pass, $port = 25, $timeout = 5)
+    {
         $this->smtp_on = true; // включаем отправку через smtp
 
         $this->smtp_serv = $smtp_serv;
@@ -344,7 +360,8 @@ class Mail {
         $this->smtp_timeout = $timeout;
     }
 
-    function get_data($smtp_conn) {
+    function get_data($smtp_conn)
+    {
         $data = "";
         while ($str = fgets($smtp_conn, 515)) {
             $data .= $str;
@@ -360,7 +377,8 @@ class Mail {
 
      */
 
-    function Send() {
+    function Send()
+    {
         $this->BuildMail();
         $this->strTo = implode(", ", $this->sendto);
 
@@ -370,6 +388,9 @@ class Mail {
         } else { // если через smtp
             if (!$this->smtp_serv OR ! $this->smtp_login OR ! $this->smtp_pass OR ! $this->smtp_port)
                 return false; // если нет хотя бы одного из основных данных для коннекта, выходим с ошибкой
+
+
+
 
 
 
@@ -494,7 +515,8 @@ class Mail {
      *
      */
 
-    function Get() {
+    function Get()
+    {
         if (isset($this->smtp_log)) {
             if ($this->smtp_log) {
                 return $this->smtp_log; // если есть лог отправки smtp выведем его
@@ -512,7 +534,8 @@ class Mail {
       возвращает true или false
      */
 
-    function ValidEmail($address) {
+    function ValidEmail($address)
+    {
 
         // если существует современная функция фильтрации данных, то проверять будем этой функцией. появилась в php 5.2
         if (function_exists('filter_list')) {
@@ -539,7 +562,8 @@ class Mail {
 
      */
 
-    function CheckAdresses($aad) {
+    function CheckAdresses($aad)
+    {
         for ($i = 0; $i < count($aad); $i++) {
             if (!$this->ValidEmail($aad[$i])) {
                 echo "ошибка : не верный email " . $aad[$i];
@@ -552,7 +576,8 @@ class Mail {
       сборка файлов для отправки
      */
 
-    function _build_attachement() {
+    function _build_attachement()
+    {
 
         $this->xheaders["Content-Type"] = "multipart/mixed;\n boundary=\"$this->boundary\"";
 

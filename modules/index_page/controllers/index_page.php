@@ -17,7 +17,8 @@ defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
 /**
  * Контроллер пользовательской части модуля главной страницы
  */
-class Index_Page_Controller extends Controller {
+class Index_Page_Controller extends Controller
+{
 
     /**
      * Уровень пользовательского доступа
@@ -27,17 +28,17 @@ class Index_Page_Controller extends Controller {
     /**
      * Метод по умолчанию
      */
-    public function action_index() {
+    public function action_index()
+    {
         $this->action_view_page();
     }
 
     /**
      * Показ главной страницы
      */
-    public function action_view_page() {
+    public function action_view_page()
+    {
         $blocks = $this->cache->get('index_page', 180);
-        $blocks = $blocks;
-
         if (empty($blocks)) {
             $result = $this->model->getPageBlocks();
             $blocks = array();

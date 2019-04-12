@@ -17,12 +17,14 @@ defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
 /**
  * Виджет гостевой книги
  */
-class lib_widget {
+class lib_widget
+{
 
     /**
      * Показ виджета
      */
-    public static function display($widget_id) {
+    public static function display($widget_id)
+    {
         $db = Registry::get('db');
         $stat = $db->get_row("SELECT COUNT(*) AS all_books, COUNT(CASE WHEN time > UNIX_TIMESTAMP() - 86400 THEN 1 END) AS new_books FROM #__lib_books");
         return '<img src="' . URL . 'modules/lib/images/lib.png" alt="" /> <a href="' . a_url('lib') . '">Библиотека</a> <span class="count">[' . $stat['all_books'] . ']</span>' . ($stat['new_books'] > 0 ? ' <span class="new">+' . $stat['new_books'] . '</span>' : '') . '<br />';
@@ -31,7 +33,8 @@ class lib_widget {
     /**
      * Настройка виджета
      */
-    public static function setup($widget) {
+    public static function setup($widget)
+    {
         a_notice('Данный виджет не требует настройки', a_url('index_page/admin'));
     }
 

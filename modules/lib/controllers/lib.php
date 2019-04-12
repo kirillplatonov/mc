@@ -17,7 +17,8 @@ defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
 /**
  * Контроллер пользовательской части библиотеки
  */
-class Lib_Controller extends Controller {
+class Lib_Controller extends Controller
+{
 
     /**
      * Уровень пользовательского доступа
@@ -27,7 +28,8 @@ class Lib_Controller extends Controller {
     /**
      * Construct
      */
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
 
         # Хелпер библиотеки
@@ -37,14 +39,16 @@ class Lib_Controller extends Controller {
     /**
      * Метод по умолчанию
      */
-    public function action_index() {
+    public function action_index()
+    {
         $this->action_list_books();
     }
 
     /**
      * Чтение книги
      */
-    public function action_read_book() {
+    public function action_read_book()
+    {
         $this->per_page = 300;
 
         # Обновляем количество просмотров
@@ -99,7 +103,8 @@ class Lib_Controller extends Controller {
     /**
      * Скачать книгу
      */
-    public function action_download_book() {
+    public function action_download_book()
+    {
         $this->per_page = 7;
 
         if (!$book = $this->db->get_row("SELECT b.* FROM #__lib_books AS b WHERE b.book_id = '" . intval($_GET['book_id']) . "'")) {
@@ -169,7 +174,8 @@ class Lib_Controller extends Controller {
     /**
      * Список книг и папок
      */
-    public function action_list_books() {
+    public function action_list_books()
+    {
         switch ($_GET['type']) {
             # Самые популярные
             case 'top':

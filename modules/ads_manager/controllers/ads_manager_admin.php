@@ -15,7 +15,8 @@ defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
 /**
  * Админская часть управления рекламой
  */
-class Ads_Manager_Admin_Controller extends Controller {
+class Ads_Manager_Admin_Controller extends Controller
+{
 
     /**
      * Уровень пользовательского доступа
@@ -30,14 +31,16 @@ class Ads_Manager_Admin_Controller extends Controller {
     /**
      * Метод по умолчанию
      */
-    public function action_index() {
+    public function action_index()
+    {
         $this->action_list_links();
     }
 
     /**
      * Конфигурация модуля
      */
-    public function action_config() {
+    public function action_config()
+    {
         $_config = $this->config['ads_manager'];
 
         if (isset($_POST['submit'])) {
@@ -61,7 +64,8 @@ class Ads_Manager_Admin_Controller extends Controller {
     /**
      * Добавление / редактирование площадки
      */
-    public function action_area_edit() {
+    public function action_area_edit()
+    {
         if (is_numeric($_GET['area_id'])) {
             if (!$area = $this->db->get_row("SELECT * FROM #__ads_manager_areas WHERE area_id = '" . intval($_GET['area_id']) . "'"))
                 a_error('Редактируемая площадка не найдена!');
@@ -123,7 +127,8 @@ class Ads_Manager_Admin_Controller extends Controller {
     /**
      * Добавление / редактирование ссылки
      */
-    public function action_link_edit() {
+    public function action_link_edit()
+    {
         if (is_numeric($_GET['link_id'])) {
             if (!$link = $this->db->get_row("SELECT * FROM #__ads_manager_links WHERE link_id = '" . intval($_GET['link_id']) . "'"))
                 a_error('Редактируемая ссылка не найдена!');
@@ -149,12 +154,12 @@ class Ads_Manager_Admin_Controller extends Controller {
 
             if (!$this->error) {
                 if ($action == 'add') {
-                    $position = $this->db->get_one("SELECT MAX(position) FROM #__ads_manager_links WHERE area_id = '" . $area['area_id'] . "'") + 1;
+                    $position = $this->db->get_one("SELECT MAX(position) FROM #__ads_manager_links WHERE area_id = '" . (int)$area['area_id'] . "'") + 1;
 
                     $this->db->query("INSERT INTO #__ads_manager_links SET
 						title = '" . a_safe($_POST['title']) . "',
 						url = '" . a_safe($_POST['url']) . "',
-						names = '" . mysqli_real_escape_string($this->db_link, $_POST['names']) . "',
+						names = '" . mysqli_real_escape_string($this->db->db_link, $_POST['names']) . "',
 						area_id = '" . $area['area_id'] . "',
 						area_ident = '" . $area['ident'] . "',
 						position = '" . $position . "'
@@ -165,7 +170,7 @@ class Ads_Manager_Admin_Controller extends Controller {
                     $this->db->query("UPDATE #__ads_manager_links SET
 						title = '" . a_safe($_POST['title']) . "',
 						url = '" . a_safe($_POST['url']) . "',
-						names = '" . mysqli_real_escape_string($this->db_link, $_POST['names']) . "',
+						names = '" . mysqli_real_escape_string($this->db->db_link, $_POST['names']) . "',
 						area_id = '" . $area['area_id'] . "',
 						area_ident = '" . $area['ident'] . "'
 						WHERE link_id = '" . $link['link_id'] . "'"
@@ -193,7 +198,8 @@ class Ads_Manager_Admin_Controller extends Controller {
     /**
      * Удаление площадки
      */
-    public function action_area_delete() {
+    public function action_area_delete()
+    {
         if (!$area = $this->db->query("DELETE FROM #__ads_manager_areas WHERE area_id = '" . intval($_GET['area_id']) . "'"))
             a_error('Площадка не найдена!');
 
@@ -206,7 +212,8 @@ class Ads_Manager_Admin_Controller extends Controller {
     /**
      * Удаление ссылки
      */
-    public function action_link_delete() {
+    public function action_link_delete()
+    {
         if (!$link = $this->db->query("DELETE FROM #__ads_manager_links WHERE link_id = '" . intval($_GET['link_id']) . "'"))
             a_error('Рекламная ссылка не найдена!');
 
@@ -221,7 +228,8 @@ class Ads_Manager_Admin_Controller extends Controller {
     /**
      * Листинг площадок и ссылок
      */
-    public function action_list_links() {
+    public function action_list_links()
+    {
         $areas = array();
         $result = $this->db->query("SELECT * FROM #__ads_manager_areas");
         while ($area = $this->db->fetch_array($result)) {
@@ -264,7 +272,8 @@ class Ads_Manager_Admin_Controller extends Controller {
     /**
      * Поднятие ссылки
      */
-    public function action_link_up() {
+    public function action_link_up()
+    {
         if (!$link = $this->db->get_row("SELECT * FROM #__ads_manager_links WHERE link_id = " . intval($_GET['link_id'])))
             a_error('Ссылка не найдена!');
 
@@ -279,7 +288,8 @@ class Ads_Manager_Admin_Controller extends Controller {
     /**
      * Опускание ссылки
      */
-    public function action_link_down() {
+    public function action_link_down()
+    {
         if (!$link = $this->db->get_row("SELECT * FROM #__ads_manager_links WHERE link_id = " . intval($_GET['link_id'])))
             a_error('Ссылка не найдена!');
 

@@ -17,19 +17,22 @@ defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
 /**
  * Хелпер установки модуля
  */
-class _installer {
+class _installer
+{
 
     /**
      * Установка модуля
      */
-    public static function install($db) {
+    public static function install($db)
+    {
         
     }
 
     /**
      * Деинсталляция модуля
      */
-    public static function uninstall($db) {
+    public static function uninstall($db)
+    {
         
     }
 

@@ -3,8 +3,8 @@
 <?php echo $this->display('title', array('text' => 'Произошла ошибка')) ?>
 
 <div class="menu">
-        <?php echo $error_message ?><br />
-        <?php if ($link) echo '<a href="'. $link .'">Вернуться назад</a>' ?>
+    <?php echo $error_message ?><br />
+    <?php if ($link) echo '<a href="'. $link .'">Вернуться назад</a>' ?>
 </div>
 
 <div class="block">

@@ -15,19 +15,22 @@ defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
 /**
  * Главный пользовательский контроллер основного модуля
  */
-class Main_Controller extends Controller {
+class Main_Controller extends Controller
+{
 
     /**
      * Метод по умолчанию
      */
-    public function action_index() {
+    public function action_index()
+    {
         $this->action_index_page();
     }
 
     /**
      * Индексная страница
      */
-    public function action_index_page() {
+    public function action_index_page()
+    {
         $last_news = $this->db->get_row("SELECT * FROM #__news ORDER BY news_id DESC LIMIT 1");
 
         $this->tpl->assign(array(
@@ -40,14 +43,16 @@ class Main_Controller extends Controller {
     /**
      * ББкоды
      */
-    public function action_bbcode() {
+    public function action_bbcode()
+    {
         $this->tpl->display('bbcode');
     }
 
     /**
      * Ошибка не найденой страницы
      */
-    public function action_page_not_found() {
+    public function action_page_not_found()
+    {
         $error_message = 'Запрашиваемой страницы не существует!<br />';
         $error_message .= '<a href="' . URL . '">Перейти на главную</a>';
 
@@ -57,7 +62,8 @@ class Main_Controller extends Controller {
     /**
      * Рейтинг
      */
-    public function action_rating() {
+    public function action_rating()
+    {
         header('Content-type: text/plain');
 
         $star_full = '<img src="' . URL . 'modules/main/images/rating/star_full.png" alt="" />';
@@ -93,7 +99,8 @@ class Main_Controller extends Controller {
         }
     }
 
-    public function action_go() {
+    public function action_go()
+    {
         echo '1';
     }
 

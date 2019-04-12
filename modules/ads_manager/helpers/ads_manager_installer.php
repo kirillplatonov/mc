@@ -15,12 +15,14 @@ defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
 /**
  * Хелпер установки модуля
  */
-class ads_manager_installer {
+class ads_manager_installer
+{
 
     /**
      * Установка модуля
      */
-    public static function install($db) {
+    public static function install($db)
+    {
         $db->query("CREATE TABLE IF NOT EXISTS #__ads_manager_areas (
 			  `area_id` int(11) NOT NULL auto_increment,
 			  `title` varchar(50) NOT NULL,
@@ -49,7 +51,8 @@ class ads_manager_installer {
     /**
      * Деинсталляция модуля
      */
-    public static function uninstall($db) {
+    public static function uninstall($db)
+    {
         $db->query("DROP TABLE #__ads_manager_areas, #__ads_manager_links ;");
         main::delete_event('ads_manager');
     }

@@ -15,7 +15,8 @@ defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
 /**
  * Контроллер управления пользователями
  */
-class User_Admin_Controller extends Controller {
+class User_Admin_Controller extends Controller
+{
 
     /**
      * Уровень пользовательского доступа
@@ -30,14 +31,16 @@ class User_Admin_Controller extends Controller {
     /**
      * Метод по умолчанию
      */
-    public function action_index() {
+    public function action_index()
+    {
         $this->action_list_users();
     }
 
     /**
      * Конфигурация модуля
      */
-    public function action_config() {
+    public function action_config()
+    {
         $_config = $this->config['user'];
 
         if (isset($_POST['submit'])) {
@@ -59,7 +62,8 @@ class User_Admin_Controller extends Controller {
     /**
      * Удаление пользователя
      */
-    public function action_delete() {
+    public function action_delete()
+    {
         main::is_demo();
         # Получаем инфо о пользователе
         if (!$user_delete = $this->db->get_row("SELECT * FROM #__users WHERE user_id = '" . intval($_GET['user_id']) . "'"))
@@ -78,7 +82,8 @@ class User_Admin_Controller extends Controller {
     /**
      * Удаление пользователя
      */
-    public function action_user_email() {
+    public function action_user_email()
+    {
         main::is_demo();
         if (ACCESS_LEVEL < 10)
             a_error('У вас нет прав на выполнение этой операции!');
@@ -120,7 +125,8 @@ class User_Admin_Controller extends Controller {
     /**
      * Бан пользователя
      */
-    public function action_ban() {
+    public function action_ban()
+    {
         # Получаем инфо о пользователе
         if (!$user_ban = $this->db->get_row("SELECT * FROM #__users WHERE user_id = '" . intval($_GET['user_id']) . "'"))
             a_error("Пользователь не найден!");
@@ -172,7 +178,8 @@ class User_Admin_Controller extends Controller {
     /**
      * Редактирование пользователя
      */
-    public function action_edit() {
+    public function action_edit()
+    {
         # Получаем инфо о пользователе
         if (!$user_edit = $this->db->get_row("SELECT * FROM #__users WHERE user_id = '" . intval($_GET['user_id']) . "'"))
             a_error("Пользователь не найден!");
@@ -217,7 +224,8 @@ class User_Admin_Controller extends Controller {
     /**
      * Вход в панель к пользователю
      */
-    public function action_go_to_user_panel() {
+    public function action_go_to_user_panel()
+    {
         // Запрет для модераторов
         if (ACCESS_LEVEL < 10)
             a_error('У Вас нет прав для выполнения данного действия.');
@@ -237,7 +245,8 @@ class User_Admin_Controller extends Controller {
     /**
      * Листинг пользователей
      */
-    public function action_list_users() {
+    public function action_list_users()
+    {
         // Кол-во пользователей на страницу
         $this->per_page = 20;
 
@@ -285,7 +294,8 @@ class User_Admin_Controller extends Controller {
     /**
      * Листинг гостей
      */
-    public function action_list_guests() {
+    public function action_list_guests()
+    {
         // Кол-во пользователей на страницу
         $this->per_page = 20;
 
@@ -319,7 +329,8 @@ class User_Admin_Controller extends Controller {
     /**
      * Бан по IP
      */
-    public function action_ip_ban() {
+    public function action_ip_ban()
+    {
         // Выполнение действий
         switch (str_safe($_GET['action'])) {
             case 'add':
@@ -469,7 +480,8 @@ class User_Admin_Controller extends Controller {
     /**
      * Модерация пользователей
      */
-    public function action_moderate() {
+    public function action_moderate()
+    {
         // Модерация
         if ($_GET['user_id'] && $_GET['action']) {
 

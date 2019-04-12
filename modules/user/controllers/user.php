@@ -15,7 +15,8 @@ defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа</b>');
 /**
  * Контроллер пользователей
  */
-class User_Controller extends Controller {
+class User_Controller extends Controller
+{
 
     /**
      * Уровень пользовательского доступа
@@ -25,7 +26,8 @@ class User_Controller extends Controller {
     /**
      * Construct
      */
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
 
         $tpl = Registry::get('tpl');
@@ -60,7 +62,8 @@ class User_Controller extends Controller {
     /**
      * Метод по умолчанию
      */
-    public function action_index() {
+    public function action_index()
+    {
         if (is_user())
             redirect('user/profile');
         else
@@ -70,7 +73,8 @@ class User_Controller extends Controller {
     /**
      * Просмотр анкеты по логину
      */
-    public function action_view() {
+    public function action_view()
+    {
         // Определяем пользователя по логину
         if (ROUTE_ACTION == 'view' && !empty($_GET['username']))
             $user_id = $this->db->get_one("SELECT user_id FROM #__users WHERE username = '" . a_safe($_GET['username']) . "'");
@@ -86,7 +90,8 @@ class User_Controller extends Controller {
     /**
      * Регистрация пользователей
      */
-    public function action_registration() {
+    public function action_registration()
+    {
         // Перенаправление авторизированного пользователя
         if (is_user())
             redirect('user/profile');
@@ -222,7 +227,8 @@ class User_Controller extends Controller {
     /**
      * Восстановление пароля
      */
-    public function action_forgot() {
+    public function action_forgot()
+    {
         // Если пользователь уже авторизирован
         if (is_user()) {
             redirect('user/profile');
@@ -274,7 +280,8 @@ class User_Controller extends Controller {
     /**
      * Подтверждение E-mail
      */
-    public function action_email_confirm() {
+    public function action_email_confirm()
+    {
         // Если пользователь уже авторизирован
         if (!is_user()) {
             a_error('Авторизируйтесь и повторите!');
@@ -351,7 +358,8 @@ class User_Controller extends Controller {
     /**
      * Смена пароля
      */
-    public function action_change_password() {
+    public function action_change_password()
+    {
         if (ACCESS_LEVEL < 5)
             a_error('Запрет доступа!');
 
@@ -396,7 +404,8 @@ class User_Controller extends Controller {
     /**
      * Авторизация пользователей
      */
-    public function action_login() {
+    public function action_login()
+    {
         // Если пользователь уже авторизирован
         if (is_user()) {
             redirect('user/profile');
@@ -467,7 +476,8 @@ class User_Controller extends Controller {
     /**
      * Список польльзователей
      */
-    public function action_list_users() {
+    public function action_list_users()
+    {
         # Получение данных
         $sql = "SELECT SQL_CALC_FOUND_ROWS u.*, up.avatar AS avatar_exists FROM #__users AS u LEFT JOIN #__users_profiles AS up USING(user_id) WHERE user_id != -1 AND account = 'active' ";
 
@@ -519,7 +529,8 @@ class User_Controller extends Controller {
     /**
      * Список гостей
      */
-    public function action_list_guests() {
+    public function action_list_guests()
+    {
         // Получение данных
         $sql = "SELECT SQL_CALC_FOUND_ROWS * FROM #__guests
 			WHERE 1 = 1 AND last_time > UNIX_TIMESTAMP() - 180
@@ -548,7 +559,8 @@ class User_Controller extends Controller {
     /**
      * Выход
      */
-    public function action_exit() {
+    public function action_exit()
+    {
         $_SESSION = array();
 
         setcookie('username', '', time() + 86400 * 14, '/', '.' . $_SERVER['HTTP_HOST']);
@@ -565,7 +577,8 @@ class User_Controller extends Controller {
     /**
      * Покинуть панель пользователя и перейти в панель управления
      */
-    public function action_exit_from_user_panel() {
+    public function action_exit_from_user_panel()
+    {
         $_SESSION['check_user_id'] = '';
         a_notice('Переходим в панель управления', a_url('user/admin'), 3);
     }

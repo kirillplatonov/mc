@@ -15,12 +15,14 @@ defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
 /**
  * Основной хелпер модуля модулей =)
  */
-class modules {
+class modules
+{
 
     /**
      * Получение списка модулей в глобальную видимость
      */
-    public static function initialize() {
+    public static function initialize()
+    {
         if (!Registry::exists('modules')) {
             $db = Registry::get('db');
 
@@ -37,7 +39,8 @@ class modules {
     /**
      * Получение списка модулей
      */
-    public static function get_modules() {
+    public static function get_modules()
+    {
         # Получаем установленные модули из БД
         self::initialize();
         $modules = Registry::get('modules');
@@ -69,7 +72,8 @@ class modules {
     /**
      * Определение активирован ли модуль
      */
-    public static function is_active_module($module_name) {
+    public static function is_active_module($module_name)
+    {
         self::initialize();
         $modules = Registry::get('modules');
 

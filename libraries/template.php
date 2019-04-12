@@ -14,7 +14,8 @@
 /**
  * Нативный шаблонизатор
  */
-class Template {
+class Template
+{
 
     public $admin = false;
     public $vars = array();
@@ -24,7 +25,8 @@ class Template {
     /**
      * Construct
      */
-    public function __construct($template_dir = '', $cache_dir = '') {
+    public function __construct($template_dir = '', $cache_dir = '')
+    {
         ob_start();
         $this->template_dir = ($template_dir ? $template_dir : ROOT . 'views/');
     }
@@ -32,7 +34,8 @@ class Template {
     /**
      * Генерация страницы
      */
-    public function parse($filename, $params = array()) {
+    public function parse($filename, $params = array())
+    {
         # Если не указано расширение файла, указываем его
         if (!strstr($filename, '.tpl')) {
             $filename .= '.tpl';
@@ -83,14 +86,16 @@ class Template {
      * Вывод кода страницы
      * @param string $filename
      */
-    public function display($filename, $params = array()) {
+    public function display($filename, $params = array())
+    {
         echo $this->parse($filename, $params);
     }
 
     /**
      * Assign переменных
      */
-    public function assign($param1, $param2 = NULL) {
+    public function assign($param1, $param2 = NULL)
+    {
         if (!$param2 && is_array($param1)) {
             foreach ($param1 AS $key => $value) {
                 $this->vars[$key] = $value;

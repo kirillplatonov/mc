@@ -15,7 +15,8 @@ defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
 /**
  * Пользовательский контроллер модуля личных сообщений
  */
-class Private_Controller extends Controller {
+class Private_Controller extends Controller
+{
 
     /**
      * Уровень пользовательского доступа
@@ -35,14 +36,16 @@ class Private_Controller extends Controller {
     /**
      * Метод по умолчанию
      */
-    public function action_index() {
+    public function action_index()
+    {
         $this->action_folders();
     }
 
     /**
      * Список папок
      */
-    public function action_folders() {
+    public function action_folders()
+    {
         $result = $this->db->query("SELECT COUNT(*) AS count, folder FROM #__private_messages WHERE user_id = '" . USER_ID . "' GROUP BY folder");
         $folders = array();
         while ($folder = $this->db->fetch_array($result)) {
@@ -59,7 +62,8 @@ class Private_Controller extends Controller {
     /**
      * Отправить сообщение
      */
-    public function action_send() {
+    public function action_send()
+    {
         if (isset($_POST['submit'])) {
             if (!$user_to_id = $this->db->get_one("SELECT user_id FROM #__users WHERE username = '" . a_safe($_POST['username']) . "' AND user_id != -1")) {
                 $this->error .= 'Получаетель не найден!<br />';
@@ -106,7 +110,8 @@ class Private_Controller extends Controller {
     /**
      * Просмотр папки
      */
-    public function action_list_messages() {
+    public function action_list_messages()
+    {
         if (!array_key_exists($_GET['folder'], $this->folders))
             a_error("Папка не найдена!");
 
@@ -154,7 +159,8 @@ class Private_Controller extends Controller {
     /**
      * Просмотр сообщения
      */
-    public function view_message() {
+    public function view_message()
+    {
         $message = $this->db->get_row("SELECT * FROM #__private_messages
 			WHERE message_id = '" . intval($_GET['message_id']) . "' AND user_id = '" . USER_ID . "'
 		");
@@ -172,7 +178,8 @@ class Private_Controller extends Controller {
     /**
      * Удаление сообщения
      */
-    public function action_delete_message() {
+    public function action_delete_message()
+    {
         $message = $this->db->get_row("SELECT * FROM #__private_messages
 			WHERE message_id = '" . intval($_GET['message_id']) . "' AND user_id = '" . USER_ID . "'
 		");
@@ -191,7 +198,8 @@ class Private_Controller extends Controller {
     /**
      * Сохранение сообщения
      */
-    public function action_save_message() {
+    public function action_save_message()
+    {
         $message = $this->db->get_row("SELECT * FROM #__private_messages
 			WHERE message_id = '" . intval($_GET['message_id']) . "' AND user_id = '" . USER_ID . "'
 		");

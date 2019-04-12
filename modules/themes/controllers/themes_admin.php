@@ -17,7 +17,8 @@ defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
 /**
  * Контроллер управления темами
  */
-class Themes_Admin_Controller extends Controller {
+class Themes_Admin_Controller extends Controller
+{
 
     /**
      * Уровень пользовательского доступа
@@ -32,14 +33,16 @@ class Themes_Admin_Controller extends Controller {
     /**
      * Метод по умолчанию
      */
-    public function action_index() {
+    public function action_index()
+    {
         $this->action_upload_theme();
     }
 
     /**
      * Загрузка новой темы
      */
-    public function action_upload_theme() {
+    public function action_upload_theme()
+    {
         if (!is_writable(ROOT . 'views'))
             a_error("Папка тем не доступна для записи, установите права 777 на папку <b>views</b>");
 

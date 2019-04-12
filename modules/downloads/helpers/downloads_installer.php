@@ -17,12 +17,14 @@ defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
 /**
  * Хелпер установки модуля
  */
-class downloads_installer {
+class downloads_installer
+{
 
     /**
      * Установка модуля
      */
-    public static function install($db) {
+    public static function install($db)
+    {
         $db->query("CREATE TABLE IF NOT EXISTS #__downloads_directories (
 			  `directory_id` int(11) NOT NULL auto_increment,
 			  `parent_id` int(11) default '0',
@@ -84,8 +86,6 @@ class downloads_installer {
         $rules = 'download_file/([0-9]*)#segment1=downloads&segment2=download_file&file_id=$1
                 downloads/([0-9]*)#segment1=downloads&directory_id=$1
                 downloads/view/([0-9]*)#segment1=downloads&segment2=view_file&file_id=$1
-                downloads/get_jad/([0-9]*).jad#segment1=downloads&segment2=get_jad&file_id=$1
-                downloads/get_jad/([0-9])/([0-9]*).jad#segment1=downloads&segment2=get_jad&file_id=$2&add_file=$1
 
                 # Добавление файла пользователями
                 downloads/([0-9]*)/add#segment1=downloads&segment2=add_file&action=add&directory_id=$1
@@ -117,7 +117,8 @@ class downloads_installer {
     /**
      * Деинсталляция модуля
      */
-    public static function uninstall($db) {
+    public static function uninstall($db)
+    {
         #$db->query("DROP TABLE #__downloads_directories, #__downloads_files");
     }
 

@@ -15,12 +15,14 @@ defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
 /**
  * Хелпер событий модуля пользователей
  */
-class user_events {
+class user_events
+{
 
     /**
      * Перед выполнением контроллера
      */
-    public static function pre_controller($db) {
+    public static function pre_controller($db)
+    {
         $tpl = Registry::get('tpl');
         $config = Registry::get('config');
 

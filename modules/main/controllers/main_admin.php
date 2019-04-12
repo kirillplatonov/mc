@@ -14,7 +14,8 @@
 /**
  * Основные функции админ панели
  */
-class Main_Admin_Controller extends Controller {
+class Main_Admin_Controller extends Controller
+{
 
     /**
      * Уровень пользовательского доступа
@@ -29,14 +30,16 @@ class Main_Admin_Controller extends Controller {
     /**
      * Метод по умолчанию
      */
-    public function action_index() {
+    public function action_index()
+    {
         $this->action_config();
     }
 
     /**
      * Конфигурация системы
      */
-    public function action_config() {
+    public function action_config()
+    {
         $_config = $this->config['system'];
 
         if (isset($_POST['submit'])) {
@@ -103,7 +106,8 @@ class Main_Admin_Controller extends Controller {
     /**
      * Конфигурация модуля
      */
-    public function action_ftp_config() {
+    public function action_ftp_config()
+    {
         $_config = $this->config['ftp'];
 
         if (isset($_POST['submit'])) {
@@ -153,7 +157,8 @@ class Main_Admin_Controller extends Controller {
     /**
      * Загрузка модулей, тем и обновлений по фтп
      */
-    public function action_upload() {
+    public function action_upload()
+    {
         switch ($_GET['action']) {
             case 'module':
                 $action = 'module';
@@ -289,11 +294,13 @@ class Main_Admin_Controller extends Controller {
     /**
      * MySQL запросы
      */
-    public function action_mysql() {
+    public function action_mysql()
+    {
 
         # Парсер SQL запросов
 
-        function parse_sql($sql) {
+        function parse_sql($sql)
+        {
             $queries = array();
             $strlen = strlen($sql);
             $position = 0;

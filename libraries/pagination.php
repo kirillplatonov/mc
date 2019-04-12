@@ -24,7 +24,8 @@
  * @author		ExpressionEngine Dev Team
  * @link		http://codeigniter.com/user_guide/libraries/pagination.html
  */
-class CI_Pagination {
+class CI_Pagination
+{
 
     var $base_url = ''; // The page we are linking to
     var $total_rows = ''; // Total number of items (database results)
@@ -59,7 +60,8 @@ class CI_Pagination {
      * @access	public
      * @param	array	initialization parameters
      */
-    function CI_Pagination($params = array()) {
+    function CI_Pagination($params = array())
+    {
         if (count($params) > 0) {
             $this->initialize($params);
         }
@@ -76,7 +78,8 @@ class CI_Pagination {
      * @param	array	initialization parameters
      * @return	void
      */
-    function initialize($params = array()) {
+    function initialize($params = array())
+    {
         if (count($params) > 0) {
             foreach ($params as $key => $val) {
                 if (isset($this->$key)) {
@@ -94,7 +97,8 @@ class CI_Pagination {
      * @access	public
      * @return	string
      */
-    function create_links() {
+    function create_links()
+    {
         $start = $_GET['start'];
         $start = is_numeric($_GET['page']) ? $_GET['page'] * $this->per_page - 1 : $start;
         // If our item count or per-page total is zero there is no need to continue.

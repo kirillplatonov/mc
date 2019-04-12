@@ -17,7 +17,8 @@ defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
 /**
  * Контроллер управления главной страницей
  */
-class Index_Page_Admin_Controller extends Controller {
+class Index_Page_Admin_Controller extends Controller
+{
 
     /**
      * Уровень пользовательского доступа
@@ -32,7 +33,8 @@ class Index_Page_Admin_Controller extends Controller {
     /**
      * Конструктор
      */
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
         a_import('modules/index_page/helpers/index_page');
 
@@ -50,14 +52,16 @@ class Index_Page_Admin_Controller extends Controller {
     /**
      * Метод по умолчанию
      */
-    public function action_index() {
+    public function action_index()
+    {
         $this->action_view_page();
     }
 
     /**
      * Просмотр главной страницы
      */
-    public function action_view_page() {
+    public function action_view_page()
+    {
         $result = $this->db->query("SELECT * FROM #__index_page_blocks ORDER BY position ASC");
 
         $blocks = array();
@@ -78,14 +82,16 @@ class Index_Page_Admin_Controller extends Controller {
     /**
      * Очистить кэш главной
      */
-    public function action_cache_clear() {
+    public function action_cache_clear()
+    {
         a_notice('Кэш главной очищен!', a_url('index_page/admin'));
     }
 
     /**
      * Добавление виджета
      */
-    public function action_widget_add() {
+    public function action_widget_add()
+    {
         if (!$block = $this->db->get_row("SELECT * FROM #__index_page_blocks WHERE block_id = '" . intval($_GET['block_id']) . "'"))
             a_error("Блок не найден!");
 
@@ -125,7 +131,8 @@ class Index_Page_Admin_Controller extends Controller {
     /**
      * Настройка виджета
      */
-    public function action_widget_setup() {
+    public function action_widget_setup()
+    {
         if (!$widget = $this->db->get_row("SELECT * FROM #__index_page_widgets WHERE widget_id = '" . intval($_GET['widget_id']) . "'"))
             a_error('Виджет не найден!');
 
@@ -139,7 +146,8 @@ class Index_Page_Admin_Controller extends Controller {
     /**
      * Перемещение виджета вверх
      */
-    public function action_widget_up() {
+    public function action_widget_up()
+    {
         if (!$widget = $this->db->get_row("SELECT * FROM #__index_page_widgets WHERE widget_id = '" . intval($_GET['widget_id']) . "'")) {
             a_error('Виджет не найден!');
         }
@@ -159,7 +167,8 @@ class Index_Page_Admin_Controller extends Controller {
     /**
      * Перемещение виджета вниз
      */
-    public function action_widget_down() {
+    public function action_widget_down()
+    {
         if (!$widget = $this->db->get_row("SELECT * FROM #__index_page_widgets WHERE widget_id = '" . intval($_GET['widget_id']) . "'"))
             a_error('Виджет не найден!');
 
@@ -178,7 +187,8 @@ class Index_Page_Admin_Controller extends Controller {
     /**
      * Удаление виджета
      */
-    public function action_widget_delete() {
+    public function action_widget_delete()
+    {
         if (!$widget = $this->db->get_row("SELECT * FROM #__index_page_widgets WHERE widget_id = '" . intval($_GET['widget_id']) . "'"))
             a_error('Виджет не найден!');
 
@@ -190,7 +200,8 @@ class Index_Page_Admin_Controller extends Controller {
     /**
      * Перемещение блока вверх
      */
-    public function action_block_up() {
+    public function action_block_up()
+    {
         if (!$block = $this->db->get_row("SELECT * FROM #__index_page_blocks WHERE block_id = " . intval($_GET['block_id'])))
             a_error('Блок не найден!');
 
@@ -209,7 +220,8 @@ class Index_Page_Admin_Controller extends Controller {
     /**
      * Перемещение блока вниз
      */
-    public function action_block_down() {
+    public function action_block_down()
+    {
         if (!$block = $this->db->get_row("SELECT * FROM #__index_page_blocks WHERE block_id = " . intval($_GET['block_id'])))
             a_error('Блок не найден!');
 
@@ -228,7 +240,8 @@ class Index_Page_Admin_Controller extends Controller {
     /**
      * Удаление блока
      */
-    public function action_block_delete() {
+    public function action_block_delete()
+    {
         if (!$block = $this->db->get_row("SELECT * FROM #__index_page_blocks WHERE block_id = " . intval($_GET['block_id'])))
             a_error('Блок не найден!');
 
@@ -244,7 +257,8 @@ class Index_Page_Admin_Controller extends Controller {
     /**
      * Добавление / Редактирование блока
      */
-    public function action_block_edit() {
+    public function action_block_edit()
+    {
         if (is_numeric($_GET['block_id'])) {
             if (!$block = $this->db->get_row("SELECT * FROM #__index_page_blocks WHERE block_id = '" . intval($_GET['block_id']) . "'"))
                 a_error("Блок не найден!");

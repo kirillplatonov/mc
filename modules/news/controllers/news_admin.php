@@ -15,7 +15,8 @@ defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
 /**
  * Новости, админская часть
  */
-class News_Admin_Controller extends Controller {
+class News_Admin_Controller extends Controller
+{
 
     /**
      * Уровень доступа
@@ -30,21 +31,24 @@ class News_Admin_Controller extends Controller {
     /**
      * Constructor
      */
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
     }
 
     /**
      * Действие по умолчанию
      */
-    public function action_index() {
+    public function action_index()
+    {
         $this->action_list_news();
     }
 
     /**
      * Добавление / Редактирование новости
      */
-    public function action_edit() {
+    public function action_edit()
+    {
         if (is_numeric($_GET['news_id'])) {
             $news = $this->db->get_row("SELECT * FROM #__news WHERE news_id = '" . intval($_GET['news_id']) . "'");
             $action = 'edit';
@@ -102,7 +106,8 @@ class News_Admin_Controller extends Controller {
     /**
      * Удаление новости
      */
-    public function action_delete() {
+    public function action_delete()
+    {
         main::is_demo();
         $this->db->query("DELETE FROM #__news WHERE news_id = '" . intval($_GET['news_id']) . "'");
         a_notice('Новость успешно удалена!', a_url('news/admin'));
@@ -111,7 +116,8 @@ class News_Admin_Controller extends Controller {
     /**
      * Листинг новостей
      */
-    public function action_list_news() {
+    public function action_list_news()
+    {
         $this->per_page = 20;
 
         # Получение данных

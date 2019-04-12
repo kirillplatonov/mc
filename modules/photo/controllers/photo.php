@@ -14,12 +14,14 @@
 /**
  * Контроллер пользовательской части фотоальбомов
  */
-class Photo_Controller extends Controller {
+class Photo_Controller extends Controller
+{
 
     /**
      * Construct
      */
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
 
         # Получаем ID пользователя в зависимости от действия
@@ -40,14 +42,16 @@ class Photo_Controller extends Controller {
     /**
      * Метод по умолчанию
      */
-    public function action_index() {
+    public function action_index()
+    {
         $this->action_list_all_albums();
     }
 
     /**
      * Список фотоальбомов юзера
      */
-    public function action_list_albums() {
+    public function action_list_albums()
+    {
         if ($this->user_id == 'FALSE')
             header('Location: /main/page_not_found.php');
 
@@ -93,7 +97,8 @@ class Photo_Controller extends Controller {
     /**
      * Фотографии альбома
      */
-    public function action_list_photos() {
+    public function action_list_photos()
+    {
         if ($this->user_id == 'FALSE')
             header('Location: /main/page_not_found.php');
 
@@ -149,7 +154,8 @@ class Photo_Controller extends Controller {
     /**
      * Список всех фотографий
      */
-    public function action_list_all_photos() {
+    public function action_list_all_photos()
+    {
         # Получение данных
         $result = $this->db->query("SELECT SQL_CALC_FOUND_ROWS #__photo.*, #__users.status AS user_status
   	FROM #__photo LEFT JOIN #__users USING(user_id)
@@ -195,7 +201,8 @@ class Photo_Controller extends Controller {
     /**
      * Список всех альбомов
      */
-    public function action_list_all_albums() {
+    public function action_list_all_albums()
+    {
         # Получение данных
         $result = $this->db->query("SELECT SQL_CALC_FOUND_ROWS #__photo_albums.*, #__users.status AS user_status
   	FROM #__photo_albums LEFT JOIN #__users USING(user_id)
@@ -236,7 +243,8 @@ class Photo_Controller extends Controller {
     /**
      * Управление альбомами
      */
-    public function action_edit_albums() {
+    public function action_edit_albums()
+    {
         if ($this->user_id == 'FALSE')
             header('Location: /main/page_not_found.php');
 
@@ -374,7 +382,8 @@ class Photo_Controller extends Controller {
     /**
      * Управление фотографиями
      */
-    public function action_edit_photos() {
+    public function action_edit_photos()
+    {
         if ($this->user_id == 'FALSE')
             header('Location: /main/page_not_found.php');
 
@@ -628,7 +637,8 @@ class Photo_Controller extends Controller {
     /**
      * Просмотр деталей фотографии
      */
-    public function action_view_photo() {
+    public function action_view_photo()
+    {
         $album_id = intval($_GET['album_id']);
 
         if (!$this->album = $this->db->get_row("SELECT * FROM #__photo_albums JOIN #__users USING(user_id) WHERE album_id = '" . $album_id . "' AND user_id = '" . $this->user_id . "'"))

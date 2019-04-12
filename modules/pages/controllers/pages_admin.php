@@ -17,7 +17,8 @@ defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
 /**
  * Управление страницами
  */
-class Pages_Admin_Controller extends Controller {
+class Pages_Admin_Controller extends Controller
+{
 
     /**
      * Уровень пользовательского доступа
@@ -32,14 +33,16 @@ class Pages_Admin_Controller extends Controller {
     /**
      * Метод по умолчанию
      */
-    public function action_index() {
+    public function action_index()
+    {
         $this->action_list_pages();
     }
 
     /**
      * Добавление / редактирование страниц
      */
-    public function action_page_edit() {
+    public function action_page_edit()
+    {
         if (is_numeric($_GET['page_id'])) {
             $action = 'edit';
             if (!$page = $this->db->get_row("SELECT * FROM #__pages WHERE page_id = '" . intval($_GET['page_id']) . "'"))
@@ -92,7 +95,8 @@ class Pages_Admin_Controller extends Controller {
     /**
      * Листинг страниц
      */
-    public function action_list_pages() {
+    public function action_list_pages()
+    {
         $this->per_page = 20;
         # Получение данных
         $pages = $this->db->get_array("SELECT SQL_CALC_FOUND_ROWS *
@@ -121,7 +125,8 @@ class Pages_Admin_Controller extends Controller {
     /**
      * Удаление страницы
      */
-    public function action_page_delete() {
+    public function action_page_delete()
+    {
         main::is_demo();
         if (!$page = $this->db->get_row("SELECT * FROM #__pages WHERE page_id = '" . intval($_GET['page_id']) . "'"))
             a_error('Страница не найдена!');

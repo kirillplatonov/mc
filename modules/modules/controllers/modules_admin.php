@@ -15,7 +15,8 @@ defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
 /**
  * Управление модулями
  */
-class Modules_Admin_Controller extends Controller {
+class Modules_Admin_Controller extends Controller
+{
 
     /**
      * Уровень пользовательского доступа
@@ -30,14 +31,16 @@ class Modules_Admin_Controller extends Controller {
     /**
      * Метод по умолчанию
      */
-    public function action_index() {
+    public function action_index()
+    {
         $this->action_list_modules();
     }
 
     /**
      * Список модулей
      */
-    public function action_list_modules() {
+    public function action_list_modules()
+    {
         $modules = modules::get_modules();
 
         $this->tpl->assign(array(
@@ -50,7 +53,8 @@ class Modules_Admin_Controller extends Controller {
     /**
      * Загрузка нового модуля
      */
-    public function action_upload_module() {
+    public function action_upload_module()
+    {
         if (empty($this->config['ftp']['server']))
             a_notice('Не настроены фтп данные системы, перейдите по ссылке "Продолжить" для настройки.', a_url('main/admin/ftp_config'));
 
@@ -106,7 +110,8 @@ class Modules_Admin_Controller extends Controller {
     /**
      * Активация / деактивация модуля
      */
-    public function action_activate() {
+    public function action_activate()
+    {
         main::is_demo();
         if (empty($_GET['module']))
             a_error("Укажите модуль!");
@@ -125,7 +130,8 @@ class Modules_Admin_Controller extends Controller {
     /**
      * Устанавка модуля
      */
-    public function action_install() {
+    public function action_install()
+    {
         main::is_demo();
         $module_name = trim($_GET['module']);
 
@@ -164,7 +170,8 @@ class Modules_Admin_Controller extends Controller {
     /**
      * Деинсталляция модуля
      */
-    public function action_uninstall() {
+    public function action_uninstall()
+    {
         main::is_demo();
         $module_name = trim($_GET['module']);
 

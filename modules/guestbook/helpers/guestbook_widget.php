@@ -15,12 +15,14 @@ defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
 /**
  * Виджет гостевой книги
  */
-class guestbook_widget {
+class guestbook_widget
+{
 
     /**
      * Показ виджета
      */
-    public static function display($widget_id) {
+    public static function display($widget_id)
+    {
         $db = Registry::get('db');
         $messages = $db->get_one("SELECT COUNT(*) FROM #__guestbook");
         return '<img src="' . URL . 'modules/guestbook/images/widget/guestbook.png" alt="" /> <a href="' . a_url('guestbook') . '">Гостевая книга</a> <span class="count">[' . $messages . ']</span><br />';
@@ -29,7 +31,8 @@ class guestbook_widget {
     /**
      * Настройка виджета
      */
-    public static function setup($widget) {
+    public static function setup($widget)
+    {
         a_notice('Данный виджет не требует настройки', a_url('index_page/admin'));
     }
 
