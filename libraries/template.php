@@ -62,7 +62,9 @@ class Template
                 die('Файл <b>' . $filename . '</b> не является шаблоном или не найден.');
             }
         } else {
-            if (file_exists(ROOT . 'modules/' . ROUTE_MODULE . '/views/' . $this->theme . '/' . $filename)) {
+            if (file_exists(ROOT . 'modules/' . ROUTE_MODULE . '/views/' . $filename)) {
+                $this->template_file = ROOT . 'modules/' . ROUTE_MODULE . '/views/' . $filename;
+            } elseif (file_exists(ROOT . 'modules/' . ROUTE_MODULE . '/views/' . $this->theme . '/' . $filename)) {
                 $this->template_file = ROOT . 'modules/' . ROUTE_MODULE . '/views/' . $this->theme . '/' . $filename;
             } elseif (file_exists(ROOT . 'modules/' . ROUTE_MODULE . '/views/' . $alternative_theme . '/' . $filename)) {
                 $this->template_file = ROOT . 'modules/' . ROUTE_MODULE . '/views/' . $alternative_theme . '/' . $filename;
