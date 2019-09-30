@@ -10,8 +10,6 @@
  * @link https://mobilecms.pro Official site
  * @license MIT license
  */
-defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
-
 /**
  * Простенький класс управления доступом
  */
