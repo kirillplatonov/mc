@@ -10,7 +10,7 @@
  * @link https://mobilecms.pro Official site
  * @license MIT license
  */
-defined('IN_SYSTEM') or die('<b>403<br />Запрет доступа!</b>');
+
 
 /**
  * Виджет гостевой книги
@@ -32,8 +32,21 @@ class forum_widget
                         (SELECT COUNT(*) FROM #__forum_messages WHERE time > UNIX_TIMESTAMP() - 3600 * 24) AS new_messages
   		");
 
-        $text = '<img src="' . URL . 'modules/forum/images/forum.png" alt="" /> <a href="' . a_url('forum') . '">Форум</a> <span class="count">[' . $stat['topics'] . '/' . $stat['messages'] . ']</span>' . ($stat['new_topics'] > 0 || $stat['new_messages'] > 0 ? ' <span class="new">+<a href="' . a_url('forum/viewforum', 'type=new') . '">' . $stat['new_topics'] . '</a>/<a href="' . a_url('forum/new_messages') . '">' . $stat['new_messages'] . '</a></span>' : '') . '<br />';
-
+        $text .= '<div class="menu"><img src="' . URL . 'modules/forum/images/forum.png" alt="" /> '
+                . '<a href="' . a_url('forum') . '">Форум</a> <span class="count">[' . $stat['topics'] . '/' . $stat['messages'] . ']</span>' . ($stat['new_topics'] > 0 || $stat['new_messages'] > 0 ? ' <span class="new">+<a href="' . a_url('forum/viewforum', 'type=new') . '">' . $stat['new_topics'] . '</a>/<a href="' . a_url('forum/new_messages') . '">' . $stat['new_messages'] . '</a></span>' : '') . '</div>';
+        $topics = $db->get_array('SELECT SQL_CALC_FOUND_ROWS ft.*, u.username AS last_username
+		  			FROM #__forum_topics AS ft
+		  			INNER JOIN #__users AS u ON ft.last_user_id = u.user_id
+		  			ORDER BY ft.time DESC
+		  			LIMIT 0, 4');
+         foreach($topics as $topic){
+            $text .= '<div class="menu">'. 
+                    ($topic['is_top_topic'] ? '!' : '') . 
+                    ($topic['is_close_topic'] ? '#' : '') .
+                    '<a href="'. a_url('forum/viewtopic', 'topic_id='. $topic['topic_id']) .'">'. 
+                    $topic['name'].'</a> ['. $topic['messages'] .'] '. $topic['last_username'] .
+                    '<a href="'.a_url('forum/viewtopic', 'topic_id='. $topic['topic_id']) .'">»</a></div>';
+         }
         return $text;
     }
 
