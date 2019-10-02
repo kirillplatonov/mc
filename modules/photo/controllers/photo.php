@@ -465,7 +465,7 @@ class Photo_Controller extends Controller
 
                         user::rating_update();
 
-                        a_notice('Фотография успешно добавлена', URL . 'photo/list_photos/?user_id=' . $this->user_id . '&amp;album_id=' . $this->album['album_id']);
+                        a_notice('Фотография успешно добавлена', URL . 'photo/list_photos/?user_id=' . $this->user_id . '&album_id=' . $this->album['album_id']);
                     }
                 }
 
