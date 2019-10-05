@@ -266,7 +266,7 @@ CREATE TABLE IF NOT EXISTS `a_modules` (
   `installed` tinyint(1) NOT NULL,
   `status` enum('on','off') NOT NULL default 'off',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=24 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 //=====================================//
 INSERT INTO `a_modules` (`id`, `name`, `title`, `admin_link`, `description`, `installed`, `status`) VALUES
 (5, 'downloads', 'Загрузки', 'downloads/admin', 'Модуль загрузок', 1, 'on'),
@@ -281,7 +281,7 @@ INSERT INTO `a_modules` (`id`, `name`, `title`, `admin_link`, `description`, `in
 (21, 'html', 'HTML/текстовые вставки', '', 'HTML/текстовые вставки в главную страницу', 1, 'on'),
 (22, 'lib', 'Библиотека', 'lib/admin', 'Модуль библиотеки', 1, 'on'),
 (23, 'photo', 'Фотоальбомы', '', 'Модуль фотоальбомов', 1, 'on'),
-(24, 'blog', 'Блоги', '', 'Модуль блогов', 1, 'on'),
+(24, 'blog', 'Блоги', '', 'Модуль блогов', 1, 'on');
 //=====================================//
 CREATE TABLE IF NOT EXISTS `a_news` (
   `news_id` int(11) NOT NULL auto_increment,
@@ -541,7 +541,7 @@ INSERT INTO a_config (`id`, `module`, `key` , `value`) VALUES
 (NULL , 'user', 'user_moderate', '1'),
 (NULL , 'user', 'registration_stop', '0'),
 (NULL , 'downloads', 'user_upload', '1'),
-(NULL , 'downloads', 'moderation', '0'),
+(NULL , 'downloads', 'moderation', '0');
 //=====================================//
 CREATE TABLE IF NOT EXISTS a_guests (
   `id` int(11) NOT NULL auto_increment,
