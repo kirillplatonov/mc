@@ -2,7 +2,7 @@
 
 <?php if ($error) echo '<div class="error">'. $error .'</div>' ?>
 
-<?php $this->display('title', array('text' => '<b><a href="'. a_url('photo/list_photos', 'album_id='. $album['album_id'] .'&amp;user_id='. $user_id) .'">'. $album[name] .'</a></b> | <b>'. $photo['name'] .'</b>')) ?>
+<?php $this->display('title', array('text' => '<b><a href="'. a_url('photo/list_photos', 'album_id='. $album['album_id'] .'&amp;user_id='. $user_id) .'">'. $album['name'] .'</a></b> | <b>'. $photo['name'] .'</b>')) ?>
 
 <div class="menu">
     <?php echo $photo['image'] ?>
