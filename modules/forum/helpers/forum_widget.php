@@ -37,7 +37,7 @@ class forum_widget
         $topics = $db->get_array('SELECT SQL_CALC_FOUND_ROWS ft.*, u.username AS last_username
 		  			FROM #__forum_topics AS ft
 		  			INNER JOIN #__users AS u ON ft.last_user_id = u.user_id
-		  			ORDER BY ft.time DESC
+		  			ORDER BY ft.last_message_time DESC
 		  			LIMIT 0, 4');
          foreach($topics as $topic){
             $text .= '<div class="menu">'. 
