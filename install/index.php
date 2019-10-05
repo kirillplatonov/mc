@@ -183,11 +183,14 @@ if (!array_key_exists($step, $steps))
                                 $dump = str_replace('{CMS_VERSION}', '2.7.1 beta', $dump);
 
                                 $queryes = explode('//=====================================//', $dump);
-                                $i = 0;
+                                $success = 0;
+                                $errors = [];
                                 foreach ($queryes as $query) {
                                     if (@mysqli_query($link, trim($query))) {
-                                        $i++;
+                                        $success++;
+                                        continue;
                                     }
+                                    $errors[] = mysqli_error($link);
                                 }
 
                                 # Создаем файл конфигурации системы
@@ -204,7 +207,10 @@ if (!array_key_exists($step, $steps))
                                     <p>
                                         <?php echo 'Запросов отправлено: ' . count($queryes); ?>
                                         <br />
-                                        <?php echo 'Успешно : ' . count($queryes); ?>
+                                        <?php echo 'Успешно: ' . $success; ?>
+                                        <br />
+                                        <?php echo 'Ошибки '. count($errors) .' <br />: ';
+                                         echo implode('<br />', $errors) ?>
                                         <br />
                                         Файл конфигурации системы успешно создан, дамп базы данных залит.
                                     </p>
