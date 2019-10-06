@@ -11,7 +11,8 @@
 <?php if ( ! empty($messages)): ?>
 <?php foreach($messages as $message): ?>
 <div class="menu">
-    <?php echo user::get_icon($message['user_id']) ?> <?php echo user::get_username($message['user_id'], TRUE) ?> <?php echo user::online_status($message['last_visit']) ?> (<?php echo main::display_time($message['time']) ?>)<br />
+    <img src="<?php echo user::getAvatarUrl($message['user_id']) ?>" width="30" height="30" />
+    <?php echo user::get_username($message['user_id'], TRUE) ?> <?php echo user::online_status($message['last_visit']) ?> (<?php echo main::display_time($message['time']) ?>)<br />
     <?php echo $message['message'] ?>
     <?php if (a_check_rights($message['user_id'], $message['user_status'])): ?>
     <br />

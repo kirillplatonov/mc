@@ -7,7 +7,9 @@
 <?php if($messages): ?>
 <?php foreach($messages as $message): ?>
 <div class="menu">
-    <?php echo user::get_icon($message['user_id']) ?> <?php echo user::get_username($message['user_id'], TRUE) ?> <?php echo user::online_status($message['last_visit']) ?> (<?php echo main::display_time($message['time']) ?>) [<a href="<?php echo a_url('forum/posting', 'topic_id='. $topic['topic_id'] .'&amp;reply='. $message['username']) ?>">Отв</a>]<br />
+    <img src="<?php echo user::getAvatarUrl($message['user_id']) ?>" width="30" height="30" />
+    <?php echo user::get_username($message['user_id'], TRUE) ?> 
+    <?php echo user::online_status($message['last_visit']) ?> (<?php echo main::display_time($message['time']) ?>) [<a href="<?php echo a_url('forum/posting', 'topic_id='. $topic['topic_id'] .'&amp;reply='. $message['username']) ?>">Отв</a>]<br />
     <?php echo $message['message'] ?><br />
     [<a href="<?php echo a_url('forum/posting', 'topic_id='. $topic['topic_id'] .'&amp;q='. $message['message_id']) ?>">Цит</a>] <?php if (a_check_rights($message['user_id'], $message['user_status'])): ?>[<a href="<?php echo a_url('forum/posting', 'message_id='. $message['message_id']) ?>">Изменить</a>]<?php if($message['is_last_message']): ?> [<a href="<?php echo a_url('forum/message_delete', 'message_id='. $message['message_id'] .'&amp;start='. @$_GET['start']) ?>">Удалить</a>]<?php endif; ?>
     <?php endif ?>
