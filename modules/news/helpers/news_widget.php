@@ -32,8 +32,7 @@ class news_widget
         if ($config['view_last_news'] == 0) {
             return '<img src="' . URL . 'modules/news/images/news.png" alt="" /> <a href="' . a_url('news') . '">Новости</a> (' . date('d.m.Y', $last_news['time']) . ')<br />';
         } else {
-            $last_news['text'] = preg_replace('|[[\/\!]*?[^\[\]]*?]|si', '', $last_news['text']);
-            $last_news['text'] = main::limit_words(strip_tags($last_news['text']), 15);
+            $last_news['text'] = nl2br(main::bbcode(main::limit_words($last_news['text'], 20)));
 
             $code = '<b>' . $last_news['subject'] . '</b> (' . date('d.m.Y', $last_news['time']) . ')<br />' . PHP_EOL;
             $code .= $last_news['text'] . '...<br />' . PHP_EOL;
