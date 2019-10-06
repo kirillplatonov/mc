@@ -128,6 +128,27 @@ class user
         }
     }
 
+    public static function getAvatarUrl($user_id)
+    {
+        if (file_exists(ROOT . 'files/avatars/' . $user_id . '_100' . '.png'))
+            return URL . 'files/avatars/' . $user_id . '_100.png';
+        elseif (file_exists(ROOT . 'files/avatars/' . $user_id . '_150' . '.png'))
+            return URL . 'files/avatars/' . $user_id . '_150.png';
+        elseif (file_exists(ROOT . 'files/avatars/' . $user_id . '_100' . '.gif'))
+            return URL . 'files/avatars/' . $user_id . '_100.gif';
+        elseif (file_exists(ROOT . 'files/avatars/' . $user_id . '_150' . '.gif'))
+            return URL . 'files/avatars/' . $user_id . '_150.gif';
+        elseif (file_exists(ROOT . 'files/avatars/' . $user_id . '_100' . '.jpg'))
+            return URL . 'files/avatars/' . $user_id . '_100.jpg';
+        elseif (file_exists(ROOT . 'files/avatars/' . $user_id . '_150' . '.jpg'))
+            return URL . 'files/avatars/' . $user_id . '_150.jpg';
+        elseif (file_exists(ROOT . 'files/avatars/' . $user_id . '_100' . '.jpeg'))
+            return URL . 'files/avatars/' . $user_id . '_100.jpeg';
+        elseif (file_exists(ROOT . 'files/avatars/' . $user_id . '_150' . '.jpeg'))
+            return URL . 'files/avatars/' . $user_id . '_150.jpeg';
+        else return URL . 'files/avatars/no_ava.jpg';
+    }
+
 }
 
 ?>
