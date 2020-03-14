@@ -8,7 +8,8 @@
 <?php foreach($messages as $message): ?>
 <div class="menu">
     <span class="small_text">
-        <?php if($message['user_to_id'] == USER_ID): ?>Отправитель: <a href="<?php echo a_url('user/profile/view', 'user_id='. $message['user_from_id']) ?>"><?php echo $message['username_from'] ?></a><?php else: ?>Получатель: <a href="<?php echo a_url('user/profile/view', 'user_id='. $message['user_to_id']) ?>"><?php echo $message['username_to'] ?></a><?php endif; ?> (<?php echo date('d.m.Y в H:i', $message['time']) ?>)<br />
+        <?php if($message['user_to_id'] == USER_ID): ?>
+    <img src="<?php echo user::getAvatarUrl($message['user_from_id']) ?>" width="30" height="30" /><a href="<?php echo a_url('user/profile/view', 'user_id='. $message['user_from_id']) ?>"><?php echo $message['username_from'] ?></a><?php else: ?>Получатель: <a href="<?php echo a_url('user/profile/view', 'user_id='. $message['user_to_id']) ?>"><?php echo $message['username_to'] ?></a><?php endif; ?> (<?php echo date('d.m.Y в H:i', $message['time']) ?>)<br />
     </span>
     <?php echo $message['message'] ?><br />
     <span style="font-size: 11px;">

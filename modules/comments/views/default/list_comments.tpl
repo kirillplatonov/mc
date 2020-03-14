@@ -11,7 +11,8 @@
 <?php if($comments): ?>
 <?php foreach($comments AS $comment): ?>
 <div class="menu">
-    <?php echo user::get_icon($comment['user_id']) ?> <?php echo user::get_username($comment['user_id'], TRUE) ?> <?php echo user::online_status($comment['last_visit']) ?> (<?php echo main::display_time($comment['time']) ?>)<br />
+    <img src="<?php echo user::getAvatarUrl($comment['user_id']) ?>" width="30" height="30" />
+    <?php echo user::get_username($comment['user_id'], TRUE) ?> <?php echo user::online_status($comment['last_visit']) ?> (<?php echo main::display_time($comment['time']) ?>)<br />
     <?php echo $comment['text'] ?>
     <?php if (a_check_rights($comment['user_id'], $comment['user_status'])): ?>
     <br />
