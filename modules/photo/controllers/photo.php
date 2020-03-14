@@ -523,7 +523,10 @@ class Photo_Controller extends Controller
                             $file['filesize'] = filesize($_FILES['file_upload']['tmp_name']);
 
                             if (!strstr($_FILES['file_upload']['type'], 'image/'))
+                                $this->error .= 'Неверный формат фотографии! Разрешены только gif, jpg и png<br />';				
+		            elseif ($file['file_ext'] != 'jpg' && $file['file_ext'] != 'jpeg' && $file['file_ext'] != 'gif' && $file['file_ext'] != 'png')
                                 $this->error .= 'Неверный формат фотографии! Разрешены только gif, jpg и png<br />';
+				
                         } else if (!empty($_POST['file_import']) && $_POST['file_import'] != 'http://') {
                             $type = 'import';
                             $file['real_name'] = main::detranslite(basename($_POST['file_import']));
