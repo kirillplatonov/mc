@@ -561,7 +561,8 @@ class Downloads_Controller extends Controller
                                 $file['screen1'] = $_FILES['screen1']['name'];
                             }
                         } else if (!empty($_POST['screen1']) && $_POST['screen1'] != 'http://') {
-                            $import_file_path = fm::get_real_file_path($_POST['screen_1']);
+                            $import_file_path = downloads::get_real_file_path($_POST['screen_1']);
+                          
                             $import_file_name = basename($import_file_path);
                             $screen_path = ROOT . $path_to_file . '/' . $import_file_name;
 
@@ -683,7 +684,7 @@ class Downloads_Controller extends Controller
                         } else if (!empty($_POST['screen1']) && $_POST['screen1'] != 'http://') {
                             @unlink(ROOT . $path_to_file . '/' . $file['screen1']);
 
-                            $import_file_path = fm::get_real_file_path($_POST['screen_1']);
+                            $import_file_path = downloads::get_real_file_path($_POST['screen_1']);
                             $import_file_name = basename($import_file_path);
                             $screen_path = ROOT . $path_to_file . '/' . $import_file_name;
 
