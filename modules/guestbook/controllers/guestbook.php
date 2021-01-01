@@ -125,7 +125,7 @@ class Guestbook_Controller extends Controller
 
                 $this->db->query("INSERT INTO #__guestbook SET
 					user_id = '" . USER_ID . "',
-					message = '" . a_safe($_POST['message']) . "',
+					message = '" . a_safe(main::bbNickName($_POST['message'], '/guestbook.php')) . "',
 					time = UNIX_TIMESTAMP()
 				");
 
