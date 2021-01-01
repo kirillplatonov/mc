@@ -415,9 +415,10 @@ CREATE TABLE IF NOT EXISTS `a_users` (
   `reputation_minus` smallint(6) NOT NULL,
   `status` enum('guest','banned','user','moder','admin') NOT NULL default 'user',
   PRIMARY KEY  (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 //=====================================//
-INSERT INTO `a_users` (`user_id`, `username`, `password`, `email`, `reg_time`, `last_visit`, `pin_code`, `pin_code_time`, `balance`, `rating`, `reputation_plus`, `reputation_minus`, `status`) VALUES
+INSERT INTO `a_users` (ìd`, user_id`, `username`, `password`, `email`, `reg_time`, `last_visit`, `pin_code`, `pin_code_time`, `balance`, `rating`, `reputation_plus`, `reputation_minus`, `status`) VALUES
+(0, 'System', '', '', UNIX_TIMESTAMP(), UNIX_TIMESTAMP(), 0, 0, 0, 0, 0, 0, 'user'),
 (1, '{ADMIN_LOGIN}', '{ADMIN_PASSWORD}', '{ADMIN_EMAIL}', UNIX_TIMESTAMP(), UNIX_TIMESTAMP(), NULL, 0, 0, 0, 0, 0, 'admin'),
  (-1, 'Guest', '', '', 1243421222, 0, '12462c1ac3bdf5f0673611834b405ec7', 1243430310, 10, 0, 0, 0, 'guest');
 //=====================================//
@@ -442,7 +443,9 @@ CREATE TABLE IF NOT EXISTS `a_users_profiles` (
   `homepage` varchar(30) NOT NULL,
   PRIMARY KEY  (`id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+INSERT INTO `a_users_profiles` (`id`, `user_id`, `real_name`, `about`, `homepage`, `sex`) 
+VALUES ('0', '0', 'Система', 'Системный бот! \r\nСоздана для уведомлений!', 'https://mobilecms.pro', 'w');
 //=====================================//
 INSERT INTO `a_users_profiles` (`id`, `user_id`, `real_name`, `birthday_time`, `about`, `avatar`, `uin`, `homepage`) VALUES
 (1, 1, '', 0, '', 0, '', '');

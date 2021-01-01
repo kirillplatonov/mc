@@ -538,6 +538,34 @@ class main
             return $filterinput[$type][1];
         }
     }
+    /**
+     * Уведомление пользователя о упоминании через @username
+     * @example https://github.com/mobilecms-pro/cms/blob/master/modules/guestbook/controllers/guestbook.php#L126
+     * @param type $markup 
+     * @param type $url
+     * @param type $urlName
+     * @return type
+     */
+    public static function bbNickName($markup, $url, $urlName = null)
+    {
+        if (preg_match('#@([A-z0-9]+)(.*)$#ui', $markup, $login)) {
+            $db = Registry::get('db');
+            $query = $db->query("SELECT user_id FROM #__users WHERE username = '" . a_safe($login[1]) . "'");
+            if ($query->num_rows !== 0) {
+                $id = $query->fetch_row()[0];
+                $db->query("INSERT INTO #__private_messages SET
+					user_id = '$id',
+					user_to_id = '$id',
+					user_from_id = '0',
+					message = 'Вас упомянули на странице: [url=" . $url . "]". ($urlName === null ? $url : $urlName) . "[/url]',
+					folder = 'new',
+					time = UNIX_TIMESTAMP()
+				");
+                
+                return preg_replace('/@([A-z0-9]+),/si', '[user]$1[/user]', $markup);
+            }
+        }
+    }
 
     /**
      * BBcode
@@ -567,8 +595,9 @@ class main
             '/\[url\=(.*?)\](.*?)\[\/url\]/si' => '<a href="$1">$2</a>',
             # images
             '/\[img\](.*?)\[\/img\]/si' => "<img src=\"$1\" alt=\"\" style=\"max-width: 150px;\" />",
+            '/\[user](.*?)\[\/user\]/si' => '<b><a href="/profile/$1">$1</a></b>,'
         );
-
+        
         return preg_replace(array_keys($preg), array_values($preg), $markup);
     }
 
